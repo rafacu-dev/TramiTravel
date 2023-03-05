@@ -86,7 +86,11 @@ function loopSlider(){
         switch(cont){
             case 0:{
                 $('#slider').fadeTo('slow', 0.2, function() {
+                  if(screen.width < screen.height){
+                    $(this).css('background-image', 'url(/static/images/bg-homepage-2-sm.webp)');
+                  }else{
                     $(this).css('background-image', 'url(/static/images/bg-homepage-2.webp)');
+                  }
                   }).fadeTo('slow', 1);
                   if(language === "es"){
                     changedText("Vuelos a todo el mundo","Los mejores precios de Miami"); //ADD_CUBA- Vuelos a Cuba","Los mejores precios de Miami
@@ -99,7 +103,11 @@ function loopSlider(){
             }
             case 1:{
                 $('#slider').fadeTo('slow', 0.2, function() {
+                  if(screen.width < screen.height){
+                    $(this).css('background-image', 'url(/static/images/bg-homepage-3-sm.jpg)');
+                  }else{
                     $(this).css('background-image', 'url(/static/images/bg-homepage-3.webp)');
+                  }
                   }).fadeTo('slow', 1);
                   if(language === "es"){
                     changedText("Trámites Consulares","Pasaportes, Visas y Repatriación");
@@ -112,7 +120,11 @@ function loopSlider(){
             }
             case 2:{
                 $('#slider').fadeTo('slow', 0.2, function() {
-                    $(this).css('background-image', 'url(/static/images/bg-homepage-4.webp)');
+                  if(screen.width < screen.height){
+                    $(this).css('background-image', 'url(/static/images/bg-homepage-4-sm.jpg)');
+                  }else{
+                    $(this).css('background-image', 'url(/static/images/bg-homepage-4.jpg)');
+                  }
                   }).fadeTo('slow', 1)
                   if(language === "es"){
                     changedText("Viaja a Punta Cana","Paquetes de verano desde $ 1057");
@@ -125,7 +137,11 @@ function loopSlider(){
             }  
             case 3:{
                 $('#slider').fadeTo('slow', 0.2, function() {
+                  if(screen.width < screen.height){
+                    $(this).css('background-image', 'url(/static/images/bg-homepage-5-sm.webp)');
+                  }else{
                     $(this).css('background-image', 'url(/static/images/bg-homepage-5.webp)');
+                  }
                   }).fadeTo('slow', 1);
                   if(language === "es"){
                     changedText("Trámites de imigración","Permiso de trabajo y Residencia Americana");
@@ -138,7 +154,11 @@ function loopSlider(){
             }  
             case 4:{
                 $('#slider').fadeTo('slow', 0.2, function() {
+                  if(screen.width < screen.height){
+                    $(this).css('background-image', 'url(/static/images/bg-homepage-1-sm.jpg)');
+                  }else{
                     $(this).css('background-image', 'url(/static/images/bg-homepage-1.webp)');
+                  }
                   }).fadeTo('slow', 1);
                   if(language === "es"){
                     changedText("Viajes a multiples destinos con","Aerolíneas Regulares Charters");
@@ -181,7 +201,6 @@ function reinitLoop(time){
   clearInterval(xx);
   setTimeout(loopSlider(),time);
 }
-
 
 $(window).ready(function(){
     loopSlider();

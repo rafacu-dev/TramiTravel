@@ -101,23 +101,25 @@
                             <span class="font-bold md:mb-1">{{ strings.account }}</span>
                             <svg class=" w-3 h-3 md:w-4 md:h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" 
                                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        </button>
 
-                        <!-- Dropdown menu -->
-                        <div id="dropdownAvatarName" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(124px, 54px, 0px);">
-                            <div class="py-3 px-4 text-sm text-gray-900">
-                            <div class="font-medium ">{{ strings.menu_t3 }}</div>
-                            <div class="truncate" id="accountEmail">{{request.user}}</div>
-                            </div>
-                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
-                                <li>
-                                    <a href="{% url 'tickets'%}" class="block py-2 px-4 hover:bg-gray-100 ">{{ strings.trips }}</a>
-                                </li>
-                            </ul>
-                            <div class="py-1">
-                            <a href="{% url 'logout'%}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">{{ strings.signout }}</a>
-                            </div>
-                        </div>
+                                <!-- Dropdown menu -->
+                                <div id="dropdownAvatarName" class="hidden z-10 w-44 absolute mt-28 pt-10">
+                                    <div id="" class="w-44 bg-white rounded divide-y divide-gray-100 shadow absolute mt-28">
+                                        <div class="py-3 px-4 text-sm text-gray-900">
+                                        <div class="font-medium ">{{ strings.menu_t3 }}</div>
+                                        <div class="truncate" id="accountEmail">{{request.user}}</div>
+                                        </div>
+                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
+                                            <li>
+                                                <a href="{% url 'tickets'%}" class="block py-2 px-4 hover:bg-gray-100 ">{{ strings.trips }}</a>
+                                            </li>
+                                        </ul>
+                                        <div class="py-1">
+                                        <a href="{% url 'logout'%}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 ">{{ strings.signout }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                        </button>
 
                         
                         <label for="toggleLanguage" class="md:p-0.5 inline-flex items-center rounded-full cursor-pointer bg-gray-100 ml-2 md:ml-5">
