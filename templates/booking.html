@@ -1,0 +1,2267 @@
+{% extends 'base.html' %}
+{% load static tailwind_tags %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/intlTelInput.css' %}">
+{% endblock styles %}
+
+{% block content %}
+
+    <div class=" flex justify-center inline-flex  w-full h-auto mt-8 md:mt-16">
+        <div class="w-full h-auto max-w-7xl bg-white border-gray-200 rounded-lg shadow-md p-12 py-6 mb-3  mt-3">
+            {% if flightReturnSelect %}
+            <p class="text-green-600 font-bold text-xs ">{{ strings.rt }}</p>
+            {% else %}
+            <p class="text-green-600 font-bold text-xs ">{{ strings.ow }}</p>
+            {% endif %}
+
+            <h1 id="rute-flight" class="text-itravel-900 font-medium text-3xl font-serif">{{flightBeginSelect.begin}} {{ strings.to }} {{flightBeginSelect.to}}</h1>
+            <h1 class="text-gray-600 font-medium text-lg ">{{flightBeginSelect.date}} {% if flightReturnSelect %}  {{ strings.to }} {{flightReturnSelect.date}} {%endif%}</h1>
+            
+            <div class="w-full h-auto max-w-6xl border border-itravel-200 rounded-lg shadow-smmb-3  mt-3 lg:flex">
+                <div class="lg:h-full lg:w-1/3 bg-itravel-900/10  p-6 ">
+                    <p class="text-black font-bold text-3xl w-full mb-3 font-serif">{{ strings.booking_t1 }}</p>
+                    <p class="text-itravel-900 font-bold text-4xl w-full mb-6">{{price}}</p>
+
+                    
+                    <p class="text-greay-600 font-medium text-lg w-full font-serif">{{ strings.passengers }} :</p>
+                    <p class="text-gray-900 font-medium text-md w-full ">{{strings.adults}} : {{adults}}</p>
+                    <p class="text-gray-900 font-medium text-md w-full ">{{strings.children}} : {{children}}</p>
+                    <p class="text-gray-900 font-medium text-md w-full ">{{strings.infants}} : {{infants}}</p>
+
+                </div>
+                <div class="h-auto lg:w-2/3 p-6 flex items-center justify-center">
+                    <div class="pb-12">
+                        <div class="md:flex items-center justify-center mt-3 text-center">
+                            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <svg
+                                    class="h-6 w-6 text-red-600"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true">
+                                    <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z"
+                                    />
+                                </svg>
+                            </div>
+                            <h3 class="text-md lg:text-4xl font-bold text-red-500 font-serif lg:ml-3" id="">{{ strings.attention }}</h3>
+                        </div>
+                        <p class="text-md lg:text-xl text-gray-500 text-center mt-3">
+                            {{ strings.booking_t2 }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class=" flex justify-center inline-flex  w-full h-auto">
+
+        <form method="post" onsubmit="return validator()" class="w-full h-auto max-w-7xl bg-white border-gray-200 rounded-lg shadow-md p-4 md:p-12 pt-6 divide-y divide-gray-300">
+            
+            {% with ''|center:adults as range %}
+            {% for n in range %}
+                <div>
+                    <h1 class="text-black font-bold mb-6 text-xl mt-6">{{ strings.adult_passenger }} {{forloop.counter}}</h1>
+                    <h1 class="text-gray-700 font-bold md:ml-2 mb-3 text-md">{{ strings.personalInformation }}</h1>
+
+                    <div class="flex flex-wrap mb-6">
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Adult{{forloop.counter}}">{{ strings.first_name }} 
+                                <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input required class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 focus:ring-itravel-500" id="firstName-Adult{{forloop.counter}}" name="firstName-Adult{{forloop.counter}}" type="text">
+                        </div>
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Adult{{forloop.counter}}">{{ strings.middle_name}}</label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Adult{{forloop.counter}}" name="middleName-Adult{{forloop.counter}}" type="text">
+                        </div>
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Adult{{forloop.counter}}">{{ strings.last_name}} 
+                                <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input required class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Adult{{forloop.counter}}" name="lastName-Adult{{forloop.counter}}" type="text">
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-wrap mb-6">
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Adult{{forloop.counter}}">{{ strings.mother_name}}</label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Adult{{forloop.counter}}" name="motherLastName-Adult{{forloop.counter}}" type="text">
+                        </div>
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2">{{ strings.date_birth }} 
+                                <span class="text-red-500 text-md p-0 font-bold">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" 
+                                        clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <input required datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" name="dateBirth-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy"
+                                type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 range-today">
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2 ml-2" for="gender-Adult{{forloop.counter}}">
+                        {{ strings.gender}} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                    <div class="flex flex-wrap w-full ml-2 mb-6">
+                        <div class="flex items-center mr-6">
+                            <input checked id="male-Adult{{forloop.counter}}" type="radio" value="M"  name="gender-Adult{{forloop.counter}}"
+                            class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" >
+                            <label for="male-Adult{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.male }}</label>
+                        </div>
+                        <div class="flex items-center mr-4">
+                            <input id="female-Adult{{forloop.counter}}" type="radio" value="F"  name="gender-Adult{{forloop.counter}}"
+                            class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2">
+                            <label for="female-Adult{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.female }}</label>
+                        </div>
+                    </div>
+
+
+                    <h1 class="text-gray-700 font-bold mb-3 text-md md:ml-2">{{ strings.primary_document_information }}</h1>
+                    <div class="flex flex-wrap mb-6">
+                        <div class="flex flex-wrap w-full md:w-1/3">
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="primaryDocumentNumber-Adult{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required id="primaryDocumentNumber-Adult{{forloop.counter}}" name="primaryDocumentNumber-Adult{{forloop.counter}}" type="text">
+                            </div>
+    
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="grid-state">{{ strings.expiration_date }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <div class="relative">
+                                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" name="primaryExpirationDocument-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
+                                    type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="primaryDocumentType-Adult{{forloop.counter}}">{{ strings.document_type }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                            name="primaryDocumentType-Adult{{forloop.counter}}" id="primaryDocumentType-Adult{{forloop.counter}}" required>
+                                <option value="Passport">{{ strings.passport }}</option>
+                                <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
+                                <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
+                                <option value="U.S. Re-entry Permit Travel Document">{{ strings.country_document_s4 }}</option>
+                            </select>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="primaryCountryDocument-Adult{{forloop.counter}}">{{ strings.country_document }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                             leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="primaryCountryDocument-Adult{{forloop.counter}}" id="primaryCountryDocument-Adult{{forloop.counter}}" required>
+                                <option value="US" selected>US (United States)</option>
+                                <!--<option value="CU">CU (Cuba)</option> ADD_CUBA-->
+                                <option value="AF">AF (Afghanistan)</option>
+                                <option value="AL">AL (Albania)</option>
+                                <option value="DZ">DZ (Algeria)</option>
+                                <option value="AS">AS (American Samoa)</option>
+                                <option value="AD">AD (Andorra)</option>
+                                <option value="AO">AO (Angola)</option>
+                                <option value="AI">AI (Anguilla)</option>
+                                <option value="AQ">AQ (Antarctica)</option>
+                                <option value="AG">AG (Antigua and Barbuda)</option>
+                                <option value="AR">AR (Argentina)</option>
+                                <option value="AM">AM (Armenia)</option>
+                                <option value="AW">AW (Aruba)</option>
+                                <option value="AU">AU (Australia)</option>
+                                <option value="AT">AT (Austria)</option>
+                                <option value="AZ">AZ (Azerbaijan)</option>
+                                <option value="BS">BS (Bahamas)</option>
+                                <option value="BH">BH (Bahrain)</option>
+                                <option value="BD">BD (Bangladesh)</option>
+                                <option value="BB">BB (Barbados)</option>
+                                <option value="BY">BY (Belarus)</option>
+                                <option value="BE">BE (Belgium)</option>
+                                <option value="BZ">BZ (Belize)</option>
+                                <option value="BJ">BJ (Benin)</option>
+                                <option value="BM">BM (Bermuda)</option>
+                                <option value="BT">BT (Bhutan)</option>
+                                <option value="BO">BO (Bolivia)</option>
+                                <option value="BQ">BQ (Bonaire)</option>
+                                <option value="BA">BA (Bosnia and Herzegovina)</option>
+                                <option value="BW">BW (Botswana)</option>
+                                <option value="BV">BV (Bouvet Island)</option>
+                                <option value="BR">BR (Brazil)</option>
+                                <option value="IO">IO (British Indian Ocean Territory)</option>
+                                <option value="BN">BN (Brunei)</option>
+                                <option value="BG">BG (Bulgaria)</option>
+                                <option value="BF">BF (Burkina Faso)</option>
+                                <option value="BI">BI (Burundi)</option>
+                                <option value="KH">KH (Cambodia)</option>
+                                <option value="CM">CM (Cameroon)</option>
+                                <option value="CA">CA (Canada)</option>
+                                <option value="CV">CV (Cape Verde)</option>
+                                <option value="KY">KY (Cayman Islands)</option>
+                                <option value="CF">CF (Central African Republic)</option>
+                                <option value="TD">TD (Chad)</option>
+                                <option value="CL">CL (Chile)</option>
+                                <option value="CN">CN (China)</option>
+                                <option value="CX">CX (Christmas Island)</option>
+                                <option value="CC">CC (Cocos Keeling Islands)</option>
+                                <option value="CO">CO (Colombia)</option>
+                                <option value="KM">KM (Comoros)</option>
+                                <option value="CG">CG (Congo Brazzaville)</option>
+                                <option value="CD">CD (Congo Kinshasa)</option>
+                                <option value="CK">CK (Cook Islands)</option>
+                                <option value="CR">CR (Costa Rica)</option>
+                                <option value="HR">HR (Croatia)</option>
+                                <option value="CW">CW (Curacao)</option>
+                                <option value="CY">CY (Cyprus)</option>
+                                <option value="CZ">CZ (Czech Republic)</option>
+                                <option value="DK">DK (Denmark)</option>
+                                <option value="DJ">DJ (Djibouti)</option>
+                                <option value="DM">DM (Dominica)</option>
+                                <option value="DO">DO (Dominican Republic)</option>
+                                <option value="TL">TL (East Timor)</option>
+                                <option value="EC">EC (Ecuador)</option>
+                                <option value="EG">EG (Egypt)</option>
+                                <option value="SV">SV (El Salvador)</option>
+                                <option value="GQ">GQ (Equatorial Guinea)</option>
+                                <option value="ER">ER (Eritrea)</option>
+                                <option value="EE">EE (Estonia)</option>
+                                <option value="SZ">SZ (Eswatini)</option>
+                                <option value="ET">ET (Ethiopia)</option>
+                                <option value="FK">FK (Falkland Islands)</option>
+                                <option value="FO">FO (Faroe Islands)</option>
+                                <option value="FJ">FJ (Fiji)</option>
+                                <option value="FI">FI (Finland)</option>
+                                <option value="FR">FR (France)</option>
+                                <option value="GF">GF (French Guiana)</option>
+                                <option value="PF">PF (French Polynesia)</option>
+                                <option value="GA">GA (Gabon)</option>
+                                <option value="GM">GM (Gambia)</option>
+                                <option value="GE">GE (Georgia)</option>
+                                <option value="DE">DE (Germany)</option>
+                                <option value="GH">GH (Ghana)</option>
+                                <option value="GI">GI (Gibraltar)</option>
+                                <option value="GR">GR (Greece)</option>
+                                <option value="GL">GL (Greenland)</option>
+                                <option value="GD">GD (Grenada)</option>
+                                <option value="GP">GP (Guadeloupe)</option>
+                                <option value="GU">GU (Guam)</option>
+                                <option value="GT">GT (Guatemala)</option>
+                                <option value="GG">GG (Guernsey)</option>
+                                <option value="GN">GN (Guinea)</option>
+                                <option value="GW">GW (Guinea-Bissau)</option>
+                                <option value="GY">GY (Guyana)</option>
+                                <option value="HT">HT (Haiti)</option>
+                                <option value="HM">HM (Heard and Mcdonald Islands)</option>
+                                <option value="HN">HN (Honduras)</option>
+                                <option value="HK">HK (Hong Kong)</option>
+                                <option value="HU">HU (Hungary)</option>
+                                <option value="IS">IS (Iceland)</option>
+                                <option value="IN">IN (India)</option>
+                                <option value="ID">ID (Indonesia)</option>
+                                <option value="IR">IR (Iran)</option>
+                                <option value="IQ">IQ (Iraq)</option>
+                                <option value="IE">IE (Ireland)</option>
+                                <option value="IL">IL (Israel)</option>
+                                <option value="IT">IT (Italy)</option>
+                                <option value="CI">CI (Ivory Coast)</option>
+                                <option value="JM">JM (Jamaica)</option>
+                                <option value="JP">JP (Japan)</option>
+                                <option value="JO">JO (Jordan)</option>
+                                <option value="KZ">KZ (Kazakstan)</option>
+                                <option value="KE">KE (Kenya)</option>
+                                <option value="KI">KI (Kiribati)</option>
+                                <option value="XK">XK (Kosovo)</option>
+                                <option value="KW">KW (Kuwait)</option>
+                                <option value="KG">KG (Kyrgyzstan)</option>
+                                <option value="LA">LA (Laos)</option>
+                                <option value="LV">LV (Latvia)</option>
+                                <option value="LB">LB (Lebanon)</option>
+                                <option value="LS">LS (Lesotho)</option>
+                                <option value="LR">LR (Liberia)</option>
+                                <option value="LY">LY (Libya)</option>
+                                <option value="LI">LI (Liechtenstein)</option>
+                                <option value="LT">LT (Lithuania)</option>
+                                <option value="LU">LU (Luxembourg)</option>
+                                <option value="MO">MO (Macau)</option>
+                                <option value="MK">MK (Macedonia)</option>
+                                <option value="MG">MG (Madagascar)</option>
+                                <option value="MW">MW (Malawi)</option>
+                                <option value="MY">MY (Malaysia)</option>
+                                <option value="MV">MV (Maldives)</option>
+                                <option value="ML">ML (Mali)</option>
+                                <option value="MT">MT (Malta)</option>
+                                <option value="MH">MH (Marshall Islands)</option>
+                                <option value="MQ">MQ (Martinique)</option>
+                                <option value="MR">MR (Mauritania)</option>
+                                <option value="MU">MU (Mauritius)</option>
+                                <option value="YT">YT (Mayotte)</option>
+                                <option value="MX">MX (Mexico)</option>
+                                <option value="FM">FM (Micronesia)</option>
+                                <option value="MD">MD (Moldova)</option>
+                                <option value="MC">MC (Monaco)</option>
+                                <option value="MN">MN (Mongolia)</option>
+                                <option value="ME">ME (Montenegro)</option>
+                                <option value="MS">MS (Montserrat)</option>
+                                <option value="MA">MA (Morocco)</option>
+                                <option value="MZ">MZ (Mozambique)</option>
+                                <option value="MM">MM (Myanmar)</option>
+                                <option value="NA">NA (Namibia)</option>
+                                <option value="NR">NR (Nauru)</option>
+                                <option value="NP">NP (Nepal)</option>
+                                <option value="NL">NL (Netherlands)</option>
+                                <option value="NC">NC (New Caledonia)</option>
+                                <option value="NZ">NZ (New Zealand)</option>
+                                <option value="NI">NI (Nicaragua)</option>
+                                <option value="NE">NE (Niger)</option>
+                                <option value="NG">NG (Nigeria)</option>
+                                <option value="NU">NU (Niue)</option>
+                                <option value="NF">NF (Norfolk Island)</option>
+                                <option value="MP">MP (Northern Mariana Islands)</option>
+                                <option value="KP">KP (North Korea)</option>
+                                <option value="NO">NO (Norway)</option>
+                                <option value="OM">OM (Oman)</option>
+                                <option value="PK">PK (Pakistan)</option>
+                                <option value="PW">PW (Palau)</option>
+                                <option value="PA">PA (Panama)</option>
+                                <option value="PG">PG (Papua New Guinea)</option>
+                                <option value="PY">PY (Paraguay)</option>
+                                <option value="PE">PE (Peru)</option>
+                                <option value="PH">PH (Philippines)</option>
+                                <option value="PN">PN (Pitcairn)</option>
+                                <option value="PL">PL (Poland)</option>
+                                <option value="PT">PT (Portugal)</option>
+                                <option value="PR">PR (Puerto Rico)</option>
+                                <option value="QA">QA (Qatar)</option>
+                                <option value="RE">RE (Reunion)</option>
+                                <option value="RO">RO (Romania)</option>
+                                <option value="RU">RU (Russia)</option>
+                                <option value="RW">RW (Rwanda)</option>
+                                <option value="SH">SH (Saint Helena)</option>
+                                <option value="KN">KN (Saint Kitts and Nevis)</option>
+                                <option value="LC">LC (Saint Lucia)</option>
+                                <option value="PM">PM (Saint Pierre and Miquelon)</option>
+                                <option value="VC">VC (Saint Vincent &amp; The Grenadines)</option>
+                                <option value="WS">WS (Samoa)</option>
+                                <option value="SM">SM (San Marino)</option>
+                                <option value="ST">ST (Sao Tome and Principe)</option>
+                                <option value="SA">SA (Saudi Arabia)</option>
+                                <option value="SN">SN (Senegal)</option>
+                                <option value="RS">RS (Serbia)</option>
+                                <option value="SC">SC (Seychelles)</option>
+                                <option value="SL">SL (Sierra Leone)</option>
+                                <option value="SG">SG (Singapore)</option>
+                                <option value="SX">SX (Sint Maarten)</option>
+                                <option value="SK">SK (Slovakia)</option>
+                                <option value="SI">SI (Slovenia)</option>
+                                <option value="SB">SB (Solomon Islands)</option>
+                                <option value="SO">SO (Somalia)</option>
+                                <option value="ZA">ZA (South Africa)</option>
+                                <option value="KR">KR (South Korea)</option>
+                                <option value="ES">ES (Spain)</option>
+                                <option value="LK">LK (Sri Lanka)</option>
+                                <option value="SD">SD (Sudan)</option>
+                                <option value="SR">SR (Suriname)</option>
+                                <option value="SJ">SJ (Svalbard and Jan Mayen)</option>
+                                <option value="SE">SE (Sweden)</option>
+                                <option value="CH">CH (Switzerland)</option>
+                                <option value="SY">SY (Syrian Arb Republic)</option>
+                                <option value="TW">TW (Taiwan)</option>
+                                <option value="TJ">TJ (Tajikistan)</option>
+                                <option value="TZ">TZ (Tanzania)</option>
+                                <option value="TH">TH (Thailand)</option>
+                                <option value="TG">TG (Togo)</option>
+                                <option value="TK">TK (Tokelau)</option>
+                                <option value="TO">TO (Tonga)</option>
+                                <option value="TT">TT (Trinidad and Tobago)</option>
+                                <option value="TN">TN (Tunisia)</option>
+                                <option value="TR">TR (Turkey)</option>
+                                <option value="TM">TM (Turkmenistan)</option>
+                                <option value="TC">TC (Turks and Caicos Islands)</option>
+                                <option value="TV">TV (Tuvalu)</option>
+                                <option value="UG">UG (Uganda)</option>
+                                <option value="UA">UA (Ukraine)</option>
+                                <option value="AE">AE (United Arab Emirates)</option>
+                                <option value="GB">GB (United Kingdom)</option>
+                                <option value="UY">UY (Uruguay)</option>
+                                <option value="UZ">UZ (Uzbekistan)</option>
+                                <option value="VU">VU (Vanuatu)</option>
+                                <option value="VA">VA (Vatican City)</option>
+                                <option value="VE">VE (Venezuela)</option>
+                                <option value="VN">VN (Vietnam)</option>
+                                <option value="VG">VG (Virgin Islands British)</option>
+                                <option value="VI">VI (Virgin Islands U.S.)</option>
+                                <option value="WF">WF (Wallis and Futuna)</option>
+                                <option value="EH">EH (Western Sahara)</option>
+                                <option value="YE">YE (Yemen)</option>
+                                <option value="ZM">ZM (Zambia)</option>
+                                <option value="ZW">ZW (Zimbabwe)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    
+                    <div class="flex flex-wrap items-center mb-3">
+                        <h1 class="text-gray-700 font-bold text-md mr-3 md:ml-2">{{ strings.secondary_document_information }}</h1>
+                        <div class="flex items-center rounded bg-red-100 py-1 md:px-2">
+                            <input id="checkboxSecondaryDocuments-Adult{{forloop.counter}}" type="checkbox" value="" class="w-4 h-4 text-red-300 bg-gray-100 rounded border-gray-300 focus:ring-red-100 focus:ring" onchange="notAvailableSecondaryDocument(this,'Adult{{forloop.counter}}')">
+                            <label for="checkboxSecondaryDocuments-Adult{{forloop.counter}}" class="ml-2 text-sm font-bold text-red-900">{{ strings.not_available }}</label>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center mb-6 ml-2 w-auto hidden" id="alertNotCubaDocument-Adult{{forloop.counter}}">
+                        <h3 class="text-md font-medium text-red-500 font-serif ml-1" id="">{{ strings.booking_t3 }}</h3>
+                    </div>
+
+                    <div class="flex flex-wrap mb-6"  id="secondaryDocument-Adult{{forloop.counter}}">
+                        <div class="flex flex-wrap w-full md:w-1/3">
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="secondaryDocumentNumber-Adult{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="secondaryDocumentNumber-Adult{{forloop.counter}}" name="secondaryDocumentNumber-Adult{{forloop.counter}}" type="text" required>
+                            </div>
+    
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="grid-state">{{ strings.expiration_date }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <div class="relative">
+                                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}"  name="secondaryExpirationDocument-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy"   id="secondaryExpirationDocument-Adult{{forloop.counter}}" required onchange="validDatepicker(this)" autocomplete="off"
+                                    type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="secondaryDocumentType-Adult{{forloop.counter}}">{{ strings.document_type }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                            id="secondaryDocumentType-Adult{{forloop.counter}}" name="secondaryDocumentType-Adult{{forloop.counter}}" required>
+                                <option value="Passport">{{ strings.passport }}</option>
+                                <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
+                                <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
+                                <option value="U.S. Re-entry Permit Travel Document">{{ strings.country_document_s4 }}</option>
+                            </select>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="secondaryCountryDocument-Adult{{forloop.counter}}">{{ strings.country_document }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                             leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="secondaryCountryDocument-Adult{{forloop.counter}}" id="secondaryCountryDocument-Adult{{forloop.counter}}" required>
+                                <option value="US" selected>US (United States)</option>
+                                <!--<option value="CU">CU (Cuba)</option> ADD_CUBA-->
+                                <option value="AF">AF (Afghanistan)</option>
+                                <option value="AL">AL (Albania)</option>
+                                <option value="DZ">DZ (Algeria)</option>
+                                <option value="AS">AS (American Samoa)</option>
+                                <option value="AD">AD (Andorra)</option>
+                                <option value="AO">AO (Angola)</option>
+                                <option value="AI">AI (Anguilla)</option>
+                                <option value="AQ">AQ (Antarctica)</option>
+                                <option value="AG">AG (Antigua and Barbuda)</option>
+                                <option value="AR">AR (Argentina)</option>
+                                <option value="AM">AM (Armenia)</option>
+                                <option value="AW">AW (Aruba)</option>
+                                <option value="AU">AU (Australia)</option>
+                                <option value="AT">AT (Austria)</option>
+                                <option value="AZ">AZ (Azerbaijan)</option>
+                                <option value="BS">BS (Bahamas)</option>
+                                <option value="BH">BH (Bahrain)</option>
+                                <option value="BD">BD (Bangladesh)</option>
+                                <option value="BB">BB (Barbados)</option>
+                                <option value="BY">BY (Belarus)</option>
+                                <option value="BE">BE (Belgium)</option>
+                                <option value="BZ">BZ (Belize)</option>
+                                <option value="BJ">BJ (Benin)</option>
+                                <option value="BM">BM (Bermuda)</option>
+                                <option value="BT">BT (Bhutan)</option>
+                                <option value="BO">BO (Bolivia)</option>
+                                <option value="BQ">BQ (Bonaire)</option>
+                                <option value="BA">BA (Bosnia and Herzegovina)</option>
+                                <option value="BW">BW (Botswana)</option>
+                                <option value="BV">BV (Bouvet Island)</option>
+                                <option value="BR">BR (Brazil)</option>
+                                <option value="IO">IO (British Indian Ocean Territory)</option>
+                                <option value="BN">BN (Brunei)</option>
+                                <option value="BG">BG (Bulgaria)</option>
+                                <option value="BF">BF (Burkina Faso)</option>
+                                <option value="BI">BI (Burundi)</option>
+                                <option value="KH">KH (Cambodia)</option>
+                                <option value="CM">CM (Cameroon)</option>
+                                <option value="CA">CA (Canada)</option>
+                                <option value="CV">CV (Cape Verde)</option>
+                                <option value="KY">KY (Cayman Islands)</option>
+                                <option value="CF">CF (Central African Republic)</option>
+                                <option value="TD">TD (Chad)</option>
+                                <option value="CL">CL (Chile)</option>
+                                <option value="CN">CN (China)</option>
+                                <option value="CX">CX (Christmas Island)</option>
+                                <option value="CC">CC (Cocos Keeling Islands)</option>
+                                <option value="CO">CO (Colombia)</option>
+                                <option value="KM">KM (Comoros)</option>
+                                <option value="CG">CG (Congo Brazzaville)</option>
+                                <option value="CD">CD (Congo Kinshasa)</option>
+                                <option value="CK">CK (Cook Islands)</option>
+                                <option value="CR">CR (Costa Rica)</option>
+                                <option value="HR">HR (Croatia)</option>
+                                <option value="CW">CW (Curacao)</option>
+                                <option value="CY">CY (Cyprus)</option>
+                                <option value="CZ">CZ (Czech Republic)</option>
+                                <option value="DK">DK (Denmark)</option>
+                                <option value="DJ">DJ (Djibouti)</option>
+                                <option value="DM">DM (Dominica)</option>
+                                <option value="DO">DO (Dominican Republic)</option>
+                                <option value="TL">TL (East Timor)</option>
+                                <option value="EC">EC (Ecuador)</option>
+                                <option value="EG">EG (Egypt)</option>
+                                <option value="SV">SV (El Salvador)</option>
+                                <option value="GQ">GQ (Equatorial Guinea)</option>
+                                <option value="ER">ER (Eritrea)</option>
+                                <option value="EE">EE (Estonia)</option>
+                                <option value="SZ">SZ (Eswatini)</option>
+                                <option value="ET">ET (Ethiopia)</option>
+                                <option value="FK">FK (Falkland Islands)</option>
+                                <option value="FO">FO (Faroe Islands)</option>
+                                <option value="FJ">FJ (Fiji)</option>
+                                <option value="FI">FI (Finland)</option>
+                                <option value="FR">FR (France)</option>
+                                <option value="GF">GF (French Guiana)</option>
+                                <option value="PF">PF (French Polynesia)</option>
+                                <option value="GA">GA (Gabon)</option>
+                                <option value="GM">GM (Gambia)</option>
+                                <option value="GE">GE (Georgia)</option>
+                                <option value="DE">DE (Germany)</option>
+                                <option value="GH">GH (Ghana)</option>
+                                <option value="GI">GI (Gibraltar)</option>
+                                <option value="GR">GR (Greece)</option>
+                                <option value="GL">GL (Greenland)</option>
+                                <option value="GD">GD (Grenada)</option>
+                                <option value="GP">GP (Guadeloupe)</option>
+                                <option value="GU">GU (Guam)</option>
+                                <option value="GT">GT (Guatemala)</option>
+                                <option value="GG">GG (Guernsey)</option>
+                                <option value="GN">GN (Guinea)</option>
+                                <option value="GW">GW (Guinea-Bissau)</option>
+                                <option value="GY">GY (Guyana)</option>
+                                <option value="HT">HT (Haiti)</option>
+                                <option value="HM">HM (Heard and Mcdonald Islands)</option>
+                                <option value="HN">HN (Honduras)</option>
+                                <option value="HK">HK (Hong Kong)</option>
+                                <option value="HU">HU (Hungary)</option>
+                                <option value="IS">IS (Iceland)</option>
+                                <option value="IN">IN (India)</option>
+                                <option value="ID">ID (Indonesia)</option>
+                                <option value="IR">IR (Iran)</option>
+                                <option value="IQ">IQ (Iraq)</option>
+                                <option value="IE">IE (Ireland)</option>
+                                <option value="IL">IL (Israel)</option>
+                                <option value="IT">IT (Italy)</option>
+                                <option value="CI">CI (Ivory Coast)</option>
+                                <option value="JM">JM (Jamaica)</option>
+                                <option value="JP">JP (Japan)</option>
+                                <option value="JO">JO (Jordan)</option>
+                                <option value="KZ">KZ (Kazakstan)</option>
+                                <option value="KE">KE (Kenya)</option>
+                                <option value="KI">KI (Kiribati)</option>
+                                <option value="XK">XK (Kosovo)</option>
+                                <option value="KW">KW (Kuwait)</option>
+                                <option value="KG">KG (Kyrgyzstan)</option>
+                                <option value="LA">LA (Laos)</option>
+                                <option value="LV">LV (Latvia)</option>
+                                <option value="LB">LB (Lebanon)</option>
+                                <option value="LS">LS (Lesotho)</option>
+                                <option value="LR">LR (Liberia)</option>
+                                <option value="LY">LY (Libya)</option>
+                                <option value="LI">LI (Liechtenstein)</option>
+                                <option value="LT">LT (Lithuania)</option>
+                                <option value="LU">LU (Luxembourg)</option>
+                                <option value="MO">MO (Macau)</option>
+                                <option value="MK">MK (Macedonia)</option>
+                                <option value="MG">MG (Madagascar)</option>
+                                <option value="MW">MW (Malawi)</option>
+                                <option value="MY">MY (Malaysia)</option>
+                                <option value="MV">MV (Maldives)</option>
+                                <option value="ML">ML (Mali)</option>
+                                <option value="MT">MT (Malta)</option>
+                                <option value="MH">MH (Marshall Islands)</option>
+                                <option value="MQ">MQ (Martinique)</option>
+                                <option value="MR">MR (Mauritania)</option>
+                                <option value="MU">MU (Mauritius)</option>
+                                <option value="YT">YT (Mayotte)</option>
+                                <option value="MX">MX (Mexico)</option>
+                                <option value="FM">FM (Micronesia)</option>
+                                <option value="MD">MD (Moldova)</option>
+                                <option value="MC">MC (Monaco)</option>
+                                <option value="MN">MN (Mongolia)</option>
+                                <option value="ME">ME (Montenegro)</option>
+                                <option value="MS">MS (Montserrat)</option>
+                                <option value="MA">MA (Morocco)</option>
+                                <option value="MZ">MZ (Mozambique)</option>
+                                <option value="MM">MM (Myanmar)</option>
+                                <option value="NA">NA (Namibia)</option>
+                                <option value="NR">NR (Nauru)</option>
+                                <option value="NP">NP (Nepal)</option>
+                                <option value="NL">NL (Netherlands)</option>
+                                <option value="NC">NC (New Caledonia)</option>
+                                <option value="NZ">NZ (New Zealand)</option>
+                                <option value="NI">NI (Nicaragua)</option>
+                                <option value="NE">NE (Niger)</option>
+                                <option value="NG">NG (Nigeria)</option>
+                                <option value="NU">NU (Niue)</option>
+                                <option value="NF">NF (Norfolk Island)</option>
+                                <option value="MP">MP (Northern Mariana Islands)</option>
+                                <option value="KP">KP (North Korea)</option>
+                                <option value="NO">NO (Norway)</option>
+                                <option value="OM">OM (Oman)</option>
+                                <option value="PK">PK (Pakistan)</option>
+                                <option value="PW">PW (Palau)</option>
+                                <option value="PA">PA (Panama)</option>
+                                <option value="PG">PG (Papua New Guinea)</option>
+                                <option value="PY">PY (Paraguay)</option>
+                                <option value="PE">PE (Peru)</option>
+                                <option value="PH">PH (Philippines)</option>
+                                <option value="PN">PN (Pitcairn)</option>
+                                <option value="PL">PL (Poland)</option>
+                                <option value="PT">PT (Portugal)</option>
+                                <option value="PR">PR (Puerto Rico)</option>
+                                <option value="QA">QA (Qatar)</option>
+                                <option value="RE">RE (Reunion)</option>
+                                <option value="RO">RO (Romania)</option>
+                                <option value="RU">RU (Russia)</option>
+                                <option value="RW">RW (Rwanda)</option>
+                                <option value="SH">SH (Saint Helena)</option>
+                                <option value="KN">KN (Saint Kitts and Nevis)</option>
+                                <option value="LC">LC (Saint Lucia)</option>
+                                <option value="PM">PM (Saint Pierre and Miquelon)</option>
+                                <option value="VC">VC (Saint Vincent &amp; The Grenadines)</option>
+                                <option value="WS">WS (Samoa)</option>
+                                <option value="SM">SM (San Marino)</option>
+                                <option value="ST">ST (Sao Tome and Principe)</option>
+                                <option value="SA">SA (Saudi Arabia)</option>
+                                <option value="SN">SN (Senegal)</option>
+                                <option value="RS">RS (Serbia)</option>
+                                <option value="SC">SC (Seychelles)</option>
+                                <option value="SL">SL (Sierra Leone)</option>
+                                <option value="SG">SG (Singapore)</option>
+                                <option value="SX">SX (Sint Maarten)</option>
+                                <option value="SK">SK (Slovakia)</option>
+                                <option value="SI">SI (Slovenia)</option>
+                                <option value="SB">SB (Solomon Islands)</option>
+                                <option value="SO">SO (Somalia)</option>
+                                <option value="ZA">ZA (South Africa)</option>
+                                <option value="KR">KR (South Korea)</option>
+                                <option value="ES">ES (Spain)</option>
+                                <option value="LK">LK (Sri Lanka)</option>
+                                <option value="SD">SD (Sudan)</option>
+                                <option value="SR">SR (Suriname)</option>
+                                <option value="SJ">SJ (Svalbard and Jan Mayen)</option>
+                                <option value="SE">SE (Sweden)</option>
+                                <option value="CH">CH (Switzerland)</option>
+                                <option value="SY">SY (Syrian Arb Republic)</option>
+                                <option value="TW">TW (Taiwan)</option>
+                                <option value="TJ">TJ (Tajikistan)</option>
+                                <option value="TZ">TZ (Tanzania)</option>
+                                <option value="TH">TH (Thailand)</option>
+                                <option value="TG">TG (Togo)</option>
+                                <option value="TK">TK (Tokelau)</option>
+                                <option value="TO">TO (Tonga)</option>
+                                <option value="TT">TT (Trinidad and Tobago)</option>
+                                <option value="TN">TN (Tunisia)</option>
+                                <option value="TR">TR (Turkey)</option>
+                                <option value="TM">TM (Turkmenistan)</option>
+                                <option value="TC">TC (Turks and Caicos Islands)</option>
+                                <option value="TV">TV (Tuvalu)</option>
+                                <option value="UG">UG (Uganda)</option>
+                                <option value="UA">UA (Ukraine)</option>
+                                <option value="AE">AE (United Arab Emirates)</option>
+                                <option value="GB">GB (United Kingdom)</option>
+                                <option value="UY">UY (Uruguay)</option>
+                                <option value="UZ">UZ (Uzbekistan)</option>
+                                <option value="VU">VU (Vanuatu)</option>
+                                <option value="VA">VA (Vatican City)</option>
+                                <option value="VE">VE (Venezuela)</option>
+                                <option value="VN">VN (Vietnam)</option>
+                                <option value="VG">VG (Virgin Islands British)</option>
+                                <option value="VI">VI (Virgin Islands U.S.)</option>
+                                <option value="WF">WF (Wallis and Futuna)</option>
+                                <option value="EH">EH (Western Sahara)</option>
+                                <option value="YE">YE (Yemen)</option>
+                                <option value="ZM">ZM (Zambia)</option>
+                                <option value="ZW">ZW (Zimbabwe)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h1 class="text-gray-700 font-bold mb-3 text-md md:ml-2">{{ strings.address_es }} {{flightBeginSelect.begin.country}} {{ strings.address_en }}</h1>
+                    <div class="flex flex-wrap mb-6">
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-street-1-Adult{{forloop.counter}}">{{ strings.street}}<span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-street-1-Adult{{forloop.counter}}" name="address-street-1-Adult{{forloop.counter}}" type="text" required>
+                        </div>
+                        <div class="w-full md:w-2/3 md:flex">
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-city-1-Adult{{forloop.counter}}">{{ strings.city}}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="address-city-1-Adult{{forloop.counter}}" id="address-city-1-Adult{{forloop.counter}}" required>
+                                {% for city in cities_begin %}
+                                    <option value="{{ city }}">{{ city }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-state-1-Adult{{forloop.counter}}">{{ strings.state }}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" onchange="setCities(this.selectedOptions[0].getAttribute('cities'),'address-city-1-Adult{{forloop.counter}}')" name="address-state-1-Adult{{forloop.counter}}"  id="address-state-1-Adult{{forloop.counter}}"  required>
+                                {% for address in address_begin %}
+                                    {% for state in address %}
+                                        <option value="{{ state }}" cities="{{address.values}}">{{ state }}</option>
+                                    {% endfor %}
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-postalcode-1-Adult{{forloop.counter}}">{{ strings.zip_code }}</label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-postalcode-1-Adult{{forloop.counter}}" name="address-postalcode-1-Adult{{forloop.counter}}" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 class="text-gray-700 font-bold mb-3 text-md md:ml-2">{{ strings.address_es }} {{flightBeginSelect.to.country}} {{ strings.address_en }}</h1>
+                    <div class="flex flex-wrap mb-6">
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-street-2-Adult{{forloop.counter}}">{{ strings.street}}<span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-street-2-Adult{{forloop.counter}}" name="address-street-2-Adult{{forloop.counter}}" type="text" required>
+                        </div>
+                        <div class="w-full md:w-2/3 md:flex">
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-city-2-Adult{{forloop.counter}}">{{ strings.street}}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="address-city-2-Adult{{forloop.counter}}" id="address-city-2-Adult{{forloop.counter}}" required>
+                                {% for sity in cities_to %}
+                                    <option value="US">{{ sity }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-state-2-Adult{{forloop.counter}}">{{ strings.state }}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" onchange="setCities(this.selectedOptions[0].getAttribute('cities'),'address-city-2-Adult{{forloop.counter}}')" name="address-state-2-Adult{{forloop.counter}}"  id="address-state-2-Adult{{forloop.counter}}"  required>
+                                {% for address in address_to %}
+                                    {% for state in address %}
+                                        <option value="{{state}}" cities="{{address.values}}">{{ state}}</option>
+                                    {% endfor %}
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-postalcode-2-Adult{{forloop.counter}}">{{ strings.zip_code }}</label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-postalcode-2-Adult{{forloop.counter}}" name="address-postalcode-2-Adult{{forloop.counter}}" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+            {% endwith %}
+            
+            {% with ''|center:children as range %}
+            {% for n in range %}
+                <div>
+                    <h1 class="text-black font-bold mb-6 text-xl mt-6">{{ strings.children_passenger }} {{forloop.counter}}</h1>
+                    <h1 class="text-gray-700 font-bold md:ml-2 mb-3 text-md">{{ strings.personalInformation }}</h1>
+
+                    <div class="flex flex-wrap mb-6">
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Children{{forloop.counter}}">{{ strings.first_name }} 
+                                <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="firstName-Children{{forloop.counter}}" name="firstName-Children{{forloop.counter}}" type="text">
+                        </div>
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Children{{forloop.counter}}">{{ strings.middle_name}}</label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Children{{forloop.counter}}" name="middleName-Children{{forloop.counter}}" type="text">
+                        </div>
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Children{{forloop.counter}}">{{ strings.last_name}} 
+                                <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Children{{forloop.counter}}" name="lastName-Children{{forloop.counter}}" type="text">
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-wrap mb-6">
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Children{{forloop.counter}}">{{ strings.mother_name}}</label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Children{{forloop.counter}}" name="motherLastName-Children{{forloop.counter}}" type="text">
+                        </div>
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2">{{ strings.date_birth }} 
+                                <span class="text-red-500 text-md p-0 font-bold">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" 
+                                        clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" name="dateBirth-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" onchange="validDatepicker(this)" autocomplete="off"
+                                type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 range-today">
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2 ml-2" for="gender-Children{{forloop.counter}}">
+                        {{ strings.gender}} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                    <div class="flex flex-wrap w-full ml-2 mb-6">
+                        <div class="flex items-center mr-6">
+                            <input checked id="male-Children{{forloop.counter}}" type="radio" value="M"  name="gender-Children{{forloop.counter}}"
+                            class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" >
+                            <label for="male-Children{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.male }}</label>
+                        </div>
+                        <div class="flex items-center mr-4">
+                            <input id="female-Children{{forloop.counter}}" type="radio" value="F"  name="gender-Children{{forloop.counter}}"
+                            class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2">
+                            <label for="female-Children{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.female }}</label>
+                        </div>
+                    </div>
+                    
+                    <h1 class="text-gray-700 font-bold mb-3 text-md md:ml-2">{{ strings.primary_document_information }}</h1>
+                    <div class="flex flex-wrap mb-6">
+                        <div class="flex flex-wrap w-full md:w-1/3">
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="primaryDocumentNumber-Children{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required
+                                id="primaryDocumentNumber-Children{{forloop.counter}}" name="primaryDocumentNumber-Children{{forloop.counter}}" type="text">
+                            </div>
+    
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="grid-state">{{ strings.expiration_date }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <div class="relative">
+                                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" name="primaryExpirationDocument-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
+                                    type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="primaryDocumentType-Children{{forloop.counter}}">{{ strings.document_type }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                            name="primaryDocumentType-Children{{forloop.counter}}" id="primaryDocumentType-Children{{forloop.counter}}" required>
+                                <option value="Passport">{{ strings.passport }}</option>
+                                <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
+                                <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
+                                <option value="U.S. Re-entry Permit Travel Document">{{ strings.country_document_s4 }}</option>
+                            </select>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="primaryCountryDocument-Children{{forloop.counter}}">{{ strings.country_document }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="primaryCountryDocument-Children{{forloop.counter}}" id="primaryCountryDocument-Children{{forloop.counter}}" required>
+                                <option value="US" selected>US (United States)</option>
+                                <!--<option value="CU">CU (Cuba)</option> ADD_CUBA-->
+                                <option value="AF">AF (Afghanistan)</option>
+                                <option value="AL">AL (Albania)</option>
+                                <option value="DZ">DZ (Algeria)</option>
+                                <option value="AS">AS (American Samoa)</option>
+                                <option value="AD">AD (Andorra)</option>
+                                <option value="AO">AO (Angola)</option>
+                                <option value="AI">AI (Anguilla)</option>
+                                <option value="AQ">AQ (Antarctica)</option>
+                                <option value="AG">AG (Antigua and Barbuda)</option>
+                                <option value="AR">AR (Argentina)</option>
+                                <option value="AM">AM (Armenia)</option>
+                                <option value="AW">AW (Aruba)</option>
+                                <option value="AU">AU (Australia)</option>
+                                <option value="AT">AT (Austria)</option>
+                                <option value="AZ">AZ (Azerbaijan)</option>
+                                <option value="BS">BS (Bahamas)</option>
+                                <option value="BH">BH (Bahrain)</option>
+                                <option value="BD">BD (Bangladesh)</option>
+                                <option value="BB">BB (Barbados)</option>
+                                <option value="BY">BY (Belarus)</option>
+                                <option value="BE">BE (Belgium)</option>
+                                <option value="BZ">BZ (Belize)</option>
+                                <option value="BJ">BJ (Benin)</option>
+                                <option value="BM">BM (Bermuda)</option>
+                                <option value="BT">BT (Bhutan)</option>
+                                <option value="BO">BO (Bolivia)</option>
+                                <option value="BQ">BQ (Bonaire)</option>
+                                <option value="BA">BA (Bosnia and Herzegovina)</option>
+                                <option value="BW">BW (Botswana)</option>
+                                <option value="BV">BV (Bouvet Island)</option>
+                                <option value="BR">BR (Brazil)</option>
+                                <option value="IO">IO (British Indian Ocean Territory)</option>
+                                <option value="BN">BN (Brunei)</option>
+                                <option value="BG">BG (Bulgaria)</option>
+                                <option value="BF">BF (Burkina Faso)</option>
+                                <option value="BI">BI (Burundi)</option>
+                                <option value="KH">KH (Cambodia)</option>
+                                <option value="CM">CM (Cameroon)</option>
+                                <option value="CA">CA (Canada)</option>
+                                <option value="CV">CV (Cape Verde)</option>
+                                <option value="KY">KY (Cayman Islands)</option>
+                                <option value="CF">CF (Central African Republic)</option>
+                                <option value="TD">TD (Chad)</option>
+                                <option value="CL">CL (Chile)</option>
+                                <option value="CN">CN (China)</option>
+                                <option value="CX">CX (Christmas Island)</option>
+                                <option value="CC">CC (Cocos Keeling Islands)</option>
+                                <option value="CO">CO (Colombia)</option>
+                                <option value="KM">KM (Comoros)</option>
+                                <option value="CG">CG (Congo Brazzaville)</option>
+                                <option value="CD">CD (Congo Kinshasa)</option>
+                                <option value="CK">CK (Cook Islands)</option>
+                                <option value="CR">CR (Costa Rica)</option>
+                                <option value="HR">HR (Croatia)</option>
+                                <option value="CW">CW (Curacao)</option>
+                                <option value="CY">CY (Cyprus)</option>
+                                <option value="CZ">CZ (Czech Republic)</option>
+                                <option value="DK">DK (Denmark)</option>
+                                <option value="DJ">DJ (Djibouti)</option>
+                                <option value="DM">DM (Dominica)</option>
+                                <option value="DO">DO (Dominican Republic)</option>
+                                <option value="TL">TL (East Timor)</option>
+                                <option value="EC">EC (Ecuador)</option>
+                                <option value="EG">EG (Egypt)</option>
+                                <option value="SV">SV (El Salvador)</option>
+                                <option value="GQ">GQ (Equatorial Guinea)</option>
+                                <option value="ER">ER (Eritrea)</option>
+                                <option value="EE">EE (Estonia)</option>
+                                <option value="SZ">SZ (Eswatini)</option>
+                                <option value="ET">ET (Ethiopia)</option>
+                                <option value="FK">FK (Falkland Islands)</option>
+                                <option value="FO">FO (Faroe Islands)</option>
+                                <option value="FJ">FJ (Fiji)</option>
+                                <option value="FI">FI (Finland)</option>
+                                <option value="FR">FR (France)</option>
+                                <option value="GF">GF (French Guiana)</option>
+                                <option value="PF">PF (French Polynesia)</option>
+                                <option value="GA">GA (Gabon)</option>
+                                <option value="GM">GM (Gambia)</option>
+                                <option value="GE">GE (Georgia)</option>
+                                <option value="DE">DE (Germany)</option>
+                                <option value="GH">GH (Ghana)</option>
+                                <option value="GI">GI (Gibraltar)</option>
+                                <option value="GR">GR (Greece)</option>
+                                <option value="GL">GL (Greenland)</option>
+                                <option value="GD">GD (Grenada)</option>
+                                <option value="GP">GP (Guadeloupe)</option>
+                                <option value="GU">GU (Guam)</option>
+                                <option value="GT">GT (Guatemala)</option>
+                                <option value="GG">GG (Guernsey)</option>
+                                <option value="GN">GN (Guinea)</option>
+                                <option value="GW">GW (Guinea-Bissau)</option>
+                                <option value="GY">GY (Guyana)</option>
+                                <option value="HT">HT (Haiti)</option>
+                                <option value="HM">HM (Heard and Mcdonald Islands)</option>
+                                <option value="HN">HN (Honduras)</option>
+                                <option value="HK">HK (Hong Kong)</option>
+                                <option value="HU">HU (Hungary)</option>
+                                <option value="IS">IS (Iceland)</option>
+                                <option value="IN">IN (India)</option>
+                                <option value="ID">ID (Indonesia)</option>
+                                <option value="IR">IR (Iran)</option>
+                                <option value="IQ">IQ (Iraq)</option>
+                                <option value="IE">IE (Ireland)</option>
+                                <option value="IL">IL (Israel)</option>
+                                <option value="IT">IT (Italy)</option>
+                                <option value="CI">CI (Ivory Coast)</option>
+                                <option value="JM">JM (Jamaica)</option>
+                                <option value="JP">JP (Japan)</option>
+                                <option value="JO">JO (Jordan)</option>
+                                <option value="KZ">KZ (Kazakstan)</option>
+                                <option value="KE">KE (Kenya)</option>
+                                <option value="KI">KI (Kiribati)</option>
+                                <option value="XK">XK (Kosovo)</option>
+                                <option value="KW">KW (Kuwait)</option>
+                                <option value="KG">KG (Kyrgyzstan)</option>
+                                <option value="LA">LA (Laos)</option>
+                                <option value="LV">LV (Latvia)</option>
+                                <option value="LB">LB (Lebanon)</option>
+                                <option value="LS">LS (Lesotho)</option>
+                                <option value="LR">LR (Liberia)</option>
+                                <option value="LY">LY (Libya)</option>
+                                <option value="LI">LI (Liechtenstein)</option>
+                                <option value="LT">LT (Lithuania)</option>
+                                <option value="LU">LU (Luxembourg)</option>
+                                <option value="MO">MO (Macau)</option>
+                                <option value="MK">MK (Macedonia)</option>
+                                <option value="MG">MG (Madagascar)</option>
+                                <option value="MW">MW (Malawi)</option>
+                                <option value="MY">MY (Malaysia)</option>
+                                <option value="MV">MV (Maldives)</option>
+                                <option value="ML">ML (Mali)</option>
+                                <option value="MT">MT (Malta)</option>
+                                <option value="MH">MH (Marshall Islands)</option>
+                                <option value="MQ">MQ (Martinique)</option>
+                                <option value="MR">MR (Mauritania)</option>
+                                <option value="MU">MU (Mauritius)</option>
+                                <option value="YT">YT (Mayotte)</option>
+                                <option value="MX">MX (Mexico)</option>
+                                <option value="FM">FM (Micronesia)</option>
+                                <option value="MD">MD (Moldova)</option>
+                                <option value="MC">MC (Monaco)</option>
+                                <option value="MN">MN (Mongolia)</option>
+                                <option value="ME">ME (Montenegro)</option>
+                                <option value="MS">MS (Montserrat)</option>
+                                <option value="MA">MA (Morocco)</option>
+                                <option value="MZ">MZ (Mozambique)</option>
+                                <option value="MM">MM (Myanmar)</option>
+                                <option value="NA">NA (Namibia)</option>
+                                <option value="NR">NR (Nauru)</option>
+                                <option value="NP">NP (Nepal)</option>
+                                <option value="NL">NL (Netherlands)</option>
+                                <option value="NC">NC (New Caledonia)</option>
+                                <option value="NZ">NZ (New Zealand)</option>
+                                <option value="NI">NI (Nicaragua)</option>
+                                <option value="NE">NE (Niger)</option>
+                                <option value="NG">NG (Nigeria)</option>
+                                <option value="NU">NU (Niue)</option>
+                                <option value="NF">NF (Norfolk Island)</option>
+                                <option value="MP">MP (Northern Mariana Islands)</option>
+                                <option value="KP">KP (North Korea)</option>
+                                <option value="NO">NO (Norway)</option>
+                                <option value="OM">OM (Oman)</option>
+                                <option value="PK">PK (Pakistan)</option>
+                                <option value="PW">PW (Palau)</option>
+                                <option value="PA">PA (Panama)</option>
+                                <option value="PG">PG (Papua New Guinea)</option>
+                                <option value="PY">PY (Paraguay)</option>
+                                <option value="PE">PE (Peru)</option>
+                                <option value="PH">PH (Philippines)</option>
+                                <option value="PN">PN (Pitcairn)</option>
+                                <option value="PL">PL (Poland)</option>
+                                <option value="PT">PT (Portugal)</option>
+                                <option value="PR">PR (Puerto Rico)</option>
+                                <option value="QA">QA (Qatar)</option>
+                                <option value="RE">RE (Reunion)</option>
+                                <option value="RO">RO (Romania)</option>
+                                <option value="RU">RU (Russia)</option>
+                                <option value="RW">RW (Rwanda)</option>
+                                <option value="SH">SH (Saint Helena)</option>
+                                <option value="KN">KN (Saint Kitts and Nevis)</option>
+                                <option value="LC">LC (Saint Lucia)</option>
+                                <option value="PM">PM (Saint Pierre and Miquelon)</option>
+                                <option value="VC">VC (Saint Vincent &amp; The Grenadines)</option>
+                                <option value="WS">WS (Samoa)</option>
+                                <option value="SM">SM (San Marino)</option>
+                                <option value="ST">ST (Sao Tome and Principe)</option>
+                                <option value="SA">SA (Saudi Arabia)</option>
+                                <option value="SN">SN (Senegal)</option>
+                                <option value="RS">RS (Serbia)</option>
+                                <option value="SC">SC (Seychelles)</option>
+                                <option value="SL">SL (Sierra Leone)</option>
+                                <option value="SG">SG (Singapore)</option>
+                                <option value="SX">SX (Sint Maarten)</option>
+                                <option value="SK">SK (Slovakia)</option>
+                                <option value="SI">SI (Slovenia)</option>
+                                <option value="SB">SB (Solomon Islands)</option>
+                                <option value="SO">SO (Somalia)</option>
+                                <option value="ZA">ZA (South Africa)</option>
+                                <option value="KR">KR (South Korea)</option>
+                                <option value="ES">ES (Spain)</option>
+                                <option value="LK">LK (Sri Lanka)</option>
+                                <option value="SD">SD (Sudan)</option>
+                                <option value="SR">SR (Suriname)</option>
+                                <option value="SJ">SJ (Svalbard and Jan Mayen)</option>
+                                <option value="SE">SE (Sweden)</option>
+                                <option value="CH">CH (Switzerland)</option>
+                                <option value="SY">SY (Syrian Arb Republic)</option>
+                                <option value="TW">TW (Taiwan)</option>
+                                <option value="TJ">TJ (Tajikistan)</option>
+                                <option value="TZ">TZ (Tanzania)</option>
+                                <option value="TH">TH (Thailand)</option>
+                                <option value="TG">TG (Togo)</option>
+                                <option value="TK">TK (Tokelau)</option>
+                                <option value="TO">TO (Tonga)</option>
+                                <option value="TT">TT (Trinidad and Tobago)</option>
+                                <option value="TN">TN (Tunisia)</option>
+                                <option value="TR">TR (Turkey)</option>
+                                <option value="TM">TM (Turkmenistan)</option>
+                                <option value="TC">TC (Turks and Caicos Islands)</option>
+                                <option value="TV">TV (Tuvalu)</option>
+                                <option value="UG">UG (Uganda)</option>
+                                <option value="UA">UA (Ukraine)</option>
+                                <option value="AE">AE (United Arab Emirates)</option>
+                                <option value="GB">GB (United Kingdom)</option>
+                                <option value="UY">UY (Uruguay)</option>
+                                <option value="UZ">UZ (Uzbekistan)</option>
+                                <option value="VU">VU (Vanuatu)</option>
+                                <option value="VA">VA (Vatican City)</option>
+                                <option value="VE">VE (Venezuela)</option>
+                                <option value="VN">VN (Vietnam)</option>
+                                <option value="VG">VG (Virgin Islands British)</option>
+                                <option value="VI">VI (Virgin Islands U.S.)</option>
+                                <option value="WF">WF (Wallis and Futuna)</option>
+                                <option value="EH">EH (Western Sahara)</option>
+                                <option value="YE">YE (Yemen)</option>
+                                <option value="ZM">ZM (Zambia)</option>
+                                <option value="ZW">ZW (Zimbabwe)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    
+                    <div class="flex flex-wrap items-center mb-3">
+                        <h1 class="text-gray-700 font-bold text-md mr-3 md:ml-2">{{ strings.secondary_document_information }}</h1>
+                        <div class="flex items-center rounded bg-red-100 py-1 px-2 ml-3 py-1 md:px-2">
+                            <input id="checkboxSecondaryDocuments-Children{{forloop.counter}}" type="checkbox" value="" class="w-4 h-4 text-red-300 bg-gray-100 rounded border-gray-300 focus:ring-red-100 focus:ring" onchange="notAvailableSecondaryDocument(this,'Children{{forloop.counter}}')">
+                            <label for="checkboxSecondaryDocuments-Children{{forloop.counter}}" class="ml-2 text-sm font-bold text-red-900">{{ strings.not_available }}</label>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center mb-6 ml-2 w-auto hidden" id="alertNotCubaDocument-Children{{forloop.counter}}">
+                        <h3 class="text-md font-medium text-red-500 font-serif ml-1" id="">{{ strings.booking_t3 }}</h3>
+                    </div>
+
+                    <div class="flex flex-wrap mb-6"  id="secondaryDocument-Children{{forloop.counter}}">
+                        <div class="flex flex-wrap w-full md:w-1/3">
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="secondaryDocumentNumber-Children{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="secondaryDocumentNumber-Children{{forloop.counter}}" name="secondaryDocumentNumber-Children{{forloop.counter}}" type="text" required>
+                            </div>
+    
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="grid-state">{{ strings.expiration_date }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <div class="relative">
+                                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" name="secondaryExpirationDocument-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" id="secondaryExpirationDocument-Children{{forloop.counter}}" required onchange="validDatepicker(this)" autocomplete="off"
+                                    type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="secondaryDocumentType-Children{{forloop.counter}}">{{ strings.document_type }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                             id="secondaryDocumentType-Children{{forloop.counter}}" name="secondaryDocumentType-Children{{forloop.counter}}" required>
+                                <option value="Passport">{{ strings.passport }}</option>
+                                <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
+                                <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
+                                <option value="U.S. Re-entry Permit Travel Document">{{ strings.country_document_s4 }}</option>
+                            </select>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="secondaryCountryDocument-Children{{forloop.counter}}">{{ strings.country_document }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                             leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="secondaryCountryDocument-Children{{forloop.counter}}" id="secondaryCountryDocument-Children{{forloop.counter}}" required>
+                                <option value="US" selected>US (United States)</option>
+                                <!--<option value="CU">CU (Cuba)</option> ADD_CUBA-->
+                                <option value="AF">AF (Afghanistan)</option>
+                                <option value="AL">AL (Albania)</option>
+                                <option value="DZ">DZ (Algeria)</option>
+                                <option value="AS">AS (American Samoa)</option>
+                                <option value="AD">AD (Andorra)</option>
+                                <option value="AO">AO (Angola)</option>
+                                <option value="AI">AI (Anguilla)</option>
+                                <option value="AQ">AQ (Antarctica)</option>
+                                <option value="AG">AG (Antigua and Barbuda)</option>
+                                <option value="AR">AR (Argentina)</option>
+                                <option value="AM">AM (Armenia)</option>
+                                <option value="AW">AW (Aruba)</option>
+                                <option value="AU">AU (Australia)</option>
+                                <option value="AT">AT (Austria)</option>
+                                <option value="AZ">AZ (Azerbaijan)</option>
+                                <option value="BS">BS (Bahamas)</option>
+                                <option value="BH">BH (Bahrain)</option>
+                                <option value="BD">BD (Bangladesh)</option>
+                                <option value="BB">BB (Barbados)</option>
+                                <option value="BY">BY (Belarus)</option>
+                                <option value="BE">BE (Belgium)</option>
+                                <option value="BZ">BZ (Belize)</option>
+                                <option value="BJ">BJ (Benin)</option>
+                                <option value="BM">BM (Bermuda)</option>
+                                <option value="BT">BT (Bhutan)</option>
+                                <option value="BO">BO (Bolivia)</option>
+                                <option value="BQ">BQ (Bonaire)</option>
+                                <option value="BA">BA (Bosnia and Herzegovina)</option>
+                                <option value="BW">BW (Botswana)</option>
+                                <option value="BV">BV (Bouvet Island)</option>
+                                <option value="BR">BR (Brazil)</option>
+                                <option value="IO">IO (British Indian Ocean Territory)</option>
+                                <option value="BN">BN (Brunei)</option>
+                                <option value="BG">BG (Bulgaria)</option>
+                                <option value="BF">BF (Burkina Faso)</option>
+                                <option value="BI">BI (Burundi)</option>
+                                <option value="KH">KH (Cambodia)</option>
+                                <option value="CM">CM (Cameroon)</option>
+                                <option value="CA">CA (Canada)</option>
+                                <option value="CV">CV (Cape Verde)</option>
+                                <option value="KY">KY (Cayman Islands)</option>
+                                <option value="CF">CF (Central African Republic)</option>
+                                <option value="TD">TD (Chad)</option>
+                                <option value="CL">CL (Chile)</option>
+                                <option value="CN">CN (China)</option>
+                                <option value="CX">CX (Christmas Island)</option>
+                                <option value="CC">CC (Cocos Keeling Islands)</option>
+                                <option value="CO">CO (Colombia)</option>
+                                <option value="KM">KM (Comoros)</option>
+                                <option value="CG">CG (Congo Brazzaville)</option>
+                                <option value="CD">CD (Congo Kinshasa)</option>
+                                <option value="CK">CK (Cook Islands)</option>
+                                <option value="CR">CR (Costa Rica)</option>
+                                <option value="HR">HR (Croatia)</option>
+                                <option value="CW">CW (Curacao)</option>
+                                <option value="CY">CY (Cyprus)</option>
+                                <option value="CZ">CZ (Czech Republic)</option>
+                                <option value="DK">DK (Denmark)</option>
+                                <option value="DJ">DJ (Djibouti)</option>
+                                <option value="DM">DM (Dominica)</option>
+                                <option value="DO">DO (Dominican Republic)</option>
+                                <option value="TL">TL (East Timor)</option>
+                                <option value="EC">EC (Ecuador)</option>
+                                <option value="EG">EG (Egypt)</option>
+                                <option value="SV">SV (El Salvador)</option>
+                                <option value="GQ">GQ (Equatorial Guinea)</option>
+                                <option value="ER">ER (Eritrea)</option>
+                                <option value="EE">EE (Estonia)</option>
+                                <option value="SZ">SZ (Eswatini)</option>
+                                <option value="ET">ET (Ethiopia)</option>
+                                <option value="FK">FK (Falkland Islands)</option>
+                                <option value="FO">FO (Faroe Islands)</option>
+                                <option value="FJ">FJ (Fiji)</option>
+                                <option value="FI">FI (Finland)</option>
+                                <option value="FR">FR (France)</option>
+                                <option value="GF">GF (French Guiana)</option>
+                                <option value="PF">PF (French Polynesia)</option>
+                                <option value="GA">GA (Gabon)</option>
+                                <option value="GM">GM (Gambia)</option>
+                                <option value="GE">GE (Georgia)</option>
+                                <option value="DE">DE (Germany)</option>
+                                <option value="GH">GH (Ghana)</option>
+                                <option value="GI">GI (Gibraltar)</option>
+                                <option value="GR">GR (Greece)</option>
+                                <option value="GL">GL (Greenland)</option>
+                                <option value="GD">GD (Grenada)</option>
+                                <option value="GP">GP (Guadeloupe)</option>
+                                <option value="GU">GU (Guam)</option>
+                                <option value="GT">GT (Guatemala)</option>
+                                <option value="GG">GG (Guernsey)</option>
+                                <option value="GN">GN (Guinea)</option>
+                                <option value="GW">GW (Guinea-Bissau)</option>
+                                <option value="GY">GY (Guyana)</option>
+                                <option value="HT">HT (Haiti)</option>
+                                <option value="HM">HM (Heard and Mcdonald Islands)</option>
+                                <option value="HN">HN (Honduras)</option>
+                                <option value="HK">HK (Hong Kong)</option>
+                                <option value="HU">HU (Hungary)</option>
+                                <option value="IS">IS (Iceland)</option>
+                                <option value="IN">IN (India)</option>
+                                <option value="ID">ID (Indonesia)</option>
+                                <option value="IR">IR (Iran)</option>
+                                <option value="IQ">IQ (Iraq)</option>
+                                <option value="IE">IE (Ireland)</option>
+                                <option value="IL">IL (Israel)</option>
+                                <option value="IT">IT (Italy)</option>
+                                <option value="CI">CI (Ivory Coast)</option>
+                                <option value="JM">JM (Jamaica)</option>
+                                <option value="JP">JP (Japan)</option>
+                                <option value="JO">JO (Jordan)</option>
+                                <option value="KZ">KZ (Kazakstan)</option>
+                                <option value="KE">KE (Kenya)</option>
+                                <option value="KI">KI (Kiribati)</option>
+                                <option value="XK">XK (Kosovo)</option>
+                                <option value="KW">KW (Kuwait)</option>
+                                <option value="KG">KG (Kyrgyzstan)</option>
+                                <option value="LA">LA (Laos)</option>
+                                <option value="LV">LV (Latvia)</option>
+                                <option value="LB">LB (Lebanon)</option>
+                                <option value="LS">LS (Lesotho)</option>
+                                <option value="LR">LR (Liberia)</option>
+                                <option value="LY">LY (Libya)</option>
+                                <option value="LI">LI (Liechtenstein)</option>
+                                <option value="LT">LT (Lithuania)</option>
+                                <option value="LU">LU (Luxembourg)</option>
+                                <option value="MO">MO (Macau)</option>
+                                <option value="MK">MK (Macedonia)</option>
+                                <option value="MG">MG (Madagascar)</option>
+                                <option value="MW">MW (Malawi)</option>
+                                <option value="MY">MY (Malaysia)</option>
+                                <option value="MV">MV (Maldives)</option>
+                                <option value="ML">ML (Mali)</option>
+                                <option value="MT">MT (Malta)</option>
+                                <option value="MH">MH (Marshall Islands)</option>
+                                <option value="MQ">MQ (Martinique)</option>
+                                <option value="MR">MR (Mauritania)</option>
+                                <option value="MU">MU (Mauritius)</option>
+                                <option value="YT">YT (Mayotte)</option>
+                                <option value="MX">MX (Mexico)</option>
+                                <option value="FM">FM (Micronesia)</option>
+                                <option value="MD">MD (Moldova)</option>
+                                <option value="MC">MC (Monaco)</option>
+                                <option value="MN">MN (Mongolia)</option>
+                                <option value="ME">ME (Montenegro)</option>
+                                <option value="MS">MS (Montserrat)</option>
+                                <option value="MA">MA (Morocco)</option>
+                                <option value="MZ">MZ (Mozambique)</option>
+                                <option value="MM">MM (Myanmar)</option>
+                                <option value="NA">NA (Namibia)</option>
+                                <option value="NR">NR (Nauru)</option>
+                                <option value="NP">NP (Nepal)</option>
+                                <option value="NL">NL (Netherlands)</option>
+                                <option value="NC">NC (New Caledonia)</option>
+                                <option value="NZ">NZ (New Zealand)</option>
+                                <option value="NI">NI (Nicaragua)</option>
+                                <option value="NE">NE (Niger)</option>
+                                <option value="NG">NG (Nigeria)</option>
+                                <option value="NU">NU (Niue)</option>
+                                <option value="NF">NF (Norfolk Island)</option>
+                                <option value="MP">MP (Northern Mariana Islands)</option>
+                                <option value="KP">KP (North Korea)</option>
+                                <option value="NO">NO (Norway)</option>
+                                <option value="OM">OM (Oman)</option>
+                                <option value="PK">PK (Pakistan)</option>
+                                <option value="PW">PW (Palau)</option>
+                                <option value="PA">PA (Panama)</option>
+                                <option value="PG">PG (Papua New Guinea)</option>
+                                <option value="PY">PY (Paraguay)</option>
+                                <option value="PE">PE (Peru)</option>
+                                <option value="PH">PH (Philippines)</option>
+                                <option value="PN">PN (Pitcairn)</option>
+                                <option value="PL">PL (Poland)</option>
+                                <option value="PT">PT (Portugal)</option>
+                                <option value="PR">PR (Puerto Rico)</option>
+                                <option value="QA">QA (Qatar)</option>
+                                <option value="RE">RE (Reunion)</option>
+                                <option value="RO">RO (Romania)</option>
+                                <option value="RU">RU (Russia)</option>
+                                <option value="RW">RW (Rwanda)</option>
+                                <option value="SH">SH (Saint Helena)</option>
+                                <option value="KN">KN (Saint Kitts and Nevis)</option>
+                                <option value="LC">LC (Saint Lucia)</option>
+                                <option value="PM">PM (Saint Pierre and Miquelon)</option>
+                                <option value="VC">VC (Saint Vincent &amp; The Grenadines)</option>
+                                <option value="WS">WS (Samoa)</option>
+                                <option value="SM">SM (San Marino)</option>
+                                <option value="ST">ST (Sao Tome and Principe)</option>
+                                <option value="SA">SA (Saudi Arabia)</option>
+                                <option value="SN">SN (Senegal)</option>
+                                <option value="RS">RS (Serbia)</option>
+                                <option value="SC">SC (Seychelles)</option>
+                                <option value="SL">SL (Sierra Leone)</option>
+                                <option value="SG">SG (Singapore)</option>
+                                <option value="SX">SX (Sint Maarten)</option>
+                                <option value="SK">SK (Slovakia)</option>
+                                <option value="SI">SI (Slovenia)</option>
+                                <option value="SB">SB (Solomon Islands)</option>
+                                <option value="SO">SO (Somalia)</option>
+                                <option value="ZA">ZA (South Africa)</option>
+                                <option value="KR">KR (South Korea)</option>
+                                <option value="ES">ES (Spain)</option>
+                                <option value="LK">LK (Sri Lanka)</option>
+                                <option value="SD">SD (Sudan)</option>
+                                <option value="SR">SR (Suriname)</option>
+                                <option value="SJ">SJ (Svalbard and Jan Mayen)</option>
+                                <option value="SE">SE (Sweden)</option>
+                                <option value="CH">CH (Switzerland)</option>
+                                <option value="SY">SY (Syrian Arb Republic)</option>
+                                <option value="TW">TW (Taiwan)</option>
+                                <option value="TJ">TJ (Tajikistan)</option>
+                                <option value="TZ">TZ (Tanzania)</option>
+                                <option value="TH">TH (Thailand)</option>
+                                <option value="TG">TG (Togo)</option>
+                                <option value="TK">TK (Tokelau)</option>
+                                <option value="TO">TO (Tonga)</option>
+                                <option value="TT">TT (Trinidad and Tobago)</option>
+                                <option value="TN">TN (Tunisia)</option>
+                                <option value="TR">TR (Turkey)</option>
+                                <option value="TM">TM (Turkmenistan)</option>
+                                <option value="TC">TC (Turks and Caicos Islands)</option>
+                                <option value="TV">TV (Tuvalu)</option>
+                                <option value="UG">UG (Uganda)</option>
+                                <option value="UA">UA (Ukraine)</option>
+                                <option value="AE">AE (United Arab Emirates)</option>
+                                <option value="GB">GB (United Kingdom)</option>
+                                <option value="UY">UY (Uruguay)</option>
+                                <option value="UZ">UZ (Uzbekistan)</option>
+                                <option value="VU">VU (Vanuatu)</option>
+                                <option value="VA">VA (Vatican City)</option>
+                                <option value="VE">VE (Venezuela)</option>
+                                <option value="VN">VN (Vietnam)</option>
+                                <option value="VG">VG (Virgin Islands British)</option>
+                                <option value="VI">VI (Virgin Islands U.S.)</option>
+                                <option value="WF">WF (Wallis and Futuna)</option>
+                                <option value="EH">EH (Western Sahara)</option>
+                                <option value="YE">YE (Yemen)</option>
+                                <option value="ZM">ZM (Zambia)</option>
+                                <option value="ZW">ZW (Zimbabwe)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h1 class="text-gray-700 font-bold mb-3 text-md ml-2">{{ strings.address_es }} {{flightBeginSelect.begin.country}} {{ strings.address_en }}</h1>
+                    <div class="flex flex-wrap mb-6">
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-street-1-Children{{forloop.counter}}">{{ strings.street}}<span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-street-1-Children{{forloop.counter}}" name="address-street-1-Children{{forloop.counter}}" type="text" required>
+                        </div>
+                        <div class="w-full md:w-2/3 md:flex">
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-city-1-Children{{forloop.counter}}">{{ strings.city}}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="address-city-1-Children{{forloop.counter}}" id="address-city-1-Children{{forloop.counter}}" required>
+                                {% for city in cities_begin %}
+                                    <option value="{{ city }}">{{ city }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-state-1-Children{{forloop.counter}}">{{ strings.state }}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" onchange="setCities(this.selectedOptions[0].getAttribute('cities'),'address-city-1-Children{{forloop.counter}}')" name="address-state-1-Children{{forloop.counter}}"  id="address-state-1-Children{{forloop.counter}}"  required>
+                                {% for address in address_begin %}
+                                    {% for state in address %}
+                                        <option value="{{state}}" cities="{{address.values}}">{{ state}}</option>
+                                    {% endfor %}
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-postalcode-1-Children{{forloop.counter}}">{{ strings.zip_code }}</label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-postalcode-1-Children{{forloop.counter}}" name="address-postalcode-1-Children{{forloop.counter}}" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 class="text-gray-700 font-bold mb-3 text-md ml-2">{{ strings.address_es }} {{flightBeginSelect.to.country}} {{ strings.address_en }}</h1>
+                    <div class="flex flex-wrap mb-6">
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-street-2-Children{{forloop.counter}}">{{ strings.street}}<span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-street-2-Children{{forloop.counter}}" name="address-street-2-Children{{forloop.counter}}" type="text" required>
+                        </div>
+                        <div class="w-full md:w-2/3 md:flex">
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-city-2-Children{{forloop.counter}}">{{ strings.street}}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="address-city-2-Children{{forloop.counter}}" id="address-city-2-Children{{forloop.counter}}" required>
+                                {% for sity in cities_to %}
+                                    <option value="US">{{ sity }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-state-2-Children{{forloop.counter}}">{{ strings.state }}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" onchange="setCities(this.selectedOptions[0].getAttribute('cities'),'address-city-2-Children{{forloop.counter}}')" name="address-state-2-Children{{forloop.counter}}"  id="address-state-2-Children{{forloop.counter}}"  required>
+                                {% for address in address_to %}
+                                    {% for state in address %}
+                                    <option value="{{state}}" cities="{{address.values}}">{{ state}}</option>
+                                    {% endfor %}
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-postalcode-2-Children{{forloop.counter}}">{{ strings.zip_code }}</label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-postalcode-2-Children{{forloop.counter}}" name="address-postalcode-2-Children{{forloop.counter}}" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>            
+            {% endfor %}
+            {% endwith %}
+            
+            {% with ''|center:infants as range %}
+            {% for n in range %}
+                <div>
+                    <h1 class="text-black font-bold mb-6 text-xl mt-6">{{ strings.infant_passenger }} {{forloop.counter}}</h1>
+                    <h1 class="text-gray-700 font-bold md:ml-2 mb-3 text-md">{{ strings.personalInformation }}</h1>
+
+                    <div class="flex flex-wrap mb-6">
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Infant{{forloop.counter}}">{{ strings.first_name }} 
+                                <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="firstName-Infant{{forloop.counter}}"  name="firstName-Infant{{forloop.counter}}" type="text">
+                        </div>
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Infant{{forloop.counter}}">{{ strings.middle_name}}</label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Infant{{forloop.counter}}" name="middleName-Infant{{forloop.counter}}" type="text">
+                        </div>
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Infant{{forloop.counter}}">{{ strings.last_name}} 
+                                <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Infant{{forloop.counter}}" name="lastName-Infant{{forloop.counter}}" type="text">
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-wrap mb-6">
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Infant{{forloop.counter}}">{{ strings.mother_name}}</label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Infant{{forloop.counter}}" name="motherLastName-Infant{{forloop.counter}}" type="text">
+                        </div>
+
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2">{{ strings.date_birth }} 
+                                <span class="text-red-500 text-md p-0 font-bold">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" 
+                                        clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" name="dateBirth-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy" onchange="validDatepicker(this)" autocomplete="off"
+                                type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 range-today">
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2 ml-2" for="gender-Infant{{forloop.counter}}">
+                        {{ strings.gender}} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                    <div class="flex flex-wrap w-full ml-2 mb-6">
+                        <div class="flex items-center mr-6">
+                            <input checked id="male-Infant{{forloop.counter}}" type="radio" value="M"  name="gender-Infant{{forloop.counter}}"
+                            class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" >
+                            <label for="male-Infant{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.male }}</label>
+                        </div>
+                        <div class="flex items-center mr-4">
+                            <input id="female-Infant{{forloop.counter}}" type="radio" value="F"  name="gender-Infant{{forloop.counter}}"
+                            class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2">
+                            <label for="female-Infant{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.female }}</label>
+                        </div>
+                    </div>
+                    
+                    <h1 class="text-gray-700 font-bold mb-3 text-md md:ml-2">{{ strings.primary_document_information }}</h1>
+                    
+                    <div class="flex flex-wrap mb-6">
+                        <div class="flex flex-wrap w-full md:w-1/3">
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="primaryDocumentNumber-Infant{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required
+                                id="primaryDocumentNumber-Infant{{forloop.counter}}" name="primaryDocumentNumber-Infant{{forloop.counter}}" type="text">
+                            </div>
+
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="grid-state">{{ strings.expiration_date }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <div class="relative">
+                                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" name="primaryExpirationDocument-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
+                                    type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="primaryDocumentType-Infant{{forloop.counter}}">{{ strings.document_type }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                            id="primaryDocumentType-Infant{{forloop.counter}}" name="primaryDocumentType-Infant{{forloop.counter}}" required>
+                                <option value="Passport">{{ strings.passport }}</option>
+                                <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
+                                <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
+                                <option value="U.S. Re-entry Permit Travel Document">{{ strings.country_document_s4 }}</option>
+                            </select>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="primaryCountryDocument-Infant{{forloop.counter}}">{{ strings.country_document }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                            leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" d="primaryCountryDocument-Infant{{forloop.counter}}" name="primaryCountryDocument-Infant{{forloop.counter}}" irequired>
+                                <option value="US" selected>US (United States)</option>
+                                <!--<option value="CU">CU (Cuba)</option> ADD_CUBA-->
+                                <option value="AF">AF (Afghanistan)</option>
+                                <option value="AL">AL (Albania)</option>
+                                <option value="DZ">DZ (Algeria)</option>
+                                <option value="AS">AS (American Samoa)</option>
+                                <option value="AD">AD (Andorra)</option>
+                                <option value="AO">AO (Angola)</option>
+                                <option value="AI">AI (Anguilla)</option>
+                                <option value="AQ">AQ (Antarctica)</option>
+                                <option value="AG">AG (Antigua and Barbuda)</option>
+                                <option value="AR">AR (Argentina)</option>
+                                <option value="AM">AM (Armenia)</option>
+                                <option value="AW">AW (Aruba)</option>
+                                <option value="AU">AU (Australia)</option>
+                                <option value="AT">AT (Austria)</option>
+                                <option value="AZ">AZ (Azerbaijan)</option>
+                                <option value="BS">BS (Bahamas)</option>
+                                <option value="BH">BH (Bahrain)</option>
+                                <option value="BD">BD (Bangladesh)</option>
+                                <option value="BB">BB (Barbados)</option>
+                                <option value="BY">BY (Belarus)</option>
+                                <option value="BE">BE (Belgium)</option>
+                                <option value="BZ">BZ (Belize)</option>
+                                <option value="BJ">BJ (Benin)</option>
+                                <option value="BM">BM (Bermuda)</option>
+                                <option value="BT">BT (Bhutan)</option>
+                                <option value="BO">BO (Bolivia)</option>
+                                <option value="BQ">BQ (Bonaire)</option>
+                                <option value="BA">BA (Bosnia and Herzegovina)</option>
+                                <option value="BW">BW (Botswana)</option>
+                                <option value="BV">BV (Bouvet Island)</option>
+                                <option value="BR">BR (Brazil)</option>
+                                <option value="IO">IO (British Indian Ocean Territory)</option>
+                                <option value="BN">BN (Brunei)</option>
+                                <option value="BG">BG (Bulgaria)</option>
+                                <option value="BF">BF (Burkina Faso)</option>
+                                <option value="BI">BI (Burundi)</option>
+                                <option value="KH">KH (Cambodia)</option>
+                                <option value="CM">CM (Cameroon)</option>
+                                <option value="CA">CA (Canada)</option>
+                                <option value="CV">CV (Cape Verde)</option>
+                                <option value="KY">KY (Cayman Islands)</option>
+                                <option value="CF">CF (Central African Republic)</option>
+                                <option value="TD">TD (Chad)</option>
+                                <option value="CL">CL (Chile)</option>
+                                <option value="CN">CN (China)</option>
+                                <option value="CX">CX (Christmas Island)</option>
+                                <option value="CC">CC (Cocos Keeling Islands)</option>
+                                <option value="CO">CO (Colombia)</option>
+                                <option value="KM">KM (Comoros)</option>
+                                <option value="CG">CG (Congo Brazzaville)</option>
+                                <option value="CD">CD (Congo Kinshasa)</option>
+                                <option value="CK">CK (Cook Islands)</option>
+                                <option value="CR">CR (Costa Rica)</option>
+                                <option value="HR">HR (Croatia)</option>
+                                <option value="CW">CW (Curacao)</option>
+                                <option value="CY">CY (Cyprus)</option>
+                                <option value="CZ">CZ (Czech Republic)</option>
+                                <option value="DK">DK (Denmark)</option>
+                                <option value="DJ">DJ (Djibouti)</option>
+                                <option value="DM">DM (Dominica)</option>
+                                <option value="DO">DO (Dominican Republic)</option>
+                                <option value="TL">TL (East Timor)</option>
+                                <option value="EC">EC (Ecuador)</option>
+                                <option value="EG">EG (Egypt)</option>
+                                <option value="SV">SV (El Salvador)</option>
+                                <option value="GQ">GQ (Equatorial Guinea)</option>
+                                <option value="ER">ER (Eritrea)</option>
+                                <option value="EE">EE (Estonia)</option>
+                                <option value="SZ">SZ (Eswatini)</option>
+                                <option value="ET">ET (Ethiopia)</option>
+                                <option value="FK">FK (Falkland Islands)</option>
+                                <option value="FO">FO (Faroe Islands)</option>
+                                <option value="FJ">FJ (Fiji)</option>
+                                <option value="FI">FI (Finland)</option>
+                                <option value="FR">FR (France)</option>
+                                <option value="GF">GF (French Guiana)</option>
+                                <option value="PF">PF (French Polynesia)</option>
+                                <option value="GA">GA (Gabon)</option>
+                                <option value="GM">GM (Gambia)</option>
+                                <option value="GE">GE (Georgia)</option>
+                                <option value="DE">DE (Germany)</option>
+                                <option value="GH">GH (Ghana)</option>
+                                <option value="GI">GI (Gibraltar)</option>
+                                <option value="GR">GR (Greece)</option>
+                                <option value="GL">GL (Greenland)</option>
+                                <option value="GD">GD (Grenada)</option>
+                                <option value="GP">GP (Guadeloupe)</option>
+                                <option value="GU">GU (Guam)</option>
+                                <option value="GT">GT (Guatemala)</option>
+                                <option value="GG">GG (Guernsey)</option>
+                                <option value="GN">GN (Guinea)</option>
+                                <option value="GW">GW (Guinea-Bissau)</option>
+                                <option value="GY">GY (Guyana)</option>
+                                <option value="HT">HT (Haiti)</option>
+                                <option value="HM">HM (Heard and Mcdonald Islands)</option>
+                                <option value="HN">HN (Honduras)</option>
+                                <option value="HK">HK (Hong Kong)</option>
+                                <option value="HU">HU (Hungary)</option>
+                                <option value="IS">IS (Iceland)</option>
+                                <option value="IN">IN (India)</option>
+                                <option value="ID">ID (Indonesia)</option>
+                                <option value="IR">IR (Iran)</option>
+                                <option value="IQ">IQ (Iraq)</option>
+                                <option value="IE">IE (Ireland)</option>
+                                <option value="IL">IL (Israel)</option>
+                                <option value="IT">IT (Italy)</option>
+                                <option value="CI">CI (Ivory Coast)</option>
+                                <option value="JM">JM (Jamaica)</option>
+                                <option value="JP">JP (Japan)</option>
+                                <option value="JO">JO (Jordan)</option>
+                                <option value="KZ">KZ (Kazakstan)</option>
+                                <option value="KE">KE (Kenya)</option>
+                                <option value="KI">KI (Kiribati)</option>
+                                <option value="XK">XK (Kosovo)</option>
+                                <option value="KW">KW (Kuwait)</option>
+                                <option value="KG">KG (Kyrgyzstan)</option>
+                                <option value="LA">LA (Laos)</option>
+                                <option value="LV">LV (Latvia)</option>
+                                <option value="LB">LB (Lebanon)</option>
+                                <option value="LS">LS (Lesotho)</option>
+                                <option value="LR">LR (Liberia)</option>
+                                <option value="LY">LY (Libya)</option>
+                                <option value="LI">LI (Liechtenstein)</option>
+                                <option value="LT">LT (Lithuania)</option>
+                                <option value="LU">LU (Luxembourg)</option>
+                                <option value="MO">MO (Macau)</option>
+                                <option value="MK">MK (Macedonia)</option>
+                                <option value="MG">MG (Madagascar)</option>
+                                <option value="MW">MW (Malawi)</option>
+                                <option value="MY">MY (Malaysia)</option>
+                                <option value="MV">MV (Maldives)</option>
+                                <option value="ML">ML (Mali)</option>
+                                <option value="MT">MT (Malta)</option>
+                                <option value="MH">MH (Marshall Islands)</option>
+                                <option value="MQ">MQ (Martinique)</option>
+                                <option value="MR">MR (Mauritania)</option>
+                                <option value="MU">MU (Mauritius)</option>
+                                <option value="YT">YT (Mayotte)</option>
+                                <option value="MX">MX (Mexico)</option>
+                                <option value="FM">FM (Micronesia)</option>
+                                <option value="MD">MD (Moldova)</option>
+                                <option value="MC">MC (Monaco)</option>
+                                <option value="MN">MN (Mongolia)</option>
+                                <option value="ME">ME (Montenegro)</option>
+                                <option value="MS">MS (Montserrat)</option>
+                                <option value="MA">MA (Morocco)</option>
+                                <option value="MZ">MZ (Mozambique)</option>
+                                <option value="MM">MM (Myanmar)</option>
+                                <option value="NA">NA (Namibia)</option>
+                                <option value="NR">NR (Nauru)</option>
+                                <option value="NP">NP (Nepal)</option>
+                                <option value="NL">NL (Netherlands)</option>
+                                <option value="NC">NC (New Caledonia)</option>
+                                <option value="NZ">NZ (New Zealand)</option>
+                                <option value="NI">NI (Nicaragua)</option>
+                                <option value="NE">NE (Niger)</option>
+                                <option value="NG">NG (Nigeria)</option>
+                                <option value="NU">NU (Niue)</option>
+                                <option value="NF">NF (Norfolk Island)</option>
+                                <option value="MP">MP (Northern Mariana Islands)</option>
+                                <option value="KP">KP (North Korea)</option>
+                                <option value="NO">NO (Norway)</option>
+                                <option value="OM">OM (Oman)</option>
+                                <option value="PK">PK (Pakistan)</option>
+                                <option value="PW">PW (Palau)</option>
+                                <option value="PA">PA (Panama)</option>
+                                <option value="PG">PG (Papua New Guinea)</option>
+                                <option value="PY">PY (Paraguay)</option>
+                                <option value="PE">PE (Peru)</option>
+                                <option value="PH">PH (Philippines)</option>
+                                <option value="PN">PN (Pitcairn)</option>
+                                <option value="PL">PL (Poland)</option>
+                                <option value="PT">PT (Portugal)</option>
+                                <option value="PR">PR (Puerto Rico)</option>
+                                <option value="QA">QA (Qatar)</option>
+                                <option value="RE">RE (Reunion)</option>
+                                <option value="RO">RO (Romania)</option>
+                                <option value="RU">RU (Russia)</option>
+                                <option value="RW">RW (Rwanda)</option>
+                                <option value="SH">SH (Saint Helena)</option>
+                                <option value="KN">KN (Saint Kitts and Nevis)</option>
+                                <option value="LC">LC (Saint Lucia)</option>
+                                <option value="PM">PM (Saint Pierre and Miquelon)</option>
+                                <option value="VC">VC (Saint Vincent &amp; The Grenadines)</option>
+                                <option value="WS">WS (Samoa)</option>
+                                <option value="SM">SM (San Marino)</option>
+                                <option value="ST">ST (Sao Tome and Principe)</option>
+                                <option value="SA">SA (Saudi Arabia)</option>
+                                <option value="SN">SN (Senegal)</option>
+                                <option value="RS">RS (Serbia)</option>
+                                <option value="SC">SC (Seychelles)</option>
+                                <option value="SL">SL (Sierra Leone)</option>
+                                <option value="SG">SG (Singapore)</option>
+                                <option value="SX">SX (Sint Maarten)</option>
+                                <option value="SK">SK (Slovakia)</option>
+                                <option value="SI">SI (Slovenia)</option>
+                                <option value="SB">SB (Solomon Islands)</option>
+                                <option value="SO">SO (Somalia)</option>
+                                <option value="ZA">ZA (South Africa)</option>
+                                <option value="KR">KR (South Korea)</option>
+                                <option value="ES">ES (Spain)</option>
+                                <option value="LK">LK (Sri Lanka)</option>
+                                <option value="SD">SD (Sudan)</option>
+                                <option value="SR">SR (Suriname)</option>
+                                <option value="SJ">SJ (Svalbard and Jan Mayen)</option>
+                                <option value="SE">SE (Sweden)</option>
+                                <option value="CH">CH (Switzerland)</option>
+                                <option value="SY">SY (Syrian Arb Republic)</option>
+                                <option value="TW">TW (Taiwan)</option>
+                                <option value="TJ">TJ (Tajikistan)</option>
+                                <option value="TZ">TZ (Tanzania)</option>
+                                <option value="TH">TH (Thailand)</option>
+                                <option value="TG">TG (Togo)</option>
+                                <option value="TK">TK (Tokelau)</option>
+                                <option value="TO">TO (Tonga)</option>
+                                <option value="TT">TT (Trinidad and Tobago)</option>
+                                <option value="TN">TN (Tunisia)</option>
+                                <option value="TR">TR (Turkey)</option>
+                                <option value="TM">TM (Turkmenistan)</option>
+                                <option value="TC">TC (Turks and Caicos Islands)</option>
+                                <option value="TV">TV (Tuvalu)</option>
+                                <option value="UG">UG (Uganda)</option>
+                                <option value="UA">UA (Ukraine)</option>
+                                <option value="AE">AE (United Arab Emirates)</option>
+                                <option value="GB">GB (United Kingdom)</option>
+                                <option value="UY">UY (Uruguay)</option>
+                                <option value="UZ">UZ (Uzbekistan)</option>
+                                <option value="VU">VU (Vanuatu)</option>
+                                <option value="VA">VA (Vatican City)</option>
+                                <option value="VE">VE (Venezuela)</option>
+                                <option value="VN">VN (Vietnam)</option>
+                                <option value="VG">VG (Virgin Islands British)</option>
+                                <option value="VI">VI (Virgin Islands U.S.)</option>
+                                <option value="WF">WF (Wallis and Futuna)</option>
+                                <option value="EH">EH (Western Sahara)</option>
+                                <option value="YE">YE (Yemen)</option>
+                                <option value="ZM">ZM (Zambia)</option>
+                                <option value="ZW">ZW (Zimbabwe)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    
+                    <div class="flex flex-wrap items-center mb-3">
+                        <h1 class="text-gray-700 font-bold text-md mr-3 md:ml-2">{{ strings.secondary_document_information }}</h1>
+                        <div class="flex items-center rounded bg-red-100 py-1 px-2 ml-3 py-1 md:px-2">
+                            <input id="checkboxSecondaryDocuments-Infant{{forloop.counter}}" type="checkbox" value="" class="w-4 h-4 text-red-300 bg-gray-100 rounded border-gray-300 focus:ring-red-100 focus:ring" onchange="notAvailableSecondaryDocument(this,'Infant{{forloop.counter}}')">
+                            <label for="checkboxSecondaryDocuments-Infant{{forloop.counter}}" class="ml-2 text-sm font-bold text-red-900">{{ strings.not_available }}</label>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center mb-6 ml-2 w-auto hidden" id="alertNotCubaDocument-Infant{{forloop.counter}}">
+                        <h3 class="text-md font-medium text-red-500 font-serif ml-1" id="">{{ strings.booking_t3 }}</h3>
+                    </div>
+
+                    <div class="flex flex-wrap mb-6"  id="secondaryDocument-Infant{{forloop.counter}}">
+                        <div class="flex flex-wrap w-full md:w-1/3">
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="secondaryDocumentNumber-Infant{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="secondaryDocumentNumber-Infant{{forloop.counter}}" name="secondaryDocumentNumber-Infant{{forloop.counter}}" type="text" required>
+                            </div>
+
+                            <div class="w-full md:w-1/2 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="grid-state">{{ strings.expiration_date }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                <div class="relative">
+                                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}"  name="secondaryExpirationDocument-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy"  id="secondaryExpirationDocument-Infant{{forloop.counter}}" required onchange="validDatepicker(this)" autocomplete="off"
+                                    type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="secondaryDocumentType-Infant{{forloop.counter}}">{{ strings.document_type }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                            id="secondaryDocumentType-Infant{{forloop.counter}}" name="secondaryDocumentType-Infant{{forloop.counter}}" required>
+                                <option value="Passport">{{ strings.passport }}</option>
+                                <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
+                                <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
+                                <option value="U.S. Re-entry Permit Travel Document">{{ strings.country_document_s4 }}</option>
+                            </select>
+                        </div>
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="secondaryCountryDocument-Infant{{forloop.counter}}">{{ strings.country_document }}</label>
+                            <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                            leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="secondaryCountryDocument-Infant{{forloop.counter}}" id="secondaryCountryDocument-Infant{{forloop.counter}}" required>
+                                <option value="US" selected>US (United States)</option>
+                                <!--<option value="CU">CU (Cuba)</option> ADD_CUBA-->
+                                <option value="AF">AF (Afghanistan)</option>
+                                <option value="AL">AL (Albania)</option>
+                                <option value="DZ">DZ (Algeria)</option>
+                                <option value="AS">AS (American Samoa)</option>
+                                <option value="AD">AD (Andorra)</option>
+                                <option value="AO">AO (Angola)</option>
+                                <option value="AI">AI (Anguilla)</option>
+                                <option value="AQ">AQ (Antarctica)</option>
+                                <option value="AG">AG (Antigua and Barbuda)</option>
+                                <option value="AR">AR (Argentina)</option>
+                                <option value="AM">AM (Armenia)</option>
+                                <option value="AW">AW (Aruba)</option>
+                                <option value="AU">AU (Australia)</option>
+                                <option value="AT">AT (Austria)</option>
+                                <option value="AZ">AZ (Azerbaijan)</option>
+                                <option value="BS">BS (Bahamas)</option>
+                                <option value="BH">BH (Bahrain)</option>
+                                <option value="BD">BD (Bangladesh)</option>
+                                <option value="BB">BB (Barbados)</option>
+                                <option value="BY">BY (Belarus)</option>
+                                <option value="BE">BE (Belgium)</option>
+                                <option value="BZ">BZ (Belize)</option>
+                                <option value="BJ">BJ (Benin)</option>
+                                <option value="BM">BM (Bermuda)</option>
+                                <option value="BT">BT (Bhutan)</option>
+                                <option value="BO">BO (Bolivia)</option>
+                                <option value="BQ">BQ (Bonaire)</option>
+                                <option value="BA">BA (Bosnia and Herzegovina)</option>
+                                <option value="BW">BW (Botswana)</option>
+                                <option value="BV">BV (Bouvet Island)</option>
+                                <option value="BR">BR (Brazil)</option>
+                                <option value="IO">IO (British Indian Ocean Territory)</option>
+                                <option value="BN">BN (Brunei)</option>
+                                <option value="BG">BG (Bulgaria)</option>
+                                <option value="BF">BF (Burkina Faso)</option>
+                                <option value="BI">BI (Burundi)</option>
+                                <option value="KH">KH (Cambodia)</option>
+                                <option value="CM">CM (Cameroon)</option>
+                                <option value="CA">CA (Canada)</option>
+                                <option value="CV">CV (Cape Verde)</option>
+                                <option value="KY">KY (Cayman Islands)</option>
+                                <option value="CF">CF (Central African Republic)</option>
+                                <option value="TD">TD (Chad)</option>
+                                <option value="CL">CL (Chile)</option>
+                                <option value="CN">CN (China)</option>
+                                <option value="CX">CX (Christmas Island)</option>
+                                <option value="CC">CC (Cocos Keeling Islands)</option>
+                                <option value="CO">CO (Colombia)</option>
+                                <option value="KM">KM (Comoros)</option>
+                                <option value="CG">CG (Congo Brazzaville)</option>
+                                <option value="CD">CD (Congo Kinshasa)</option>
+                                <option value="CK">CK (Cook Islands)</option>
+                                <option value="CR">CR (Costa Rica)</option>
+                                <option value="HR">HR (Croatia)</option>
+                                <option value="CW">CW (Curacao)</option>
+                                <option value="CY">CY (Cyprus)</option>
+                                <option value="CZ">CZ (Czech Republic)</option>
+                                <option value="DK">DK (Denmark)</option>
+                                <option value="DJ">DJ (Djibouti)</option>
+                                <option value="DM">DM (Dominica)</option>
+                                <option value="DO">DO (Dominican Republic)</option>
+                                <option value="TL">TL (East Timor)</option>
+                                <option value="EC">EC (Ecuador)</option>
+                                <option value="EG">EG (Egypt)</option>
+                                <option value="SV">SV (El Salvador)</option>
+                                <option value="GQ">GQ (Equatorial Guinea)</option>
+                                <option value="ER">ER (Eritrea)</option>
+                                <option value="EE">EE (Estonia)</option>
+                                <option value="SZ">SZ (Eswatini)</option>
+                                <option value="ET">ET (Ethiopia)</option>
+                                <option value="FK">FK (Falkland Islands)</option>
+                                <option value="FO">FO (Faroe Islands)</option>
+                                <option value="FJ">FJ (Fiji)</option>
+                                <option value="FI">FI (Finland)</option>
+                                <option value="FR">FR (France)</option>
+                                <option value="GF">GF (French Guiana)</option>
+                                <option value="PF">PF (French Polynesia)</option>
+                                <option value="GA">GA (Gabon)</option>
+                                <option value="GM">GM (Gambia)</option>
+                                <option value="GE">GE (Georgia)</option>
+                                <option value="DE">DE (Germany)</option>
+                                <option value="GH">GH (Ghana)</option>
+                                <option value="GI">GI (Gibraltar)</option>
+                                <option value="GR">GR (Greece)</option>
+                                <option value="GL">GL (Greenland)</option>
+                                <option value="GD">GD (Grenada)</option>
+                                <option value="GP">GP (Guadeloupe)</option>
+                                <option value="GU">GU (Guam)</option>
+                                <option value="GT">GT (Guatemala)</option>
+                                <option value="GG">GG (Guernsey)</option>
+                                <option value="GN">GN (Guinea)</option>
+                                <option value="GW">GW (Guinea-Bissau)</option>
+                                <option value="GY">GY (Guyana)</option>
+                                <option value="HT">HT (Haiti)</option>
+                                <option value="HM">HM (Heard and Mcdonald Islands)</option>
+                                <option value="HN">HN (Honduras)</option>
+                                <option value="HK">HK (Hong Kong)</option>
+                                <option value="HU">HU (Hungary)</option>
+                                <option value="IS">IS (Iceland)</option>
+                                <option value="IN">IN (India)</option>
+                                <option value="ID">ID (Indonesia)</option>
+                                <option value="IR">IR (Iran)</option>
+                                <option value="IQ">IQ (Iraq)</option>
+                                <option value="IE">IE (Ireland)</option>
+                                <option value="IL">IL (Israel)</option>
+                                <option value="IT">IT (Italy)</option>
+                                <option value="CI">CI (Ivory Coast)</option>
+                                <option value="JM">JM (Jamaica)</option>
+                                <option value="JP">JP (Japan)</option>
+                                <option value="JO">JO (Jordan)</option>
+                                <option value="KZ">KZ (Kazakstan)</option>
+                                <option value="KE">KE (Kenya)</option>
+                                <option value="KI">KI (Kiribati)</option>
+                                <option value="XK">XK (Kosovo)</option>
+                                <option value="KW">KW (Kuwait)</option>
+                                <option value="KG">KG (Kyrgyzstan)</option>
+                                <option value="LA">LA (Laos)</option>
+                                <option value="LV">LV (Latvia)</option>
+                                <option value="LB">LB (Lebanon)</option>
+                                <option value="LS">LS (Lesotho)</option>
+                                <option value="LR">LR (Liberia)</option>
+                                <option value="LY">LY (Libya)</option>
+                                <option value="LI">LI (Liechtenstein)</option>
+                                <option value="LT">LT (Lithuania)</option>
+                                <option value="LU">LU (Luxembourg)</option>
+                                <option value="MO">MO (Macau)</option>
+                                <option value="MK">MK (Macedonia)</option>
+                                <option value="MG">MG (Madagascar)</option>
+                                <option value="MW">MW (Malawi)</option>
+                                <option value="MY">MY (Malaysia)</option>
+                                <option value="MV">MV (Maldives)</option>
+                                <option value="ML">ML (Mali)</option>
+                                <option value="MT">MT (Malta)</option>
+                                <option value="MH">MH (Marshall Islands)</option>
+                                <option value="MQ">MQ (Martinique)</option>
+                                <option value="MR">MR (Mauritania)</option>
+                                <option value="MU">MU (Mauritius)</option>
+                                <option value="YT">YT (Mayotte)</option>
+                                <option value="MX">MX (Mexico)</option>
+                                <option value="FM">FM (Micronesia)</option>
+                                <option value="MD">MD (Moldova)</option>
+                                <option value="MC">MC (Monaco)</option>
+                                <option value="MN">MN (Mongolia)</option>
+                                <option value="ME">ME (Montenegro)</option>
+                                <option value="MS">MS (Montserrat)</option>
+                                <option value="MA">MA (Morocco)</option>
+                                <option value="MZ">MZ (Mozambique)</option>
+                                <option value="MM">MM (Myanmar)</option>
+                                <option value="NA">NA (Namibia)</option>
+                                <option value="NR">NR (Nauru)</option>
+                                <option value="NP">NP (Nepal)</option>
+                                <option value="NL">NL (Netherlands)</option>
+                                <option value="NC">NC (New Caledonia)</option>
+                                <option value="NZ">NZ (New Zealand)</option>
+                                <option value="NI">NI (Nicaragua)</option>
+                                <option value="NE">NE (Niger)</option>
+                                <option value="NG">NG (Nigeria)</option>
+                                <option value="NU">NU (Niue)</option>
+                                <option value="NF">NF (Norfolk Island)</option>
+                                <option value="MP">MP (Northern Mariana Islands)</option>
+                                <option value="KP">KP (North Korea)</option>
+                                <option value="NO">NO (Norway)</option>
+                                <option value="OM">OM (Oman)</option>
+                                <option value="PK">PK (Pakistan)</option>
+                                <option value="PW">PW (Palau)</option>
+                                <option value="PA">PA (Panama)</option>
+                                <option value="PG">PG (Papua New Guinea)</option>
+                                <option value="PY">PY (Paraguay)</option>
+                                <option value="PE">PE (Peru)</option>
+                                <option value="PH">PH (Philippines)</option>
+                                <option value="PN">PN (Pitcairn)</option>
+                                <option value="PL">PL (Poland)</option>
+                                <option value="PT">PT (Portugal)</option>
+                                <option value="PR">PR (Puerto Rico)</option>
+                                <option value="QA">QA (Qatar)</option>
+                                <option value="RE">RE (Reunion)</option>
+                                <option value="RO">RO (Romania)</option>
+                                <option value="RU">RU (Russia)</option>
+                                <option value="RW">RW (Rwanda)</option>
+                                <option value="SH">SH (Saint Helena)</option>
+                                <option value="KN">KN (Saint Kitts and Nevis)</option>
+                                <option value="LC">LC (Saint Lucia)</option>
+                                <option value="PM">PM (Saint Pierre and Miquelon)</option>
+                                <option value="VC">VC (Saint Vincent &amp; The Grenadines)</option>
+                                <option value="WS">WS (Samoa)</option>
+                                <option value="SM">SM (San Marino)</option>
+                                <option value="ST">ST (Sao Tome and Principe)</option>
+                                <option value="SA">SA (Saudi Arabia)</option>
+                                <option value="SN">SN (Senegal)</option>
+                                <option value="RS">RS (Serbia)</option>
+                                <option value="SC">SC (Seychelles)</option>
+                                <option value="SL">SL (Sierra Leone)</option>
+                                <option value="SG">SG (Singapore)</option>
+                                <option value="SX">SX (Sint Maarten)</option>
+                                <option value="SK">SK (Slovakia)</option>
+                                <option value="SI">SI (Slovenia)</option>
+                                <option value="SB">SB (Solomon Islands)</option>
+                                <option value="SO">SO (Somalia)</option>
+                                <option value="ZA">ZA (South Africa)</option>
+                                <option value="KR">KR (South Korea)</option>
+                                <option value="ES">ES (Spain)</option>
+                                <option value="LK">LK (Sri Lanka)</option>
+                                <option value="SD">SD (Sudan)</option>
+                                <option value="SR">SR (Suriname)</option>
+                                <option value="SJ">SJ (Svalbard and Jan Mayen)</option>
+                                <option value="SE">SE (Sweden)</option>
+                                <option value="CH">CH (Switzerland)</option>
+                                <option value="SY">SY (Syrian Arb Republic)</option>
+                                <option value="TW">TW (Taiwan)</option>
+                                <option value="TJ">TJ (Tajikistan)</option>
+                                <option value="TZ">TZ (Tanzania)</option>
+                                <option value="TH">TH (Thailand)</option>
+                                <option value="TG">TG (Togo)</option>
+                                <option value="TK">TK (Tokelau)</option>
+                                <option value="TO">TO (Tonga)</option>
+                                <option value="TT">TT (Trinidad and Tobago)</option>
+                                <option value="TN">TN (Tunisia)</option>
+                                <option value="TR">TR (Turkey)</option>
+                                <option value="TM">TM (Turkmenistan)</option>
+                                <option value="TC">TC (Turks and Caicos Islands)</option>
+                                <option value="TV">TV (Tuvalu)</option>
+                                <option value="UG">UG (Uganda)</option>
+                                <option value="UA">UA (Ukraine)</option>
+                                <option value="AE">AE (United Arab Emirates)</option>
+                                <option value="GB">GB (United Kingdom)</option>
+                                <option value="UY">UY (Uruguay)</option>
+                                <option value="UZ">UZ (Uzbekistan)</option>
+                                <option value="VU">VU (Vanuatu)</option>
+                                <option value="VA">VA (Vatican City)</option>
+                                <option value="VE">VE (Venezuela)</option>
+                                <option value="VN">VN (Vietnam)</option>
+                                <option value="VG">VG (Virgin Islands British)</option>
+                                <option value="VI">VI (Virgin Islands U.S.)</option>
+                                <option value="WF">WF (Wallis and Futuna)</option>
+                                <option value="EH">EH (Western Sahara)</option>
+                                <option value="YE">YE (Yemen)</option>
+                                <option value="ZM">ZM (Zambia)</option>
+                                <option value="ZW">ZW (Zimbabwe)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h1 class="text-gray-700 font-bold mb-3 text-md ml-2">{{ strings.address_es }} {{flightBeginSelect.begin.country}} {{ strings.address_en }}</h1>
+                    <div class="flex flex-wrap mb-6">
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-street-1-Infant{{forloop.counter}}">{{ strings.street}}<span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-street-1-Infant{{forloop.counter}}" name="address-street-1-Infant{{forloop.counter}}" type="text" required>
+                        </div>
+                        <div class="w-full md:w-2/3 md:flex">
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-city-1-Infant{{forloop.counter}}">{{ strings.city}}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="address-city-1-Infant{{forloop.counter}}" id="address-city-1-Infant{{forloop.counter}}" required>
+                                {% for city in cities_begin %}
+                                    <option value="{{ city }}">{{ city }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-state-1-Infant{{forloop.counter}}">{{ strings.state }}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" onchange="setCities(this.selectedOptions[0].getAttribute('cities'),'address-city-1-Infant{{forloop.counter}}')" name="address-state-1-Infant{{forloop.counter}}"  id="address-state-1-Infant{{forloop.counter}}"  required>
+                                {% for address in address_begin %}
+                                    {% for state in address %}
+                                    <option value="{{state}}" cities="{{address.values}}">{{ state}}</option>
+                                    {% endfor %}
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-postalcode-1-Infant{{forloop.counter}}">{{ strings.zip_code }}</label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-postalcode-1-Infant{{forloop.counter}}" name="address-postalcode-1-Infant{{forloop.counter}}" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h1 class="text-gray-700 font-bold mb-3 text-md ml-2">{{ strings.address_es }} {{flightBeginSelect.to.country}} {{ strings.address_en }}</h1>
+                    <div class="flex flex-wrap mb-6">
+                        <div class="w-full md:w-1/3 md:px-2 py-3">
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-street-2-Infant{{forloop.counter}}">{{ strings.street}}<span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-street-2-Infant{{forloop.counter}}" name="address-street-2-Infant{{forloop.counter}}" type="text" required>
+                        </div>
+                        <div class="w-full md:w-2/3 md:flex">
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-city-2-Infant{{forloop.counter}}">{{ strings.street}}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="address-city-2-Infant{{forloop.counter}}" id="address-city-2-Infant{{forloop.counter}}" required>
+                                {% for sity in cities_to %}
+                                    <option value="US">{{ sity }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-state-2-Infant{{forloop.counter}}">{{ strings.state }}</label>
+                                <select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-2 
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" onchange="setCities(this.selectedOptions[0].getAttribute('cities'),'address-city-2-Infant{{forloop.counter}}')" name="address-state-2-Infant{{forloop.counter}}"  id="address-state-2-Infant{{forloop.counter}}"  required>
+                                {% for address in address_to %}
+                                    {% for state in address %}
+                                    <option value="{{state}}" cities="{{address.values}}">{{ state}}</option>
+                                    {% endfor %}
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/3 md:px-2 py-3">
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-postalcode-2-Infant{{forloop.counter}}">{{ strings.zip_code }}</label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-postalcode-2-Infant{{forloop.counter}}" name="address-postalcode-2-Infant{{forloop.counter}}" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+            {% endwith %}
+
+            {% csrf_token %}
+            <input class="hidden"  type="number" name="adults" value="{{adults}}">
+            <input class="hidden"  type="number" name="children" value="{{children}}">
+            <input class="hidden"  type="number" name="infants" value="{{infants}}">
+            <input class="hidden"  type="number" name="flightBeginSelect" value="{{flightBeginSelect.id}}">
+            {% if flightReturnSelect %}<input class="hidden"  type="number" name="flightReturnSelect" value="{{flightReturnSelect.id}}">{%endif%}
+
+            <div>
+                <h1 class="text-gray-700 font-bold mb-6 mt-6 text-xl">{{ strings.trip_contact }}</h1>
+                <div class="flex flex-wrap mb-6">   
+
+                    <div class="w-full md:w-1/3 md:px-2 py-3">
+                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="emailContact">{{ strings.email }}</label>
+                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500"
+                        name="emailContact" id="emailContact" type="email" {% if request.user.is_authenticated %} value="{{request.user}} {% endif %}">
+                    </div>
+
+                    <div class="w-full md:w-1/3 md:px-2 py-3">
+                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="confirmEmail">{{ strings.confirm_email }}</label>
+                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500  mb-1"
+                        name="confirmEmail" id="confirmEmail" type="email" {% if request.user.is_authenticated %} value="{{request.user}} {% endif %}">
+                        <span id="errorMsgConfirmEmail" class="text-red-500 text-xs font-serif"> </span>
+                    </div>
+
+                    <div class="w-full md:w-1/3 md:px-2 py-3">
+                        <label id="" class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2">{{ strings.phone_number }}</label>
+                        <input class="hidden" name="codePhoneNumber" id="codePhoneNumberInput" type="text">
+                        <input id="phone" type="tel" autocomplete="off" data-intl-tel-input-id="0" placeholder="" name="phoneNumber" required
+                            class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500  mb-1">
+                        <span id="errorMsgValidatePhone" class="hidden text-red-500 text-xs font-serif"></span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center mr-4 hidden">
+                    <input checked id="sameContact" type="checkbox" value="" class="w-4 h-4 text-itravel-900 bg-gray-100 rounded border-gray-300 focus:ring-itravel-500 focus:ring-2">
+                    <label for="sameContact" class="ml-2 text-sm font-medium text-gray-900 ">Use the same contact information for all passengers</label>
+                </div>
+
+
+                <div class="flex justify-center items-center pt-24">
+                    
+                    <button id="btnLoginForContinue" type="button" class="shadow-md hover:shadow-lg w-auto px-3  mb-3 py-2.5  text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform
+                    {% if request.user.is_authenticated %}hidden{% endif %} bg-itravel-900 rounded-md hover:bg-itravel-600 focus:outline-none focus:ring focus:ring-itravel-500 focus:ring-opacity-50"data-modal-toggle="authentication-modal">
+                    {{ strings.login_continue }}
+                    </button>
+                    
+                    <button id="btnContinue" type="submit" class="shadow-md hover:shadow-lg w-auto px-3  mb-3 py-2.5  text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform
+                    {% if not request.user.is_authenticated %}hidden{% endif %} bg-itravel-900 rounded-md hover:bg-itravel-600 focus:outline-none focus:ring focus:ring-itravel-500 focus:ring-opacity-50" >
+                    {{ strings.continue }}
+                    </button>
+                    
+                </div>
+            </div>
+
+                
+        </form>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/booking.js' %}"></script>
+<script class="iti-load-utils" async="" src="{% static 'js/validatePhoneNumberUtils.js' %}"></script>
+{% endblock scripts %}
