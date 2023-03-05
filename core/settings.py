@@ -185,7 +185,6 @@ if  DEBUG:# not
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 
