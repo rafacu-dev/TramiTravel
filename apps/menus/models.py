@@ -84,9 +84,8 @@ class Ofert(models.Model):
     name_en =models.CharField(max_length=200,null=False,blank=False)
     
     description_es = models.TextField(null=False,blank=False)
-    message_en = models.TextField(null=False,blank=False)
-
-    description_es = models.TextField(null=False,blank=False)
+    description_en = models.TextField(null=False,blank=False)
+    message_es = models.TextField(null=False,blank=False)
     message_en = models.TextField(null=False,blank=False)
 
     actived = models.BooleanField(default=True)
