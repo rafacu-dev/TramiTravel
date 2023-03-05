@@ -165,7 +165,7 @@ AUTH_USER_MODEL="user.UserAccount"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if not DEBUG:# 
+if  DEBUG:# not
     EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = os.environ.get('EMAIL_HOST')
@@ -185,6 +185,7 @@ if not DEBUG:#
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 
