@@ -14,10 +14,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 #DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ['10.0.2.2','127.0.0.1','localhost','tramitravel-4n2v.onrender.com','tramitravel-4n2v.onrender.com/','https://tramitravel-4n2v.onrender.com/']
-#RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-#if RENDER_EXTERNAL_HOSTNAME:
-#    ALLOWED_HOSTS=[RENDER_EXTERNAL_HOSTNAME,]
+ALLOWED_HOSTS = ['10.0.2.2','127.0.0.1','localhost']
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    print("RENDER_EXTERNAL_HOSTNAME: ", RENDER_EXTERNAL_HOSTNAME)
+    ALLOWED_HOSTS=[RENDER_EXTERNAL_HOSTNAME,]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -164,12 +166,13 @@ AUTH_USER_MODEL="user.UserAccount"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 if not DEBUG:# 
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = os.environ.get('EMAIL_HOST')
-    EMAIL_PORT = os.environ.get('EMAIL_PORT')
-    EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+    EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+    #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    #EMAIL_HOST = os.environ.get('EMAIL_HOST')
+    #EMAIL_PORT = os.environ.get('EMAIL_PORT')
+    #EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+    #EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    #EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
     SESSION_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
