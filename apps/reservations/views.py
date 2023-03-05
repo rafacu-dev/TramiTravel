@@ -606,13 +606,13 @@ def baggagePolicy(request,bp):
         raise Http404()
         
 def download_pdf_ticket(request,tickets,option):
-    try:
+    #try:
         tickets = int(tickets + "01")
         bookings = Booking.objects.filter(Q(reservationCode = tickets)|Q(reservationCode = tickets + 1),actived=True)
 
         generate_tickets_pdf(bookings,BASE_DIR + "/media/reports/download_pdf_ticket.pdf")
 
-        pdf = open(BASE_DIR + "/media/reports/download_pdf_ticket.pdf","r",encoding="latin-1")
+        pdf = open(BASE_DIR + "/media/reports/download_pdf_ticket.pdf","rb")
         pdf_return = pdf.read()
         pdf.close()
 
@@ -623,9 +623,9 @@ def download_pdf_ticket(request,tickets,option):
             response['Content-Disposition'] = f"attachment; filename=bookings.pdf"
             return response
         else:
-            return FileResponse(pdf_return, content_type='application/pdf')
+            return HttpResponse(pdf_return, content_type='application/pdf')
 
-    except FileNotFoundError:
+    #except FileNotFoundError:
         raise Http404()
 
 def deleteBooking(request):
