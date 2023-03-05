@@ -14,12 +14,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 #DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ['10.0.2.2','127.0.0.1','localhost']
-
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    print("RENDER_EXTERNAL_HOSTNAME: ", RENDER_EXTERNAL_HOSTNAME)
-    ALLOWED_HOSTS=[RENDER_EXTERNAL_HOSTNAME,]
+ALLOWED_HOSTS = ['10.0.2.2','127.0.0.1','localhost','tramitravel-4n2v.onrender.com','tramitravel-4n2v.onrender.com/','https://tramitravel-4n2v.onrender.com/']
+#RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+#if RENDER_EXTERNAL_HOSTNAME:
+#    ALLOWED_HOSTS=[RENDER_EXTERNAL_HOSTNAME,]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
