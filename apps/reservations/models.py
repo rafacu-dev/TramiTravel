@@ -289,7 +289,7 @@ class Booking(models.Model):
     cityTo = models.CharField(blank = False, null = False, max_length=100)
     stateTo = models.CharField(blank = False, null = False, max_length=100)
 
-    reservationCode = models.IntegerField(blank = False, null = False)
+    reservationCode = models.BigIntegerField(blank = False, null = False)
     pnr = models.CharField(blank = True, null = True, max_length=50)
     
     amount = models.FloatField(blank=False, null=False,default=0)
