@@ -87,7 +87,7 @@ function loopSlider(){
             case 0:{
                 $('#slider').fadeTo('slow', 0.2, function() {
                   if(screen.width < screen.height){
-                    $(this).css('background-image', 'url(/static/images/bg-homepage-2-sm.webp)');
+                    $(this).css('background-image', 'url(/static/images/bg-homepage-2-sm.jpg)');
                   }else{
                     $(this).css('background-image', 'url(/static/images/bg-homepage-2.webp)');
                   }
@@ -153,7 +153,7 @@ function loopSlider(){
                 break;
             }  
             case 4:{
-                $('#slider').fadeTo('slow', 0.2, function() {
+                $('#slider').fadeTo('slow',n0.2, function() {
                   if(screen.width < screen.height){
                     $(this).css('background-image', 'url(/static/images/bg-homepage-1-sm.jpg)');
                   }else{
