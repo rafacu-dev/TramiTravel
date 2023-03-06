@@ -153,7 +153,7 @@ function loopSlider(){
                 break;
             }  
             case 4:{
-                $('#slider').fadeTo('slow',n0.2, function() {
+                $('#slider').fadeTo('slow',0.2, function() {
                   if(screen.width < screen.height){
                     $(this).css('background-image', 'url(/static/images/bg-homepage-1-sm.jpg)');
                   }else{
