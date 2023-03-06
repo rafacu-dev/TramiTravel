@@ -3,20 +3,13 @@ if(!document.getElementById("preloader").classList.contains("hidden")){
     $('#navBar').addClass("hidden");
     $('.root-index').addClass("hidden");
 
-    
-    $('#preloader').fadeOut(1000);
+    window.onload = function(){
+        $('#preloader').fadeOut(1000);
         
-    setTimeout(function(){
-        $('.root-index').removeClass("hidden");
-        $('#navBar').removeClass("hidden");},2300)
-
-    //window.onload = function(){
-    //    $('#preloader').fadeOut(1000);
-        
-    //    setTimeout(function(){
-    //        $('.root-index').removeClass("hidden");
-    //        $('#navBar').removeClass("hidden");},1000)
-    //};
+        setTimeout(function(){
+            $('.root-index').removeClass("hidden");
+            $('#navBar').removeClass("hidden");},1000)
+    };
 }
 
 function controlDateReturn(v){
