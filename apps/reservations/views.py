@@ -38,8 +38,8 @@ class Home(View):
     def get(self,request,*args,**kwargs):
 
         destinatations = Destinatation.objects.filter(actived=True)
-        menus = Menu.objects.all().order_by('position')
-        oferts = OfertGroup.objects.all().order_by('position')
+        menus = Menu.objects.filter(actived=True).order_by('position')
+        oferts = OfertGroup.objects.filter(actived=True).order_by('position')
         strings,language = get_strings(request.COOKIES)
         
         context = {
