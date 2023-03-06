@@ -106,7 +106,7 @@ function loopSlider(){
                   if(screen.width < screen.height){
                     $(this).css('background-image', 'url(/static/images/bg-homepage-3-sm.jpg)');
                   }else{
-                    $(this).css('background-image', 'url(/static/images/bg-homepage-3.webp)');
+                    $(this).css('background-image', 'url(/static/images/bg-homepage-3.jpg)');
                   }
                   }).fadeTo('slow', 1);
                   if(language === "es"){
