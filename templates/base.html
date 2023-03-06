@@ -16,8 +16,6 @@
     <script src="{% static 'js/flowbite.min.js' %}"></script>
     <script src="{% static 'js/base.js' %}"></script>
     <script src="{% static 'js/datepicker.js' %}"></script>
-    <!--<script src="{% static 'js/alpine.min.js' %}" defer></script>-->
-    <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
 
     <style type="text/css" media="screen">
         span.datepicker-cell.selected {background-color: #804b64 !important;}
@@ -73,10 +71,10 @@
         }
 
     </style>
+
+    <link rel="stylesheet" href="/static/css/dist/styles.css">
     
     {% block styles %} {% endblock styles %}
-
-    {% tailwind_css %}
   </head>
   
 
