@@ -8,7 +8,7 @@ if(!document.getElementById("preloader").classList.contains("hidden")){
         
     setTimeout(function(){
         $('.root-index').removeClass("hidden");
-        $('#navBar').removeClass("hidden");},1000)
+        $('#navBar').removeClass("hidden");},2300)
 
     //window.onload = function(){
     //    $('#preloader').fadeOut(1000);
