@@ -7,9 +7,15 @@
 
 {% block content %}
   <section class="mb-32 text-gray-800 flex flex-col items-center justify-center">
+    {% if imageOfert %}
+    <div class="relative overflow-hidden bg-no-repeat bg-cover w-full"
+      style="background-position: 50%; background-image: url('{% imageOfert %}'); height: 300px;">
+    </div>
+    {% else %}
     <div class="relative overflow-hidden bg-no-repeat bg-cover w-full"
       style="background-position: 50%; background-image: url('{% static 'images/las_vegas.jpg' %}'); height: 300px;">
     </div>
+    {% endif%}
 
     <div class="container text-gray-800 px-4 lg:max-w-6xl">
       <div class="block rounded-lg shadow-lg py-10 md:py-12 px-4 md:px-6 flex flex-wrap justify-between"

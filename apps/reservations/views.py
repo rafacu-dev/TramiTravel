@@ -574,7 +574,7 @@ class BookingView(View):
 class Message(View):
     def get(self,request,tag,*args,**kwargs):
 
-        menus = Menu.objects.all().order_by('position')        
+        menus = Menu.objects.filter(actived=True).order_by('position')
         strings,language = get_strings(request.COOKIES)
         ofert = Ofert.objects.get(tag=tag)
         if language == "en":
@@ -586,7 +586,8 @@ class Message(View):
             "language" : language,
             "strings" : strings,
             "menus" : menus,
-            "messageOfert" : message
+            "messageOfert" : message,
+            "imageOfert" : ofert.image.url
             }
 
         return render(request,'contact.html',context)

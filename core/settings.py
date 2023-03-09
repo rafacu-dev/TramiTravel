@@ -12,7 +12,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
-#DEBUG = 'RENDER' not in os.environ
+DEBUG = 'RENDER' not in os.environ
+print("DEBUG: ", DEBUG)
 
 ALLOWED_HOSTS = ['10.0.2.2','127.0.0.1','localhost']
 
@@ -165,8 +166,7 @@ AUTH_USER_MODEL="user.UserAccount"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if  DEBUG:# not
-    EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+if not DEBUG:# 
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = os.environ.get('EMAIL_HOST')
     EMAIL_PORT = os.environ.get('EMAIL_PORT')
@@ -183,7 +183,7 @@ if  DEBUG:# not
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
