@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = True
+
 DEBUG = 'RENDER' not in os.environ
 print("DEBUG: ", DEBUG)
 
@@ -20,7 +20,7 @@ ALLOWED_HOSTS = ['*']
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     print("RENDER_EXTERNAL_HOSTNAME: ", RENDER_EXTERNAL_HOSTNAME)
-    #ALLOWED_HOSTS=[RENDER_EXTERNAL_HOSTNAME,]
+    ALLOWED_HOSTS=[RENDER_EXTERNAL_HOSTNAME,]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -184,7 +184,8 @@ if not DEBUG:#
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 
