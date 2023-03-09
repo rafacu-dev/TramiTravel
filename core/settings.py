@@ -17,8 +17,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = 'RENDER' not in os.environ
 print("DEBUG: ", DEBUG)
-DEBUG = True
-
 ALLOWED_HOSTS = ['10.0.2.2','127.0.0.1','localhost']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -171,7 +169,7 @@ AUTH_USER_MODEL="user.UserAccount"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if  DEBUG:# not
+if not DEBUG:# 
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = os.environ.get('EMAIL_HOST')
     EMAIL_PORT = os.environ.get('EMAIL_PORT')
