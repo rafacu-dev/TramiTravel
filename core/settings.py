@@ -188,8 +188,6 @@ if not DEBUG:#
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
-
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
