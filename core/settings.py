@@ -192,6 +192,11 @@ if  DEBUG:# not
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 
 else:
+    SESSION_COOKIE_SECURE = False
+    SECURE_BROWSER_XSS_FILTER = False
+    SECURE_CONTENT_TYPE_NOSNIFF = False
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
     EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
