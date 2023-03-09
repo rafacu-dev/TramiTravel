@@ -145,7 +145,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\ "[0],"/")
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
