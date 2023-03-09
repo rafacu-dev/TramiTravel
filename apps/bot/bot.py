@@ -26,16 +26,6 @@ bot = telebot.TeleBot(TOKEN)
 def cmd_chat_id(message):
     bot.send_message(message.chat.id, str(message.chat.id))
 
-@bot.message_handler(commands=["new_su"])
-def cmd_start(message):
-    if message.chat.id == ADMIN2_ID or message.chat.id == ADMIN1_ID:
-        try:
-            userRegister = UserAccount.objects.create_superuser(email="info@tramitravel.com", password="admin")
-            userRegister.save()
-            bot.send_message(message.chat.id, "✅ Creado super usuario", parse_mode="html", disable_web_page_preview=True)
-            print("Super usuario creado")
-        except:print("Error al crear super usuaio")
-
 @bot.message_handler(commands=["pnr_pendientes"])
 def cmd_pnr_pendientes(message):
     bookings = Booking.objects.filter(pnr = None)

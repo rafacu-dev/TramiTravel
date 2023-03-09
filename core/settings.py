@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = 'RENDER' not in os.environ
 print("DEBUG: ", DEBUG)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['10.0.2.2','127.0.0.1','localhost']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
