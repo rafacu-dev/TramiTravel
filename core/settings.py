@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = 'RENDER' not in os.environ
 print("DEBUG: ", DEBUG)
-DEBUG= False
+DEBUG= True
 
 ALLOWED_HOSTS = ['10.0.2.2','127.0.0.1','localhost']
 
