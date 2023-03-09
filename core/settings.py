@@ -65,7 +65,7 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -184,7 +184,7 @@ if not DEBUG:#
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
     #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
