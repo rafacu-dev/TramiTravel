@@ -146,7 +146,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\ "[0],"/")
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
@@ -190,7 +190,6 @@ if  DEBUG:# not
     #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 else:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
