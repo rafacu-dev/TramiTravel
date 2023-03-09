@@ -5,6 +5,7 @@ from django.conf import settings
 
 from apps.user.views import Login, Logout, Register, RegisterConfirm, RecreatePassword, RecreateConfirm
 
+
 urlpatterns = [
     path('logout/', Logout.as_view(),name='logout'),
     path('login/', Login.as_view(),name='login'),
