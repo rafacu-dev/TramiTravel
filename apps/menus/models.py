@@ -27,7 +27,6 @@ class Seccion(models.Model):
     id = models.AutoField(primary_key=True)
     tag = models.CharField(unique=True,blank = False, null = False, max_length=50,validators=[validate_tag])
     position = models.IntegerField(null=False,blank=False)
-    icon = models.ImageField(blank = True, null = True,upload_to = 'menu-icon')
     menu = models.ForeignKey(Menu,on_delete=models.CASCADE,null=False,blank=False,related_name="Menu")
     
     image = models.ImageField(blank = False, null = False,upload_to = 'seccion')
