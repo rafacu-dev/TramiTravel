@@ -144,7 +144,8 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\ "[0],"/")
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\ "[0],"/")
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
@@ -184,10 +185,11 @@ if not DEBUG:#
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-    #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 else:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
