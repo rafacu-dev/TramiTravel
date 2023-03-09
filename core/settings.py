@@ -10,6 +10,7 @@ ENVIRONMENT = env
 
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
+print("BASE_DIR",BASE_DIR)
 
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -170,7 +171,7 @@ AUTH_USER_MODEL="user.UserAccount"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if not DEBUG:# 
+if  DEBUG:# not
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = os.environ.get('EMAIL_HOST')
     EMAIL_PORT = os.environ.get('EMAIL_PORT')
