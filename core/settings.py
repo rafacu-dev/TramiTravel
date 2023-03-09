@@ -147,7 +147,7 @@ STATIC_URL = '/static/'
 
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace("\ "[0],"/")
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -168,7 +168,7 @@ AUTH_USER_MODEL="user.UserAccount"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if  DEBUG:# not
+if not DEBUG:# 
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = os.environ.get('EMAIL_HOST')
     EMAIL_PORT = os.environ.get('EMAIL_PORT')
