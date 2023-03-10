@@ -610,14 +610,15 @@ def download_pdf_ticket(request,tickets,option):
     #try:
         tickets = int(tickets + "01")
         bookings = Booking.objects.filter(Q(reservationCode = tickets)|Q(reservationCode = tickets + 1),actived=True)
+        pdf_path = str(BASE_DIR) + "/media/reports/download_pdf_ticket.pdf"
 
-        generate_tickets_pdf(bookings,BASE_DIR + "/media/reports/download_pdf_ticket.pdf")
+        generate_tickets_pdf(bookings,pdf_path)
 
-        pdf = open(BASE_DIR + "/media/reports/download_pdf_ticket.pdf","rb")
+        pdf = open(pdf_path,"rb")
         pdf_return = pdf.read()
         pdf.close()
 
-        remove(BASE_DIR + "/media/reports/download_pdf_ticket.pdf")
+        remove(pdf_path)
 
         if option == 0:
             response = HttpResponse(pdf_return,content_type='application/pdf')
