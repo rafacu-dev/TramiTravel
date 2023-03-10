@@ -124,7 +124,7 @@ def cmd_pagos_pendientes(message):
 
 @bot.message_handler(content_types=["text"])
 def bot_message_text(message):
-    try:
+    #try:
         reply = message.reply_to_message
 
         if reply.reply_markup != None and message.chat.id == ADMIN1_ID:
@@ -234,8 +234,8 @@ def bot_message_text(message):
                 threadSendMail = threading.Thread(name="threadSendMail", target=lambda:send_email_booking(booking.bill))
                 threadSendMail.start()
 
-    except:
-        bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
+    #except:
+        #bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
 
     bot.delete_message(message.chat.id,message.id)
 
@@ -316,7 +316,7 @@ def send_message_confirm_paid(message=str,bill=int):
 
 @bot.callback_query_handler(func=lambda x:True)
 def response_buttons(call):
-    #try:
+    try:
         chat_id = call.from_user.id
         message_id = call.message.id
         message_text = call.message.text
@@ -400,7 +400,8 @@ def response_buttons(call):
             bill.save()
             bot.edit_message_text(call.message.text + "\n\n❌ DENEGADO",chat_id,message_id,parse_mode="html")
     
-    #except:pass
+    except:
+        bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
 
 def bot_infinity_polling():
     bot.infinity_polling()
