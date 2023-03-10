@@ -612,13 +612,14 @@ def download_pdf_ticket(request,tickets,option):
         bookings = Booking.objects.filter(Q(reservationCode = tickets)|Q(reservationCode = tickets + 1),actived=True)
         pdf_path = str(BASE_DIR) + "/media/reports/download_pdf_ticket.pdf"
 
+        try:remove(pdf_path)
+        except:pass
+
         generate_tickets_pdf(bookings,pdf_path)
 
         pdf = open(pdf_path,"rb")
         pdf_return = pdf.read()
         pdf.close()
-
-        remove(pdf_path)
 
         if option == 0:
             response = HttpResponse(pdf_return,content_type='application/pdf')

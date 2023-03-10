@@ -6,12 +6,13 @@ from reportlab.lib.units import mm
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from reportlab.lib.colors import gray,black,HexColor
+from core.settings import BASE_DIR
 
 
 def generate_tickets_pdf(bookings,name):
     iTravelColor = HexColor(0xE5DCED)
     
-    doc = SimpleDocTemplate(name, leftMargin= 10*mm, rightMargin= 10*mm, topMargin = 20*mm, bottomMargin = 20*mm, pagesize = A4, title="Reporte PDF", author="SOARH")
+    doc = SimpleDocTemplate(name, leftMargin= 10*mm, rightMargin= 10*mm, topMargin = 20*mm, bottomMargin = 20*mm, pagesize = A4, title="Reporte PDF", author="TramiTravel")
     ancho, alto = doc.pagesize
     story=[]
 
@@ -19,7 +20,7 @@ def generate_tickets_pdf(bookings,name):
     styleLeftLigt = ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=9, textColor=black, fontName="Helvetica",parent= getSampleStyleSheet()["Normal"],spaceBefore=4)
 
 
-    img = Image("media/" + str(bookings[0].flight.aircraft.carrier_code.image))
+    img = Image(str(BASE_DIR)+"/media/" + str(bookings[0].flight.aircraft.carrier_code.image))
     img.drawHeight = 20 * mm
     img.drawWidth = 20 * mm
 
