@@ -59,7 +59,7 @@ class Refills(View):
             message = f"El usuario {request.user} indicó que realizo una recarga de <b>{deposit} USD a entregar {receiver} MLC</b>, "
             message += f"en la tarjeta <b>{card}</b> a nombre de <b>{receivingPerson}</b>, "
             message += "y proporcionó los siguientes datos de <b>Zelle</b>: \n" 
-            message += f"<b>Usurio:</b> {userZelle}\n"
+            message += f"<b>Usuario:</b> {userZelle}\n"
             message += f"<b>Email/Phone:</b> {emailZelle}\n"
             message += f"<b>Codigo</b> {code}"
             

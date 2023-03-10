@@ -340,10 +340,12 @@ class Tickets(View):
                 bill.paid = None
                 bill.save()
 
-                message = f"<b>Usurio:</b> <code>{request.user}</code>\n"
+                message = f"<b>COMPROBACION DE PAGO PARA BILL-{bill.id}:</b>\n\n"
+                message += f"<b>Usuario:</b> <code>{request.user}</code>\n"
                 message += f"<b>Zelle:</b> <code>{bill.zelle}</code>\n"
                 message += f"<b>Codigo:</b> <code>{bill.code}</code>\n\n"
-                message += f"<b>Monto requerido:</b> <code>{bill.amountMoney()}</code>"
+                message += f"<b>Monto requerido:</b> <code>{bill.amountMoney()}</code>\n"
+                message += f"<b>Liquidado:</b> <code> ${bill.liquidated}</code>"
                 
                 
                 

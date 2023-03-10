@@ -31,66 +31,68 @@ def cmd_pnr_pendientes(message):
     bookings = Booking.objects.filter(pnr = None)
 
     booking_sends = []
-
-    for booking in bookings:
-        if booking.reservationCode not in booking_sends:
-            headder = f"<b>ASIGNACION DE PNR PARA PASAJERO {booking.reservationCode}:</b>\n\n"
-            
-            message = f"<u>Datos del Vuelo de Ida:</u>\n"
-            message += f"<b>Fecha:</b> <code>{booking.date}</code>\n"
-            message += f"<b>Origen:</b> <code>{booking.begin}</code>\n"
-            message += f"<b>Destino:</b> <code>{booking.to}</code>\n"
-            message += f"<b>Aerolinea:</b> <code>{booking.aircraft.carrier_code}</code>\n"
-            message += f"<b>Charter:</b> <code>{booking.charter}</code>\n"
-            message += f"<b>Avión:</b> <code>{booking.aircraft}</code>\n"
-            message += f"<b>Número de Avión:</b> <code>{booking.number}</code>\n"
-            message += f"<b>Hora de Salida:</b> <code>{booking.departure}</code>\n"
-            message += f"<b>Hora de Llegada:</b> <code>{booking.arrival}</code>\n\n"
-
-
-            if Booking.objects.filter(reservationCode=booking.reservationCode + 1).exists(): 
-                booking_return = Booking.objects.get(reservationCode=booking.reservationCode + 1)
-                message += f"<u>Datos del Vuelo de Regreso:</u>\n"
-                message += f"<b>Fecha:</b> <code>{booking_return.date}</code>\n"
-                message += f"<b>Origen:</b> <code>{booking_return.begin}</code>\n"
-                message += f"<b>Destino:</b> <code>{booking_return.to}</code>\n"
-                message += f"<b>Aerolinea:</b> <code>{booking_return.aircraft.carrier_code}</code>\n"
-                message += f"<b>Charter:</b> <code>{booking_return.charter}</code>\n"
-                message += f"<b>Avión:</b> <code>{booking_return.aircraft}</code>\n"
-                message += f"<b>Número:</b> <code>{booking_return.number}</code>\n"
-                message += f"<b>Hora de Salida:</b> <code>{booking_return.departure}</code>\n"
-                message += f"<b>Hora de Llegada:</b> <code>{booking_return.arrival}</code>\n\n"
-
+    try:
+        for booking in bookings:
+            if booking.reservationCode not in booking_sends:
+                headder = f"<b>ASIGNACION DE PNR PARA PASAJERO {booking.reservationCode}:</b>\n\n"
                 
-                headder = f"<b>ASIGNACION DE PNR PARA PASAJERO {booking_return.reservationCode}:</b>\n\n"
+                message = f"<u>Datos del Vuelo de Ida:</u>\n"
+                message += f"<b>Fecha:</b> <code>{booking.date}</code>\n"
+                message += f"<b>Origen:</b> <code>{booking.begin}</code>\n"
+                message += f"<b>Destino:</b> <code>{booking.to}</code>\n"
+                message += f"<b>Aerolinea:</b> <code>{booking.aircraft.carrier_code}</code>\n"
+                message += f"<b>Charter:</b> <code>{booking.charter}</code>\n"
+                message += f"<b>Avión:</b> <code>{booking.aircraft}</code>\n"
+                message += f"<b>Número de Avión:</b> <code>{booking.number}</code>\n"
+                message += f"<b>Hora de Salida:</b> <code>{booking.departure}</code>\n"
+                message += f"<b>Hora de Llegada:</b> <code>{booking.arrival}</code>\n\n"
 
-                booking_sends.append(booking_return.reservationCode)
-            
-            
-            message += f"<u>Datos Personales:</u>\n"
-            message += f"<b>Primer Nombre:</b> <code>{booking.firstName}</code>\n"
-            message += f"<b>Segundo Nombre:</b> <code>{booking.middleName}</code>\n"
-            message += f"<b>Primer Apellido:</b> <code>{booking.lastName}</code>\n"
-            message += f"<b>Segundo Apellido:</b> <code>{booking.motherLastName}</code>\n"
-            message += f"<b>Fecha de Nacimiento:</b> <code>{booking.birth}</code>\n"
-            message += f"<b>Genero:</b> <code>{booking.gender}</code>\n\n"
-            
-            message += f"<u>Documento Primario:</u>\n"
-            message += f"<b>Número:</b> <code>{booking.documentNumber}</code>\n"
-            message += f"<b>Expiración:</b> <code>{booking.documentExpiration}</code>\n"
-            message += f"<b>Tipo:</b> <code>{booking.documentType}</code>\n"
-            message += f"<b>País:</b> <code>{booking.documentCountry}</code>\n\n"
-            
-            message += f"<u>Documento Secundario:</u>\n"
-            message += f"<b>Número:</b> <code>{booking.secondaryDocumentNumber}</code>\n"
-            message += f"<b>Expiración:</b> <code>{booking.secondaryDocumentExpiration}</code>\n"
-            message += f"<b>Tipo:</b> <code>{booking.secondaryDocumentType}</code>\n"
-            message += f"<b>País:</b> <code>{booking.secondaryDocumentCountry}</code>\n"
 
-            message = headder + message
-            bot.send_message(ADMIN2_ID, message, parse_mode="html", disable_web_page_preview=True)
+                if Booking.objects.filter(reservationCode=booking.reservationCode + 1).exists(): 
+                    booking_return = Booking.objects.get(reservationCode=booking.reservationCode + 1)
+                    message += f"<u>Datos del Vuelo de Regreso:</u>\n"
+                    message += f"<b>Fecha:</b> <code>{booking_return.date}</code>\n"
+                    message += f"<b>Origen:</b> <code>{booking_return.begin}</code>\n"
+                    message += f"<b>Destino:</b> <code>{booking_return.to}</code>\n"
+                    message += f"<b>Aerolinea:</b> <code>{booking_return.aircraft.carrier_code}</code>\n"
+                    message += f"<b>Charter:</b> <code>{booking_return.charter}</code>\n"
+                    message += f"<b>Avión:</b> <code>{booking_return.aircraft}</code>\n"
+                    message += f"<b>Número:</b> <code>{booking_return.number}</code>\n"
+                    message += f"<b>Hora de Salida:</b> <code>{booking_return.departure}</code>\n"
+                    message += f"<b>Hora de Llegada:</b> <code>{booking_return.arrival}</code>\n\n"
 
-            booking_sends.append(booking.reservationCode)
+                    
+                    headder = f"<b>ASIGNACION DE PNR PARA PASAJERO {booking_return.reservationCode}:</b>\n\n"
+
+                    booking_sends.append(booking_return.reservationCode)
+                
+                
+                message += f"<u>Datos Personales:</u>\n"
+                message += f"<b>Primer Nombre:</b> <code>{booking.firstName}</code>\n"
+                message += f"<b>Segundo Nombre:</b> <code>{booking.middleName}</code>\n"
+                message += f"<b>Primer Apellido:</b> <code>{booking.lastName}</code>\n"
+                message += f"<b>Segundo Apellido:</b> <code>{booking.motherLastName}</code>\n"
+                message += f"<b>Fecha de Nacimiento:</b> <code>{booking.birth}</code>\n"
+                message += f"<b>Genero:</b> <code>{booking.gender}</code>\n\n"
+                
+                message += f"<u>Documento Primario:</u>\n"
+                message += f"<b>Número:</b> <code>{booking.documentNumber}</code>\n"
+                message += f"<b>Expiración:</b> <code>{booking.documentExpiration}</code>\n"
+                message += f"<b>Tipo:</b> <code>{booking.documentType}</code>\n"
+                message += f"<b>País:</b> <code>{booking.documentCountry}</code>\n\n"
+                
+                message += f"<u>Documento Secundario:</u>\n"
+                message += f"<b>Número:</b> <code>{booking.secondaryDocumentNumber}</code>\n"
+                message += f"<b>Expiración:</b> <code>{booking.secondaryDocumentExpiration}</code>\n"
+                message += f"<b>Tipo:</b> <code>{booking.secondaryDocumentType}</code>\n"
+                message += f"<b>País:</b> <code>{booking.secondaryDocumentCountry}</code>\n"
+
+                message = headder + message
+                bot.send_message(ADMIN2_ID, message, parse_mode="html", disable_web_page_preview=True)
+
+                booking_sends.append(booking.reservationCode)
+    except:
+        bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
 
 @bot.message_handler(commands=["pagos_pendientes"])
 def cmd_pagos_pendientes(message):
@@ -101,10 +103,12 @@ def cmd_pagos_pendientes(message):
         try:
             user = Booking.objects.filter(bill = bills[0])[0].user
             for bill in bills:
-                message = f"<b>Usurio:</b> <code>{user}</code>\n"
+                message = f"<b>COMPROBACION DE PAGO PARA BILL-{bill.id}:</b>\n\n"
+                message += f"<b>Usuario:</b> <code>{user}</code>\n"
                 message += f"<b>Zelle:</b> <code>{bill.zelle}</code>\n"
-                message += f"<b>Codigo</b> <code>{bill.code}</code>\n\n"
-                message += f"<b>Monto requerido:</b> <code>{bill.amountMoney()}</code>"
+                message += f"<b>Codigo:</b> <code>{bill.code}</code>\n\n"
+                message += f"<b>Monto requerido:</b> <code>{bill.amountMoney()}</code>\n"
+                message += f"<b>Liquidado:</b> <code> ${bill.liquidated}</code>"
 
                 markup = InlineKeyboardMarkup(row_width=2)
                 btn_success = InlineKeyboardButton("✅ CONFIRMAR",callback_data=f"confirm-{bill.id}")
@@ -112,7 +116,7 @@ def cmd_pagos_pendientes(message):
                 markup.add(btn_success,btn_deny)
                 bot.send_message(ADMIN1_ID,message,parse_mode="html",disable_web_page_preview=True,reply_markup=markup)
         except:
-            print("error en /pagos_pendientes")
+            bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
 
 
 
@@ -125,7 +129,88 @@ def bot_message_text(message):
 
         if reply.reply_markup != None and message.chat.id == ADMIN1_ID:
             bot.send_chat_action(message.chat.id, "typing")
-            bot.edit_message_text(reply.text + "\nLiquidado: $" + message.text,message.chat.id,reply.id,parse_mode="html",reply_markup=reply.reply_markup)
+
+            liquidated = int(message.text)
+
+            bill_id = int(reply.text.split(":")[0].replace("COMPROBACION DE PAGO PARA BILL-",""))            
+            bill = Bill.objects.get(id=bill_id)
+            bill.liquidated += liquidated
+
+            if bill.liquidated >= bill.amount() + bill.revenue():
+                bill.paid = True
+                bill.save()
+                bot.edit_message_text(reply.text + "\n\n✅ CONFIRMADO",message.chat.id,reply.id,parse_mode="html")
+
+                bookings = Booking.objects.filter(bill = bill)
+
+                booking_sends = []
+
+                for booking in bookings:
+                    if booking.reservationCode not in booking_sends:
+                        headder = f"<b>ASIGNACION DE PNR PARA PASAJERO {booking.reservationCode}:</b>\n\n"
+                        
+                        message = f"<u>Datos del Vuelo de Ida:</u>\n"
+                        message += f"<b>Fecha:</b> <code>{booking.flight.date}</code>\n"
+                        message += f"<b>Origen:</b> <code>{booking.flight.begin}</code>\n"
+                        message += f"<b>Destino:</b> <code>{booking.flight.to}</code>\n"
+                        message += f"<b>Aerolinea:</b> <code>{booking.flight.aircraft.carrier_code}</code>\n"
+                        message += f"<b>Charter:</b> <code>{booking.flight.charter}</code>\n"
+                        message += f"<b>Avión:</b> <code>{booking.flight.aircraft}</code>\n"
+                        message += f"<b>Número de Avión:</b> <code>{booking.flight.number}</code>\n"
+                        message += f"<b>Hora de Salida:</b> <code>{booking.flight.departure}</code>\n"
+                        message += f"<b>Hora de Llegada:</b> <code>{booking.flight.arrival}</code>\n\n"
+
+
+                        if Booking.objects.filter(reservationCode=booking.reservationCode + 1).exists(): 
+                            booking_return = Booking.objects.get(reservationCode=booking.reservationCode + 1)
+                            message += f"<u>Datos del Vuelo de Regreso:</u>\n"
+                            message += f"<b>Fecha:</b> <code>{booking_return.date}</code>\n"
+                            message += f"<b>Origen:</b> <code>{booking_return.flight.begin}</code>\n"
+                            message += f"<b>Destino:</b> <code>{booking_return.flight.to}</code>\n"
+                            message += f"<b>Aerolinea:</b> <code>{booking_return.flight.aircraft.carrier_code}</code>\n"
+                            message += f"<b>Charter:</b> <code>{booking_return.flight.charter}</code>\n"
+                            message += f"<b>Avión:</b> <code>{booking_return.flight.aircraft}</code>\n"
+                            message += f"<b>Número de Avión:</b> <code>{booking_return.flight.number}</code>\n"
+                            message += f"<b>Hora de Salida:</b> <code>{booking_return.flight.departure}</code>\n"
+                            message += f"<b>Hora de Llegada:</b> <code>{booking_return.flight.arrival}</code>\n\n"
+
+                            
+                            headder = f"<b>ASIGNACION DE PNR PARA PASAJERO {booking_return.reservationCode}:</b>\n\n"
+
+                            booking_sends.append(booking_return.reservationCode)
+                        
+                        
+                        message += f"<u>Datos Personales:</u>\n"
+                        message += f"<b>Primer Nombre:</b> <code>{booking.firstName}</code>\n"
+                        message += f"<b>Segundo Nombre:</b> <code>{booking.middleName}</code>\n"
+                        message += f"<b>Primer Apellido:</b> <code>{booking.lastName}</code>\n"
+                        message += f"<b>Segundo Apellido:</b> <code>{booking.motherLastName}</code>\n"
+                        message += f"<b>Fecha de Nacimiento:</b> <code>{booking.birth}</code>\n"
+                        message += f"<b>Genero:</b> <code>{booking.gender}</code>\n\n"
+                        
+                        message += f"<u>Documento Primario:</u>\n"
+                        message += f"<b>Número:</b> <code>{booking.documentNumber}</code>\n"
+                        message += f"<b>Expiración:</b> <code>{booking.documentExpiration}</code>\n"
+                        message += f"<b>Tipo:</b> <code>{booking.documentType}</code>\n"
+                        message += f"<b>País:</b> <code>{booking.documentCountry}</code>\n\n"
+                        
+                        message += f"<u>Documento Secundario:</u>\n"
+                        message += f"<b>Número:</b> <code>{booking.secondaryDocumentNumber}</code>\n"
+                        message += f"<b>Expiración:</b> <code>{booking.secondaryDocumentExpiration}</code>\n"
+                        message += f"<b>Tipo:</b> <code>{booking.secondaryDocumentType}</code>\n"
+                        message += f"<b>País:</b> <code>{booking.secondaryDocumentCountry}</code>\n"
+
+                        message = headder + message
+                        bot.send_message(ADMIN2_ID, message, parse_mode="html", disable_web_page_preview=True)
+
+                        booking_sends.append(booking.reservationCode)
+
+            else:
+                bill.save()
+                
+                response = reply.text.split("Liquidado:")[0] + f"\n<b>Liquidado:</b> <code> ${bill.liquidated}</code>"
+
+                bot.edit_message_text(response,message.chat.id,reply.id,parse_mode="html",reply_markup=reply.reply_markup)
 
         elif "✅ PNR ASIGNADO:" not in reply.text and "ASIGNACION DE PNR PARA PASAJERO" in reply.text and message.chat.id == ADMIN2_ID:
             bot.send_chat_action(message.chat.id, "typing")
@@ -150,7 +235,7 @@ def bot_message_text(message):
                 threadSendMail.start()
 
     except:
-        print("error en el envio de mensaje")
+        bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
 
     bot.delete_message(message.chat.id,message.id)
 
@@ -174,9 +259,13 @@ def send_email_booking(bill):
                 booking_codes.append(booking_return[0].reservationCode)
             booking_codes.append(booking.reservationCode)\
             
-            url = f"media/reports/{booking.name()}.pdf"
-            generate_tickets_pdf(b,url)
-            files.append(url)
+            file_path = str(settings.MEDIA_ROOT) + f'/{booking.name()}.pdf'
+
+            try:os.remove(file_path)
+            except:pass
+
+            generate_tickets_pdf(b, booking.name())
+            files.append(file_path)
 
 
             
@@ -201,7 +290,8 @@ def send_email_booking(bill):
     email.send()
     
     for pdf_file in files:
-        os.remove(pdf_file)
+        try:os.remove(pdf_file)
+        except:pass
 
 def send_message_to_channel(message=str):
     bot.send_chat_action(CHANEL_ID, "typing")
