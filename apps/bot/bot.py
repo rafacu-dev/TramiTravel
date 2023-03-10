@@ -38,28 +38,28 @@ def cmd_pnr_pendientes(message):
                 
                 message = f"<u>Datos del Vuelo de Ida:</u>\n"
                 message += f"<b>Fecha:</b> <code>{booking.date}</code>\n"
-                message += f"<b>Origen:</b> <code>{booking.begin}</code>\n"
-                message += f"<b>Destino:</b> <code>{booking.to}</code>\n"
-                message += f"<b>Aerolinea:</b> <code>{booking.aircraft.carrier_code}</code>\n"
-                message += f"<b>Charter:</b> <code>{booking.charter}</code>\n"
-                message += f"<b>Avión:</b> <code>{booking.aircraft}</code>\n"
-                message += f"<b>Número de Avión:</b> <code>{booking.number}</code>\n"
-                message += f"<b>Hora de Salida:</b> <code>{booking.departure}</code>\n"
-                message += f"<b>Hora de Llegada:</b> <code>{booking.arrival}</code>\n\n"
+                message += f"<b>Origen:</b> <code>{booking.flight.begin}</code>\n"
+                message += f"<b>Destino:</b> <code>{booking.flight.to}</code>\n"
+                message += f"<b>Aerolinea:</b> <code>{booking.flight.aircraft.carrier_code}</code>\n"
+                message += f"<b>Charter:</b> <code>{booking.flight.charter}</code>\n"
+                message += f"<b>Avión:</b> <code>{booking.flight.aircraft}</code>\n"
+                message += f"<b>Número de Avión:</b> <code>{booking.flight.number}</code>\n"
+                message += f"<b>Hora de Salida:</b> <code>{booking.flight.departure}</code>\n"
+                message += f"<b>Hora de Llegada:</b> <code>{booking.flight.arrival}</code>\n\n"
 
 
                 if Booking.objects.filter(reservationCode=booking.reservationCode + 1).exists(): 
                     booking_return = Booking.objects.get(reservationCode=booking.reservationCode + 1)
                     message += f"<u>Datos del Vuelo de Regreso:</u>\n"
                     message += f"<b>Fecha:</b> <code>{booking_return.date}</code>\n"
-                    message += f"<b>Origen:</b> <code>{booking_return.begin}</code>\n"
-                    message += f"<b>Destino:</b> <code>{booking_return.to}</code>\n"
-                    message += f"<b>Aerolinea:</b> <code>{booking_return.aircraft.carrier_code}</code>\n"
-                    message += f"<b>Charter:</b> <code>{booking_return.charter}</code>\n"
-                    message += f"<b>Avión:</b> <code>{booking_return.aircraft}</code>\n"
-                    message += f"<b>Número:</b> <code>{booking_return.number}</code>\n"
-                    message += f"<b>Hora de Salida:</b> <code>{booking_return.departure}</code>\n"
-                    message += f"<b>Hora de Llegada:</b> <code>{booking_return.arrival}</code>\n\n"
+                    message += f"<b>Origen:</b> <code>{booking_return.flight.begin}</code>\n"
+                    message += f"<b>Destino:</b> <code>{booking_return.flight.to}</code>\n"
+                    message += f"<b>Aerolinea:</b> <code>{booking_return.flight.aircraft.carrier_code}</code>\n"
+                    message += f"<b>Charter:</b> <code>{booking_return.flight.charter}</code>\n"
+                    message += f"<b>Avión:</b> <code>{booking_return.flight.aircraft}</code>\n"
+                    message += f"<b>Número:</b> <code>{booking_return.flight.number}</code>\n"
+                    message += f"<b>Hora de Salida:</b> <code>{booking_return.flight.departure}</code>\n"
+                    message += f"<b>Hora de Llegada:</b> <code>{booking_return.flight.arrival}</code>\n\n"
 
                     
                     headder = f"<b>ASIGNACION DE PNR PARA PASAJERO {booking_return.reservationCode}:</b>\n\n"
@@ -91,8 +91,12 @@ def cmd_pnr_pendientes(message):
                 bot.send_message(ADMIN2_ID, message, parse_mode="html", disable_web_page_preview=True)
 
                 booking_sends.append(booking.reservationCode)
-    except:
-        bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
+
+        if len(booking_sends) == 0:
+            bot.send_message(ADMIN1_ID,f"👍🏻 No hay reservas pendientes por PNR",parse_mode="html",disable_web_page_preview=True)
+
+    except Exception as e:
+        bot.send_message(ADMIN1_ID,f"⚠️ Ha ocurrido un error: {e}",parse_mode="html",disable_web_page_preview=True)
 
 @bot.message_handler(commands=["pagos_pendientes"])
 def cmd_pagos_pendientes(message):
@@ -115,8 +119,8 @@ def cmd_pagos_pendientes(message):
                 btn_deny = InlineKeyboardButton("❌ DENEGAR",callback_data=f"deny-{bill.id}")
                 markup.add(btn_success,btn_deny)
                 bot.send_message(ADMIN1_ID,message,parse_mode="html",disable_web_page_preview=True,reply_markup=markup)
-        except:
-            bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
+        except Exception as e:
+            bot.send_message(ADMIN1_ID,f"⚠️ Ha ocurrido un error: {e}",parse_mode="html",disable_web_page_preview=True)
 
 
 
@@ -234,8 +238,8 @@ def bot_message_text(message):
                 threadSendMail = threading.Thread(name="threadSendMail", target=lambda:send_email_booking(booking.bill))
                 threadSendMail.start()
 
-    except:
-        bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
+    except Exception as e:
+        bot.send_message(ADMIN1_ID,f"⚠️ Ha ocurrido un error: {e}",parse_mode="html",disable_web_page_preview=True)
 
     bot.delete_message(message.chat.id,message.id)
 
@@ -400,8 +404,8 @@ def response_buttons(call):
             bill.save()
             bot.edit_message_text(call.message.text + "\n\n❌ DENEGADO",chat_id,message_id,parse_mode="html")
     
-    except:
-        bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
+    except Exception as e:
+        bot.send_message(ADMIN1_ID,f"⚠️ Ha ocurrido un error: {e}",parse_mode="html",disable_web_page_preview=True)
 
 def bot_infinity_polling():
     bot.infinity_polling()
