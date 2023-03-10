@@ -124,7 +124,7 @@ def cmd_pagos_pendientes(message):
 
 @bot.message_handler(content_types=["text"])
 def bot_message_text(message):
-    #try:
+    try:
         reply = message.reply_to_message
 
         if reply.reply_markup != None and message.chat.id == ADMIN1_ID:
@@ -234,10 +234,10 @@ def bot_message_text(message):
                 threadSendMail = threading.Thread(name="threadSendMail", target=lambda:send_email_booking(booking.bill))
                 threadSendMail.start()
 
-    #except:
-        #bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
+    except:
+        bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
 
-        bot.delete_message(message.chat.id,message.id)
+    bot.delete_message(message.chat.id,message.id)
 
 
 

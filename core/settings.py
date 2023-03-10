@@ -16,13 +16,11 @@ print("BASE_DIR",BASE_DIR)
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = 'RENDER' not in os.environ
-DEBUG = True
-print("DEBUG: ", DEBUG)
+
 ALLOWED_HOSTS = ['10.0.2.2','127.0.0.1','localhost']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
-    print("RENDER_EXTERNAL_HOSTNAME: ", RENDER_EXTERNAL_HOSTNAME)
     ALLOWED_HOSTS=[RENDER_EXTERNAL_HOSTNAME,"tramicuba.com","tramitravel.com"]
 
 INSTALLED_APPS = [
@@ -169,7 +167,7 @@ AUTH_USER_MODEL="user.UserAccount"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if  DEBUG:# not
+if not DEBUG:# 
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = os.environ.get('EMAIL_HOST')
     EMAIL_PORT = os.environ.get('EMAIL_PORT')
