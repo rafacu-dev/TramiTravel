@@ -15,6 +15,7 @@ from apps.reservations.models import BaggagePolicy, Bill, Booking, Destinatation
 from apps.bot.bot import send_message_confirm_paid
 from apps.utils.pdf_generated import generate_tickets_pdf
 from apps.utils.countries import countries
+from core import settings
 from core.settings import BASE_DIR
 from core.languages import get_strings
 
@@ -610,14 +611,14 @@ def download_pdf_ticket(request,tickets,option):
     #try:
         tickets = int(tickets + "01")
         bookings = Booking.objects.filter(Q(reservationCode = tickets)|Q(reservationCode = tickets + 1),actived=True)
-        pdf_path = str(BASE_DIR) + "/media/reports/download_pdf_ticket.pdf"
+        file_path = settings.MEDIA_ROOT + '/download_pdf_ticket.pdf'
 
-        try:remove(pdf_path)
+        try:remove(file_path)
         except:pass
 
-        generate_tickets_pdf(bookings,pdf_path)
+        generate_tickets_pdf(bookings,"download_pdf_ticket")
 
-        pdf = open(pdf_path,"rb")
+        pdf = open(file_path,"rb")
         pdf_return = pdf.read()
         pdf.close()
 

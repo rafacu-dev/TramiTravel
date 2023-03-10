@@ -6,13 +6,23 @@ from reportlab.lib.units import mm
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from reportlab.lib.colors import gray,black,HexColor
-from core.settings import BASE_DIR
+from core import settings
+from django.core.files.storage import FileSystemStorage
 
 
 def generate_tickets_pdf(bookings,name):
     iTravelColor = HexColor(0xE5DCED)
     
-    doc = SimpleDocTemplate(name, leftMargin= 10*mm, rightMargin= 10*mm, topMargin = 20*mm, bottomMargin = 20*mm, pagesize = A4, title="Reporte PDF", author="TramiTravel")
+    # Define la ruta absoluta de la carpeta 'media'
+    media_root = settings.MEDIA_ROOT
+
+    # Concatena el nombre del archivo al final de la ruta
+    file_path = media_root + f'/{name}.pdf'
+
+    # Crea un objeto de almacenamiento de sistema de archivos
+    fs = FileSystemStorage()
+    
+    doc = SimpleDocTemplate(file_path, leftMargin= 10*mm, rightMargin= 10*mm, topMargin = 20*mm, bottomMargin = 20*mm, pagesize = A4, title="Reporte PDF", author="TramiTravel")
     ancho, alto = doc.pagesize
     story=[]
 
@@ -20,7 +30,7 @@ def generate_tickets_pdf(bookings,name):
     styleLeftLigt = ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=9, textColor=black, fontName="Helvetica",parent= getSampleStyleSheet()["Normal"],spaceBefore=4)
 
 
-    img = Image(str(BASE_DIR)+"/media/" + str(bookings[0].flight.aircraft.carrier_code.image))
+    img = Image("media/" + str(bookings[0].flight.aircraft.carrier_code.image))
     img.drawHeight = 20 * mm
     img.drawWidth = 20 * mm
 
@@ -194,3 +204,6 @@ def generate_tickets_pdf(bookings,name):
 
 
         
+    # Guarda el archivo en el sistema de archivos
+    with open(file_path, 'rb') as pdf:
+        fs.save(f'{name}.pdf', pdf)
