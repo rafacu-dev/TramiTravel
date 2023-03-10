@@ -237,7 +237,7 @@ def bot_message_text(message):
     #except:
         #bot.send_message(ADMIN1_ID,"⚠️ Ha ocurrido un error",parse_mode="html",disable_web_page_preview=True)
 
-    bot.delete_message(message.chat.id,message.id)
+        bot.delete_message(message.chat.id,message.id)
 
 
 
