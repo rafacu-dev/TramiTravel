@@ -290,7 +290,7 @@ class Tickets(View):
                     if bill == None:
                         bill = ticket.bill
                     else:
-                        bill.amount += ticket.bill.amount
+                        #bill.amount += ticket.bill.amount
                         bill.code += f"-{ticket.bill.code}"
                 else:
                     bookings.append(data)
