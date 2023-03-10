@@ -14,7 +14,7 @@ def generate_tickets_pdf(bookings,name):
     iTravelColor = HexColor(0xE5DCED)
     
     # Define la ruta absoluta de la carpeta 'media'
-    media_root = settings.MEDIA_ROOT
+    media_root = str(settings.MEDIA_ROOT)
 
     # Concatena el nombre del archivo al final de la ruta
     file_path = media_root + f'/{name}.pdf'

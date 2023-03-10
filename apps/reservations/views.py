@@ -611,7 +611,7 @@ def download_pdf_ticket(request,tickets,option):
     #try:
         tickets = int(tickets + "01")
         bookings = Booking.objects.filter(Q(reservationCode = tickets)|Q(reservationCode = tickets + 1),actived=True)
-        file_path = settings.MEDIA_ROOT + '/download_pdf_ticket.pdf'
+        file_path = str(settings.MEDIA_ROOT) + '/download_pdf_ticket.pdf'
 
         try:remove(file_path)
         except:pass
