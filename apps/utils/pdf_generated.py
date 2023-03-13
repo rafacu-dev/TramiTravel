@@ -11,7 +11,7 @@ from django.core.files.storage import FileSystemStorage
 
 
 def generate_tickets_pdf(bookings,name):
-    iTravelColor = HexColor(0xE5DCED)
+    ttColor = HexColor(0xE5DCED)
     
     # Define la ruta absoluta de la carpeta 'media'
     media_root = str(settings.MEDIA_ROOT)
@@ -47,7 +47,7 @@ def generate_tickets_pdf(bookings,name):
     data = []
     data.append(row)
     styles = [
-        ("BACKGROUND", (0, 0),(-1, 0), iTravelColor),
+        ("BACKGROUND", (0, 0),(-1, 0), ttColor),
         ("ALIGN", (0,0),(-1, 0), "RIGHT"),
         ("VALIGN", (0,0),(-1, 0), "TOP"),
         ("TOPPADDING", (0,0),(-1, 0),10),
@@ -63,7 +63,7 @@ def generate_tickets_pdf(bookings,name):
         story.append(spacer)
 
         styles = [
-            ("BACKGROUND", (0, 0),(-1, 0), iTravelColor),
+            ("BACKGROUND", (0, 0),(-1, 0), ttColor),
             ("ALIGN", (0,0),(-1, 0), "RIGHT"),
             ("VALIGN", (0,0),(-1, -1), "TOP"),
             ("LINEABOVE", (0, 0), (-1, 0), 0.25, black),
@@ -71,7 +71,7 @@ def generate_tickets_pdf(bookings,name):
         ]
         
         data = [
-            [Paragraph("Passenger Name:", styleLeftLigt), Paragraph("Seat:", styleLeftLigt), Paragraph("iTravel Reservation Code:", styleLeftLigt)],
+            [Paragraph("Passenger Name:", styleLeftLigt), Paragraph("Seat:", styleLeftLigt), Paragraph("TramiTravel Reservation Code:", styleLeftLigt)],
             [Paragraph(">> " + booking.name(), styleLeftLigt), Paragraph("Check-In Required", styleLeftLigt), Paragraph(str(booking.reservationCode), styleLeftLigt)],
         ]
         table = Table(data = data,style = styles, colWidths=((ancho - (10*mm * 2)) / 3), hAlign="CENTER")
@@ -84,7 +84,7 @@ def generate_tickets_pdf(bookings,name):
             [
                 img,
                 Paragraph("DEPARTURE: ", ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=11, textColor=black, fontName="Helvetica",parent= getSampleStyleSheet()["Normal"])), 
-                Paragraph(booking.date.strftime("%A, %b %d"), ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=11, textColor=black, fontName="Helvetica-Bold",parent= getSampleStyleSheet()["Normal"])), 
+                Paragraph(booking.flight.date.strftime("%A, %b %d"), ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=11, textColor=black, fontName="Helvetica-Bold",parent= getSampleStyleSheet()["Normal"])), 
                 Paragraph("Please verify flight times prior to departure", ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=11, textColor=gray, fontName="Helvetica",parent= getSampleStyleSheet()["Normal"]))
             ],
         ]
@@ -154,7 +154,7 @@ def generate_tickets_pdf(bookings,name):
             [
                 [
                     Paragraph(charter, ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=11, textColor=black, fontName="Helvetica",parent= getSampleStyleSheet()["Normal"])), 
-                    Paragraph("&nbsp;&nbsp;&nbsp;&nbsp;" + booking.flight.aircraft.carrier_code.nameCode, ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=13, textColor=black, fontName="Helvetica-Bold",parent= getSampleStyleSheet()["Normal"],spaceBefore=4)), 
+                    Paragraph("&nbsp;&nbsp;&nbsp;&nbsp;" + booking.flight.aircraft.carrier_code.nameCode + booking.flight.number, ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=13, textColor=black, fontName="Helvetica-Bold",parent= getSampleStyleSheet()["Normal"],spaceBefore=4)), 
                     Paragraph("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operated By:", ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=11, textColor=black, fontName="Helvetica",parent= getSampleStyleSheet()["Normal"],spaceBefore=12)),  
                     Paragraph("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + booking.flight.aircraft.carrier_code.__str__(), ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=11, textColor=black, fontName="Helvetica",parent= getSampleStyleSheet()["Normal"],spaceBefore=4)),
                     Paragraph("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status", ParagraphStyle(name="estiloEncabezado", alignment=TA_LEFT,fontSize=11, textColor=black, fontName="Helvetica",parent= getSampleStyleSheet()["Normal"],spaceBefore=12)),  
@@ -178,7 +178,7 @@ def generate_tickets_pdf(bookings,name):
         ]
         
         styles = [
-            ("BACKGROUND", (0, 0),(0, 0), iTravelColor),
+            ("BACKGROUND", (0, 0),(0, 0), ttColor),
             ("VALIGN", (0,0),(-1, -1), "TOP"),
             ("TOPPADDING", (0,0),(-1, 0),5),
             ("BOTTOMPADDING", (0,0),(-1, 0),0),
@@ -193,7 +193,7 @@ def generate_tickets_pdf(bookings,name):
     story.append(spacer)
 
     styles = [
-        ("BACKGROUND", (0, 0),(0, 0), iTravelColor),
+        ("BACKGROUND", (0, 0),(0, 0), ttColor),
         ("TOPPADDING", (0,0),(-1,-1),35),
         ("LINEABOVE", (0, 0), (-1, 0), 0.25, black),
     ]

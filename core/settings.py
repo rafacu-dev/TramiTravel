@@ -10,8 +10,6 @@ ENVIRONMENT = env
 
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
-print("BASE_DIR",BASE_DIR)
-
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
@@ -43,6 +41,7 @@ INSTALLED_APPS = [
     'apps.refills',
     'apps.menus',
     'apps.bot',
+    'apps.location',
 ]
 
 TAILWIND_APP_NAME = 'theme'

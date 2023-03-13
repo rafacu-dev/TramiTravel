@@ -23,6 +23,7 @@ urlpatterns = [
     path('recreate-confirm/', RecreateConfirm.as_view(),name='register_confirm'),
     path('admin/', admin.site.urls),
     
+    path('', include('apps.location.urls')),
     path('', include('apps.reservations.urls')),
     path('refills/', include('apps.refills.urls')),
     path('service/', include('apps.menus.urls')),

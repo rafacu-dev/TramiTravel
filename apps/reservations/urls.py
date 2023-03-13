@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import Home,BookingView,Flights,GetFligths,Tickets, Message, HomeTraslate, baggagePolicy, download_pdf_ticket, deleteBooking
+from .views import (Home,BookingView,Flights,GetFligths,
+                    Tickets, Message, HomeTraslate,
+                    baggagePolicy, download_pdf_ticket, deleteBooking)
 
 urlpatterns = [
     path('<str:traslate>', HomeTraslate.as_view(),name='index_traslate'),
