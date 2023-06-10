@@ -5,6 +5,8 @@ from django.shortcuts import redirect, render
 from django.views.generic import View
 from apps.hotels.models import Bill, Booking, Destinatation, Hotel, RoomType, VacationPackage
 
+#OK
+
 from apps.menus.models import Menu
 from core.languages import get_strings
 
