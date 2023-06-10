@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/intlTelInput.css' %}">
+{% endblock styles %}
+
+{% block content %}
+  <section class="mb-32 text-gray-800 flex flex-col items-center justify-center">
+    {% if imageOfert %}
+    <div class="relative overflow-hidden bg-no-repeat bg-cover w-full"
+      style="background-position: 50%; background-image: url('{{ imageOfert }}'); height: 300px;">
+    </div>
+    {% else %}
+    <div class="relative overflow-hidden bg-no-repeat bg-cover w-full"
+      style="background-position: 50%; background-image: url('{% static 'images/las_vegas.jpg' %}'); height: 300px;">
+    </div>
+    {% endif%}
+
+    <div class="container text-gray-800 px-4 lg:max-w-6xl">
+      <div class="block rounded-lg shadow-lg py-10 md:py-12 px-4 md:px-6 flex flex-wrap justify-between"
+        style="margin-top: -100px; background: hsla(0, 0%, 100%, 0.8); backdrop-filter: blur(30px);">
+        
+        <div class="w-full p-6 py-8 lg:p-12 lg:w-1/2">
+            <h3 class="mb-4 text-2xl font-extrabold leading-none sm:text-xl">{{ strings.contact_t1 }}:</h3>
+            <form method="POST" action="{% url 'contact' %}" onsubmit="return validator()">
+                {% csrf_token %}
+                <label for="name" class="block text-sm font-medium text-gray-700">{{ strings.full_name }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                <input type="text" name="name" id="name" autocomplete="family-name" required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm mb-3">
+                
+                <div class=" lg:flex w-full mb-3" >
+                    <div class="lg:w-1/2 md:mr-2">
+                        <label for="email_contact" class="block text-sm font-medium text-gray-700">{{ strings.email }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                        <input type="email" name="email_contact" id="email_contact" autocomplete="given-name" required
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm">
+                    </div>
+
+                    <div class="lg:w-1/2 md:ml-2">
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">{{ strings.phone_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                        <input name="phone" id="phone" type="tel" autocomplete="off" data-intl-tel-input-id="0" placeholder="" required
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm">
+                    </div>
+                </div>
+                <p id="errorMsgValidatePhone" class="hidden text-red-500 text-xs font-serif w-full" style="text-align: end;"></p>
+
+                
+                <label for="menssage" class="block text-sm font-medium text-gray-700">{{ strings.mensaje }}</label>
+                <textarea id="menssage" name="menssage" rows="3" 
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm mb-3 resize-none" 
+                placeholder="{{ strings.contact_mensaje_placeholder }}">{% if messageOfert %}{{messageOfert}}{% endif %}</textarea>
+            
+                <button type="submit" class="px-2 h-12 inline-flex items-center justify-center    
+                w-full mb-2 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-itravel-900 hover:bg-itravel-700 focus:shadow-outline focus:outline-none">{{ strings.send }}</button>
+            </form>
+        </div>
+
+        <div class="w-full p-6 py-8 lg:p-12 lg:w-1/2">
+          
+          <h1 class="text-2xl font-bold font-serif mt-4 flex justify-center mb-4">{{ strings.contact_t2 }}:</h1>
+          <h1 class="font-serif flex justify-center mb-12 ">{{ strings.contact_t3 }}</h1>
+
+          <div class="flex flex-wrap md:mb-12 ">
+            <div class="mb-12 md:mb-0 text-center mx-auto w-full sm:w-1/2">
+              <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-600 mb-2 md:mb-6 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M21,10V4c0-1.1-0.9-2-2-2H3C1.9,2,1.01,2.9,1.01,4L1,16c0,1.1,0.9,2,2,2h11v-5c0-1.66,1.34-3,3-3H21z M11,11L3,6V4l8,5 l8-5v2L11,11z"/><path fill="currentColor" d="M21,14v4c0,1.1-0.9,2-2,2s-2-0.9-2-2v-4.5c0-0.28,0.22-0.5,0.5-0.5s0.5,0.22,0.5,0.5V18h2v-4.5c0-1.38-1.12-2.5-2.5-2.5 S15,12.12,15,13.5V18c0,2.21,1.79,4,4,4s4-1.79,4-4v-4H21z"/></svg>
+              <h6 class="text-xs md:text-lg font-medium">{{ strings.email }} :<br>info@tramitavel.com</h6>
+            </div>
+            <div class="mb-12 md:mb-0 text-center mx-auto w-full sm:w-1/2">
+              <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-600 mb-2 md:mb-6 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"></path></svg>
+              <h6 class="text-xs md:text-lg font-medium">11865 SW 26th St Suite C-30,<br> Miami, FL 33175</h6>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap">
+            <div class="mb-12 md:mb-0 text-center mx-auto w-full sm:w-1/2">
+              <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-600 mb-2 md:mb-6 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"></path></svg>
+              <h6 class="text-xs md:text-lg font-medium">Tel: (305) 223-3090</h6>
+            </div>
+            <div class="text-center mx-auto w-full sm:w-1/2">
+              <svg class="w-5 h-5 md:w-8 md:h-8 text-blue-600 mb-2 md:mb-6 mx-auto color-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M192 64h197.5L416 90.51V160h64V77.25c0-8.484-3.375-16.62-9.375-22.62l-45.25-45.25C419.4 3.375 411.2 0 402.8 0H160C142.3 0 128 14.33 128 32v128h64V64zM64 128H32C14.38 128 0 142.4 0 160v320c0 17.62 14.38 32 32 32h32c17.62 0 32-14.38 32-32V160C96 142.4 81.63 128 64 128zM480 192H128v288c0 17.6 14.4 32 32 32h320c17.6 0 32-14.4 32-32V224C512 206.4 497.6 192 480 192zM288 432c0 8.875-7.125 16-16 16h-32C231.1 448 224 440.9 224 432v-32C224 391.1 231.1 384 240 384h32c8.875 0 16 7.125 16 16V432zM288 304c0 8.875-7.125 16-16 16h-32C231.1 320 224 312.9 224 304v-32C224 263.1 231.1 256 240 256h32C280.9 256 288 263.1 288 272V304zM416 432c0 8.875-7.125 16-16 16h-32c-8.875 0-16-7.125-16-16v-32c0-8.875 7.125-16 16-16h32c8.875 0 16 7.125 16 16V432zM416 304c0 8.875-7.125 16-16 16h-32C359.1 320 352 312.9 352 304v-32C352 263.1 359.1 256 368 256h32C408.9 256 416 263.1 416 272V304z"/></svg>
+              <h6 class="text-xs md:text-lg font-medium">{{ strings.fax }}: (305) 982-8466</h6>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  {% endblock content %}
+
+
+  {% block scripts %}
+  <script class="iti-load-utils" async="" src="{% static 'js/validatePhoneNumberUtils.js' %}"></script>
+  
+  <script type = "text/JavaScript">
+      function validator(){
+          let errorMsgValidatePhone = document.querySelector("#errorMsgValidatePhone");
+  
+          var r = true;
+          if(errorMsgValidatePhone.innerHTML !== "valid-phone"){
+              errorMsgValidatePhone.classList.remove("hidden");        
+              r = false;
+          }
+          else{
+              document.getElementById("codePhoneNumberInput").value = document.getElementByClassName("iti__country iti__preferred iti__active").getAttribute("data-dial-code");
+          }
+          return r;
+          
+      }
+  </script>
+  {% endblock scripts %}

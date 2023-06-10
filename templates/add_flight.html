@@ -1,0 +1,464 @@
+{% extends 'base.html' %}
+{% load static %}
+                
+{% block content %}
+<div class="pt-16 flex justify-center">
+    <form method="POST" onsubmit="return validator()" id="newFlights" enctype="multipart/form-data">
+        <div class="m-5 max-w-7xl rounded-lg bg-white shadow-lg p-4 ">
+            {% csrf_token %}
+            <div class="flex flex-wrap">
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.begin.id_for_label }}">
+                        Origen
+                    </label>
+                    {{ form.begin }}
+                </div>
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.to.id_for_label }}">
+                        Destino
+                    </label>
+                    {{ form.to }}
+                </div>
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.charter.id_for_label }}">
+                        Charter
+                    </label>
+                    {{ form.charter }}
+                </div>
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.aircraft.id_for_label }}">
+                        Avión
+                    </label>
+                    {{ form.aircraft }}
+                </div>
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.number.id_for_label  }}">
+                        Número de Vuelo
+                    </label>
+                    {{ form.number }}
+                </div>
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.checkinMoment.id_for_label  }}">
+                        Checkeo Previo
+                    </label>
+                    {{ form.checkinMoment }}
+                </div>
+
+                <div class="w-full md:w-1/3 flex flex-wrap">
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
+                            Hora de Salida
+                        </label>
+                        <div class="inline-flex items-center block w-full rounded-md border border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm">
+                            <select name="departure_h" id="" class="border-0 appearance-none bg-transparent w-full focus:border-0 focus:ring-0 h-9">
+                                <option value="00">00</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                            </select>
+                            <span class="px-2 font-bold">:</span>
+                            <select name="departure_m" id="" class="px-2 border-0 appearance-none bg-transparent w-full focus:border-0 focus:ring-0 h-9">
+                                <option value="00">00</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                                <option value="32">32</option>
+                                <option value="33">33</option>
+                                <option value="34">34</option>
+                                <option value="35">35</option>
+                                <option value="36">36</option>
+                                <option value="37">37</option>
+                                <option value="38">38</option>
+                                <option value="39">39</option>
+                                <option value="40">40</option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                                <option value="46">46</option>
+                                <option value="47">47</option>
+                                <option value="48">48</option>
+                                <option value="49">49</option>
+                                <option value="50">50</option>
+                                <option value="51">51</option>
+                                <option value="52">52</option>
+                                <option value="53">53</option>
+                                <option value="54">54</option>
+                                <option value="55">55</option>
+                                <option value="56">56</option>
+                                <option value="57">57</option>
+                                <option value="58">58</option>
+                                <option value="59">59</option>
+                            </select>
+                        </div>
+                    </div>
+        
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            Hora de Llegada
+                        </label>
+                        <div class="inline-flex items-center block w-full rounded-md border border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm">
+                            <select name="arrival_h" id="" class="border-0 appearance-none bg-transparent w-full focus:border-0 focus:ring-0 h-9">
+                                <option value="00">00</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                            </select>
+                            <span class="px-2 font-bold">:</span>
+                            <select name="arrival_m" id="" class="px-2 border-0 appearance-none bg-transparent w-full focus:border-0 focus:ring-0 h-9">
+                                <option value="00">00</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                                <option value="32">32</option>
+                                <option value="33">33</option>
+                                <option value="34">34</option>
+                                <option value="35">35</option>
+                                <option value="36">36</option>
+                                <option value="37">37</option>
+                                <option value="38">38</option>
+                                <option value="39">39</option>
+                                <option value="40">40</option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                                <option value="46">46</option>
+                                <option value="47">47</option>
+                                <option value="48">48</option>
+                                <option value="49">49</option>
+                                <option value="50">50</option>
+                                <option value="51">51</option>
+                                <option value="52">52</option>
+                                <option value="53">53</option>
+                                <option value="54">54</option>
+                                <option value="55">55</option>
+                                <option value="56">56</option>
+                                <option value="57">57</option>
+                                <option value="58">58</option>
+                                <option value="59">59</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.gate.id_for_label }}">
+                        Puerta
+                    </label>
+                    {{ form.gate }}
+                </div>
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.agencyCommission.id_for_label }}">
+                        Commisión para Agencias
+                    </label>
+                    {{ form.agencyCommission }}
+                </div>
+            </div>
+            
+            
+            <div class="mt-12">
+                {% for c in class_type%}
+                <input type="text" name="class_type_val_{{c.id}}" value="{{c.id}}" class="hidden">
+                <div class="flex items-center ml-3 mb-5">
+                    <input type="checkbox" name="class_type_{{c.id}}" class="w-4 h-4 text-itravel-700 bg-gray-100 border-gray-300 rounded focus:ring-itravel-900 focus:ring-2 mr-2" id="class_type_{{c.id}}" onchange="selectClass(this.id, this.checked)">
+                    <label class="block uppercase tracking-wide text-gray-700 text-md font-bold" for="class_type_{{c.id}}">{{c.name_es}}</label>
+                </div>
+
+                <div id="body-class-{{c.id}}" class="hidden">
+                    <div class="flex flex-wrap">
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="ability_{{c.id}}">
+                                Cantidad de reservas
+                            </label>
+                            <input type="number" name="ability{{c.id}}" value="4" class="input-{{c.id}} mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm mb-6" id="ability_{{c.id}}">
+                        </div>
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="baggagePolicy{{c.id}}">
+                                Política de privacidad
+                            </label>
+                            <select name="baggagePolicy{{c.id}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm mb-6" id="baggagePolicy{{c.id}}">
+                                <option value="" selected="">---------</option>
+                                {% for b in bp %}<option value="{{b.id}}">{{b.identifier}}</option>{% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap">
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="priceAdult{{c.id}}">
+                                Precio de adultos
+                            </label>
+                            <input type="number" name="priceAdult{{c.id}}" class="input-{{c.id}} mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm mb-6" step="any" id="priceAdult{{c.id}}">
+                        </div>
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="priceChildren{{c.id}}">
+                                Precio de niños
+                            </label>
+                            <input type="number" name="priceChildren{{c.id}}" class="input-{{c.id}} mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm mb-6" step="any" id="priceChildren{{c.id}}">
+                        </div>
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="priceInfant{{c.id}}">
+                                Precio de infantes
+                            </label>
+                            <input type="number" name="priceInfant{{c.id}}" class="input-{{c.id}} mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm mb-6" step="any" id="priceInfant{{c.id}}">
+                        </div>
+                        
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="revenueAdult{{c.id}}">
+                                Ganancia de adultos
+                            </label>
+                            <input type="number" name="revenueAdult{{c.id}}" class="input-{{c.id}} mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm mb-6" step="any" id="revenueAdult{{c.id}}">
+                        </div>
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="revenueChildren{{c.id}}">
+                                Ganancia de niños
+                            </label>
+                            <input type="number" name="revenueChildren{{c.id}}" class="input-{{c.id}} mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm mb-6" step="any" id="revenueChildren{{c.id}}">
+                        </div>
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="revenueInfant{{c.id}}">
+                                Ganancia de infantes
+                            </label>
+                            <input type="number" name="revenueInfant{{c.id}}" class="input-{{c.id}} mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm mb-6" step="any" id="revenueInfant{{c.id}}">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+
+            <div class="flex w-full px-3 mb-6 md:mb-0">{{ form.actived }}</div>
+
+            <div id="calendar-multiselect-4" class="inline-block rounded-lg bg-white shadow-lg p-4 flex justify-between items-start divide-x m-5 overflow-auto scrollbar max-w-7xl mt-12 border border-gray-300"></div>
+            <input type="text" id="days_flights" name="days_flights" class="hidden">    
+            <button class=" shadow-md hover:shadow-lg w-full px-3  p-2.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border border-itravel-900
+                bg-itravel-900 rounded-md hover:bg-itravel-600 focus:outline-none focus:ring focus:ring-itravel-500 focus:ring-opacity-50  font-serif"
+                type="submit" onclick="submitForm()">
+                Crear vuelos
+            </button>
+        </div>
+    
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script type = "text/JavaScript">
+    function generateCalendar() {
+        const calendar = document.getElementById("calendar-multiselect-4");
+        const date = new Date();
+      
+        for (let i = 0; i < 4; i++) {
+          const year = date.getFullYear();
+          const month = date.getMonth();
+      
+          const daysInMonth = new Date(year, month + 1, 0).getDate();
+          const firstDayOfWeek = new Date(year, month, 1).getDay();
+      
+          const monthContainer = document.createElement("div");
+          monthContainer.className = "month-container flex flex-col justify-center items-center p-4";
+      
+          const monthTitle = document.createElement("h2");
+          monthTitle.className = "text-sm rounded-lg text-gray-900 bg-white font-semibold py-2.5 px-5 focus:outline-none focus:ring-2 focus:ring-gray-200 view-switch";
+          monthTitle.innerText = `${getMonthName(month)} ${year}`;
+          monthContainer.appendChild(monthTitle);
+
+          const days_week = document.createElement("div");
+          days_week.className = "w-64 grid grid-cols-7 mb-1";
+          days_week.innerHTML = `
+          <span class="dow text-center h-6 leading-6 text-sm font-medium text-gray-500">Do</span>
+          <span class="dow text-center h-6 leading-6 text-sm font-medium text-gray-500">Lu</span>
+          <span class="dow text-center h-6 leading-6 text-sm font-medium text-gray-500">Ma</span>
+          <span class="dow text-center h-6 leading-6 text-sm font-medium text-gray-500">Mi</span>
+          <span class="dow text-center h-6 leading-6 text-sm font-medium text-gray-500">Ju</span>
+          <span class="dow text-center h-6 leading-6 text-sm font-medium text-gray-500">Vi</span>
+          <span class="dow text-center h-6 leading-6 text-sm font-medium text-gray-500">Sa</span>
+          `;
+          monthContainer.appendChild(days_week);
+
+      
+          const gridContainer = document.createElement("div");
+          gridContainer.className = "w-64 select-none grid grid-cols-7";
+      
+          // Agregar elementos vacíos al principio del mes
+          for (let j = 0; j < firstDayOfWeek; j++) {
+            const emptyDay = document.createElement("div");
+            emptyDay.classList.add("day", "empty");
+            gridContainer.appendChild(emptyDay);
+          }
+      
+          // Agregar los días del mes
+          for (let j = 1; j <= daysInMonth; j++) {
+            const day = document.createElement("label");
+            day.innerText = j;
+            
+            // Comprueba si el día es anterior o igual al día actual
+            const today = new Date();
+            const currentDate = new Date(year, month, j);
+
+            if (currentDate <= today) {
+                day.className = "day select-none block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-300 font-semibold text-sm disabled";
+            } else {
+                day.className = "day select-none hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-900 font-semibold text-sm";
+                // Agrega un listener de evento click al día
+                day.addEventListener("click", function() {
+                    if (day.classList.contains("selected-day-flight")) {
+                        day.className = "day select-none hover:bg-gray-100 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-gray-900 font-semibold text-sm";
+                    } else {
+                        day.className = "day select-none hover:bg-itravel-900 bg-itravel-700 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center text-white font-semibold text-sm selected-day-flight";
+                    }
+                });
+            }
+
+            // Convierte la fecha al formato deseado
+            const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+            // Agrega la propiedad data-date al elemento div con el valor de la fecha en formato deseado
+            day.setAttribute("data-date", formattedDate);
+
+            gridContainer.appendChild(day);
+          }
+      
+          monthContainer.appendChild(gridContainer);
+          calendar.appendChild(monthContainer);
+      
+          // Avanza al siguiente mes
+          date.setMonth(date.getMonth() + 1);
+        }
+    }
+      
+    
+    function getMonthName(monthIndex) {
+        const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        return monthNames[monthIndex];
+    }
+    
+    function validator() {
+        var data_date_list = [];
+        var elementos = document.querySelectorAll('.selected-day-flight');
+        for (var i = 0; i < elementos.length; i++) {
+            var data_date = elementos[i].getAttribute('data-date');
+            console.log(data_date);
+            data_date_list.push(data_date);
+        }
+        var valoresUnidos = data_date_list.join(',');
+        $('#days_flights').val(valoresUnidos);
+        return true;
+    }
+
+    function selectClass(id, checked){
+        let id_value = id.substring('class_type_'.length);
+
+        var inputs = document.querySelectorAll(`.input-${id_value}`);
+        for (var i = 0; i < inputs.length; i++) {
+            if (checked) {
+                inputs[i].setAttribute("required", "required");
+                document.getElementById(`body-class-${id_value}`).classList.remove("hidden");
+            } else {
+                inputs[i].removeAttribute("required");
+                document.getElementById(`body-class-${id_value}`).classList.add("hidden");
+            }
+        }
+    }
+    
+    generateCalendar();
+</script>
+{% endblock scripts %}

@@ -1,0 +1,449 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link href="{% static 'css/tickets.css' %}"  rel="stylesheet"/>
+{% endblock styles %}
+
+{% block content %}
+
+
+<div class="flex items-center justify-center mb-6 mt-12 md:mt-20">
+    <div class=" md:flex w-full max-w-6xl  p-3" >
+        {% if tickets|length > 0 %}
+        <div class=" md:w-1/3 lg:w-1/4 md:mr-6 h-full mb-2 mt-4 flex justify-center" >
+            
+            <div class="h-full w-auto" >
+                {% if bill %}
+                    {% if bill.paid == False or not bill.paid %}
+
+                        {% if not bill.zelle or bill.paid == False %}
+                        <button class="animate-bounce flex items-center justify-between px-8 h-12 shadow-lg shadow-itravel-500/50 rounded-lg bg-gradient-to-br from-itravel-900 to-pink-700 hover:bg-gradient-to-bl font-bold w-64"
+                            data-modal-toggle="payment-modal">
+                            <p class="text-lg text-white mr-2">{{ strings.ticket_t1 }}</p>
+                            <img src="{% static 'images/zelle.png' %}" class="w-auto h-8" alt="" />
+                        </button>
+                        {% endif %}
+                    
+                        {% if bill.zelle and bill.paid == None %}
+                        <div class="flex items-center justify-center px-4 h-12 shadow-lg rounded-lg bg-red-50 border-2 border-red-500 font-bold w-64 mb-2">
+                            <svg
+                                class="h-6 w-6 text-red-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                aria-hidden="true">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 10.5v3.75m-9.303 3.376C1.83 19.126 2.914 21 4.645 21h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 4.88c-.866-1.501-3.032-1.501-3.898 0L2.697 17.626zM12 17.25h.007v.008H12v-.008z"
+                                />
+                            </svg>
+                            <span class="text-sm text-red-500 font-bold ml-2">{{ strings.ticket_t2 }}</span>
+                        </div>
+                        {% endif %}
+                    
+                    
+                        <div class="w-64 h-auto bg-white border-gray-500 p-3 rounded-md shadow-md">
+                            <p class="text-black font-serif font-bold w-full text-center mb-3 text-lg">{{ strings.ticket_t4 }}</p>
+                            <div class="flex justify-between countdown ">
+                                <div class="bloc-time hours" data-init-value="{{bill.hoursRest.0}}">
+                                    <span class="count-title">{{ strings.hours }}</span>                
+                                    <div class="figure hours hours-1">
+                                        <span class="top">{{bill.hoursRest.1}}</span>
+                                        <span class="top-back">
+                                            <span>{{bill.hoursRest.1}}</span>
+                                        </span>
+                                        <span class="bottom">{{bill.hoursRest.1}}</span>
+                                        <span class="bottom-back">
+                                            <span>{{bill.hoursRest.1}}</span>
+                                        </span>
+                                    </div>                    
+                                    <div class="figure hours hours-2">
+                                        <span class="top">{{bill.hoursRest.2}}</span>
+                                        <span class="top-back">
+                                            <span>{{bill.hoursRest.2}}</span>
+                                        </span>
+                                        <span class="bottom">{{bill.hoursRest.2}}</span>
+                                        <span class="bottom-back">
+                                            <span>{{bill.hoursRest.2}}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            
+                                <div class="bloc-time min" data-init-value="{{bill.minutesRest.0}}">
+                                    <span class="count-title">{{ strings.minutes }}</span>                
+                                    <div class="figure min min-1">
+                                        <span class="top">{{bill.minutesRest.1}}</span>
+                                        <span class="top-back">
+                                            <span>{{bill.minutesRest.1}}</span>
+                                        </span>
+                                        <span class="bottom">{{bill.minutesRest.1}}</span>
+                                        <span class="bottom-back">
+                                            <span>{{bill.minutesRest.1}}</span>
+                                        </span>        
+                                    </div>                
+                                    <div class="figure min min-2">
+                                        <span class="top">{{bill.minutesRest.2}}</span>
+                                        <span class="top-back">
+                                            <span>{{bill.minutesRest.2}}</span>
+                                        </span>
+                                        <span class="bottom">{{bill.minutesRest.2}}</span>
+                                        <span class="bottom-back">
+                                            <span>{{bill.minutesRest.2}}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            
+                                <div class="bloc-time sec" data-init-value="{{bill.secondsRest.0}}">
+                                    <span class="count-title">{{ strings.seconds }}</span>                
+                                    <div class="figure sec sec-1">
+                                        <span class="top">{{bill.secondsRest.1}}</span>
+                                        <span class="top-back">
+                                            <span>{{bill.secondsRest.1}}</span>
+                                        </span>
+                                        <span class="bottom">{{bill.secondsRest.1}}</span>
+                                        <span class="bottom-back">
+                                            <span>{{bill.secondsRest.1}}</span>
+                                        </span>
+                                    </div>                
+                                    <div class="figure sec sec-2">
+                                        <span class="top">{{bill.secondsRest.2}}</span>
+                                        <span class="top-back">
+                                            <span>{{bill.secondsRest.2}}</span>
+                                        </span>
+                                        <span class="bottom">{{bill.secondsRest.2}}</span>
+                                        <span class="bottom-back">
+                                            <span>{{bill.secondsRest.2}}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% if bill.zelle and bill.paid == False %}
+                        <div id="toast-error-payment" class="flex flex-col justify-end w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow w-64 mb-1 mt-1" role="alert">
+
+                            <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 " data-dismiss-target="#toast-error-payment" aria-label="Close">
+                                <span class="sr-only">Close</span>
+                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </button>
+
+                            <div class="flex flex-col justify-center w-full items-center">
+                                <div class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 text-orange-500 bg-orange-100 rounded-lg">
+                                    <svg aria-hidden="true" class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                                    <span class="sr-only">Warning icon</span>
+                                </div>
+                                <div class="mt-3 text-sm font-normal text-center">{{ strings.ticket_t3 }}</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif%}
+
+                <div class="w-64 h-auto bg-white border-gray-500 p-4 rounded-md shadow-md mt-1">
+                    <div class=" flex justify-between items-center w-full" >
+                        <p class="text-itravel-900 font-serif font-bold">{{ strings.bookings }}</p>
+                        
+                        <button onclick="openClose('divBookings')" type="button" 
+                        class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100
+                        focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="divBookings" aria-expanded="false">
+                        <span class="material-icons text-itravel-900 text-lg leading-none rotate-90" >code</span>
+                        </button>                        
+                    </div>
+
+                    <div class="hidden md:flex md:flex-col" id="divBookings">
+                        
+                        {% if bookings|length == 0 %}
+                        <p class="text-xs mt-3">{{strings.ticket_t15}}</p>
+                        {% endif %}
+                        {% for booking in bookings %}
+                        <button class="p-2 my-1 hover:bg-itravel-900/30 hover:text-black text-gray-700 text-sm w-56 text-left font-serif rounded-md booking-btn truncate {% if forloop.counter == 1 %} bg-itravel-900/30 {% endif %}" id="{{booking.reservationCode}}" onclick="controlSeeBooking({{booking.reservationCode}})">
+                            <span class="overflow-hidden truncate">{{booking.name}}</span>
+                        </button>
+                        {% endfor %}
+
+                        {% if pending_bookings|length > 0 %}
+                            <div id="pending-bookings-line" class="h-px w-full bg-gray-200 mt-3"></div>
+                            <p id="pending-bookings-header" class="py-2 my-1 text-sm text-itravel-900 font-bold w-56 text-left font-serif">{{ strings.pending_bookings }}</p>                        
+                            {% for booking in pending_bookings %}
+                            <div class="p-2 my-1 hover:bg-itravel-900/30 hover:text-black text-gray-700 text-sm w-56 text-left font-serif rounded-md booking-btn flex items-center pending-bookings" id="{{booking.reservationCode}}">
+                                <button class="w-44 overflow-hidden truncate"  onclick="controlSeeBooking({{booking.reservationCode}})">{{booking.name}}</button>
+                                <button id="btnDelete-{{booking.reservationCode}}" class="z-50 material-icons hover:text-red-900 ml-2 " data-modal-toggle="toast-delete-booking" onclick="deleteBooking({{booking.reservationCode}})">delete_outline</button>
+                                <svg id="loadingDelete-{{booking.reservationCode}}" aria-hidden="true" role="status" class="ml-2 h-6 w-6 animate-spin text-itravel-900 hidden" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class=" mb-12 md:w-2/3 lg:w-3/4 p-4 h-full mt-2 bg-white border-gray-500 rounded-md shadow-md  overflow-auto scrollbar">
+            <div class="mb-4 flex justify-center {% if not select_booking %} hidden {% endif%}" id="panel-control-pdf">
+                <a href="{% url 'download_pdf_ticket' tickets=select_booking option=0 %}" id="download-tickets"
+                class="material-icons w-7 h-7 p-1 cursor-pointer text-center align-middle font-bold text-itravel-900 text-sm bg-itravel-900/10 rounded-full shadow-sm mr-3">download</a>
+                <a href="{% url 'download_pdf_ticket' tickets=select_booking option=1 %}" target="_blank" rel="noreferrer" id="view-tickets"
+                class="material-icons w-7 h-7 p-1 cursor-pointer text-center font-bold text-itravel-900 text-sm bg-itravel-900/10 rounded-full shadow-sm mx-2">open_in_new</a>
+            </div>
+
+            {% for ticket in tickets %}
+            
+            <div id="booking-{{ticket.reservationCode}}" class="booking booking-{{ticket.reservationCodeGroup}} {% if forloop.counter > 2 or forloop.counter == 2 and not ticket.isReturn %} hidden {% endif %}">
+                <div class="mt-4 md:mt-0 flex justify-center h-28 w-max sm:w-full {% if ticket.pnr == None %}pending{%endif%}">
+                    <div class="flex justify-between inline-flex h-full w-max sm:w-full bg-itravel-900/10 p-4">
+                        <div class="">
+                            <p class="text-xs md:text-md  font-light">RESERVATION CODE</p>
+                            <p class="text-md md:text-2xl font-bold" id="ticket-pnr">{% if ticket.pnr == None %} Pending {%else%} {{ticket.pnr}} {%endif%}</p>
+                        </div>
+                        <div class="mx-14 flex flex-col items-center">
+                            <p class="text-md md:text-sm">PREPARED BY</p>
+                            <p class="text-md md:text-xl font-bold">TRAMITRAVEL</p>
+                        </div>
+                        <div class="pr-6 h-20 p-2">
+                            <img src="{% static 'images/transparent.png' %}" class="h-full" alt="" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" flex justify-center inline-flex h-auto mt-4 w-max sm:w-full">
+                    <div class="w-full">
+                        <div class="flex w-full border-t border-gray-900 divide-x divide-gray-300">
+                            <div class="h-auto w-2/5 bg-itravel-900/10 px-2">
+                                <p class="text-sm">Passenger Name:</p>
+                            </div>
+                            <div class="flex h-auto w-3/5 divide-x divide-gray-300 ">
+                                <div class="h-auto w-1/2 bg-itravel-900/10 px-2">
+                                    <p class="text-sm">Seat:</p>
+                                </div>
+                                <div class="h-auto w-1/2 bg-itravel-900/10 px-2">
+                                    <p class="text-sm">TramiTravel Reservation Code:</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex w-full divide-x divide-gray-300">
+                            <div class="h-auto w-2/5 px-2">
+                                <p class="font-bold text-sm"><span class="font-light text-xs">>> </span>{{ticket.lastName}} {{ticket.motherLastName}}, {{ticket.firstName}} {{ticket.middleName}}</p>
+                            </div>
+                            <div class="flex h-auto w-3/5 divide-x divide-gray-300">
+                                <div class="h-auto w-1/2 px-2">
+                                    <p class="text-sm">Check-In Required </p>
+                                </div>
+                                <div class="h-auto w-1/2 px-2">
+                                    <p class="text-sm">{{ticket.reservationCode}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex py-2">
+                            <img src="{% static 'images/avion.png' %}" class="mr-1 h-5 md:h-9 text-red-500" alt="" />
+                            <p >DEPARTURE: &nbsp;&nbsp;<span class="font-bold text-md md:text-lg">  {{ticket.flight.date_en }}</span> <span class="font-medium text-sm md:text-md text-gray-500">&nbsp;&nbsp; Please verify flight times prior to departure</span></p>
+                        </div>
+
+                        <div class=" flex w-full ">
+                            <div class="h-auto w-1/3 bg-cover px-5 pt-3 mr-0.5" style="background-image: url('{% static 'images/bg-tickets.png' %}')">
+                                <div class=" flex w-full justify-between">
+                                    <div>
+                                        <p class="text-lg font-medium">{{ticket.flight.charter}} </p>
+                                        <p class="text-lg font-bold -mt-1 mb-2">{{ticket.flight.aircraft.carrier_code.nameCode}} {{ticket.flight.number}}</p>
+                                    </div>
+                                    <img src="{{ ticket.flight.charter.image.url }}" class="h-10" alt="" />
+                                </div>
+
+                                <p class="text-sm font-semibold">Operated By: </p>
+                                <p class="text-sm font-medium mb-2">{{ticket.flight.aircraft.carrier_code}}</p>
+                                <p class="text-sm font-semibold">Status: </p>
+                                <p class="text-sm font-medium">{% if ticket.pnr == None%} Pending {%else%} Confirmed {%endif%} </p>
+                            </div>
+                            <div class="h-auto w-2/3 flex inline-flex border border-gray-500 divide-x divide-gray-300">
+                                <div class=" h-full w-2/3 divide-y divide-gray-300">
+                                    <div class=" flex w-full h-1/3 justify-between items-center ">
+                                        <div class="w-full pl-3">
+                                            <p class="text-xl">{{ticket.flight.begin.cityCode}}</p>
+                                            <p class="text-sm font-medium">{{ticket.flight.begin.city}}, {{ticket.flight.begin.countryCode}}</p>
+                                        </div>
+                                        <p class="w-6 rotate-90">▲</p>
+                                        <div class="w-full pl-3">
+                                            <p class="w-full text-xl">{{ticket.flight.to.cityCode}}</p>
+                                            <p class="w-full text-sm font-medium">{{ticket.flight.to.city}}, {{ticket.flight.to.countryCode}}</p>
+                                        </div>
+                                    </div>
+                                    <div  class="flex w-full h-2/3 divide-x divide-gray-300">
+                                        <div class="w-1/2 p-3">
+                                            <p class="text-xs font-semibold">Departing At:</p>
+                                            <p class="text-lg font-medium mb-2">{{ticket.flight.departure|time:"h:i a"}}</p>
+                                            <p class="text-xs font-semibold">Check-in:</p>
+                                            <p class="text-sm font-medium">{{ticket.flight.checkin|time:"h:i a"}}</p>
+                                        </div>
+                                        <div class="w-1/2 p-3">
+                                            <p class="text-xs font-semibold">Arriving At:</p>
+                                            <p class="text-lg font-medium mb-2">{{ticket.flight.arrival|time:"h:i a"}}</p>
+                                            <p class="text-xs font-semibold">Duration:</p>
+                                            <p class="text-sm font-medium">{{ticket.flight.duration}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="h-full w-1/3 p-3">
+                                    <p class="text-sm font-semibold">Aircraft: </p>
+                                    <p class="text-sm font-medium mb-2">{{ticket.flight.aircraft.make}} {{ticket.flight.aircraft.model}} </p>
+
+                                    <p class="text-sm font-semibold mb-2">Gate: {{ticket.flight.gate}}</p>
+
+                                    <p class="text-sm font-semibold">Class: </p>
+                                    <p class="text-md font-medium mb-2">{{ ticket.flight.class_type.name_en }}</p>
+
+                                    {% if ticket.flight.baggagePolicy %}
+                                    <a href="{% url 'baggagePolicy' bp=ticket.flight.baggagePolicy.id %}" 
+                                    class="text-sm font-semibold flex text-blue-600 hover:text-blue-800"
+                                    target="_blank"
+                                    rel="noreferrer"><p class="material-icons text-sm mr-2">business_center</p><p>Baggage policy</p></a>
+                                    {% endif%}
+                                    <!--<p class="text-sm font-semibold">Bags Included: </p>
+                                    <p class="text-xs font-medium">● Handbag + Carry On</p>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex justify-center h-28 mt-4 mb-4 w-full">
+                    <div class="flex justify-between inline-flex h-full w-full bg-itravel-900/10 p-4 border-t-4 border-double border-gray-900">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <h1 id="text-booking" class="hidden" >{{strings.select_bookings}}</h1>
+        </div>
+        {% else %}
+        <h1 class="mt-20 w-full text-center">{{strings.ticket_t15}}</h1>
+        {% endif %}
+    </div>
+</div>
+
+
+<div id="toast-delete-booking" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full flex justify-center items-center hidden">
+    <div class="relative w-full max-w-md md:h-auto
+        w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow " role="alert">
+        <div class="flex">
+            <div class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 text-orange-500 bg-orange-100 rounded-lg">
+                <svg aria-hidden="true" class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Warning icon</span>
+            </div>
+
+            <div class="mx-3">
+                <span class="mb-1 text-sm font-semibold text-gray-900 ">{{ strings.t1_delete_bookings}}</span>
+                <div class="mb-2 text-sm font-normal">{{ strings.t2_delete_bookings}}</div> 
+            </div>
+        </div>
+        <div class="ml-3 text-sm font-normal">
+            <div class="grid grid-cols-2 gap-2 mt-6">
+                <button class="inline-flex justify-center w-full px-2 py-1.5 text-xs font-medium text-center text-white bg-red-500 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300" onclick="deleteBookingAjax()">{{strings.delete}}</button>
+                <button id="cancelDeleteBooking" class="inline-flex justify-center w-full px-2 py-1.5 text-xs font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200" data-modal-toggle="toast-delete-booking">{{strings.cancel}}</button> 
+            </div>    
+        </div>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div id="payment-modal"  data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full flex justify-center items-center">
+    <div class="relative w-full max-w-md md:h-auto">
+        <!-- Modal content -->
+        <form class="relative bg-white rounded-lg shadow mt-20 md:mt-0" method="post"  id="formPaymentRegister">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " 
+            id="close-payment-modal" data-modal-toggle="payment-modal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            
+            <div class="px-1 py-6">
+                <h3 class="mb-4 text-2xl font-bold font-serif text-itravel-900 text-center">{{ strings.ticket_t4 }}</h3>                
+                <!--<div class="flex justify-center w-full">
+                    <img src="{% static 'images/qr-zelle.jpg' %}" class="w-auto h-40" alt="" />
+                </div>-->
+                <div class="max-h-96 overflow-auto scrollbar lg:px-8 mt-5">
+                    <ol class="relative border-l border-gray-200 mx-2">
+                        <li class="mb-5 ml-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400">{{ strings.step }} 1</time>
+                            <h3 class="text-lg font-semibold text-gray-900">{{ strings.ticket_t5 }}</h3>
+                            <p class="mb-4 text-base font-normal text-gray-500">{{ strings.ticket_t6 }}</p>
+                            <div class="flex w-auto">
+                                <svg class="w-5 h-5 mr-2 hover:text-itravel-700 focus:text-itravel-700 mt-0.5 cursor-pointer" id="copyEmail" onclick="copyToClickBoard('zelle@tramitravel.com','Email')" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                                <img class="w-4 h-4 mt-1 mr-3 hidden" id="successCopyEmail" src="/static/admin/img/icon-yes.svg" alt="True">
+                                <p class="text-base font-normal text-gray-700">{{ strings.email }}: &nbsp</p>
+                                <p class="text-base font-normal text-gray-500">zelle@tramitravel.com</p>
+                            </div>
+                        </li>
+                        <li class="mb-5 ml-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400">{{ strings.step }} 2</time>
+                            <h3 class="text-lg font-semibold text-gray-900">{{ strings.ticket_t7 }}</h3>
+                            <p class="text-base font-normal text-gray-500 ">{{ strings.ticket_t8 }}</p>
+                            <h1 class="text-xl font-bold text-black text-left mt-2">{{bill.amountMoney}} USD</h1>
+                        </li>
+                        <li class="mb-5 ml-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400">{{ strings.step }} 3</time>
+                            <h3 class="text-lg font-semibold text-gray-900">{{ strings.ticket_t9 }}</h3>
+                            <p class="text-base font-normal text-gray-500 ">{{ strings.ticket_t10 }}</p>
+                            <h1 class="text-3xl font-bold text-black text-left mt-2">{{bill.code}}</h1>
+                        </li>
+                        <li class="ml-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400">{{ strings.step }} 4</time>
+                            <h3 class="text-lg font-semibold text-gray-900">{{ strings.ticket_t11 }}</h3>
+                            
+                            <h3 class="text-sm font-semibold text-gray-900 mt-3">{{ strings.ticket_t17 }}</h3>
+                            <div class="relative mt-1">
+                                <input type="email" name="emailPayment" id="emailPayment" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-itravel-600 focus:bg-gray-100 peer" placeholder=" " />
+                                <label for="emailPayment" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ strings.ticket_t12 }}</label>
+                            </div>
+                            <p class="ml-6 text-sm font-normal leading-none text-gray-600 mt-2">{{ strings.or }}</p>
+                            <div class="relative mt-2">
+                                <input type="number" name="phonePayment" id="phonePayment" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-itravel-600 focus:bg-gray-100 peer" placeholder=" " />
+                                <label for="phonePayment" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ strings.ticket_t13 }}</label>
+                            </div> 
+                            <p class="text-sm font-normal text-red-600 mt-2 ml-2 hidden" id="alertZelleRequired">{{ strings.ticket_t16 }}</p>
+                            <h3 class="text-sm font-semibold text-gray-900 mt-4">{{ strings.ticket_t18 }}</h3>
+                            <div class="relative mt-1">
+                                <input type="text" name="zelle-owner" id="zelle-owner" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-itravel-600 focus:bg-gray-100 peer" placeholder=" " />
+                                <label for="zelle-owner" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ strings.ticket_t19 }}</label>
+                            </div> 
+                        </li>
+                    </ol>
+
+                    {% csrf_token %}
+                    {% if bill %}
+                    <input class="hidden" name="bill-code" value="{{bill.code}}">
+                    <input class="hidden" name="bill-id" value="{{bill.id}}">
+                    {% endif%}
+
+                    <button id="btnRegisterPayment" type="button" onclick="registerPayment()" class="mt-6 mb-3 w-full text-white bg-itravel-700 hover:bg-itravel-800 focus:ring-4 focus:outline-none focus:ring-itravel-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        <svg id="loadingRegisterPayment" aria-hidden="true" role="status" class="hidden inline mr-3 w-4 h-4 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+                        </svg>
+                        <span id="textRegisterPayment" class="font-bold">{{ strings.ticket_t14 }}</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div> 
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'js/TweenMax.min.js' %}"></script>
+<script src="{% static 'js/tickets.js' %}"></script>
+{% endblock scripts %}

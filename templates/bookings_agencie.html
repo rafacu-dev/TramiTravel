@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+                
+{% block content %}
+
+<div class="pt-16 flex flex-col items-center justify-center h-2/3">
+    <div class="flex flex-wrap justify-between w-full max-w-7xl">
+        <p class="w-auto text-black font-bold font-serif text-lg" id="total-credit">{{ strings.total_credit_remaining }}: {{request.user.agencie.creditMoney }}</p>
+        <button class="flex items-center justify-between px-4 h-auto py-2 shadow-lg shadow-itravel-500/50 rounded-lg bg-gradient-to-br from-itravel-900 to-pink-700 hover:bg-gradient-to-bl font-bold"
+            data-modal-toggle="payment-modal">
+            <p class="text-sm text-white mr-2">{{ strings.recharge_account_with }}</p>
+            <img src="{% static 'images/zelle.png' %}" class="w-auto h-6" alt="" />
+        </button>
+    </div>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-7xl m-5 bg-white">
+        <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 bg-gray-50 ">
+                <tr>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Status</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Last Name</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Mother Last Name</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">First Name</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Middle Name</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Departure Flight</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Return Flight</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Reservation Code</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Pnr</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Amount Total</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Liquidated</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Amount Billed</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3">Revenue</th>
+                    <th scope="col" class="whitespace-nowrap px-6 py-3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tiket in tickets%}
+                <tr class="bg-white border-b hover:bg-gray-50">
+                    <td scope="row" class="px-6 py-3">
+                        <div class="flex items-center">
+                            {% if tiket.pnr %}<div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Reserved{% else %}
+                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Pending{% endif %}
+                        </div>
+                    </td>
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">{{ tiket.lastName }}</td>
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">{{ tiket.motherLastName }}</td>
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">{{ tiket.firstName }}</td>
+                    <td scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">{{ tiket.middleName }}</td>
+                    <td scope="row" class="whitespace-nowrap px-6 py-3">{{ tiket.flight.date|date:"m/d/Y" }} {{ tiket.flight.departure|time:"h:iA" }}</td>
+                    <td scope="row" class="whitespace-nowrap px-6 py-3">{% if tiket.flight_return %}{{ tiket.flight_return.date|date:"m/d/Y" }} {{ tiket.flight_return.departure|time:"h:iA" }}{% else %}-{% endif %}</td>
+                    <td scope="row" class="whitespace-nowrap px-6 py-3">{{ tiket.reservationCode }}</td>
+                    <td scope="row" class="whitespace-nowrap px-6 py-3">{% if tiket.pnr %}{{ tiket.pnr }}{% endif %}</td>
+                    <td scope="row" class="px-6 py-3">{{ tiket.amount_agencie_money }}</td>
+                    <td scope="row" id="amount-liquidated-{{ tiket.id }}" class="whitespace-nowrap px-6 py-3">{{ tiket.liquidatedMoney }}</td>
+                    <td scope="row" class="whitespace-nowrap px-6 py-3">{{ tiket.amountMoney }}</td>
+                    <td scope="row" class="px-6 py-3">{{ request.user.agencie.amountMoney }}</td>
+                    <td scope="row" class="px-6 py-3">
+                        <button id="btn-liquidated-{{ tiket.id }}" type="button" class="flex items-center justify-center h-auto text-white bg-itravel-700 hover:bg-itravel-800 z-50 
+                        rounded-lg text-sm px-3 py-1.5 text-center px-4 cursor-pointer group focus:outline-none 
+                        {% if tiket.liquidated > 0.0%} hidden {% endif %}" onclick="liquidateBooking({{ tiket.id }})">
+                        {{ strings.liquidate }}
+                        </button>
+                        <svg id="loading-liquidated-{{ tiket.id }}" aria-hidden="true" role="status" class="ml-2 h-6 w-6 animate-spin text-itravel-900 hidden" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+                        </svg>                        
+                        <span class="flex {% if tiket.liquidated == 0.0%} hidden {% endif %}" id="liquidated-{{ tiket.id }}"><svg class="w-5 h-5 text-green-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>{{ strings.liquidated }}</span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div id="payment-modal"  data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full flex justify-center items-center">
+    <div class="relative w-full max-w-md md:h-auto">
+        <!-- Modal content -->
+        <form class="relative bg-white rounded-lg shadow mt-20 md:mt-0" method="post"  id="formPaymentRegister">
+            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " 
+            id="close-payment-modal" data-modal-toggle="payment-modal">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            
+            <div class="px-1 py-6">
+                <h3 class="mb-4 text-2xl font-bold font-serif text-itravel-900 text-center">{{ strings.recharge_account }}</h3>                
+                <!--<div class="flex justify-center w-full">
+                    <img src="{% static 'images/qr-zelle.jpg' %}" class="w-auto h-40" alt="" />
+                </div>-->
+                <div class="max-h-96 overflow-auto scrollbar lg:px-8 mt-5">
+                    <ol class="relative border-l border-gray-200 mx-2">
+                        <li class="mb-5 ml-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400">{{ strings.step }} 1</time>
+                            <h3 class="text-lg font-semibold text-gray-900">{{ strings.ticket_t5 }}</h3>
+                            <p class="mb-4 text-base font-normal text-gray-500">{{ strings.ticket_t6 }}</p>
+                            <div class="flex w-auto">
+                                <svg class="w-5 h-5 mr-2 hover:text-itravel-700 focus:text-itravel-700 mt-0.5 cursor-pointer" id="copyEmail" onclick="copyToClickBoard('zelle@tramitravel.com','Email')" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                                <img class="w-4 h-4 mt-1 mr-3 hidden" id="successCopyEmail" src="/static/admin/img/icon-yes.svg" alt="True">
+                                <p class="text-base font-normal text-gray-700">{{ strings.email }}: &nbsp</p>
+                                <p class="text-base font-normal text-gray-500">zelle@tramitravel.com</p>
+                            </div>
+                        </li>
+                        <li class="mb-5 ml-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400">{{ strings.step }} 2</time>
+                            <h3 class="text-lg font-semibold text-gray-900">{{ strings.amount_transferred }}</h3>                            
+                            <div class="relative mt-1">
+                                <input type="number" name="amount_transferred" id="amount_transferred" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-itravel-600 focus:bg-gray-100 peer" placeholder=" " />
+                                <label for="amount_transferred" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ strings.amount_transferred_t2 }}</label>
+                            </div>
+                        </li>
+                        <li class="ml-4">
+                            <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                            <time class="mb-1 text-sm font-normal leading-none text-gray-400">{{ strings.step }} 3</time>
+                            <h3 class="text-lg font-semibold text-gray-900">{{ strings.ticket_t11 }}</h3>
+                            
+                            <h3 class="text-sm font-semibold text-gray-900 mt-3">{{ strings.ticket_t17 }}</h3>
+                            <div class="relative mt-1">
+                                <input type="email" name="emailPayment" id="emailPayment" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-itravel-600 focus:bg-gray-100 peer" placeholder=" " />
+                                <label for="emailPayment" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ strings.ticket_t12 }}</label>
+                            </div>
+                            <p class="ml-6 text-sm font-normal leading-none text-gray-600 mt-2">{{ strings.or }}</p>
+                            <div class="relative mt-2">
+                                <input type="number" name="phonePayment" id="phonePayment" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-itravel-600 focus:bg-gray-100 peer" placeholder=" " />
+                                <label for="phonePayment" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ strings.ticket_t13 }}</label>
+                            </div> 
+                            <p class="text-sm font-normal text-red-600 mt-2 ml-2 hidden" id="alertZelleRequired">{{ strings.ticket_t16 }}</p>
+                            <h3 class="text-sm font-semibold text-gray-900 mt-4">{{ strings.ticket_t18 }}</h3>
+                            <div class="relative mt-1">
+                                <input type="text" name="zelle-owner" id="zelle-owner" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-itravel-600 focus:bg-gray-100 peer" placeholder=" " />
+                                <label for="zelle-owner" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ strings.ticket_t19 }}</label>
+                            </div> 
+                        </li>
+                    </ol>
+
+                    {% csrf_token %}
+                    {% if bill %}
+                    <input class="hidden" name="bill-code" value="{{bill.code}}">
+                    <input class="hidden" name="bill-id" value="{{bill.id}}">
+                    {% endif%}
+
+                    <button id="btnRegisterPayment" type="button" onclick="registerPayment()" class="mt-6 mb-3 w-full text-white bg-itravel-700 hover:bg-itravel-800 focus:ring-4 focus:outline-none focus:ring-itravel-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        <svg id="loadingRegisterPayment" aria-hidden="true" role="status" class="hidden inline mr-3 w-4 h-4 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+                            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+                        </svg>
+                        <span id="textRegisterPayment" class="font-bold">{{ strings.ticket_t14 }}</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div> 
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/bookings_agencie.js' %}"></script>
+{% endblock scripts %}

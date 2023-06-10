@@ -1,0 +1,511 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<script src="{% static 'js/flight.js' %}"></script>
+{% endblock styles %}
+
+{% block content %}
+
+
+<div class="flex items-center justify-center pt-10">
+    <div class=" lg:flex  w-full max-w-6xl p-3  mt-3 md:mt-6" >
+        <div class="lg:w-1/3 bg-white border rounded-lg shadow-md lg:mr-6 h-full mb-2" >
+            <div class=" flex justify-between items-center lg:hidden w-full max-w-6xl p-3 w-full" >
+                <p>{{filter}}</p>
+                
+                <button onclick="openClose('formFilter')" type="button" 
+                class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100
+                focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="formFilter" aria-expanded="false">
+                <span class="material-icons text-itravel-900 text-lg leading-none rotate-90" >code</span>
+                </button>
+            </div>
+
+            <form method="get" class="hidden lg:flex flex-wrap h-full pt-6 mb-0" id="formFilter">
+                <div class="w-full px-1 mb-6 md:mb-0">
+                    <label class="pl-3 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >{{ strings.from }}</label>
+
+                    <div class="relative">
+                        <select class="block appearance-none w-full border border-white/50 text-gray-500 pr-8 rounded leading-tight
+                            outline-none hover:bg-gray-50 border-none ring-none p-2.5 focus:border-itravel-500 focus:ring-itravel-500" name="begin" id="begin" >
+                            {% for d in destinatations %}   
+                                {% if d.begin %}                             
+                                    <option value="{{d.id}}" {% if begin == d.id %}selected="true"{%endif%}>{{d.name}}</option>
+                                {% endif%}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-3 w-full px-1 mb-6 md:mb-0">
+                    <label class="pl-3 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >{{ strings.to }}</label>
+
+                    <div class="relative">
+                        <select class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 pr-8 rounded leading-tight
+                        outline-none hover:bg-gray-50 border-none ring-none p-2.5 focus:border-itravel-500 focus:ring-itravel-500" name="to" id="to">
+                        {% for d in destinatations %}
+                            {% if d.destination %}
+                                <option value="{{d.id}}" {% if to == d.id %} selected="true" {%endif%} >{{d.name}}</option>
+                            {% endif%}
+                        {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-3 w-full px-1 mb-6 md:mb-0">
+                    <label class="pl-3 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >{{ strings.trip }}</label>
+
+                    <div class="relative">
+                        <select class="block appearance-none w-full  bg-white/70 border border-white/70 text-gray-500 pr-8 rounded
+                         leading-tight outline-none hover:bg-gray-50 border-none ring-none p-2.5 focus:border-itravel-500 focus:ring-itravel-500" onchange="controlDateReturn(this.value)" id="selectRtOw" name="rt_ow">
+                         <option value="rt" {% if date_return %}selected="true"{%endif%}>{{strings.rt}}</option>
+                         <option value="ow" {% if not date_return %}selected="true"{%endif%}>{{strings.ow}}</option>
+                        </select>
+                    </div>
+                </div>
+                
+
+                <div date-rangepicker datepicker-autohide class="w-full">
+                    <div class="mt-3 w-full px-1 mb-6 md:mb-0">
+                        <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <input name="date_departure" type="text" datepicker-title="{{strings.index_t4}}" placeholder="{{strings.departure}}" required  id="date_departure" onchange ="validDatepicker(this)" autocomplete="off"  value="{{date_departure}}" 
+                        class="bg-white/70 border border-white/70 text-gray-500 text-sm rounded-lg outline-none hover:bg-gray-50 border-none ring-none p-2.5 block w-full pl-10 focus:border-itravel-500 focus:ring-itravel-500" >
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 w-full px-1 mb-6 md:mb-0">
+                        <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <input datepicker-title="{{strings.index_t5}}"  id="date_return" name="date_return" onchange="validDatepicker(this)" autocomplete="off" type="text" placeholder="{{strings.return}}" required  {% if date_return %} value="{{date_return}}" {% else %} disabled {%endif%}
+                        class="text-gray-500 text-sm rounded-lg outline-none hover:bg-gray-50 border-none ring-none p-2.5 block w-full pl-10 focus:border-itravel-500 focus:ring-itravel-500">
+                    </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 w-full px-1 mb-6 md:mb-0">
+                    <label class=" pl-3 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >{{strings.passengers}}</label>
+                    <button id="dropdownPassenger" onclick="openClose('dropdownPassengerEdit')" data-dropdown-placement="bottom"
+                        class="w-full block appearance-none w-full  bg-white/70 border border-white/70 text-gray-500 pr-4 pl-5 rounded
+                        leading-tight outline-none hover:bg-gray-50 border-none ring-none py-2.5 inline-flex items-center justify-between" type="button">
+                        <span>{{ strings.passengers}}: <span id="textDropdownPassenger">{{totalPassengers}}</span></span>
+                        <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdownPassengerEdit" class="hidden z-10 bg-white rounded divide-y divide-gray-100 shadow p-5 absolute">
+                        <div class="flex justify-between items-center py-1 ">
+                            <div class="ml-2 text-sm  mr-6 w-full">
+                                <label for="helper-radio-4 " class="font-medium text-gray-900">
+                                    <h5 class="text-md text-gray-900 font-bold ">{{strings.adults}} :</h5>
+                                    <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.adults_ages}}</p>
+                                </label>
+                            </div>
+                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                            onclick="downPassenger('adults')">
+                                <svg class="w-6 h-6 p-1 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <input type="number" value="{{adults}}" min="1" name="adults" id="adults"  onkeyup="" class="hidden" placeholder="0">
+                            <h1 class="flex justify-center text-center  text-md w-12 mx-3" id="adultsLabel">{{adults}}</h1>
+                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                            onclick="upPassenger('adults')">
+                                <svg class="w-6 h-6 p-1 rotate-180 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex justify-between items-center py-1 ">
+                            <div class="ml-2 text-sm  mr-6 w-full">
+                                <label for="helper-radio-4 " class="font-medium text-gray-900">
+                                    <h5 class="text-md text-gray-900 font-bold ">{{strings.children}} :</h5>
+                                    <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.children_ages}}</p>
+                                </label>
+                            </div>
+                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                            onclick="downPassenger('children')">
+                                <svg class="w-6 h-6 p-1 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <input type="number" value="{{children}}" min="0" name="children" id="children"  onkeyup="" class="hidden" placeholder="0">
+                            <h1 class="flex justify-center text-center  text-md w-12 mx-3" id="childrenLabel">{{children}}</h1>
+                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                            onclick="upPassenger('children')">
+                                <svg class="w-6 h-6 p-1 rotate-180 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex justify-between items-center py-1 ">
+                            <div class="ml-2 text-sm  mr-6 w-full">
+                                <label for="helper-radio-4 " class="font-medium text-gray-900">
+                                    <h5 class="text-md text-gray-900 font-bold ">{{strings.infants}} :</h5>
+                                    <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.infants_ages}}</p>
+                                </label>
+                            </div>
+                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                            onclick="downPassenger('infants')">
+                                <svg class="w-6 h-6 p-1 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <input type="number" value="{{infants}}" min="0" name="infants" id="infants"  onkeyup="" class="hidden" placeholder="0">
+                            <h1 class="flex justify-center text-center  text-md w-12 mx-3" id="infantsLabel">{{infants}}</h1>
+                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                                onclick="upPassenger('infants')">
+                                <svg class="w-6 h-6 p-1 rotate-180 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+    
+                        <div class="py-1">
+                            <button type="button" onclick="document.getElementById('dropdownPassenger').click()"
+                            class="block py-2 px-4 text-sm font-bold font-serif text-black bg-itravel-900/50 hover:bg-itravel-900/70 w-full rounded-md">{{strings.ready}}</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="mt-3 text-white shadow-md hover:shadow-lg w-full px-3 py-2.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-itravel-900 rounded-b-md hover:bg-itravel-600 focus:outline-none focus:ring focus:ring-itravel-500 focus:ring-opacity-50">
+                    {{strings.search_now}}
+                </button>
+            </form>
+        </div>
+
+        <div class=" lg:w-2/3 p-1 md:p-4 bg-white border rounded-lg shadow-md h-full">
+            <div class="flex justify-center items-center w-full mb-4">
+                <button class="material-icons" style="color: rgb(236, 236, 236);" onclick="scrollToLeft()">arrow_back_ios</button>
+                <div class="flex w-auto border rounded-full shadow-sm p-0.5 bg-gray-100 space-x-1 max-w-md overflow-auto scrollbar scrollbar-sm" id="scrollContainerClass" style="">
+                    {% for c in class_types %}
+                    <button class="border rounded-full shadow-md px-4 py-1 w-max whitespace-nowrap font-serif" style="{{ c.css }}" id="btn-{{c.id}}" onclick="changeClass({{ c.id }},'{% if language == 'es' %}{{ c.name_es }}{% else %}{{ c.name_en }}{% endif %}','{{ c.css }}')">{% if language == 'es' %}{{ c.name_es }}{% else %}{{ c.name_en }}{% endif %}</button>
+                    {% endfor %}
+                </div>                
+                <button class="material-icons" style="color: rgb(236, 236, 236);"onclick="scrollRight()">arrow_forward_ios</button>
+            </div>
+            <!-- Date selection -->
+            <div class="flex justify-between items-center">
+                <div class="w-full md:mx-12">
+
+                    <div class="flex w-full justify-center">
+                        <p id="month-selection" class="p-1 text-center font-bold text-sm mx-6"></p>
+                    </div>
+
+                    <div class="flex flex-row justify-between bg-itravel-900/20 rounded-lg">  
+                        <button id="prevMonth" type="button" onclick="prevMonth()" class="w-6 h-content cursor-pointer text-center font-bold text-itravel-200 hover:text-itravel-400 text-sm pr-8 rotate-180">➜</button>                      
+                        <div id="day-selection" class="flex flex-row justify-between w-full  py-1 pl-2"></div>
+                        <button type="button" onclick="nextMonth()" class="w-6 h-content cursor-pointer text-center font-bold text-itravel-200 hover:text-itravel-400 text-sm pr-8">➜</button>
+                    </div>
+                </div>
+            </div>
+            
+            <form method="get" action="{% url 'booking'%}" class="" name="" id="formFlights">
+                <div class=" p-4  max-h-96 overflow-auto scrollbar">
+                    <div class="">
+                        <table  id="tableOutboundFlights" class="items-center w-full bg-transparent ">
+                            <thead>
+                                <tr class="">
+                                    <th class="border-b border-solid border-gray-200 md:px-2 text-teal-500 align-middle  py-1 text-sm whitespace-nowrap font-light text-left">
+                                        <div class="flex">
+                                            <img src="{% static 'images/avion_despegando.png' %}" class="mr-3 h-5 md:h-9 text-red-500" alt="" />
+                                            <div class="font-bold text-md md:text-2xl">{{ strings.outbound_flight }}</div>
+                                        </div>
+                                    </th>
+                                    <th class="border-b border-solid border-gray-200 md:px-5 text-teal-500 align-middle  py-1 text-sm whitespace-nowrap font-light text-left"><div class="font-bold text-md text-center">{{ strings.duration }}</div></th>
+                                    <th class="border-b border-solid border-gray-200 text-teal-500 flex align-middle justify-center py-1 text-sm whitespace-nowrap font-light text-left">
+                                        <div class="font-bold rounded-t-md rounded-b-3xl text-xs px-3 md:px-6 pt-2 w-auto text-center pb-2 h-12 flex items-center" 
+                                        id="panel-class-begin" style="{% if class_types|length > 0 %}{{ class_types.0.css }}{% endif %}"></div> 
+                                    </th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody class="mt-6">
+                                {% for flight in flights %}
+                                    <tr class="editable">
+                                        <th class="align-middle font-light text-sm whitespace-nowrap md:px-2 pt-4 text-left">
+                                            <label for="rbegin_{{flight.id}}">
+                                                <div class="flex items-center space-x-4">
+                                                    <div class="hidden lg:flex lg:w-auto">
+                                                        <img class="w-8 h-8 rounded-full bg-gray-50" 
+                                                        src="{{flight.charter.image.url}}" alt="Neil image">
+                                                    </div>
+                                                    <div class="flex-1 min-w-0">
+                                                        <div class="flex">
+                                                            <p class="text-sm font-medium text-gray-900 truncate ">
+                                                                {{flight.charter.name}} 
+                                                            </p>
+                                                            {% if flight.baggagePolicy %}
+                                                            <a href="{% url 'baggagePolicy' bp=flight.baggagePolicy.id %}" 
+                                                            class="material-icons text-gray-500 text-sm ml-3"
+                                                            target="_blank"
+                                                            rel="noreferrer">business_center</a>
+                                                            {% endif%}
+                                                        </div>
+                                                        <div class="flex">
+                                                            <span class="text-md md:text-lg font-bold truncate"> {{flight.departure|time:"h:i"}} </span>
+                                                            <span class="text-xs pt-1 md:pt-2"> {{flight.departure|time:"A"}} </span>
+
+                                                            <span class="md:text-lg font-bold truncate md:mx-5"> ➜ </span>
+
+                                                            <span class="text-md md:text-lg font-bold truncate"> {{flight.arrival|time:"h:i"}} </span>
+                                                            <span class="text-xs pt-1 md:pt-2"> {{flight.arrival|time:"A"}} </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </th>
+                                        <th class="align-middle font-light text-sm whitespace-nowrap px-1 md:px-2 pt-4 text-center">
+                                            <label for="rbegin_{{flight.id}}">{{flight.duration}}</label>
+                                        </th>
+                                        <th class="align-middle font-light text-xs md:text-sm whitespace-nowrap px-1 md:px-2 pt-4 text-center">
+                                            <div class="inline-flex justify-center items-center p-0.5 rounded-lg cursor-pointer border-select-flight" style="{% if class_types|length > 0 %}{{ class_types.0.css }}{% endif %}">                                         
+                                                <input type="radio" id="rbegin_{{flight.id}}" name="flightBeginSelect" value="{{flight.id}}" class="hidden peer" date-time="{{flight.arrivalMS}}" agency="{{flight.charter.id}}"
+                                                required agency="{{flight.charter.id}}" onchange="onchangeFlight(this,'{{flight.arrivalMS}}','{{flight.charter.id}}')">
+                                                <label for="rbegin_{{flight.id}}" class="w-full text-gray-900 cursor-pointer
+                                                relative w-full px-1.5 md:px-5 py-1.5 md:py-2.5 transition-all ease-in duration-75 rounded-md bg-white peer-checked:text-white peer-checked:bg-transparent font-bold cursor-pointer">    
+                                                    {{flight.price_money}}
+                                                </label>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                {% endfor %}    
+                            </tbody>
+
+                        </table>
+
+                        
+                        <div class="flex items-center justify-center font-medium text-xs md:text-lg text-center w-full hidden" id="contentLoadingOutboundFlight">
+                            <svg id="loadingRegister" aria-hidden="true" role="status" class="h-6 w-6 animate-spin mt-12 text-itravel-900" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="relative align-middle font-medium text-xs md:text-lg text-center py-6 {% if flights|length > 0%}hidden{% endif %}" id="emptyOutboundFlight">{{ strings.no_flight }}</div>
+
+                        <div id="available_dates" class="relative align-middle font-medium text-xs mb-6 text-center {% if not available_dates or available_dates|length == 0 %}hidden{% endif %}">{{ strings.available_flight }}:<br>
+                            {% for date in available_dates %}
+                            <button type="button" onclick="getFlightsForAvailableDate('day-selection',{{date|date:"Y"}},{{date|date:"m"}},{{date|date:"d"}}, {{begin}}, {{to}})" 
+                            class="editable-available_dates text-blue-600 mx-3">{{date}}</button>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                </div>
+                
+                {% if date_return %}
+                
+                <!-- Date return selection -->
+                <div class="flex justify-between items-center">
+                    <div class="w-full md:mx-12">
+
+                        <div class="flex w-full justify-center">
+                            <p id="month-selection2" class="p-1 text-center font-bold text-sm mx-6"></p>
+                        </div>            
+                        <div class="flex flex-row justify-between bg-itravel-900/20 rounded-lg">  
+                            <button id="prevMonth-2" type="button" onclick="prevMonth2()" class="w-6 h-content cursor-pointer text-center font-bold text-itravel-200 hover:text-itravel-400 text-sm pr-8 rotate-180">➜</button>                      
+                            <div id="day-selection2" class="flex flex-row justify-between w-full  py-1 pl-2"></div>
+                            <button type="button" onclick="nextMonth2()" class="w-6 h-content cursor-pointer text-center font-bold text-itravel-200 hover:text-itravel-400 text-sm pr-8">➜</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" p-4  max-h-96 overflow-auto scrollbar">
+                    <div class="">
+                        <table  id="tableReturnFlights" class="items-center w-full bg-transparent ">
+                            <thead>
+                                <tr class="">
+                                    <th class="border-b border-solid border-gray-200 md:px-2 text-teal-500 align-middle  py-1 text-sm whitespace-nowrap font-light text-left">
+                                        <div class="flex">
+                                            <img src="{% static 'images/avion_aterrizando.png' %}" class="mr-3 h-5 md:h-9 text-red-500" alt="" />
+                                            <div class="font-bold text-md md:text-2xl">{{ strings.return_flight }}</div>
+                                        </div>
+                                    </th>
+                                    <th class="border-b border-solid border-gray-200 md:px-5 text-teal-500 align-middle  py-1 text-sm whitespace-nowrap font-light text-left"><div class="font-bold text-md text-center">{{ strings.duration }}</div></th>
+                                    <th class="border-b border-solid border-gray-200 text-teal-500 flex align-middle justify-center py-1 text-sm whitespace-nowrap font-light text-left">
+                                        <div class="font-bold rounded-t-md rounded-b-3xl text-xs px-3 md:px-6 pt-2 w-auto text-center pb-2 h-12 flex items-center" 
+                                        id="panel-class-return" style="{% if class_types|length > 0 %}{{ class_types.0.css }}{% endif %}"></div> 
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for flight in flightsReturn %}
+                                    <tr class="editable editable-return" date-time="{{flight.departureMS}}" agency="{{flight.charter.id}}" for="rReturn_{{flight.id}}">
+                                        <th class="align-middle font-light text-sm whitespace-nowrap md:px-2 pt-4 text-left">   
+                                            <label for="rReturn_{{flight.id}}">
+                                                <div class="flex items-center space-x-4">
+                                                    <div class="hidden lg:flex lg:w-auto">
+                                                        <img class="w-8 h-8 rounded-full bg-gray-50" 
+                                                        src="{{flight.charter.image.url}}" alt="Neil image">
+                                                    </div>
+                                                    <div class="flex-1 min-w-0">
+                                                        <div class="flex">
+                                                            <p class="text-sm font-medium text-gray-900 truncate ">
+                                                                {{flight.charter.name}} 
+                                                            </p>
+                                                            {% if flight.baggagePolicy %}
+                                                            <a href="{% url 'baggagePolicy' bp=flight.baggagePolicy.id %}" 
+                                                            class="material-icons text-gray-500 text-sm ml-3"
+                                                            target="_blank"
+                                                            rel="noreferrer">business_center</a>
+                                                            {% endif%}
+                                                        </div>
+                                                        <div class="flex">
+                                                            <span class="text-md md:text-lg font-bold truncate"> {{flight.departure|time:"g:i"}} </span>
+                                                            <span class="text-xs pt-1 md:pt-2"> {{flight.departure|time:"A"}} </span>
+
+                                                            <span class="md:text-lg font-bold truncate md:mx-5"> ➜ </span>
+
+                                                            <span class="text-md md:text-lg font-bold truncate"> {{flight.arrival|time:"g:i"}} </span>
+                                                            <span class="text-xs pt-1 md:pt-2"> {{flight.arrival|time:"A"}} </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </th>
+                                        <th class="align-middle font-light text-sm whitespace-nowrap px-1 md:px-2 pt-4 text-center">
+                                            <label for="rReturn_{{flight.id}}">{{flight.duration}}</label>
+                                        </th>
+                                        <th class="align-middle font-light text-xs md:text-sm whitespace-nowrap px-1 md:px-2 pt-4 text-center">
+                                            <div class="inline-flex justify-center items-center p-0.5 rounded-lg cursor-pointer border-select-flight" style="{% if class_types|length > 0 %}{{ class_types.0.css }}{% endif %}">                                          
+                                                <input type="radio" id="rReturn_{{flight.id}}" name="flightReturnSelect" value="{{flight.id}}" class="hidden peer cursor-pointer" required  agency="{{flight.charter.id}}">
+                                                <label for="rReturn_{{flight.id}}" class="w-full text-gray-900 cursor-pointer
+                                                relative w-full px-1.5 md:px-5 py-1.5 md:py-2.5 transition-all ease-in duration-75 rounded-md bg-white peer-checked:text-white peer-checked:bg-transparent font-bold">    
+                                                    {{flight.price_money}}
+                                                </label>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                {% endfor %}    
+                            </tbody> 
+
+                        </table>
+
+                        <div class="flex items-center justify-center font-medium text-xs md:text-lg text-center w-full hidden" id="contentLoadingReturnFlight">
+                            <svg id="loadingRegister" aria-hidden="true" role="status" class="h-6 w-6 animate-spin mt-12 text-itravel-900" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="relative align-middle font-medium text-xs md:text-lg py-6 text-center {% if flightsReturn|length > 0%}hidden{% endif %}" id="emptyReturnFlight">{{ strings.no_flight }}</div>
+                        
+                        <div id="available_dates_return" class="relative align-middle font-medium text-xs mb-6 text-center {% if not available_dates_return or available_dates_return|length == 0 %}hidden{% endif %}">{{ strings.available_flight }}:<br>
+                            {% for date in available_dates_return %}
+                            <button type="button" onclick="getFlightsForAvailableDate('day-selection2', {{date|date:"Y"}}, {{date|date:"m"}}, {{date|date:"d"}}, {{begin}}, {{to}})" 
+                            class="editable-available_dates_return text-blue-600 mx-3">{{date}}</button>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                </div>
+                {%endif%}
+                
+                <div class="flex justify-between items-center py-2 border-t border-solid border-gray-200 mt-6  pt-6 hidden">
+                    <div class="lg:flex justify-center items-center py-2 w-1/3 ">
+                        <h5 class="bg-itravel-900/20 appearance-none md:rounded-l-lg border border-itravel-900  focus:border-itravel-500 focus:ring-itravel-500 p-2 text-md text-gray-900 font-bold italic">{{strings.adults}} :</h5>
+                        <input type="number" value="{{adults}}" min="1" name="adults" class="appearance-none w-full md:w-20 md:rounded-r-lg border border-itravel-900  focus:border-itravel-500 focus:ring-itravel-500 text-md text-gray-900 placeholder-gray-900 font-bold" placeholder="0.00">
+                    </div>
+                    <div class="lg:flex justify-center items-center py-2 w-1/3">
+                        <h5 class="bg-itravel-900/20 appearance-none md:rounded-l-lg border border-itravel-900 p-2 text-md text-gray-900 font-bold italic">{{strings.children}} :</h5>
+                        <input type="number" value="{{children}}" min="0" name="children" class="appearance-none w-full md:w-20 md:rounded-r-lg border-itravel-900 text-md text-gray-900 placeholder-gray-900 font-bold" placeholder="0.00">
+                    </div>
+                    <div class="lg:flex justify-center items-center py-2 w-1/3">
+                        <h5 class="bg-itravel-900/20 appearance-none md:rounded-l-lg border border-itravel-900 p-2 text-md text-gray-900 font-bold italic">{{strings.infants}} :</h5>
+                        <input type="number" value="{{infants}}" min="0" name="infants" class="appearance-none w-full md:w-20 md:rounded-r-lg border-itravel-900 text-md text-gray-900 placeholder-gray-900 font-bold" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="flex justify-center items-center pt-6">
+                    <button class="shadow-md hover:shadow-lg w-auto px-3  mb-3 py-2.5  text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform
+                    bg-itravel-900 rounded-md hover:bg-itravel-600 focus:outline-none focus:ring focus:ring-itravel-500 focus:ring-opacity-50" type="button" onclick="submitForm()">
+                        {{ strings.continue }}
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+  
+  <div id="messagge-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative w-full max-w-md max-h-full">
+          <div class="relative bg-white rounded-lg shadow">
+              <div class="p-6 text-center">
+                  <!--<svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>-->
+                  <div id="content-messagge" class="flex flex-col items-center p-6"></div>
+                  <button id="btn-messagge-modal" data-modal-target="messagge-modal" data-modal-toggle="messagge-modal" type="button" class="text-white bg-itravel-700 hover:bg-itravel-900 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">Yes, I'm sure</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script type = "text/JavaScript">
+    {% if class_types|length > 0 %}
+    var class_types = {{class_types.0.id}};
+    var class_types_css = '{{class_types.0.css}}';
+    {% else %}
+    var class_types = 0;
+    var class_types_css = "";
+    {% endif %}
+
+    
+    function scrollToLeft() {
+        const scrollArea = document.querySelector('#scrollContainerClass');
+        scrollArea.scrollLeft -= 50;
+    }
+
+    function scrollRight() {
+        const scrollArea = document.querySelector('#scrollContainerClass');
+        scrollArea.scrollLeft += 50;
+    }
+
+    function changeClass(id,name,css){
+
+        class_types_css = css
+
+        var name_transform = name.split(" ").join('</br>');
+
+        const border_select_flight = document.querySelectorAll(".border-select-flight");
+        for (var i = 0; i < border_select_flight.length; i++) {
+            border_select_flight[i].setAttribute("style",css)
+        }
+
+        const panel_class_begin = document.getElementById("panel-class-begin");
+        panel_class_begin.innerHTML =  `<div>${name_transform}</div>`;
+        panel_class_begin.setAttribute("style",css)
+
+        try {
+            const panel_class_return = document.getElementById("panel-class-return");
+            panel_class_return.innerHTML = `<div>${name_transform}</div>`;
+            panel_class_return.setAttribute("style",css)
+        } catch (error) {
+            console.log("");
+        }
+
+        class_types = id;
+        var days_selected = document.querySelectorAll(".day-selected");
+        for (var i = days_selected.length - 1; i >= 0; i--) {
+            console.log(i)
+            days_selected[i].click();
+        }
+    }
+    
+    try {
+        document.getElementById("panel-class-begin").innerHTML =  `<div>${"{% if class_types|length > 0 %}{% if language == 'es' %}{{ class_types.0.name_es }}{% else %}{{ class_types.0.name_en }}{% endif %}{% endif %}".split(" ").join('</br>')}</div>`;
+        document.getElementById("panel-class-return").innerHTML = `<div>${"{% if class_types|length > 0 %}{% if language == 'es' %}{{ class_types.0.name_es }}{% else %}{{ class_types.0.name_en }}{% endif %}{% endif %}".split(" ").join('</br>')}</div>`;
+    } catch (error) {
+        console.log("");
+    }
+</script>
+<script src="{% static 'js/horizontal_calendar.js' %}"></script>
+
+{% endblock scripts %}

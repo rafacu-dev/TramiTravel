@@ -1,0 +1,536 @@
+{% extends 'base.html' %}
+{% load static %}
+                
+{% block content %}
+<div class="pt-16 flex justify-center">
+    <form method="POST" onsubmit="return validator()" id="newFlights" enctype="multipart/form-data" class="">
+        
+        <div class="max-w-7xl m-5 rounded-lg bg-white shadow-lg p-4">
+            <h3 class="w-full my-4 font-semibold text-gray-900 text-center ">Seleccione solo los vuelos que desea editar</h3>
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th scope="col" class="p-4">
+                            </th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Id</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Origen</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Destino</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Puerta</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Charter</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Avión</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Número de vuelo</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Checkeo previo</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Hora de salida</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Hora de llegada</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Fecha</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Capacidad</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Precio(Adultos)</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Ganancia(Adultos)</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Precio(Niños)</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Ganancia(Niños)</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Precio(Infantes)</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Ganancia(Infantes)</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Comisión de agencias</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Clase</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Politica de equipajes</th>
+                            <th scope="col" class="whitespace-nowrap px-6 py-3">Activo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for flight in flights %}
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <input id="flight-{{flight.id}}" name="flight_ids" value="{{flight.id}}" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked>
+                                    <label for="flight-{{flight.id}}" class="sr-only">checkbox</label>
+                                </div>
+                            </td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.id}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.begin}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.to}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.gate}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.charter}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.aircraft}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.number}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.checkinMoment}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.departure}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.arrival}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.date}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.ability}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.priceAdult}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.revenueAdult}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.priceChildren}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.revenueChildren}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.priceInfant}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.revenueInfant}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.agencyCommission}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.class_type}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.baggagePolicy}}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{flight.actived}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg flex flex-wrap my-4 pb-3 justify-center">
+                <h3 class="w-full my-4 font-semibold text-gray-900 text-center ">Seleccione solo los campos que desea editar</h3>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="begin-edit" type="checkbox" value="begin" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('begin',this.checked)">
+                        <label for="begin-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Begin</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="to-edit" type="checkbox" value="to" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('to',this.checked)">
+                        <label for="to-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">To</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="gate-edit" type="checkbox" value="gate" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('gate',this.checked)">
+                        <label for="gate-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Gate</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="charter-edit" type="checkbox" value="charter" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('charter',this.checked)">
+                        <label for="charter-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Charter</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="aircraft-edit" type="checkbox" value="aircraft" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('aircraft',this.checked)">
+                        <label for="aircraft-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Aircraft</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="number-edit" type="checkbox" value="number" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('number',this.checked)">
+                        <label for="number-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Number</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="checkinMoment-edit" type="checkbox" value="checkinMoment" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('checkinMoment',this.checked)">
+                        <label for="checkinMoment-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Checkin Moment</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="departure-edit" type="checkbox" value="departure" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('departure',this.checked)">
+                        <label for="departure-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Departure</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="arrival-edit" type="checkbox" value="arrival" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('arrival',this.checked)">
+                        <label for="arrival-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Arrival</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="date-edit" type="checkbox" value="date" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('date',this.checked)">
+                        <label for="date-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Date</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="ability-edit" type="checkbox" value="ability" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('ability',this.checked)">
+                        <label for="ability-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Ability</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="priceAdult-edit" type="checkbox" value="priceAdult" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('priceAdult',this.checked)">
+                        <label for="priceAdult-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Price Adult</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="revenueAdult-edit" type="checkbox" value="revenueAdult" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('revenueAdult',this.checked)">
+                        <label for="revenueAdult-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Revenue Adult</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="priceChildren-edit" type="checkbox" value="priceChildren" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('priceChildren',this.checked)">
+                        <label for="priceChildren-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Price Children</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="revenueChildren-edit" type="checkbox" value="revenueChildren" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('revenueChildren',this.checked)">
+                        <label for="revenueChildren-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Revenue Children</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="priceInfant-edit" type="checkbox" value="priceInfant" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('priceInfant',this.checked)">
+                        <label for="priceInfant-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Price Infant</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="revenueInfant-edit" type="checkbox" value="revenueInfant" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('revenueInfant',this.checked)">
+                        <label for="revenueInfant-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Revenue Infant</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="agencyCommission-edit" type="checkbox" value="agencyCommission" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('agencyCommission',this.checked)">
+                        <label for="agencyCommission-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Agency Commission</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="class_type-edit" type="checkbox" value="class_type" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('class_type',this.checked)">
+                        <label for="class_type-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Class Type</label>
+                    </div>
+                </div>
+                <div class="w-auto whitespace-nowrap">
+                    <div class="flex items-center px-3">
+                        <input id="baggagePolicy-edit" type="checkbox" value="baggagePolicy" name="edited_fields" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" checked onchange="showHidenEdit('baggagePolicy',this.checked)">
+                        <label for="baggagePolicy-edit" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Baggage Policy</label>
+                    </div>
+                </div>
+            </div>
+            
+            {% csrf_token %}
+            <div class="flex flex-wrap mb-4">
+                <div class="w-1/3 px-3" id="content-begin">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.begin.id_for_label }}">
+                        {{ form.begin.label }}
+                    </label>
+                    {{ form.begin }}
+                </div>
+                <div class="w-1/3 px-3" id="content-to">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.to.id_for_label }}">
+                        {{ form.to.label }}
+                    </label>
+                    {{ form.to }}
+                </div>
+                <div class="w-1/3 px-3" id="content-gate">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.gate.id_for_label }}">
+                        {{ form.gate.label }}
+                    </label>
+                    {{ form.gate }}
+                </div>
+                <div class="w-1/3 px-3" id="content-charter">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.charter.id_for_label }}">
+                        {{ form.charter.label }}
+                    </label>
+                    {{ form.charter }}
+                </div>
+                <div class="w-1/3 px-3" id="content-aircraft">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.aircraft.id_for_label }}">
+                        {{ form.aircraft.label }}
+                    </label>
+                    {{ form.aircraft }}
+                </div>
+                <div class="w-1/3 px-3" id="content-number">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.number.id_for_label }}">
+                        {{ form.number.label }}
+                    </label>
+                    {{ form.number }}
+                </div>
+                <div class="w-1/3 px-3" id="content-checkinMoment">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.checkinMoment.id_for_label }}">
+                        {{ form.checkinMoment.label }}
+                    </label>
+                    {{ form.checkinMoment }}
+                </div>
+                <div class="w-1/3 px-3" id="content-agencyCommission">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.agencyCommission.id_for_label }}">
+                        {{ form.agencyCommission.label }}
+                    </label>
+                    {{ form.agencyCommission }}
+                </div>
+                <div class="w-1/3 px-3" id="content-ability">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.ability.id_for_label }}">
+                        {{ form.ability.label }}
+                    </label>
+                    {{ form.ability }}
+                </div>
+                <div class="w-1/3 px-3" id="content-priceAdult">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.priceAdult.id_for_label }}">
+                        {{ form.priceAdult.label }}
+                    </label>
+                    {{ form.priceAdult }}
+                </div>
+                <div class="w-1/3 px-3" id="content-revenueAdult">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.revenueAdult.id_for_label }}">
+                        {{ form.revenueAdult.label }}
+                    </label>
+                    {{ form.revenueAdult }}
+                </div>
+                <div class="w-1/3 px-3" id="content-priceChildren">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.priceChildren.id_for_label }}">
+                        {{ form.priceChildren.label }}
+                    </label>
+                    {{ form.priceChildren }}
+                </div>
+                <div class="w-1/3 px-3" id="content-revenueChildren">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.revenueChildren.id_for_label }}">
+                        {{ form.revenueChildren.label }}
+                    </label>
+                    {{ form.revenueChildren }}
+                </div>
+                <div class="w-1/3 px-3" id="content-priceInfant">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.priceInfant.id_for_label }}">
+                        {{ form.priceInfant.label }}
+                    </label>
+                    {{ form.priceInfant }}
+                </div>
+                <div class="w-1/3 px-3" id="content-revenueInfant">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.revenueInfant.id_for_label }}">
+                        {{ form.revenueInfant.label }}
+                    </label>
+                    {{ form.revenueInfant }}
+                </div>
+                <div class="w-1/3 px-3" id="content-baggagePolicy">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.baggagePolicy.id_for_label }}">
+                        {{ form.baggagePolicy.label }}
+                    </label>
+                    {{ form.baggagePolicy }}
+                </div>
+                <div class="w-1/3 px-3" id="content-class_type">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.class_type.id_for_label }}">
+                        {{ form.class_type.label }}
+                    </label>
+                    {{ form.class_type }}
+                </div>                
+                <div class="w-1/3 px-3" id="content-departure">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="">
+                        Hora de Salida
+                    </label>
+                    <div class="inline-flex items-center block w-full rounded-md border border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm">
+                        <select name="departure_h" id="" class="border-0 appearance-none bg-transparent w-full focus:border-0 focus:ring-0 h-9">
+                            <option value="00">00</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                        </select>
+                        <span class="px-2 font-bold">:</span>
+                        <select name="departure_m" id="" class="px-2 border-0 appearance-none bg-transparent w-full focus:border-0 focus:ring-0 h-9">
+                            <option value="00">00</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                            <option value="46">46</option>
+                            <option value="47">47</option>
+                            <option value="48">48</option>
+                            <option value="49">49</option>
+                            <option value="50">50</option>
+                            <option value="51">51</option>
+                            <option value="52">52</option>
+                            <option value="53">53</option>
+                            <option value="54">54</option>
+                            <option value="55">55</option>
+                            <option value="56">56</option>
+                            <option value="57">57</option>
+                            <option value="58">58</option>
+                            <option value="59">59</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="w-1/3 px-3" id="content-arrival">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        Hora de Llegada
+                    </label>
+                    <div class="inline-flex items-center block w-full rounded-md border border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm">
+                        <select name="arrival_h" id="" class="border-0 appearance-none bg-transparent w-full focus:border-0 focus:ring-0 h-9">
+                            <option value="00">00</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                        </select>
+                        <span class="px-2 font-bold">:</span>
+                        <select name="arrival_m" id="" class="px-2 border-0 appearance-none bg-transparent w-full focus:border-0 focus:ring-0 h-9">
+                            <option value="00">00</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                            <option value="46">46</option>
+                            <option value="47">47</option>
+                            <option value="48">48</option>
+                            <option value="49">49</option>
+                            <option value="50">50</option>
+                            <option value="51">51</option>
+                            <option value="52">52</option>
+                            <option value="53">53</option>
+                            <option value="54">54</option>
+                            <option value="55">55</option>
+                            <option value="56">56</option>
+                            <option value="57">57</option>
+                            <option value="58">58</option>
+                            <option value="59">59</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="w-1/3 px-3" id="content-date">
+                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="">Date</label>
+                    <div class="relative">
+                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <input datepicker datepicker-autohide datepicker-title="Seleccione la fecha del vuelo" id="id_date" name="date" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
+                        type="text" class="appearance-none block w-full mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-itravel-500 focus:ring-itravel-500 sm:text-sm mb-6 pl-10 p-2.5">
+                    </div>
+                </div>
+            </div>
+
+            <button class=" shadow-md hover:shadow-lg w-full px-3  p-2.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border border-itravel-900
+                bg-itravel-900 rounded-md hover:bg-itravel-600 focus:outline-none focus:ring focus:ring-itravel-500 focus:ring-opacity-50  font-serif"
+                type="submit" onclick="submitForm()">
+                Editar vuelos
+            </button>
+        </div>
+    
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script type = "text/JavaScript">
+    function showHidenEdit(id,checked){
+        if(checked == true){
+            document.getElementById(`content-${id}`).classList.remove("hidden");
+            document.getElementById(`id_${id}`).required= 'required';
+        }
+        else{
+            document.getElementById(`content-${id}`).classList.add("hidden");
+            document.getElementById(`id_${id}`).required= '';
+        }
+    }
+</script>
+{% endblock scripts %}
