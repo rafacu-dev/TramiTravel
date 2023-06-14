@@ -52,7 +52,7 @@ class Hotel(models.Model):
     id = models.AutoField(primary_key=True)
     image = models.ImageField(upload_to = 'package_hotel')
     name = models.CharField(blank = False, null = False,max_length=300)
-    description = models.TextField(blank = False, null = False)
+    description = models.TextField(blank = True, null = True)
 
     maxChildrens = models.IntegerField(default=0,null=False, blank=False)
     maxInfants = models.IntegerField(default=0,null=False, blank=False)
@@ -73,7 +73,7 @@ class VacationPackage(models.Model):
     lastDate = models.DateField(null=False)
 
     name = models.CharField(blank = False, null = False,max_length=300)
-    description = models.TextField(blank = False, null = False)
+    description = models.TextField(blank = True, null = True)
 
     origen = models.ForeignKey(Destinatation,on_delete=models.CASCADE,null=False,blank=False,related_name="origen")
     hotel = models.ForeignKey(Hotel,on_delete=models.CASCADE,null=False,blank=False,related_name="hotel")
@@ -109,17 +109,21 @@ class VacationPackage(models.Model):
 
     
     airline = models.ForeignKey(Airline,on_delete=models.CASCADE,null=True,blank=True)
-    departure_flight = models.DateTimeField(null=False)
-    arrival_flight = models.DateTimeField(null=False)
+    departure_flight = models.DateTimeField(blank = True, null = True)
+    arrival_flight = models.DateTimeField(blank = True, null = True)    
+    departure_flight_return = models.DateTimeField(blank = True, null = True)
+    arrival_flight_return = models.DateTimeField(blank = True, null = True)
     
     transport = models.ForeignKey(Transport,on_delete=models.CASCADE,null=True,blank=True)
-    departure_traslate = models.DateTimeField(null=False)
-    arrival_traslate = models.DateTimeField(null=False)
+    departure_traslate = models.DateTimeField(blank = True, null = True)
+    arrival_traslate = models.DateTimeField(blank = True, null = True)
+    departure_traslate_return = models.DateTimeField(blank = True, null = True)
+    arrival_traslate_return = models.DateTimeField(blank = True, null = True)
     
     actived = models.BooleanField(default=True)
 
     def numberNights(self) -> str:
-        return (self.lastDay - self.startDay).days
+        return (self.lastDate - self.startDate).days
     
     def pricePackage(self,adults,childrens,infants) -> float:
         ammount = 0.0

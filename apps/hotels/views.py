@@ -54,9 +54,7 @@ class Hotels(View):
             #package__hotel__id = hotel,
             origen__id = nearest_airport,
             room_type__id = room_type,
-            startDay__range = (start_day,last_day)
-            #startDay__gte = start_day,
-            #lastDay__lte = start_day
+            startDate__range = (start_day,last_day)
         ).distinct()
         
         for pp in period_packages:
@@ -65,8 +63,6 @@ class Hotels(View):
         strings,language = get_strings(request.COOKIES)
         
         destinatationsHotels = Destinatation.objects.filter(actived=True)
-        roomType = RoomType.objects.filter(actived=True)
-        hotels = Hotel.objects.filter(actived=True)
         menus = Menu.objects.filter(actived=True).order_by('position')
         
         context = {
@@ -76,8 +72,6 @@ class Hotels(View):
             "language":language,
             "strings" : strings,
             "destinatationsHotels":destinatationsHotels,
-            "hotels":hotels,
-            "roomType":roomType,
             "menus" :menus,
             'period_packages': period_packages
             }
@@ -100,11 +94,16 @@ class BookingView(View):
 
         period = VacationPackage.objects.get(id=id)
         
-        
-        address_begin = countries[period.origen.countryCode.upper()]
-        cities_begin = address_begin[0][list(address_begin[0].keys())[0]]
-        address_to = countries[period.hotel.location.countryCode.upper()]
-        cities_to = address_to[0][list(address_to[0].keys())[0]]
+        try:
+            address_begin = countries[period.origen.countryCode.upper()]
+            cities_begin = address_begin[0][list(address_begin[0].keys())[0]]
+            address_to = countries[period.hotel.location.countryCode.upper()]
+            cities_to = address_to[0][list(address_to[0].keys())[0]]
+        except:
+            address_begin = []
+            cities_begin = []
+            address_to = []
+            cities_to = []
         
         menus = Menu.objects.filter(actived=True).order_by('position')
         strings,language = get_strings(request.COOKIES)
@@ -146,7 +145,7 @@ class BookingView(View):
         n = 1
         bill = Bill.objects.create(code = str(dk[5:]),
                                    amount = periodPackage.pricePackage(adults,children,infants),
-                                   revenue = periodPackage.markup(adults,children,infants))
+                                   revenue = periodPackage.markupValue(adults,children,infants))
 
 
         for p in passagersTypeList:
@@ -168,7 +167,7 @@ class BookingView(View):
 
                 booking = Booking.objects.create(
                     user = request.user,
-                    periodPackage = periodPackage,
+                    package = periodPackage,
 
                     firstName = data[f'firstName-{p}{i}'].upper(),
                     middleName = data[f'middleName-{p}{i}'].upper(),
