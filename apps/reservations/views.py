@@ -58,8 +58,8 @@ class Home(View):
         relationsRoomType = []
 
         fecha_actual = timezone.now().date()
-        package = VacationPackage.objects.filter(Q(startDate__lte=fecha_actual) & Q(lastDate__gte=fecha_actual))
-
+        package = VacationPackage.objects.filter(Q(startDate__gte=fecha_actual) & Q(actived=True))
+        print(package)
 
         for p in package:
             objFrom = {
