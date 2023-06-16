@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.db import models
+from apps.reservations.models import Destinatation, Flight
 
 from apps.user.models import UserAccount
 
@@ -23,7 +24,7 @@ class Transport(models.Model):
     def __str__(self) -> str:
         return str(self.name) 
 
-class Destinatation(models.Model):
+"""class Destinatation(models.Model):
     id = models.AutoField(primary_key=True)
     city = models.CharField(blank = False, null = False,max_length=300)
     country = models.CharField(blank = False, null = False,max_length=300)
@@ -37,12 +38,11 @@ class Destinatation(models.Model):
         return self.city + ", " + self.country
         
     def name(self) -> str:
-        return self.city + ", " + self.country
+        return self.city + ", " + self.country"""
 
 class RoomType(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(blank = False, null = False,max_length=100,unique=True)
-    css = models.TextField(blank = True, null = True)
     actived = models.BooleanField(default=True)
 
     def __str__(self) -> str:
@@ -54,20 +54,32 @@ class Hotel(models.Model):
     name = models.CharField(blank = False, null = False,max_length=300)
     description = models.TextField(blank = True, null = True)
 
-    maxChildrens = models.IntegerField(default=0,null=False, blank=False)
-    maxInfants = models.IntegerField(default=0,null=False, blank=False)
-    maxAdults = models.IntegerField(default=2,null=False, blank=False)
 
-    location = models.ForeignKey(Destinatation,on_delete=models.CASCADE,null=False,blank=False,related_name="location")#location
+    location = models.ForeignKey(Destinatation,on_delete=models.CASCADE,null=False,blank=False,related_name="location")
 
-    isForAdults = models.BooleanField(default=True)
+    #isForAdults = models.BooleanField(default=True)
     actived = models.BooleanField(default=True)
 
     def __str__(self) -> str:
         return str(self.name) + " ( " +  str(self.location.name()) + " ) "
 
+class Room(models.Model):
+    id = models.AutoField(primary_key=True)
+    hotel = models.ForeignKey(Hotel,on_delete=models.CASCADE,null=False,blank=False,related_name="hotel")
+    quantity = models.IntegerField(default=0,null=False, blank=False)
+    room_space = models.IntegerField(default=0,null=False, blank=False)
+    maxChildrens = models.IntegerField(default=0,null=False, blank=False)
+    maxInfants = models.IntegerField(default=0,null=False, blank=False)
+    maxAdults = models.IntegerField(default=2,null=False, blank=False)
+    room_type = models.ForeignKey(RoomType,on_delete=models.CASCADE,null=False,blank=False,related_name="room_type")
+
+    def __str__(self) -> str:
+        return str(self.hotel) + " - " +  str(self.room_type)
+
 class VacationPackage(models.Model):
     id = models.AutoField(primary_key=True)
+
+    room = models.ForeignKey(Room,on_delete=models.CASCADE,null=False,blank=False,related_name="Room")
     
     startDate = models.DateField(null=False)
     lastDate = models.DateField(null=False)
@@ -76,43 +88,36 @@ class VacationPackage(models.Model):
     description = models.TextField(blank = True, null = True)
 
     origen = models.ForeignKey(Destinatation,on_delete=models.CASCADE,null=False,blank=False,related_name="origen")
-    hotel = models.ForeignKey(Hotel,on_delete=models.CASCADE,null=False,blank=False,related_name="hotel")
 
     price_adults_1 = models.FloatField(default=0.0,null=False, blank=False)
     price_adults_2 = models.FloatField(default=0.0,null=False, blank=False)
-    price_adults_3 = models.FloatField(default=0.0,null=False, blank=False)
-    price_adults_4 = models.FloatField(default=0.0,null=False, blank=False)
-    price_adults_5 = models.FloatField(default=0.0,null=False, blank=False)
+    price_adults_3 = models.FloatField(null=True, blank=True)
+    price_adults_4 = models.FloatField(null=True, blank=True)
+    price_adults_5 = models.FloatField(null=True, blank=True)
 
-    price_childrens_1 = models.FloatField(default=0.0,null=False, blank=False)
-    price_childrens_2 = models.FloatField(default=0.0,null=False, blank=False)
-    price_childrens_3 = models.FloatField(default=0.0,null=False, blank=False)
-    price_childrens_4 = models.FloatField(default=0.0,null=False, blank=False)
-    price_childrens_5 = models.FloatField(default=0.0,null=False, blank=False)
+    price_childrens_1 = models.FloatField(null=True, blank=True)
+    price_childrens_2 = models.FloatField(null=True, blank=True)
+    price_childrens_3 = models.FloatField(null=True, blank=True)
+    price_childrens_4 = models.FloatField(null=True, blank=True)
+    price_childrens_5 = models.FloatField(null=True, blank=True)
 
-    price_infants_1 = models.FloatField(default=0.0,null=False, blank=False)
-    price_infants_2 = models.FloatField(default=0.0,null=False, blank=False)
-    price_infants_3 = models.FloatField(default=0.0,null=False, blank=False)
-    price_infants_4 = models.FloatField(default=0.0,null=False, blank=False)
-    price_infants_5 = models.FloatField(default=0.0,null=False, blank=False)
+    price_infants_1 = models.FloatField(null=True, blank=True)
+    price_infants_2 = models.FloatField(null=True, blank=True)
+    price_infants_3 = models.FloatField(null=True, blank=True)
+    price_infants_4 = models.FloatField(null=True, blank=True)
+    price_infants_5 = models.FloatField(null=True, blank=True)
 
     taxes = models.FloatField(default=0.0,null=False, blank=False)
     flight = models.FloatField(default=0.0,null=False, blank=False)
     transfer = models.FloatField(default=0.0,null=False, blank=False)
     markup = models.FloatField(default=0.0,null=False, blank=False) # Se da en %
 
-    #room_space = models.IntegerField(default=0,null=False, blank=False)
-    room_type = models.ForeignKey(RoomType,on_delete=models.CASCADE,null=False,blank=False,related_name="room_type")
         
     servicesInclude = models.CharField(blank = True, null = True,max_length=100)    
     accommodation = models.CharField(blank = True, null = True,max_length=100)
 
-    
-    airline = models.ForeignKey(Airline,on_delete=models.CASCADE,null=True,blank=True)
-    departure_flight = models.DateTimeField(blank = True, null = True)
-    arrival_flight = models.DateTimeField(blank = True, null = True)    
-    departure_flight_return = models.DateTimeField(blank = True, null = True)
-    arrival_flight_return = models.DateTimeField(blank = True, null = True)
+    flightBegin = models.ForeignKey(Flight,on_delete=models.SET_NULL,null=True,blank=True,related_name="FlightBegin")
+    flightReturn = models.ForeignKey(Flight,on_delete=models.SET_NULL,null=True,blank=True,related_name="FlightReturn")
     
     transport = models.ForeignKey(Transport,on_delete=models.CASCADE,null=True,blank=True)
     departure_traslate = models.DateTimeField(blank = True, null = True)
@@ -138,13 +143,13 @@ class VacationPackage(models.Model):
         elif childrens == 4: ammount += ((self.price_childrens_2 * 2) + self.price_childrens_3 + self.price_childrens_4)
         elif childrens == 3 :  ammount += ((self.price_childrens_2 * 2) + self.price_childrens_3)
         elif childrens == 2:  ammount += (self.price_childrens_2 * 2)
-        else:  ammount += self.price_childrens_1
+        elif childrens == 1:  ammount += self.price_childrens_1
 
         if infants >= 5: ammount += ((self.price_infants_2 * 2) + self.price_infants_3 + self.price_infants_4 + (self.price_infants_5 * infants - 4))
         elif infants == 4: ammount += ((self.price_infants_2 * 2) + self.price_infants_3 + self.price_infants_4)
         elif infants == 3 :  ammount += ((self.price_infants_2 * 2) + self.price_infants_3)
         elif infants == 2:  ammount += (self.price_infants_2 * 2)
-        else:  ammount += self.price_infants_1
+        elif infants == 1:  ammount += self.price_infants_1
 
         return ammount
     
