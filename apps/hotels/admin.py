@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.hotels.models import Airline, Bill, Booking, Destinatation, Hotel, RoomType, VacationPackage, Transport
+from apps.hotels.models import Airline, Bill, Booking, Hotel, Room, RoomType, VacationPackage, Transport
     
 class TransportAdmin(admin.ModelAdmin):
     list_display=[field.name for field in Transport._meta.fields]
@@ -13,19 +13,7 @@ class AirlineAdmin(admin.ModelAdmin):
     search_fields = ["id","name","nameCode"]
     list_filter = ["actived",]
     model = Airline
-    
-class DestinatationAdmin(admin.ModelAdmin):
-    list_display=[field.name for field in Destinatation._meta.fields]
-    search_fields = ["id","city","country","cityCode","countryCode"]
-    list_filter = ["city","country"]
-    model = Destinatation
-    
-class DestinatationAdmin(admin.ModelAdmin):
-    list_display=[field.name for field in Destinatation._meta.fields]
-    search_fields = ["id","city","country","cityCode","countryCode"]
-    list_filter = ["city","country"]
-    model = Destinatation
-    
+        
 class RoomTypeAdmin(admin.ModelAdmin):
     list_display=[field.name for field in RoomType._meta.fields]
     search_fields = ["id","name","actived"]
@@ -34,7 +22,7 @@ class RoomTypeAdmin(admin.ModelAdmin):
 class HotelAdmin(admin.ModelAdmin):
     list_display=[field.name for field in Hotel._meta.fields]
     search_fields = ["id","name","actived"]
-    list_filter = ["location","isForAdults"]
+    list_filter = ["location"]
     model = Hotel
 
 class VacationPackageAdmin(admin.ModelAdmin):
@@ -63,9 +51,13 @@ class BookingAdmin(admin.ModelAdmin):
     list_filter = ["user","license","actived"]
     date_hierarchy = "date"
     model = Booking
+
+class RoomAdmin(admin.ModelAdmin):
+    list_display=[field.name for field in Room._meta.fields]
+    model = Room
     
 admin.site.register(Bill,BillAdmin)
-admin.site.register(Destinatation,DestinatationAdmin)
+admin.site.register(Room,RoomAdmin)
 admin.site.register(RoomType,RoomTypeAdmin)
 admin.site.register(Hotel,HotelAdmin)
 admin.site.register(VacationPackage,VacationPackageAdmin)

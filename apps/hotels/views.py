@@ -53,7 +53,7 @@ class Hotels(View):
         period_packages = VacationPackage.objects.filter(
             #package__hotel__id = hotel,
             origen__id = nearest_airport,
-            room_type__id = room_type,
+            room__room_type__id = room_type,
             startDate__range = (start_day,last_day)
         ).distinct()
         

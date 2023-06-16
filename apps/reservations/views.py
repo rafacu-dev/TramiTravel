@@ -71,28 +71,28 @@ class Home(View):
                 
             objTo = {
                 "id_from":p.origen.id,
-                "id":p.hotel.location.id,
-                "name":p.hotel.location.name(),
+                "id":p.room.hotel.location.id,
+                "name":p.room.hotel.location.name(),
             }
             if objTo not in relationsTo:
                 relationsTo.append(objTo)
                 
             objHotels = {
-                "id_to":p.hotel.location.id,
-                "id":p.hotel.id,
-                "name":p.hotel.name,
-                "max_adults":p.hotel.maxAdults,
-                "max_childrens":p.hotel.maxChildrens,
-                "max_infants":p.hotel.maxInfants,
+                "id_to":p.room.hotel.location.id,
+                "id":p.room.hotel.id,
+                "name":p.room.hotel.name,
+                "max_adults":p.room.maxAdults,
+                "max_childrens":p.room.maxChildrens,
+                "max_infants":p.room.maxInfants,
 
             }
             if objHotels not in relationsHotels:
                 relationsHotels.append(objHotels)
                 
             objRoomType = {
-                "id_hotel":p.hotel.id,
-                "id":p.room_type.id,
-                "name":p.room_type.name,
+                "id_hotel":p.room.hotel.id,
+                "id":p.room.room_type.id,
+                "name":p.room.room_type.name,
             }
             if objRoomType not in relationsRoomType:
                 relationsRoomType.append(objRoomType)

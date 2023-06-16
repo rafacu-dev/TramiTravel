@@ -126,6 +126,8 @@ class Flight(models.Model):
     
     baggagePolicy = models.ForeignKey(BaggagePolicy,on_delete=models.SET_NULL,null=True,blank=True,related_name="baggage_policy")
 
+    packagesOnly = models.BooleanField(default=False)
+
     actived = models.BooleanField(default=True)
 
     def __str__(self) -> str:
