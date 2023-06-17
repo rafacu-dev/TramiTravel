@@ -1,18 +1,12 @@
 from django.contrib import admin
 
-from apps.hotels.models import Airline, Bill, Booking, Hotel, Room, RoomType, VacationPackage, Transport
+from apps.hotels.models import Bill, Booking, Hotel, Room, RoomType, VacationPackage, Transport
     
 class TransportAdmin(admin.ModelAdmin):
     list_display=[field.name for field in Transport._meta.fields]
     search_fields = ["id","name","nameCode"]
     list_filter = ["actived",]
     model = Transport
-
-class AirlineAdmin(admin.ModelAdmin):
-    list_display=[field.name for field in Airline._meta.fields]
-    search_fields = ["id","name","nameCode"]
-    list_filter = ["actived",]
-    model = Airline
         
 class RoomTypeAdmin(admin.ModelAdmin):
     list_display=[field.name for field in RoomType._meta.fields]
@@ -62,5 +56,4 @@ admin.site.register(RoomType,RoomTypeAdmin)
 admin.site.register(Hotel,HotelAdmin)
 admin.site.register(VacationPackage,VacationPackageAdmin)
 admin.site.register(Booking,BookingAdmin)
-admin.site.register(Airline,AirlineAdmin)
 admin.site.register(Transport,TransportAdmin)

@@ -35,8 +35,8 @@ class Hotels(View):
         data = request.GET
         nearest_airport = int(data["begin"])
         to = int(data["to"])
-        room_type = int(data["room-type"])
-        #hotel = int(data["hotel"])
+        room_type = data["room-type"]
+        hotel = data["hotel"]
 
         adults = int(data["adults"])
         children = int(data["children"])
@@ -53,9 +53,10 @@ class Hotels(View):
         period_packages = VacationPackage.objects.filter(
             #package__hotel__id = hotel,
             origen__id = nearest_airport,
-            room__room_type__id = room_type,
             startDate__range = (start_day,last_day)
         ).distinct()
+        if room_type != "All":period_packages = period_packages.filter(room__room_type__id = room_type,).distinct()
+        
         
         for pp in period_packages:
             pp.priceTotalM = pp.priceTotalMoney(adults,children,infants)

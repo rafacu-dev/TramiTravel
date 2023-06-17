@@ -151,6 +151,10 @@ function selectTo(id_select){
 			select.appendChild(option);
 		}
 	})
+  const option = document.createElement('option');
+  option.text = "All";
+  option.value = "All";
+  select.appendChild(option);
 }
 function selectHotel(id_select){
 	const select = document.getElementById("room-type");
@@ -159,7 +163,7 @@ function selectHotel(id_select){
 		select.remove(i);
 	}
 	
-	window.objHotels.forEach(obj => {       
+	window.objHotels.forEach(obj => { 
 		if(obj.id == id_select) {
 			document.getElementById("textClientsHotels").textContent = 1;
 			document.getElementById("adultsLabelClientsHotels").setAttribute("max",obj.max_adults);
@@ -178,6 +182,10 @@ function selectHotel(id_select){
 			select.appendChild(option);
 		}
 	})
+  const option = document.createElement('option');
+  option.text = "All";
+  option.value = "All";
+  select.appendChild(option);
 }
 
 //**************************************************** */
