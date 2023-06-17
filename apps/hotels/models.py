@@ -4,16 +4,6 @@ from apps.reservations.models import Destinatation, Flight
 
 from apps.user.models import UserAccount
 
-class Airline(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(blank = False, null = False,max_length=300)
-    nameCode = models.CharField(blank = False, null = False,max_length=10)
-    image = models.ImageField(upload_to = 'package_airline')
-    actived = models.BooleanField(default=True)
-
-    def __str__(self) -> str:
-        return str(self.name) 
-
 class Transport(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(blank = False, null = False,max_length=300)

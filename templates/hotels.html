@@ -204,13 +204,13 @@
                             
                             <div class="flex justify-between items-center">
                                 <button type="button" class="flex w-min px-2 bg-itravel-900/30 rounded-lg shadow-sm" data-accordion-target="#accordion-flush-body-1" aria-expanded="false" aria-controls="accordion-flush-body-1">
-                                    <span class="text-gray-900">Ver detalles</span>
+                                    <span class="text-gray-900">Ver itinerario</span>
                                     <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                 </button>
 
                                 <div class="w-4 h-4"></div>
                                 
-                                <button class="shadow-md hover:shadow-lg w-min p-1 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border border-itravel-900
+                                <button class="shadow-md hover:shadow-lg w-min py-1 px-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border border-itravel-900
                                     bg-itravel-900 rounded-md hover:bg-itravel-600 focus:outline-none focus:ring focus:ring-itravel-500 focus:ring-opacity-50  font-serif">
                                     Reservar
                                 </button>
@@ -218,6 +218,75 @@
                         </div>
                     </div>
                     <div id="accordion-flush-body-1" class="hidden py-3" aria-labelledby="accordion-flush-heading-1">
+                        <div class="flex bg-gray-100 p-6">
+                            <div class="w-1/2">
+                                <div class="flex items-center">
+                                    <span class="material-icons md:text-sm font-bold md:mx-2 rotate-90"> flight </span>
+
+                                    <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightBegin.begin.cityCode}} </span>
+                                    <span class="text-md md:text-md font-bold"> {{pp.flightBegin.departure|time:"h:i"}} </span>
+                                    <span class="text-xs pt-1 md:pt-2"> {{pp.flightBegin.departure|time:"A"}} </span>
+
+                                    <span class="md:text-sm font-bold md:mx-2"> ➜ </span>
+
+                                    <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightBegin.to.cityCode}} </span>
+                                    <span class="text-md md:text-md font-bold"> {{pp.flightBegin.arrival|time:"h:i"}} </span>
+                                    <span class="text-xs pt-1 md:pt-2"> {{pp.flightBegin.arrival|time:"A"}} </span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="material-icons md:text-sm font-bold md:mx-2 " style="transform: rotate(270deg);"> flight </span>
+
+                                    <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightBegin.begin.cityCode}} </span>
+                                    <span class="text-md md:text-md font-bold"> {{pp.flightBegin.departure|time:"h:i"}} </span>
+                                    <span class="text-xs pt-1 md:pt-2"> {{pp.flightBegin.departure|time:"A"}} </span>
+
+                                    <span class="md:text-sm font-bold md:mx-2"> ➜ </span>
+
+                                    <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightBegin.to.cityCode}} </span>
+                                    <span class="text-md md:text-md font-bold"> {{pp.flightBegin.arrival|time:"h:i"}} </span>
+                                    <span class="text-xs pt-1 md:pt-2"> {{pp.flightBegin.arrival|time:"A"}} </span>
+                                </div>
+                            </div>
+                            <div class="w-1/2">
+                            </div>
+                        </div>
+                        <div class="flex flex-col p-6">
+                            <div class="flex items-center">
+                                <span class="material-icons md:text-sm font-bold md:mx-2 "> airport_shuttle </span>
+
+                                <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightBegin.to.city}} Airport</span>
+
+                                <span class="md:text-sm font-bold md:mx-2"> ➜ </span>
+                                
+                                <span class="text-md md:text-md font-bold"> {{pp.room.hotel.name}}</span>
+                            </div>
+                            <p class="text-sm font-semibold ml-6">&nbsp;&nbsp;Hora de recogida: {{pp.departure_traslate|time:"h:i"}}  {{pp.departure_traslate|time:"A"}}</p>
+                            <p class="text-sm font-semibold ml-6">&nbsp;&nbsp;Hora de llegada: {{pp.arrival_traslate|time:"h:i"}}  {{pp.arrival_traslate|time:"A"}}</p>
+                        </div>
+                        <div class="flex flex-col bg-gray-100 p-6">
+                            <div class="flex items-center w-full">
+                                <span class="material-icons md:text-sm font-bold md:mx-2 "> apartment </span> 
+                                <div class="flex items-center justify-between w-full">                               
+                                    <p class="text-md md:text-md font-bold"> {{pp.room.hotel.name}}</p>
+                                    <p class="text-xs font-light text-gray-500"><span class="font-bold text-gray-900 text-sm">{{ pp.numberNights }} noches </span>({{pp.startDate}} - {{pp.lastDate}})</p>
+                                </div>
+                            </div>
+                            <p class="text-sm font-semibold ml-6">&nbsp;&nbsp; {{pp.room.hotel.description}}</p>
+                        </div>
+                        <div class="flex flex-col p-6">
+                            <div class="flex items-center">
+                                <span class="material-icons md:text-sm font-bold md:mx-2 "> airport_shuttle </span>
+
+                                <span class="text-md md:text-md font-bold"> {{pp.room.hotel.name}}</span>
+
+                                <span class="md:text-sm font-bold md:mx-2"> ➜ </span>
+
+                                <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightReturn.from.city}} Airport</span>
+                                
+                            </div>
+                            <p class="text-sm font-semibold ml-6">&nbsp;&nbsp;Hora de recogida: {{pp.departure_traslate_return|time:"h:i"}}  {{pp.departure_traslate_return|time:"A"}}</p>
+                            <p class="text-sm font-semibold ml-6">&nbsp;&nbsp;Hora de llegada: {{pp.arrival_traslate_return|time:"h:i"}}  {{pp.arrival_traslate_return|time:"A"}}</p>
+                        </div>
                     </div>
                 </form>
                 {% endfor %}
