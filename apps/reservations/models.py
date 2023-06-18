@@ -131,7 +131,9 @@ class Flight(models.Model):
     actived = models.BooleanField(default=True)
 
     def __str__(self) -> str:
-        return f"{self.date} / {self.begin} - {self.to}   /  {self.charter.name}"
+        t = f"{self.date} / {self.begin} - {self.to} "
+        if self.charter:  t += f"/  {self.charter.name}"
+        return t
     
     def date_en(self):
         return self.date.strftime("%A, %b %d")
