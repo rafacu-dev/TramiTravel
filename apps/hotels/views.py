@@ -5,8 +5,6 @@ from django.shortcuts import redirect, render
 from django.views.generic import View
 from apps.hotels.models import Bill, Booking, Destinatation, Hotel, RoomType, VacationPackage
 
-#OK
-
 from apps.menus.models import Menu
 from core.languages import get_strings
 
@@ -109,6 +107,7 @@ class BookingView(View):
         menus = Menu.objects.filter(actived=True).order_by('position')
         strings,language = get_strings(request.COOKIES)
         
+        period.priceTotalM = period.priceTotalMoney(adults,children,infants)
         context = {
             "language":language,
             "strings" : strings,
@@ -121,7 +120,7 @@ class BookingView(View):
             "adults":adults,
             "children":children,
             "infants":infants,
-            "period":id
+            "period":period
 
             }
         

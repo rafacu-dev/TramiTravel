@@ -22,6 +22,8 @@ en = {
     "ready":"Ready",
     "index_t4":"Select the day of departure",
     "index_t5":"Select the day of return",
+    "rooms":"Rooms",
+    "max_rooms":"More of 9 you contact with support",
 
     
     "index_vacations":"Book now the vacation you deserve!",
@@ -263,6 +265,8 @@ sp = {
     "ready":"Listo",
     "index_t4":"Seleccione el día de salida",
     "index_t5":"Seleccione el día de retorno",
+    "rooms":"Abitaciones",
+    "max_rooms":"Más de 9 contactar con soporte",
 
     
     "index_vacations":"¡Reserva ahora las vacaciones que te mereces!",

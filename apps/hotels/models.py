@@ -57,7 +57,6 @@ class Room(models.Model):
     id = models.AutoField(primary_key=True)
     hotel = models.ForeignKey(Hotel,on_delete=models.CASCADE,null=False,blank=False,related_name="hotel")
     quantity = models.IntegerField(default=0,null=False, blank=False)
-    room_space = models.IntegerField(default=0,null=False, blank=False)
     maxChildrens = models.IntegerField(default=0,null=False, blank=False)
     maxInfants = models.IntegerField(default=0,null=False, blank=False)
     maxAdults = models.IntegerField(default=2,null=False, blank=False)
@@ -103,8 +102,8 @@ class VacationPackage(models.Model):
     markup = models.FloatField(default=0.0,null=False, blank=False) # Se da en %
 
         
-    servicesInclude = models.CharField(blank = True, null = True,max_length=100)    
-    accommodation = models.CharField(blank = True, null = True,max_length=100)
+    #servicesInclude = models.CharField(blank = True, null = True,max_length=100)    
+    #accommodation = models.CharField(blank = True, null = True,max_length=100)
 
     flightBegin = models.ForeignKey(Flight,on_delete=models.SET_NULL,null=True,blank=True,related_name="FlightBegin")
     flightReturn = models.ForeignKey(Flight,on_delete=models.SET_NULL,null=True,blank=True,related_name="FlightReturn")

@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block styles %}
-<script src="{% static 'js/flight.js' %}"></script>
 {% endblock styles %}
 
 {% block content %}
@@ -178,8 +177,8 @@
                     <input class="hidden"  type="number" name="infants" value="{{infants}}">
                     <input class="hidden"  type="number" name="period" value="{{pp.id}}">
 
-                    <div class="w-full flex items-center p-2">
-                        <img class="object-cover rounded-lg h-max md:w-48" src="{{pp.room.hotel.image.url}}" alt="">
+                    <div class="w-full flex items-center p-0.5">
+                        <img class="object-cover rounded-lg h-full md:w-48" src="{{pp.room.hotel.image.url}}" alt="">
                         <div class="flex flex-col justify-between p-4 leading-normal w-full p-3">
                             <div class="flex w-full justify-between">
                                 <h5 class="mb-1 text-xl font-serif font-bold text-gray-900">{{pp.name}}</h5>
@@ -193,8 +192,6 @@
                                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
                                 </div>
                             </div>
-                            {% if pp.servicesInclude_es %}<p class="text-xs text-gray-700">Services Include: {{pp.servicesInclude_es}}</p>{% endif %}
-                            {% if pp.accommodation_es %}<p class="text-xs text-gray-700">Accommodation: {{pp.accommodation_es}}</p>{% endif %}
                             <p class="mb-1 font-bold text-gray-900">{{ pp.numberNights }} noches <span class="text-xs font-light text-gray-500">({{pp.startDate}} - {{pp.lastDate}})</span></p>
 
                             <div class="flex items-center mb-1 text-sm font-light">
@@ -203,54 +200,195 @@
                             </div>
                             
                             <div class="flex justify-between items-center">
-                                <button type="button" class="flex w-min px-2 bg-itravel-900/30 rounded-lg shadow-sm" data-accordion-target="#accordion-flush-body-1" aria-expanded="false" aria-controls="accordion-flush-body-1">
+                                <button type="button" class="flex w-min px-2 bg-itravel-900/30 rounded-lg shadow-sm" data-accordion-target="#accordion-flush-body-{{pp.id}}" aria-expanded="false" aria-controls="accordion-flush-body-{{pp.id}}">
                                     <span class="text-gray-900">Ver itinerario</span>
                                     <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                                 </button>
 
                                 <div class="w-4 h-4"></div>
                                 
-                                <button class="shadow-md hover:shadow-lg w-min py-1 px-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border border-itravel-900
+                                <button id="accordion-flush-heading-{{pp.id}}" class="shadow-md hover:shadow-lg w-min py-1 px-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border border-itravel-900
                                     bg-itravel-900 rounded-md hover:bg-itravel-600 focus:outline-none focus:ring focus:ring-itravel-500 focus:ring-opacity-50  font-serif">
                                     Reservar
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div id="accordion-flush-body-1" class="hidden py-3" aria-labelledby="accordion-flush-heading-1">
-                        <div class="flex bg-gray-100 p-6">
-                            <div class="w-1/2">
-                                <div class="flex items-center">
-                                    <span class="material-icons md:text-sm font-bold md:mx-2 rotate-90"> flight </span>
+                    <div id="accordion-flush-body-{{pp.id}}" class="hidden py-1" aria-labelledby="accordion-flush-heading-{{pp.id}}">
+                        <div class="flex flex-col border-b p-6">
+                            <div class="flex">
+                                <div class="w-1/2">
+                                    <div class="flex items-center">
+                                        <span class="material-icons md:text-sm font-bold md:mx-2 rotate-90"> flight </span>
 
-                                    <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightBegin.begin.cityCode}} </span>
-                                    <span class="text-md md:text-md font-bold"> {{pp.flightBegin.departure|time:"h:i"}} </span>
-                                    <span class="text-xs pt-1 md:pt-2"> {{pp.flightBegin.departure|time:"A"}} </span>
+                                        <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightBegin.begin.cityCode}} </span>
+                                        <span class="text-md md:text-md font-bold"> {{pp.flightBegin.departure|time:"h:i"}} </span>
+                                        <span class="text-xs pt-1 md:pt-2"> {{pp.flightBegin.departure|time:"A"}} </span>
 
-                                    <span class="md:text-sm font-bold md:mx-2"> ➜ </span>
+                                        <span class="md:text-sm font-bold md:mx-2"> ➜ </span>
 
-                                    <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightBegin.to.cityCode}} </span>
-                                    <span class="text-md md:text-md font-bold"> {{pp.flightBegin.arrival|time:"h:i"}} </span>
-                                    <span class="text-xs pt-1 md:pt-2"> {{pp.flightBegin.arrival|time:"A"}} </span>
+                                        <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightBegin.to.cityCode}} </span>
+                                        <span class="text-md md:text-md font-bold"> {{pp.flightBegin.arrival|time:"h:i"}} </span>
+                                        <span class="text-xs pt-1 md:pt-2"> {{pp.flightBegin.arrival|time:"A"}} </span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="material-icons md:text-sm font-bold md:mx-2 " style="transform: rotate(270deg);"> flight </span>
+
+                                        <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightReturn.begin.cityCode}} </span>
+                                        <span class="text-md md:text-md font-bold"> {{pp.flightReturn.departure|time:"h:i"}} </span>
+                                        <span class="text-xs pt-1 md:pt-2"> {{pp.flightReturn.departure|time:"A"}} </span>
+
+                                        <span class="md:text-sm font-bold md:mx-2"> ➜ </span>
+
+                                        <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightReturn.to.cityCode}} </span>
+                                        <span class="text-md md:text-md font-bold"> {{pp.flightReturn.arrival|time:"h:i"}} </span>
+                                        <span class="text-xs pt-1 md:pt-2"> {{pp.flightReturn.arrival|time:"A"}} </span>
+                                    </div>
                                 </div>
-                                <div class="flex items-center">
-                                    <span class="material-icons md:text-sm font-bold md:mx-2 " style="transform: rotate(270deg);"> flight </span>
-
-                                    <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightBegin.begin.cityCode}} </span>
-                                    <span class="text-md md:text-md font-bold"> {{pp.flightBegin.departure|time:"h:i"}} </span>
-                                    <span class="text-xs pt-1 md:pt-2"> {{pp.flightBegin.departure|time:"A"}} </span>
-
-                                    <span class="md:text-sm font-bold md:mx-2"> ➜ </span>
-
-                                    <span class="text-md md:text-md font-bold mr-2 font-serif"> {{pp.flightBegin.to.cityCode}} </span>
-                                    <span class="text-md md:text-md font-bold"> {{pp.flightBegin.arrival|time:"h:i"}} </span>
-                                    <span class="text-xs pt-1 md:pt-2"> {{pp.flightBegin.arrival|time:"A"}} </span>
+                                <div class="w-1/2">
                                 </div>
                             </div>
-                            <div class="w-1/2">
+
+                            <div class="w-full flex flex-col justify-center h-auto mt-4 w-max sm:w-full">
+                                <div class="flex p-2">
+                                    <img src="{% static 'images/avion.png' %}" class="mr-1 h-6 text-red-500" alt="" />
+                                    <p >DEPARTURE FLIGHT: &nbsp;&nbsp;<span class="font-bold text-md">  {{pp.flightBegin.date_en }}</span> <span class="font-medium text-sm md:text-md text-gray-500">&nbsp;&nbsp; Please verify flight times prior to departure</span></p>
+                                </div>
+
+                                <div class=" flex w-full ">
+                                    <div class="h-auto w-1/3 bg-cover px-5 pt-3 border-t border-l border-b border-gray-200">
+                                        <div class=" flex w-full justify-between">
+                                            <div>
+                                                <p class="text-lg font-medium">{{pp.flightBegin.charter}} </p>
+                                                <p class="text-lg font-bold -mt-1 mb-2">{{pp.flightBegin.aircraft.carrier_code.nameCode}} {{pp.flightBegin.number}}</p>
+                                            </div>
+                                            <img src="{{ pp.flightBegin.charter.image.url }}" class="h-10" alt="" />
+                                        </div>
+
+                                        <p class="text-sm font-semibold">Operated By: </p>
+                                        <p class="text-sm font-medium mb-2">{{pp.flightBegin.aircraft.carrier_code}}</p>
+                                    </div>
+                                    <div class="h-auto w-2/3 flex inline-flex border border-gray-200 divide-x divide-gray-300">
+                                        <div class=" h-full w-2/3 divide-y divide-gray-300">
+                                            <div class=" flex w-full h-1/3 justify-between items-center ">
+                                                <div class="w-full pl-3">
+                                                    <p class="text-xl">{{pp.flightBegin.begin.cityCode}}</p>
+                                                    <p class="text-sm font-medium">{{pp.flightBegin.begin.city}}, {{pp.flightBegin.begin.countryCode}}</p>
+                                                </div>
+                                                <p class="w-6 rotate-90">▲</p>
+                                                <div class="w-full pl-3">
+                                                    <p class="w-full text-xl">{{pp.flightBegin.to.cityCode}}</p>
+                                                    <p class="w-full text-sm font-medium">{{pp.flightBegin.to.city}}, {{pp.flightBegin.to.countryCode}}</p>
+                                                </div>
+                                            </div>
+                                            <div  class="flex w-full h-2/3 divide-x divide-gray-300">
+                                                <div class="w-1/2 p-3">
+                                                    <p class="text-xs font-semibold">Departing At:</p>
+                                                    <p class="text-lg font-medium mb-2">{{pp.flightBegin.departure|time:"h:i a"}}</p>
+                                                    <p class="text-xs font-semibold">Check-in:</p>
+                                                    <p class="text-sm font-medium">{{pp.flightBegin.checkin|time:"h:i a"}}</p>
+                                                </div>
+                                                <div class="w-1/2 p-3">
+                                                    <p class="text-xs font-semibold">Arriving At:</p>
+                                                    <p class="text-lg font-medium mb-2">{{pp.flightBegin.arrival|time:"h:i a"}}</p>
+                                                    <p class="text-xs font-semibold">Duration:</p>
+                                                    <p class="text-sm font-medium">{{pp.flightBegin.duration}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="h-full w-1/3 p-3">
+                                            <p class="text-sm font-semibold">Aircraft: </p>
+                                            <p class="text-sm font-medium mb-2">{{pp.flightBegin.aircraft.make}} {{pp.flightBegin.aircraft.model}} </p>
+
+                                            <p class="text-sm font-semibold mb-2">Gate: {{pp.flightBegin.gate}}</p>
+
+                                            <p class="text-sm font-semibold">Class: </p>
+                                            <p class="text-md font-medium mb-2">{{ pp.flightBegin.class_type.name_en }}</p>
+
+                                            {% if pp.flightBegin.baggagePolicy %}
+                                            <a href="{% url 'baggagePolicy' bp=pp.flightBegin.baggagePolicy.id %}" 
+                                            class="text-sm font-semibold flex text-blue-600 hover:text-blue-800"
+                                            target="_blank"
+                                            rel="noreferrer"><p class="material-icons text-sm mr-2">business_center</p><p>Baggage policy</p></a>
+                                            {% endif%}
+                                            <!--<p class="text-sm font-semibold">Bags Included: </p>
+                                            <p class="text-xs font-medium">● Handbag + Carry On</p>-->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            
+                            <div class="w-full flex flex-col justify-center h-auto mt-4 w-max sm:w-full">
+                                <div class="flex p-2">
+                                    <img src="{% static 'images/avion.png' %}" class="mr-1 h-6 text-red-500" alt="" />
+                                    <p >RETURN FLIGHT: &nbsp;&nbsp;<span class="font-bold text-md">  {{pp.flightReturn.date_en }}</span> <span class="font-medium text-sm md:text-md text-gray-500">&nbsp;&nbsp; Please verify flight times prior to departure</span></p>
+                                </div>
+
+                                <div class=" flex w-full ">
+                                    <div class="h-auto w-1/3 bg-cover px-5 pt-3 border-t border-l border-b border-gray-200">
+                                        <div class=" flex w-full justify-between">
+                                            <div>
+                                                <p class="text-lg font-medium">{{pp.flightReturn.charter}} </p>
+                                                <p class="text-lg font-bold -mt-1 mb-2">{{pp.flightReturn.aircraft.carrier_code.nameCode}} {{pp.flightBegin.number}}</p>
+                                            </div>
+                                            <img src="{{ pp.flightReturn.charter.image.url }}" class="h-10" alt="" />
+                                        </div>
+
+                                        <p class="text-sm font-semibold">Operated By: </p>
+                                        <p class="text-sm font-medium mb-2">{{pp.flightReturn.aircraft.carrier_code}}</p>
+                                    </div>
+                                    <div class="h-auto w-2/3 flex inline-flex border border-gray-200 divide-x divide-gray-300">
+                                        <div class=" h-full w-2/3 divide-y divide-gray-300">
+                                            <div class=" flex w-full h-1/3 justify-between items-center ">
+                                                <div class="w-full pl-3">
+                                                    <p class="text-xl">{{pp.flightReturn.begin.cityCode}}</p>
+                                                    <p class="text-sm font-medium">{{pp.flightReturn.begin.city}}, {{pp.flightReturn.begin.countryCode}}</p>
+                                                </div>
+                                                <p class="w-6 rotate-90">▲</p>
+                                                <div class="w-full pl-3">
+                                                    <p class="w-full text-xl">{{pp.flightReturn.to.cityCode}}</p>
+                                                    <p class="w-full text-sm font-medium">{{pp.flightReturn.to.city}}, {{pp.flightReturn.to.countryCode}}</p>
+                                                </div>
+                                            </div>
+                                            <div  class="flex w-full h-2/3 divide-x divide-gray-300">
+                                                <div class="w-1/2 p-3">
+                                                    <p class="text-xs font-semibold">Departing At:</p>
+                                                    <p class="text-lg font-medium mb-2">{{pp.flightReturn.departure|time:"h:i a"}}</p>
+                                                    <p class="text-xs font-semibold">Check-in:</p>
+                                                    <p class="text-sm font-medium">{{pp.flightReturn.checkin|time:"h:i a"}}</p>
+                                                </div>
+                                                <div class="w-1/2 p-3">
+                                                    <p class="text-xs font-semibold">Arriving At:</p>
+                                                    <p class="text-lg font-medium mb-2">{{pp.flightReturn.arrival|time:"h:i a"}}</p>
+                                                    <p class="text-xs font-semibold">Duration:</p>
+                                                    <p class="text-sm font-medium">{{pp.flightReturn.duration}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="h-full w-1/3 p-3">
+                                            <p class="text-sm font-semibold">Aircraft: </p>
+                                            <p class="text-sm font-medium mb-2">{{pp.flightReturn.aircraft.make}} {{pp.flightReturn.aircraft.model}} </p>
+
+                                            <p class="text-sm font-semibold mb-2">Gate: {{pp.flightReturn.gate}}</p>
+
+                                            <p class="text-sm font-semibold">Class: </p>
+                                            <p class="text-md font-medium mb-2">{{ pp.flightReturn.class_type.name_en }}</p>
+
+                                            {% if pp.flightReturn.baggagePolicy %}
+                                            <a href="{% url 'baggagePolicy' bp=pp.flightReturn.baggagePolicy.id %}" 
+                                            class="text-sm font-semibold flex text-blue-600 hover:text-blue-800"
+                                            target="_blank"
+                                            rel="noreferrer"><p class="material-icons text-sm mr-2">business_center</p><p>Baggage policy</p></a>
+                                            {% endif%}
+                                            <!--<p class="text-sm font-semibold">Bags Included: </p>
+                                            <p class="text-xs font-medium">● Handbag + Carry On</p>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="flex flex-col p-6">
+                        <div class="flex flex-col p-6 border-b">
                             <div class="flex items-center">
                                 <span class="material-icons md:text-sm font-bold md:mx-2 "> airport_shuttle </span>
 
@@ -263,7 +401,7 @@
                             <p class="text-sm font-semibold ml-6">&nbsp;&nbsp;Hora de recogida: {{pp.departure_traslate|time:"h:i"}}  {{pp.departure_traslate|time:"A"}}</p>
                             <p class="text-sm font-semibold ml-6">&nbsp;&nbsp;Hora de llegada: {{pp.arrival_traslate|time:"h:i"}}  {{pp.arrival_traslate|time:"A"}}</p>
                         </div>
-                        <div class="flex flex-col bg-gray-100 p-6">
+                        <div class="flex flex-col border-b p-6">
                             <div class="flex items-center w-full">
                                 <span class="material-icons md:text-sm font-bold md:mx-2 "> apartment </span> 
                                 <div class="flex items-center justify-between w-full">                               
