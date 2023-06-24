@@ -79,7 +79,6 @@
     </div>
 
     <div class=" flex justify-center inline-flex  w-full h-auto">
-
         <form method="post" onsubmit="return validator()" enctype="multipart/form-data" class="w-full h-auto max-w-7xl bg-white border-gray-200 rounded-lg shadow-md p-4 md:p-12 pt-6 divide-y divide-gray-300">
                        
             {% with ''|center:adults as range %}
@@ -2470,8 +2469,8 @@
                         <option value="515.571:Ciudadanos cubanos de regreso" class="ng-star-inserted">515.571 : Ciudadanos cubanos de regreso </option>
                     </select>
                 </div>
+                {% endif %}
             </div>
-            {% endif %}
 
 
             {% csrf_token %}
