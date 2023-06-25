@@ -57,9 +57,6 @@ class Room(models.Model):
     id = models.AutoField(primary_key=True)
     hotel = models.ForeignKey(Hotel,on_delete=models.CASCADE,null=False,blank=False,related_name="hotel")
     quantity = models.IntegerField(default=0,null=False, blank=False)
-    maxChildrens = models.IntegerField(default=0,null=False, blank=False)
-    maxInfants = models.IntegerField(default=0,null=False, blank=False)
-    maxAdults = models.IntegerField(default=2,null=False, blank=False)
     room_type = models.ForeignKey(RoomType,on_delete=models.CASCADE,null=False,blank=False,related_name="room_type")
 
     def __str__(self) -> str:
@@ -116,6 +113,29 @@ class VacationPackage(models.Model):
     
     actived = models.BooleanField(default=True)
 
+    def maxAdults(self) -> int:
+        if self.price_adults_2 == None: return 1
+        if self.price_adults_3 == None: return 2
+        if self.price_adults_4 == None: return 3
+        if self.price_adults_5 == None: return 4
+        return 5
+    
+    def maxChildrens(self) -> int:
+        if self.price_childrens_1 == None: return 0
+        if self.price_childrens_2 == None: return 1
+        if self.price_childrens_3 == None: return 2
+        if self.price_childrens_4 == None: return 3
+        if self.price_childrens_5 == None: return 4
+        return 5
+    
+    def maxInfants(self) -> int:
+        if self.price_infants_1 == None: return 0
+        if self.price_infants_2 == None: return 1
+        if self.price_infants_3 == None: return 2
+        if self.price_infants_4 == None: return 3
+        if self.price_infants_5 == None: return 4
+        return 5    
+
     def numberNights(self) -> str:
         return (self.lastDate - self.startDate).days
     
@@ -144,12 +164,7 @@ class VacationPackage(models.Model):
     
     def priceTotal(self,adults,childrens,infants) -> float:
         return (self.pricePackage(adults,childrens,infants) * self.numberNights()) + self.taxes + self.flight + self.transfer + self.markup
-    
-    def priceTotalMoney(self,adults,childrens,infants) -> float:
-        priceTotal = self.priceTotal(adults,childrens,infants)
-        if len(str(priceTotal).split(".")[1]) == 1: return "$ " + str(priceTotal) + "0"
-        return "$ " + str(priceTotal)
-    
+        
     def markupValue(self,adults,childrens,infants) -> float:
         return ((self.pricePackage(adults,childrens,infants) * self.numberNights()) + self.flight + self.transfer) / (1 - (self.markup / 100))
 

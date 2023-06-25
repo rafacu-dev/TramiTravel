@@ -81,9 +81,9 @@ class Home(View):
                 "id_to":p.room.hotel.location.id,
                 "id":p.room.hotel.id,
                 "name":p.room.hotel.name,
-                "max_adults":p.room.maxAdults,
-                "max_childrens":p.room.maxChildrens,
-                "max_infants":p.room.maxInfants,
+                "max_adults":p.maxAdults(),
+                "max_childrens":p.maxChildrens(),
+                "max_infants":p.maxInfants(),
 
             }
             if objHotels not in relationsHotels:
@@ -165,9 +165,9 @@ class HomeTraslate(View):
                 "id_to":p.hotel.location.id,
                 "id":p.hotel.id,
                 "name":p.hotel.name,
-                "max_adults":p.hotel.maxAdults,
-                "max_childrens":p.hotel.maxChildrens,
-                "max_infants":p.hotel.maxInfants,
+                "max_adults":p.maxAdults(),
+                "max_childrens":p.maxChildrens(),
+                "max_infants":p.maxInfants(),
 
             }
             if objHotels not in relationsHotels:

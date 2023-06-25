@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static custom_filters %}
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/intlTelInput.css' %}">
@@ -263,67 +263,73 @@
 
     <div class=" flex justify-center inline-flex  w-full h-auto">
 
-        <form method="post" onsubmit="return validator()" enctype="multipart/form-data" class="w-full h-auto max-w-7xl bg-white border-gray-200 rounded-lg shadow-md p-4 md:p-12 pt-6 divide-y divide-gray-300">
-                       
-            {% with ''|center:adults as range %}
+        <form method="post" onsubmit="return validator()" enctype="multipart/form-data" class="w-full h-auto max-w-7xl bg-white border-gray-200 rounded-lg shadow-md p-4 md:p-12 pt-6 ">
+            
+            <input class="hidden" name="room-clients" value="{{rooms_clients}}"/>
+            {% for room in rooms_clients %}
+            {% with forloop.counter as room_number %}
+            
+            <h1 class="text-black font-bold mb-6 text-2xl mt-6">Room {{room_number}}</h1>
+
+            {% with ''|center:room.0 as range %}
             {% for n in range %}
                 <div>
                     <h1 class="text-black font-bold mb-6 text-xl mt-6">{{ strings.adult_passenger }} {{forloop.counter}}</h1>                    
                     
                     <div class="flex flex-wrap space-x-2">
                         <div class="flex flex-wrap items-center mb-3">
-                            <label for="imagen-document-Adult{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
+                            <label for="imagen-document-Room{{room_number}}-Adult{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
                             style="background-image: linear-gradient(to bottom, #5b0f29, #b61f53, #5b0f29);">
                                 <span class="material-icons text-center font-bold text-white text-sm hidden md:flex mr-2">folder_open</span>
                                 <span class="material-icons text-center font-bold text-white text-sm md:hidden mr-2">photo_camera</span>
                                 {{ strings.scan_document }} 
                             </label>
-                            <input class="hidden imagen-document" type="file" id="imagen-document-Adult{{forloop.counter}}" name="imagen-document-Adult{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
+                            <input class="hidden imagen-document" type="file" id="imagen-document-Room{{room_number}}-Adult{{forloop.counter}}" name="imagen-document-Room{{room_number}}-Adult{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
                         </div>
                         
                         <div class="flex flex-wrap items-center mb-3">
-                            <label for="imagen-document-secondary-Adult{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
+                            <label for="imagen-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
                             style="background-image: linear-gradient(to bottom, #5b0f29, #b61f53, #5b0f29);">
                                 <span class="material-icons text-center font-bold text-white text-sm hidden md:flex mr-2">folder_open</span>
                                 <span class="material-icons text-center font-bold text-white text-sm md:hidden mr-2">photo_camera</span>
                                 {{ strings.scan_secondary_document }} 
                             </label>
-                            <input class="hidden imagen-document" type="file" id="imagen-document-secondary-Adult{{forloop.counter}}" name="imagen-document-secondary-Adult{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
+                            <input class="hidden imagen-document" type="file" id="imagen-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}" name="imagen-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
                         </div>
-                        <button type="button" class="cursor-pointer text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm" onclick="showForm('Adult{{forloop.counter}}')"
-                        style="background-image: linear-gradient(to bottom, #b61f53, #b61f53, #b61f53);" id="btn-showForm-Adult{{forloop.counter}}">
+                        <button type="button" class="cursor-pointer text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm" onclick="showForm('Room{{room_number}}-Adult{{forloop.counter}}')"
+                        style="background-image: linear-gradient(to bottom, #b61f53, #b61f53, #b61f53);" id="btn-showForm-Room{{room_number}}-Adult{{forloop.counter}}">
                         {{ strings.manually_enter_data }}
                         </button>
                     </div>
                     
                     <div class="flex flex-wrap space-x-2">
-                        <img src="" class="h-40 hidden" id="imageDocument-Adult{{forloop.counter}}" alt="" />
-                        <img src="" class="h-40 hidden" id="imageDocument-secondary-Adult{{forloop.counter}}" alt="" />
+                        <img src="" class="h-40 hidden" id="imageDocument-Room{{room_number}}-Adult{{forloop.counter}}" alt="" />
+                        <img src="" class="h-40 hidden" id="imageDocument-secondary-Room{{room_number}}-Adult{{forloop.counter}}" alt="" />
                     </div>
 
-                    <div id="form-vcontent-Adult{{forloop.counter}}" class="hidden">
+                    <div id="form-vcontent-Room{{room_number}}-Adult{{forloop.counter}}" class="hidden">
 
                         <h1 class="text-gray-700 font-bold md:ml-2 text-md mr-2">{{ strings.personalInformation }}</h1>
                         <div class="flex flex-wrap mb-6">
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Adult{{forloop.counter}}">{{ strings.first_name }} 
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Room{{room_number}}-Adult{{forloop.counter}}">{{ strings.first_name }} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
                                 <input required class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 focus:ring-itravel-500" id="firstName-Adult{{forloop.counter}}" name="firstName-Adult{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 focus:ring-itravel-500" id="firstName-Room{{room_number}}-Adult{{forloop.counter}}" name="firstName-Room{{room_number}}-Adult{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Adult{{forloop.counter}}">{{ strings.middle_name}}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Room{{room_number}}-Adult{{forloop.counter}}">{{ strings.middle_name}}</label>
                                 <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Adult{{forloop.counter}}" name="middleName-Adult{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Room{{room_number}}-Adult{{forloop.counter}}" name="middleName-Room{{room_number}}-Adult{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Adult{{forloop.counter}}">{{ strings.last_name}} 
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Room{{room_number}}-Adult{{forloop.counter}}">{{ strings.last_name}} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
                                 <input required class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Adult{{forloop.counter}}" name="lastName-Adult{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Room{{room_number}}-Adult{{forloop.counter}}" name="lastName-Room{{room_number}}-Adult{{forloop.counter}}" type="text">
                             </div>
 
                         </div>
@@ -331,9 +337,9 @@
                         <div class="flex flex-wrap mb-6">
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Adult{{forloop.counter}}">{{ strings.mother_name}}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Room{{room_number}}-Adult{{forloop.counter}}">{{ strings.mother_name}}</label>
                                 <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Adult{{forloop.counter}}" name="motherLastName-Adult{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Room{{room_number}}-Adult{{forloop.counter}}" name="motherLastName-Room{{room_number}}-Adult{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
@@ -347,7 +353,7 @@
                                             clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <input required datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="dateBirth-Adult{{forloop.counter}}" name="dateBirth-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy"
+                                    <input required datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="dateBirth-Room{{room_number}}-Adult{{forloop.counter}}" name="dateBirth-Room{{room_number}}-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy"
                                     type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                     focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 range-today">
                                 </div>
@@ -355,20 +361,20 @@
                             
                         </div>
 
-                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2 ml-2" for="gender-Adult{{forloop.counter}}">
+                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2 ml-2" for="gender-Room{{room_number}}-Adult{{forloop.counter}}">
                             {{ strings.gender}} <span class="text-red-500 text-md p-0 font-bold">*</span>
                         </label>
 
                         <div class="flex flex-wrap w-full ml-2 mb-6">
                             <div class="flex items-center mr-6">
-                                <input checked id="male-Adult{{forloop.counter}}" type="radio" value="M"  name="gender-Adult{{forloop.counter}}"
+                                <input checked id="male-Room{{room_number}}-Adult{{forloop.counter}}" type="radio" value="M"  name="gender-Room{{room_number}}-Adult{{forloop.counter}}"
                                 class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" >
-                                <label for="male-Adult{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.male }}</label>
+                                <label for="male-Room{{room_number}}-Adult{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.male }}</label>
                             </div>
                             <div class="flex items-center mr-4">
-                                <input id="female-Adult{{forloop.counter}}" type="radio" value="F"  name="gender-Adult{{forloop.counter}}"
+                                <input id="female-Room{{room_number}}-Adult{{forloop.counter}}" type="radio" value="F"  name="gender-Room{{room_number}}-Adult{{forloop.counter}}"
                                 class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2">
-                                <label for="female-Adult{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.female }}</label>
+                                <label for="female-Room{{room_number}}-Adult{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.female }}</label>
                             </div>
                         </div>
 
@@ -379,8 +385,8 @@
                         <div class="flex flex-wrap mb-6">
                             <div class="flex flex-wrap w-full md:w-1/3">
                                 <div class="w-full md:w-1/2 md:px-2 py-3">
-                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-primary-Adult{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                    <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required id="number-document-primary-Adult{{forloop.counter}}" name="number-document-primary-Adult{{forloop.counter}}" type="text">
+                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-primary-Room{{room_number}}-Adult{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                    <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required id="number-document-primary-Room{{room_number}}-Adult{{forloop.counter}}" name="number-document-primary-Room{{room_number}}-Adult{{forloop.counter}}" type="text">
                                 </div>
         
                                 <div class="w-full md:w-1/2 md:px-2 py-3">
@@ -390,15 +396,15 @@
                                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                         </div>
-                                        <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-primary-Adult{{forloop.counter}}" name="expiration-document-primary-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
+                                        <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-primary-Room{{room_number}}-Adult{{forloop.counter}}" name="expiration-document-primary-Room{{room_number}}-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
                                         type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
                                     </div>
                                 </div>
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-primary-Adult{{forloop.counter}}">{{ strings.document_type }}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-primary-Room{{room_number}}-Adult{{forloop.counter}}">{{ strings.document_type }}</label>
                                 <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
-                                name="type-document-primary-Adult{{forloop.counter}}" id="type-document-primary-Adult{{forloop.counter}}" required>
+                                name="type-document-primary-Room{{room_number}}-Adult{{forloop.counter}}" id="type-document-primary-Room{{room_number}}-Adult{{forloop.counter}}" required>
                                     <option value="Passport">{{ strings.passport }}</option>
                                     <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
                                     <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
@@ -406,9 +412,9 @@
                                 </select>
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-primary-Adult{{forloop.counter}}">{{ strings.country_document }}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-primary-Room{{room_number}}-Adult{{forloop.counter}}">{{ strings.country_document }}</label>
                                 <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
-                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-primary-Adult{{forloop.counter}}" id="country-document-primary-Adult{{forloop.counter}}" required>
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-primary-Room{{room_number}}-Adult{{forloop.counter}}" id="country-document-primary-Room{{room_number}}-Adult{{forloop.counter}}" required>
                                     
                                     <!--<option value="US" selected>US (United States)</option>
                                     <option value="CU">CU (Cuba)</option> ADD_CUBA
@@ -898,21 +904,21 @@
                         <div class="flex flex-wrap items-center mb-3">
                             <h1 class="text-gray-700 font-bold text-md mr-3 md:ml-2">{{ strings.secondary_document_information }}</h1>
                             <div class="flex items-center rounded bg-red-100 py-1 md:px-2" style="background-image: linear-gradient(to bottom, #940000, #e90303, #940000);">
-                                <input id="checkboxSecondaryDocuments-Adult{{forloop.counter}}" type="checkbox" value="" class="w-4 h-4 text-red-300 bg-gray-100 rounded border-gray-300 focus:ring-red-300 focus:ring" onchange="notAvailableSecondaryDocument(this,'Adult{{forloop.counter}}')">
-                                <label for="checkboxSecondaryDocuments-Adult{{forloop.counter}}" class="ml-2 text-sm font-bold text-white">{{ strings.not_available }}</label>
+                                <input id="checkboxSecondaryDocuments-Room{{room_number}}-Adult{{forloop.counter}}" type="checkbox" value="" class="w-4 h-4 text-red-300 bg-gray-100 rounded border-gray-300 focus:ring-red-300 focus:ring" onchange="notAvailableSecondaryDocument(this,'Room{{room_number}}-Adult{{forloop.counter}}')">
+                                <label for="checkboxSecondaryDocuments-Room{{room_number}}-Adult{{forloop.counter}}" class="ml-2 text-sm font-bold text-white">{{ strings.not_available }}</label>
                             </div>
                         </div>
 
-                        <div class="flex items-center mb-6 ml-2 w-auto hidden" id="alertNotCubaDocument-Adult{{forloop.counter}}">
+                        <div class="flex items-center mb-6 ml-2 w-auto hidden" id="alertNotCubaDocument-Room{{room_number}}-Adult{{forloop.counter}}">
                             <h3 class="text-md font-medium text-red-500 font-serif ml-1" id="">{{ strings.booking_t3 }}</h3>
                         </div>
 
-                        <div id="secondaryDocument-Adult{{forloop.counter}}">
+                        <div id="secondaryDocument-Room{{room_number}}-Adult{{forloop.counter}}">
                             <div class="flex flex-wrap mb-6">
                                 <div class="flex flex-wrap w-full md:w-1/3">
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
-                                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-secondary-Adult{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                        <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Adult{{forloop.counter}}" name="number-document-secondary-Adult{{forloop.counter}}" type="text" required>
+                                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                        <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}" name="number-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}" type="text">
                                     </div>
             
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
@@ -921,15 +927,15 @@
                                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                             </div>
-                                            <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}"  id="expiration-document-secondary-Adult{{forloop.counter}}"  name="expiration-document-secondary-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy"   id="expiration-document-secondary-Adult{{forloop.counter}}" required onchange="validDatepicker(this)" autocomplete="off"
+                                            <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}"  id="expiration-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}"  name="expiration-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy"   id="expiration-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}" onchange="validDatepicker(this)" autocomplete="off"
                                             type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
-                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-secondary-Adult{{forloop.counter}}">{{ strings.document_type }}</label>
+                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}">{{ strings.document_type }}</label>
                                     <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
-                                    id="type-document-secondary-Adult{{forloop.counter}}" name="type-document-secondary-Adult{{forloop.counter}}" required>
+                                    id="type-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}" name="type-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}" required>
                                         <option value="Passport">{{ strings.passport }}</option>
                                         <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
                                         <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
@@ -937,9 +943,9 @@
                                     </select>
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
-                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-secondary-Adult{{forloop.counter}}">{{ strings.country_document }}</label>
+                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}">{{ strings.country_document }}</label>
                                     <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
-                                    leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-secondary-Adult{{forloop.counter}}" id="country-document-secondary-Adult{{forloop.counter}}" required>
+                                    leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}" id="country-document-secondary-Room{{room_number}}-Adult{{forloop.counter}}" required>
                                         <option value="USA" selected>USA (United States)</option>
                                         <option value="CUB">CUB (Cuba)</option> ADD_CUBA
                                         <option value="AFG">AFG (Afghanistan)</option>
@@ -1188,43 +1194,43 @@
             {% endfor %}
             {% endwith %}
             
-            {% with ''|center:children as range %}
+            {% with ''|center:room.1 as range %}
             {% for n in range %}
                 <div>
                     <h1 class="text-black font-bold mb-6 text-xl mt-6">{{ strings.children_passenger }} {{forloop.counter}}</h1>
                     <div class="flex flex-wrap space-x-2">
                         <div class="flex flex-wrap items-center mb-3">
-                            <label for="imagen-document-Children{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
+                            <label for="imagen-document-Room{{room_number}}-Children{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
                             style="background-image: linear-gradient(to bottom, #5b0f29, #b61f53, #5b0f29);">
                                 <span class="material-icons text-center font-bold text-white text-sm hidden md:flex mr-2">folder_open</span>
                                 <span class="material-icons text-center font-bold text-white text-sm md:hidden mr-2">photo_camera</span>
                                 {{ strings.scan_document }} 
                             </label>
-                            <input class="hidden imagen-document" type="file" id="imagen-document-Children{{forloop.counter}}" name="imagen-document-Children{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
+                            <input class="hidden imagen-document" type="file" id="imagen-document-Room{{room_number}}-Children{{forloop.counter}}" name="imagen-document-Room{{room_number}}-Children{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
                         </div>
                         
                         <div class="flex flex-wrap items-center mb-3">
-                            <label for="imagen-document-secondary-Children{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
+                            <label for="imagen-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
                             style="background-image: linear-gradient(to bottom, #5b0f29, #b61f53, #5b0f29);">
                                 <span class="material-icons text-center font-bold text-white text-sm hidden md:flex mr-2">folder_open</span>
                                 <span class="material-icons text-center font-bold text-white text-sm md:hidden mr-2">photo_camera</span>
                                 {{ strings.scan_secondary_document }} 
                             </label>
-                            <input class="hidden imagen-document" type="file" id="imagen-document-secondary-Children{{forloop.counter}}" name="imagen-document-secondary-Children{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
+                            <input class="hidden imagen-document" type="file" id="imagen-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" name="imagen-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
                         </div>
 
-                        <button type="button" class="cursor-pointer text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm" onclick="showForm('Children{{forloop.counter}}')"
-                        style="background-image: linear-gradient(to bottom, #b61f53, #b61f53, #b61f53);" id="btn-showForm-Children{{forloop.counter}}">
+                        <button type="button" class="cursor-pointer text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm" onclick="showForm('Room{{room_number}}-Children{{forloop.counter}}')"
+                        style="background-image: linear-gradient(to bottom, #b61f53, #b61f53, #b61f53);" id="btn-showForm-Room{{room_number}}-Children{{forloop.counter}}">
                         {{ strings.manually_enter_data }}
                         </button>
                     </div>
                     
                     <div class="flex flex-wrap space-x-2">
-                        <img src="" class="h-40 hidden" id="imageDocument-Children{{forloop.counter}}" alt="" />
-                        <img src="" class="h-40 hidden" id="imageDocument-secondary-Children{{forloop.counter}}" alt="" />
+                        <img src="" class="h-40 hidden" id="imageDocument-Room{{room_number}}-Children{{forloop.counter}}" alt="" />
+                        <img src="" class="h-40 hidden" id="imageDocument-secondary-Room{{room_number}}-Children{{forloop.counter}}" alt="" />
                     </div>
 
-                    <div id="form-vcontent-Children{{forloop.counter}}" class="hidden">
+                    <div id="form-vcontent-Room{{room_number}}-Children{{forloop.counter}}" class="hidden">
 
                         <div class="flex flex-wrap items-center mb-3">
                             <h1 class="text-gray-700 font-bold md:ml-2 text-md mr-2">{{ strings.personalInformation }}</h1>
@@ -1233,23 +1239,23 @@
                         <div class="flex flex-wrap mb-6">
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Children{{forloop.counter}}">{{ strings.first_name }} 
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Room{{room_number}}-Children{{forloop.counter}}">{{ strings.first_name }} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
                                 <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="firstName-Children{{forloop.counter}}" name="firstName-Children{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="firstName-Room{{room_number}}-Children{{forloop.counter}}" name="firstName-Room{{room_number}}-Children{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Children{{forloop.counter}}">{{ strings.middle_name}}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Room{{room_number}}-Children{{forloop.counter}}">{{ strings.middle_name}}</label>
                                 <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Children{{forloop.counter}}" name="middleName-Children{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Room{{room_number}}-Children{{forloop.counter}}" name="middleName-Room{{room_number}}-Children{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Children{{forloop.counter}}">{{ strings.last_name}} 
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Room{{room_number}}-Children{{forloop.counter}}">{{ strings.last_name}} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
                                 <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Children{{forloop.counter}}" name="lastName-Children{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Room{{room_number}}-Children{{forloop.counter}}" name="lastName-Room{{room_number}}-Children{{forloop.counter}}" type="text">
                             </div>
 
                         </div>
@@ -1257,9 +1263,9 @@
                         <div class="flex flex-wrap mb-6">
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Children{{forloop.counter}}">{{ strings.mother_name}}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Room{{room_number}}-Children{{forloop.counter}}">{{ strings.mother_name}}</label>
                                 <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Children{{forloop.counter}}" name="motherLastName-Children{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Room{{room_number}}-Children{{forloop.counter}}" name="motherLastName-Room{{room_number}}-Children{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
@@ -1273,7 +1279,7 @@
                                             clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="dateBirth-Children{{forloop.counter}}" name="dateBirth-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" onchange="validDatepicker(this)" autocomplete="off"
+                                    <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="dateBirth-Room{{room_number}}-Children{{forloop.counter}}" name="dateBirth-Room{{room_number}}-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" onchange="validDatepicker(this)" autocomplete="off"
                                     type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                     focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 range-today children-dateBirth" children-date-count="{{flightBeginSelect.date|date:"Y-m-d"}}">
                                 </div>
@@ -1281,18 +1287,18 @@
                             
                         </div>
 
-                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2 ml-2" for="gender-Children{{forloop.counter}}">
+                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2 ml-2" for="gender-Room{{room_number}}-Children{{forloop.counter}}">
                             {{ strings.gender}} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
                         <div class="flex flex-wrap w-full ml-2 mb-6">
                             <div class="flex items-center mr-6">
-                                <input checked id="male-Children{{forloop.counter}}" type="radio" value="M"  name="gender-Children{{forloop.counter}}"
+                                <input checked id="male-Room{{room_number}}-Children{{forloop.counter}}" type="radio" value="M"  name="gender-Room{{room_number}}-Children{{forloop.counter}}"
                                 class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" >
-                                <label for="male-Children{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.male }}</label>
+                                <label for="male-Room{{room_number}}-Children{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.male }}</label>
                             </div>
                             <div class="flex items-center mr-4">
-                                <input id="female-Children{{forloop.counter}}" type="radio" value="F"  name="gender-Children{{forloop.counter}}"
+                                <input id="female-Room{{room_number}}-Children{{forloop.counter}}" type="radio" value="F"  name="gender-Room{{room_number}}-Children{{forloop.counter}}"
                                 class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2">
-                                <label for="female-Children{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.female }}</label>
+                                <label for="female-Room{{room_number}}-Children{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.female }}</label>
                             </div>
                         </div>
                         
@@ -1301,9 +1307,9 @@
                         <div class="flex flex-wrap mb-6">
                             <div class="flex flex-wrap w-full md:w-1/3">
                                 <div class="w-full md:w-1/2 md:px-2 py-3">
-                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-primary-Children{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-primary-Room{{room_number}}-Children{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
                                     <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required
-                                    id="number-document-primary-Children{{forloop.counter}}" name="number-document-primary-Children{{forloop.counter}}" type="text">
+                                    id="number-document-primary-Room{{room_number}}-Children{{forloop.counter}}" name="number-document-primary-Room{{room_number}}-Children{{forloop.counter}}" type="text">
                                 </div>
         
                                 <div class="w-full md:w-1/2 md:px-2 py-3">
@@ -1313,15 +1319,15 @@
                                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                         </div>
-                                        <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-primary-Children{{forloop.counter}}" name="expiration-document-primary-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
+                                        <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-primary-Room{{room_number}}-Children{{forloop.counter}}" name="expiration-document-primary-Room{{room_number}}-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
                                         type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
                                     </div>
                                 </div>
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-primary-Children{{forloop.counter}}">{{ strings.document_type }}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-primary-Room{{room_number}}-Children{{forloop.counter}}">{{ strings.document_type }}</label>
                                 <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
-                                name="type-document-primary-Children{{forloop.counter}}" id="type-document-primary-Children{{forloop.counter}}" required>
+                                name="type-document-primary-Room{{room_number}}-Children{{forloop.counter}}" id="type-document-primary-Room{{room_number}}-Children{{forloop.counter}}" required>
                                     <option value="Passport">{{ strings.passport }}</option>
                                     <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
                                     <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
@@ -1329,9 +1335,9 @@
                                 </select>
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-primary-Children{{forloop.counter}}">{{ strings.country_document }}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-primary-Room{{room_number}}-Children{{forloop.counter}}">{{ strings.country_document }}</label>
                                 <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
-                                    leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-primary-Children{{forloop.counter}}" id="country-document-primary-Children{{forloop.counter}}" required>
+                                    leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-primary-Room{{room_number}}-Children{{forloop.counter}}" id="country-document-primary-Room{{room_number}}-Children{{forloop.counter}}" required>
                                     <option value="USA" selected>USA (United States)</option>
                                     <option value="CUB">CUB (Cuba)</option> ADD_CUBA
                                     <option value="AFG">AFG (Afghanistan)</option>
@@ -1578,22 +1584,22 @@
                         <div class="flex flex-wrap items-center mb-3">
                             <h1 class="text-gray-700 font-bold text-md mr-3 md:ml-2">{{ strings.secondary_document_information }}</h1>
                             <div class="flex items-center rounded bg-red-100 py-1 px-2 ml-3 py-1 md:px-2" style="background-image: linear-gradient(to bottom, #940000, #e90303, #940000);">
-                                <input id="checkboxSecondaryDocuments-Children{{forloop.counter}}" type="checkbox" value="" class="w-4 h-4 text-red-300 bg-gray-100 rounded border-gray-300 focus:ring-red-300 focus:ring" onchange="notAvailableSecondaryDocument(this,'Children{{forloop.counter}}')">
-                                <label for="checkboxSecondaryDocuments-Children{{forloop.counter}}" class="ml-2 text-sm font-bold text-white">{{ strings.not_available }}</label>
+                                <input id="checkboxSecondaryDocuments-Room{{room_number}}-Children{{forloop.counter}}" type="checkbox" value="" class="w-4 h-4 text-red-300 bg-gray-100 rounded border-gray-300 focus:ring-red-300 focus:ring" onchange="notAvailableSecondaryDocument(this,'Room{{room_number}}-Children{{forloop.counter}}')">
+                                <label for="checkboxSecondaryDocuments-Room{{room_number}}-Children{{forloop.counter}}" class="ml-2 text-sm font-bold text-white">{{ strings.not_available }}</label>
                             </div>
                         </div>
 
-                        <div class="flex items-center mb-6 ml-2 w-auto hidden" id="alertNotCubaDocument-Children{{forloop.counter}}">
+                        <div class="flex items-center mb-6 ml-2 w-auto hidden" id="alertNotCubaDocument-Room{{room_number}}-Children{{forloop.counter}}">
                             <h3 class="text-md font-medium text-red-500 font-serif ml-1" id="">{{ strings.booking_t3 }}</h3>
                         </div>
 
                         
-                        <div id="secondaryDocument-Children{{forloop.counter}}">
+                        <div id="secondaryDocument-Room{{room_number}}-Children{{forloop.counter}}">
                             <div class="flex flex-wrap mb-6">
                                 <div class="flex flex-wrap w-full md:w-1/3">
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
-                                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-secondary-Children{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                        <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Children{{forloop.counter}}" name="number-document-secondary-Children{{forloop.counter}}" type="text" required>
+                                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-secondary-Room{{room_number}}-Children{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                        <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" name="number-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" type="text">
                                     </div>
             
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
@@ -1602,15 +1608,15 @@
                                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                             </div>
-                                            <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-secondary-Children{{forloop.counter}}" name="expiration-document-secondary-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" id="expiration-document-secondary-Children{{forloop.counter}}" required onchange="validDatepicker(this)" autocomplete="off"
+                                            <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" name="expiration-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" id="expiration-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" onchange="validDatepicker(this)" autocomplete="off"
                                             type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 ">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
-                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-secondary-Children{{forloop.counter}}">{{ strings.document_type }}</label>
+                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-secondary-Room{{room_number}}-Children{{forloop.counter}}">{{ strings.document_type }}</label>
                                     <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
-                                    id="type-document-secondary-Children{{forloop.counter}}" name="type-document-secondary-Children{{forloop.counter}}" required>
+                                    id="type-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" name="type-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" required>
                                         <option value="Passport">{{ strings.passport }}</option>
                                         <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
                                         <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
@@ -1618,9 +1624,9 @@
                                     </select>
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
-                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-secondary-Children{{forloop.counter}}">{{ strings.country_document }}</label>
+                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-secondary-Room{{room_number}}-Children{{forloop.counter}}">{{ strings.country_document }}</label>
                                     <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
-                                    leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-secondary-Children{{forloop.counter}}" id="country-document-secondary-Children{{forloop.counter}}" required>
+                                    leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" id="country-document-secondary-Room{{room_number}}-Children{{forloop.counter}}" required>
                                         <option value="USA" selected>USA (United States)</option>
                                         <option value="CUB">CUB (Cuba)</option> ADD_CUBA
                                         <option value="AFG">AFG (Afghanistan)</option>
@@ -1869,44 +1875,44 @@
             {% endfor %}
             {% endwith %}
             
-            {% with ''|center:infants as range %}
+            {% with ''|center:room.2 as range %}
             {% for n in range %}
                 <div>
                     <h1 class="text-black font-bold mb-6 text-xl mt-6">{{ strings.infant_passenger }} {{forloop.counter}}</h1>
                     
                     <div class="flex flex-wrap space-x-2">
                         <div class="flex flex-wrap items-center mb-3">
-                            <label for="imagen-document-Infant{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
+                            <label for="imagen-document-Room{{room_number}}-Infant{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
                             style="background-image: linear-gradient(to bottom, #5b0f29, #b61f53, #5b0f29);">
                                 <span class="material-icons text-center font-bold text-white text-sm hidden md:flex mr-2">folder_open</span>
                                 <span class="material-icons text-center font-bold text-white text-sm md:hidden mr-2">photo_camera</span>
                                 {{ strings.scan_document }} 
                             </label>
-                            <input class="hidden imagen-document" type="file" id="imagen-document-Infant{{forloop.counter}}" name="imagen-document-Infant{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
+                            <input class="hidden imagen-document" type="file" id="imagen-document-Room{{room_number}}-Infant{{forloop.counter}}" name="imagen-document-Room{{room_number}}-Infant{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
                         </div>
                         
                         <div class="flex flex-wrap items-center mb-3">
-                            <label for="imagen-document-secondary-Infant{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
+                            <label for="imagen-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" class="cursor-pointer flex justify-center text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm"
                             style="background-image: linear-gradient(to bottom, #5b0f29, #b61f53, #5b0f29);">
                                 <span class="material-icons text-center font-bold text-white text-sm hidden md:flex mr-2">folder_open</span>
                                 <span class="material-icons text-center font-bold text-white text-sm md:hidden mr-2">photo_camera</span>
                                 {{ strings.scan_secondary_document }} 
                             </label>
-                            <input class="hidden imagen-document" type="file" id="imagen-document-secondary-Infant{{forloop.counter}}" name="imagen-document-secondary-Infant{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
+                            <input class="hidden imagen-document" type="file" id="imagen-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" name="imagen-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" capture="environment" accept="image/png, image/jpeg"/>
                         </div>
 
-                        <button type="button" class="cursor-pointer text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm" onclick="showForm('Adult{{forloop.counter}}')"
-                        style="background-image: linear-gradient(to bottom, #b61f53, #b61f53, #b61f53);" id="btn-showForm-Infant{{forloop.counter}}">
+                        <button type="button" class="cursor-pointer text-white text-sm font-bold w-auto h-7 px-2 items-center border border-itravel-700 rounded-full shadow-sm" onclick="showForm('Room{{room_number}}-Adult{{forloop.counter}}')"
+                        style="background-image: linear-gradient(to bottom, #b61f53, #b61f53, #b61f53);" id="btn-showForm-Room{{room_number}}-Infant{{forloop.counter}}">
                         {{ strings.manually_enter_data }}
                         </button>
                     </div>
                     
                     <div class="flex flex-wrap space-x-2">
-                        <img src="" class="h-40 hidden" id="imageDocument-Infant{{forloop.counter}}" alt="" />
-                        <img src="" class="h-40 hidden" id="imageDocument-secondary-Infant{{forloop.counter}}" alt="" />
+                        <img src="" class="h-40 hidden" id="imageDocument-Room{{room_number}}-Infant{{forloop.counter}}" alt="" />
+                        <img src="" class="h-40 hidden" id="imageDocument-secondary-Room{{room_number}}-Infant{{forloop.counter}}" alt="" />
                     </div>
 
-                    <div id="form-vcontent-Infant{{forloop.counter}}" class="hidden">
+                    <div id="form-vcontent-Room{{room_number}}-Infant{{forloop.counter}}" class="hidden">
                         
                         <div class="flex flex-wrap items-center mb-3">
                             <h1 class="text-gray-700 font-bold md:ml-2 text-md mr-2">{{ strings.personalInformation }}</h1>
@@ -1915,23 +1921,23 @@
                         <div class="flex flex-wrap mb-6">
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Infant{{forloop.counter}}">{{ strings.first_name }} 
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Room{{room_number}}-Infant{{forloop.counter}}">{{ strings.first_name }} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
                                 <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="firstName-Infant{{forloop.counter}}"  name="firstName-Infant{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="firstName-Room{{room_number}}-Infant{{forloop.counter}}"  name="firstName-Room{{room_number}}-Infant{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Infant{{forloop.counter}}">{{ strings.middle_name}}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Room{{room_number}}-Infant{{forloop.counter}}">{{ strings.middle_name}}</label>
                                 <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Infant{{forloop.counter}}" name="middleName-Infant{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Room{{room_number}}-Infant{{forloop.counter}}" name="middleName-Room{{room_number}}-Infant{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Infant{{forloop.counter}}">{{ strings.last_name}} 
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Room{{room_number}}-Infant{{forloop.counter}}">{{ strings.last_name}} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
                                 <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Infant{{forloop.counter}}" name="lastName-Infant{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Room{{room_number}}-Infant{{forloop.counter}}" name="lastName-Room{{room_number}}-Infant{{forloop.counter}}" type="text">
                             </div>
 
                         </div>
@@ -1939,9 +1945,9 @@
                         <div class="flex flex-wrap mb-6">
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Infant{{forloop.counter}}">{{ strings.mother_name}}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Room{{room_number}}-Infant{{forloop.counter}}">{{ strings.mother_name}}</label>
                                 <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
-                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Infant{{forloop.counter}}" name="motherLastName-Infant{{forloop.counter}}" type="text">
+                                focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Room{{room_number}}-Infant{{forloop.counter}}" name="motherLastName-Room{{room_number}}-Infant{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
@@ -1955,7 +1961,7 @@
                                             clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="dateBirth-Infant{{forloop.counter}}" name="dateBirth-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy" onchange="validDatepicker(this)" autocomplete="off"
+                                    <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="dateBirth-Room{{room_number}}-Infant{{forloop.counter}}" name="dateBirth-Room{{room_number}}-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy" onchange="validDatepicker(this)" autocomplete="off"
                                     type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                     focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 range-today infant-dateBirth">
                                 </div>
@@ -1963,18 +1969,18 @@
                             
                         </div>
 
-                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2 ml-2" for="gender-Infant{{forloop.counter}}">
+                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2 ml-2" for="gender-Room{{room_number}}-Infant{{forloop.counter}}">
                             {{ strings.gender}} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
                         <div class="flex flex-wrap w-full ml-2 mb-6">
                             <div class="flex items-center mr-6">
-                                <input checked id="male-Infant{{forloop.counter}}" type="radio" value="M"  name="gender-Infant{{forloop.counter}}"
+                                <input checked id="male-Room{{room_number}}-Infant{{forloop.counter}}" type="radio" value="M"  name="gender-Room{{room_number}}-Infant{{forloop.counter}}"
                                 class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" >
-                                <label for="male-Infant{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.male }}</label>
+                                <label for="male-Room{{room_number}}-Infant{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.male }}</label>
                             </div>
                             <div class="flex items-center mr-4">
-                                <input id="female-Infant{{forloop.counter}}" type="radio" value="F"  name="gender-Infant{{forloop.counter}}"
+                                <input id="female-Room{{room_number}}-Infant{{forloop.counter}}" type="radio" value="F"  name="gender-Room{{room_number}}-Infant{{forloop.counter}}"
                                 class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2">
-                                <label for="female-Infant{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.female }}</label>
+                                <label for="female-Room{{room_number}}-Infant{{forloop.counter}}" class="ml-2 text-sm font-medium text-gray-900">{{ strings.female }}</label>
                             </div>
                         </div>
                         
@@ -1983,9 +1989,9 @@
                         <div class="flex flex-wrap mb-6">
                             <div class="flex flex-wrap w-full md:w-1/3">
                                 <div class="w-full md:w-1/2 md:px-2 py-3">
-                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-primary-Infant{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-primary-Room{{room_number}}-Infant{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
                                     <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required
-                                    id="number-document-primary-Infant{{forloop.counter}}" name="number-document-primary-Infant{{forloop.counter}}" type="text">
+                                    id="number-document-primary-Room{{room_number}}-Infant{{forloop.counter}}" name="number-document-primary-Room{{room_number}}-Infant{{forloop.counter}}" type="text">
                                 </div>
 
                                 <div class="w-full md:w-1/2 md:px-2 py-3">
@@ -1995,15 +2001,15 @@
                                             <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                         </div>
-                                        <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-primary-Infant{{forloop.counter}}" name="expiration-document-primary-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
+                                        <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-primary-Room{{room_number}}-Infant{{forloop.counter}}" name="expiration-document-primary-Room{{room_number}}-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
                                         type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
                                     </div>
                                 </div>
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-primary-Infant{{forloop.counter}}">{{ strings.document_type }}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-primary-Room{{room_number}}-Infant{{forloop.counter}}">{{ strings.document_type }}</label>
                                 <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
-                                id="type-document-primary-Infant{{forloop.counter}}" name="type-document-primary-Infant{{forloop.counter}}" required>
+                                id="type-document-primary-Room{{room_number}}-Infant{{forloop.counter}}" name="type-document-primary-Room{{room_number}}-Infant{{forloop.counter}}" required>
                                     <option value="Passport">{{ strings.passport }}</option>
                                     <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
                                     <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
@@ -2011,9 +2017,9 @@
                                 </select>
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
-                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-primary-Infant{{forloop.counter}}">{{ strings.country_document }}</label>
+                                <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-primary-Room{{room_number}}-Infant{{forloop.counter}}">{{ strings.country_document }}</label>
                                 <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
-                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="country-document-primary-Infant{{forloop.counter}}" name="country-document-primary-Infant{{forloop.counter}}" required>
+                                leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="country-document-primary-Room{{room_number}}-Infant{{forloop.counter}}" name="country-document-primary-Room{{room_number}}-Infant{{forloop.counter}}" required>
                                     <option value="USA" selected>USA (United States)</option>
                                     <option value="CUB">CUB (Cuba)</option> ADD_CUBA
                                     <option value="AFG">AFG (Afghanistan)</option>
@@ -2260,21 +2266,21 @@
                         <div class="flex flex-wrap items-center mb-3">
                             <h1 class="text-gray-700 font-bold text-md mr-3 md:ml-2">{{ strings.secondary_document_information }}</h1>
                             <div class="flex items-center rounded bg-red-100 py-1 px-2 ml-3 py-1 md:px-2" style="background-image: linear-gradient(to bottom, #940000, #e90303, #940000);">
-                                <input id="checkboxSecondaryDocuments-Infant{{forloop.counter}}" type="checkbox" value="" class="w-4 h-4 text-red-300 bg-gray-100 rounded border-gray-300 focus:ring-red-300 focus:ring" onchange="notAvailableSecondaryDocument(this,'Infant{{forloop.counter}}')">
-                                <label for="checkboxSecondaryDocuments-Infant{{forloop.counter}}" class="ml-2 text-sm font-bold text-white">{{ strings.not_available }}</label>
+                                <input id="checkboxSecondaryDocuments-Room{{room_number}}-Infant{{forloop.counter}}" type="checkbox" value="" class="w-4 h-4 text-red-300 bg-gray-100 rounded border-gray-300 focus:ring-red-300 focus:ring" onchange="notAvailableSecondaryDocument(this,'Room{{room_number}}-Infant{{forloop.counter}}')">
+                                <label for="checkboxSecondaryDocuments-Room{{room_number}}-Infant{{forloop.counter}}" class="ml-2 text-sm font-bold text-white">{{ strings.not_available }}</label>
                             </div>
                         </div>
 
-                        <div class="flex items-center mb-6 ml-2 w-auto hidden" id="alertNotCubaDocument-Infant{{forloop.counter}}">
+                        <div class="flex items-center mb-6 ml-2 w-auto hidden" id="alertNotCubaDocument-Room{{room_number}}-Infant{{forloop.counter}}">
                             <h3 class="text-md font-medium text-red-500 font-serif ml-1" id="">{{ strings.booking_t3 }}</h3>
                         </div>
 
-                        <div id="secondaryDocument-Infant{{forloop.counter}}">
+                        <div id="secondaryDocument-Room{{room_number}}-Infant{{forloop.counter}}">
                             <div class="flex flex-wrap mb-6">
                                 <div class="flex flex-wrap w-full md:w-1/3">
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
-                                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-secondary-Infant{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                        <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Infant{{forloop.counter}}" name="number-document-secondary-Infant{{forloop.counter}}" type="text" required>
+                                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
+                                        <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" name="number-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" type="text">
                                     </div>
 
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
@@ -2283,15 +2289,15 @@
                                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                             </div>
-                                            <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-secondary-Infant{{forloop.counter}}" name="expiration-document-secondary-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy"  id="expiration-document-secondary-Infant{{forloop.counter}}" required onchange="validDatepicker(this)" autocomplete="off"
+                                            <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" name="expiration-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy"  id="expiration-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" onchange="validDatepicker(this)" autocomplete="off"
                                             type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
-                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-secondary-Infant{{forloop.counter}}">{{ strings.document_type }}</label>
+                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}">{{ strings.document_type }}</label>
                                     <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
-                                    id="type-document-secondary-Infant{{forloop.counter}}" name="type-document-secondary-Infant{{forloop.counter}}" required>
+                                    id="type-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" name="type-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" required>
                                         <option value="Passport">{{ strings.passport }}</option>
                                         <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
                                         <option value="U.S. Refugee Permit Travel Document">{{ strings.country_document_s3 }}</option>
@@ -2299,9 +2305,9 @@
                                     </select>
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
-                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-secondary-Infant{{forloop.counter}}">{{ strings.country_document }}</label>
+                                    <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}">{{ strings.country_document }}</label>
                                     <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
-                                    leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-secondary-Infant{{forloop.counter}}" id="country-document-secondary-Infant{{forloop.counter}}" required>
+                                    leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" id="country-document-secondary-Room{{room_number}}-Infant{{forloop.counter}}" required>
                                         <option value="USA" selected>USA (United States)</option>
                                         <option value="CUB">CUB (Cuba)</option> ADD_CUBA
                                         <option value="AFG">AFG (Afghanistan)</option>
@@ -2551,8 +2557,11 @@
             {% endfor %}
             {% endwith %}
 
+            {% endwith %}
+            {% endfor %}
+
             <div class="pt-6">
-                <h1 class="text-gray-700 font-bold mb-3 text-md ml-2">{{ strings.address_es }} {{flightBeginSelect.begin.country}} {{ strings.address_en }}</h1>
+                <h1 class="text-gray-700 font-bold mb-3 text-md ml-2">{{ strings.address_es }} {{period.flightBegin.begin.country}} {{ strings.address_en }}</h1>
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full md:w-1/3 md:px-2 py-3">
                         <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-street-1">{{ strings.street}}<span class="text-red-500 text-md p-0 font-bold">*</span></label>
@@ -2560,7 +2569,7 @@
                     </div>
                     <div class="w-full md:w-2/3 md:flex">
                         <div class="w-full md:w-1/3 md:px-2 py-3">
-                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-state-1">{% if flightBeginSelect.from.countryCode|upper == "CUB" or flightBeginSelect.from.countryCode|upper == "CU" %}{{ strings.province }}{% else %}{{ strings.state }}{% endif%}</label>
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-state-1">{% if period.flightBegin.begin.countryCode|upper == "CUB" or period.flightBegin.begin.countryCode|upper == "CU" %}{{ strings.province }}{% else %}{{ strings.state }}{% endif%}</label>
                             <select autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 
                             leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" onchange="setCities(this.selectedOptions[0].getAttribute('cities'),'address-city-1')" name="address-state-1"  id="address-state-1"  required>
                             {% for address in address_begin %}
@@ -2571,7 +2580,7 @@
                             </select>
                         </div>
                         <div class="w-full md:w-1/3 md:px-2 py-3">
-                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-city-1">{% if flightBeginSelect.from.countryCode|upper == "CUB" or flightBeginSelect.from.countryCode|upper == "CU" %}{{ strings.municipality }}{% else %}{{ strings.city }}{% endif%}</label>
+                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-city-1">{% if period.flightBegin.begin.countryCode|upper == "CUB" or period.flightBegin.begin.countryCode|upper == "CU" %}{{ strings.municipality }}{% else %}{{ strings.city }}{% endif%}</label>
                             <select autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
                             leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="address-city-1" id="address-city-1" required>
                             {% for city in cities_begin %}
@@ -2585,42 +2594,8 @@
                         </div>
                     </div>
                 </div>
-
-                <h1 class="text-gray-700 font-bold mb-3 text-md ml-2">{{ strings.address_es }} {{flightBeginSelect.to.country}} {{ strings.address_en }}</h1>
-                <div class="flex flex-wrap mb-6">
-                    <div class="w-full md:w-1/3 md:px-2 py-3">
-                        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-street-2">{{ strings.street}}<span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                        <input autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-street-2" name="address-street-2" type="text" required>
-                    </div>
-                    <div class="w-full md:w-2/3 md:flex">
-                        <div class="w-full md:w-1/3 md:px-2 py-3">
-                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-state-2">{% if flightBeginSelect.to.countryCode|upper == "CUB" or flightBeginSelect.to.countryCode|upper == "CU" %}{{ strings.province }}{% else %}{{ strings.state }}{% endif%}</label>
-                            <select autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 
-                            leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" onchange="setCities(this.selectedOptions[0].getAttribute('cities'),'address-city')" name="address-state-2"  id="address-state-2"  required>
-                            {% for address in address_to %}
-                                {% for state in address %}
-                                <option value="{{state}}" cities="{{address.values}}">{{ state}}</option>
-                                {% endfor %}
-                            {% endfor %}
-                            </select>
-                        </div>
-                        <div class="w-full md:w-1/3 md:px-2 py-3">
-                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-city-2">{% if flightBeginSelect.to.countryCode|upper == "CUB" or flightBeginSelect.to.countryCode|upper == "CU" %}{{ strings.municipality }}{% else %}{{ strings.city }}{% endif%}</label>
-                            <select autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
-                            leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="address-city-2" id="address-city-2" required>
-                            {% for sity in cities_to %}
-                                <option value="US">{{ sity }}</option>
-                            {% endfor %}
-                            </select>
-                        </div>
-                        <div class="w-full md:w-1/3 md:px-2 py-3">
-                            <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-postalcode">{{ strings.zip_code }}</label>
-                            <input autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-postalcode" name="address-postalcode" type="text">
-                        </div>
-                    </div>
-                </div>
                 
-                {% if flightBeginSelect.begin.countryCode|upper == "USA" or flightBeginSelect.begin.countryCode|upper == "US" and flightBeginSelect.to.countryCode|upper == "CUB" or flightBeginSelect.to.countryCode|upper == "CU" %}
+                {% if period.flightBegin.beginn.countryCode|upper == "USA" or period.flightBegin.beginn.countryCode|upper == "US" and period.flightBegin.beginountryCode|upper == "CUB" or period.flightBegin.beginountryCode|upper == "CU" %}
                 <h1 class="text-gray-700 font-bold mb-3 text-sm ml-2">{{ strings.license_t1 }}</h1>
                 <p class="text-gray-700 mb-3 text-sm ml-4">{{ strings.license_t2 }}</p>
                 <h1 class="text-gray-700 font-bold mb-3 text-sm ml-2">{{ strings.license_t3 }}</h1>
@@ -2631,7 +2606,7 @@
                 <p class="text-gray-700 mb-3 text-sm ml-4">{{ strings.license_t7 }}</p>
                 <div class="mt-2 flex flex-col mb-6 ml-2">
                     <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="license">{{ strings.license_t8 }}</label>
-                    <select id="license" id="license-Infant{{forloop.counter}}" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 md:w-1/3
+                    <select id="license" id="license-Room{{room_number}}-Infant{{forloop.counter}}" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 md:w-1/3
                     leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500">
                         <option value="515.561:Visita familiar" class="ng-star-inserted">515.561 : Visita familiar </option>
                         <option value="515.562:Asuntos oficiales del gobierno de EE.&nbsp;UU., gobiernos extranjeros u organizaciones intergubernamentales" class="ng-star-inserted">515.562 : Asuntos oficiales del gobierno de EE.&nbsp;UU., gobiernos extranjeros u organizaciones intergubernamentales </option>
@@ -2658,9 +2633,6 @@
 
 
             {% csrf_token %}
-            <input class="hidden"  type="number" name="adults" value="{{adults}}">
-            <input class="hidden"  type="number" name="children" value="{{children}}">
-            <input class="hidden"  type="number" name="infants" value="{{infants}}">
             <input class="hidden"  type="number" name="period" value="{{period.id}}">
 
             <div>
@@ -2771,9 +2743,8 @@
 {% endblock content %}
 
 {% block scripts %}
-<script src="{% static 'js/booking.js' %}"></script>
+<script src="{% static 'js/booking_package.js' %}"></script>
 <script class="iti-load-utils" async="" src="{% static 'js/validatePhoneNumberUtils.js' %}"></script>
-<!--<script src="https://cdn.jsdelivr.net/gh/naptha/tesseract.js@v1.0.19/dist/tesseract.js"></script>-->
 <script src="{% static 'js/mrz_read.js' %}"></script>
 
 <script type = "text/JavaScript">
