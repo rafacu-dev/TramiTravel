@@ -21537,6 +21537,524 @@ countries = {
                 "Yoder"
             ]
         }
+    ],
+    "DO": [
+        {
+            "Distrito Nacional": [
+                "Santo Domingo de Guzmán",
+                "Santo Domingo Este",
+                "Santo Domingo Norte",
+                "Santo Domingo Oeste"
+            ]
+        },
+        {
+            "Azua": [
+                "Azua de Compostela",
+                "Estebanía",
+                "Guayabal",
+                "Las Charcas",
+                "Las Yayas de Viajama",
+                "Padre Las Casas",
+                "Peralta",
+                "Sabana Yegua",
+                "Tábara Arriba"
+            ]
+        },
+        {
+            "Bahoruco": [
+                "Galván",
+                "Los Ríos",
+                "Neiba",
+                "Tamayo",
+                "Villa Jaragua"
+            ]
+        },
+        {
+            "Barahona": [
+                "Barahona",
+                "Cabral",
+                "El Peñón",
+                "Enriquillo",
+                "Fundación",
+                "Jaquimeyes",
+                "La Ciénaga",
+                "Las Salinas",
+                "Paraíso",
+                "Polo"
+            ]
+        },
+        {
+            "Dajabón": [
+                "Dajabón",
+                "El Pino",
+                "Loma de Cabrera",
+                "Partido",
+                "Restauración"
+            ]
+        },
+        {
+            "Duarte": [
+                "Cevicos",
+                "Las Guáranas",
+                "Pimentel",
+                "San Francisco de Macorís",
+                "Villa Riva"
+            ]
+        },
+        {
+            "Elías Piña": [
+                "Bánica",
+                "Comendador",
+                "El Llano",
+                "Hondo Valle",
+                "Pedro Santana"
+            ]
+        },
+        {
+            "Espaillat": [
+                "Gaspar Hernández",
+                "Jamao al Norte",
+                "Moca"
+            ]
+        },
+        {
+            "Hato Mayor": [
+                "El Valle",
+                "Hato Mayor del Rey",
+                "Sabana de la Mar"
+            ]
+        },
+        {
+            "Hermanas Mirabal": [
+                "Salcedo",
+                "Tenares",
+                "Villa Tapia"
+            ]
+        },
+        {
+            "Independencia": [
+                "Cristóbal",
+                "Duvergé",
+                "La Descubierta",
+                "Mella"
+            ]
+        },
+        {
+            "La Altagracia": [
+                "Higüey",
+                "La Romana",
+                "San Rafael del Yuma"
+            ]
+        },
+        {
+            "La Romana": [
+                "Guaymate",
+                "La Romana",
+                "Villa Hermosa"
+            ]
+        },
+        {
+            "La Vega": [
+                "Concepción de La Vega",
+                "Constanza",
+                "Jarabacoa",
+                "Jima Abajo",
+                "La Vega",
+                "Moca"
+            ]
+        },
+        {
+            "María Trinidad Sánchez": [
+                "Cabrera",
+                "El Factor",
+                "Nagua",
+                "Río San Juan"
+            ]
+        },
+        {
+            "Monseñor Nouel": [
+                "Bonao",
+                "Maimón",
+                "Piedra Blanca"
+            ]
+        },
+        {
+            "Monte Cristi": [
+                "Castañuela",
+                "Guayubín",
+                "Las Matas de Santa Cruz",
+                "Monte Cristi",
+                "Pepillo Salcedo",
+                "Villa Vásquez"
+            ]
+        },
+        {
+            "Monte Plata": [
+                "Bayaguana",
+                "Don Juan",
+                "Monte Plata",
+                "Peralvillo",
+                "Sabana Grande de Boyá",
+                "Yamasá"
+            ]
+        },
+        {
+            "Pedernales": [
+                "Oviedo",
+                "Pedernales"
+            ]
+        },
+        {
+            "Peravia": [
+                "Baní",
+                "Nizao",
+                "Sabana Buey",
+                "Sabana Grande de Palenque"
+            ]
+        },
+        {
+            "Puerto Plata": [
+                "Altamira",
+                "Guananico",
+                "Imbert",
+                "Los Hidalgos",
+                "Luperón",
+                "Puerto Plata",
+                "Sosúa",
+                "Villa Isabela"
+            ]
+        },
+        {
+            "Samaná": [
+                "El Limón",
+                "Las Terrenas",
+                "Samaná",
+                "Sánchez"
+            ]
+        },
+        {
+            "San Cristóbal": [
+                "Bajos de Haina",
+                "Cambita Garabitos",
+                "Los Cacaos",
+                "Sabana Grande de Palenque",
+                "San Cristóbal",
+                "Villa Altagracia"
+            ]
+        },
+        {
+            "San José de Ocoa": [
+                "Rancho Arriba",
+                "San José de Ocoa"
+            ]
+        },
+        {
+            "San Juan": [
+                "Bohechío",
+                "El Cercado",
+                "Juan de Herrera",
+                "Las Matas de Farfán",
+                "San Juan de la Maguana",
+                "Vallejuelo"
+            ]
+        },
+        {
+            "San Pedro de Macorís": [
+                "Consuelo",
+                "Guayacanes",
+                "Quisqueya",
+                "Ramón Santana",
+                "San Pedro de Macorís"
+            ]
+        },
+        {
+            "Santiago": [
+                "Bisonó",
+                "Jánico",
+                "Licey al Medio",
+                "Puñal",
+                "Santiago de los Caballeros",
+                "Tamboril",
+                "Villa González"
+            ]
+        },
+        {
+            "Santiago Rodríguez": [
+                "Los Almácigos",
+                "San Ignacio de Sabaneta",
+                "Villa Los Almácigos"
+            ]
+        },
+        {
+            "Santo Domingo": [
+                "Boca Chica",
+                "Los Alcarrizos",
+                "Pedro Brand",
+                "San Antonio de Guerra",
+                "Santo Domingo Este",
+                "Santo Domingo Norte",
+                "Santo Domingo Oeste"
+            ]
+        }
+    ],
+    "DOM": [
+        {
+            "Distrito Nacional": [
+                "Santo Domingo de Guzmán",
+                "Santo Domingo Este",
+                "Santo Domingo Norte",
+                "Santo Domingo Oeste"
+            ]
+        },
+        {
+            "Azua": [
+                "Azua de Compostela",
+                "Estebanía",
+                "Guayabal",
+                "Las Charcas",
+                "Las Yayas de Viajama",
+                "Padre Las Casas",
+                "Peralta",
+                "Sabana Yegua",
+                "Tábara Arriba"
+            ]
+        },
+        {
+            "Bahoruco": [
+                "Galván",
+                "Los Ríos",
+                "Neiba",
+                "Tamayo",
+                "Villa Jaragua"
+            ]
+        },
+        {
+            "Barahona": [
+                "Barahona",
+                "Cabral",
+                "El Peñón",
+                "Enriquillo",
+                "Fundación",
+                "Jaquimeyes",
+                "La Ciénaga",
+                "Las Salinas",
+                "Paraíso",
+                "Polo"
+            ]
+        },
+        {
+            "Dajabón": [
+                "Dajabón",
+                "El Pino",
+                "Loma de Cabrera",
+                "Partido",
+                "Restauración"
+            ]
+        },
+        {
+            "Duarte": [
+                "Cevicos",
+                "Las Guáranas",
+                "Pimentel",
+                "San Francisco de Macorís",
+                "Villa Riva"
+            ]
+        },
+        {
+            "Elías Piña": [
+                "Bánica",
+                "Comendador",
+                "El Llano",
+                "Hondo Valle",
+                "Pedro Santana"
+            ]
+        },
+        {
+            "Espaillat": [
+                "Gaspar Hernández",
+                "Jamao al Norte",
+                "Moca"
+            ]
+        },
+        {
+            "Hato Mayor": [
+                "El Valle",
+                "Hato Mayor del Rey",
+                "Sabana de la Mar"
+            ]
+        },
+        {
+            "Hermanas Mirabal": [
+                "Salcedo",
+                "Tenares",
+                "Villa Tapia"
+            ]
+        },
+        {
+            "Independencia": [
+                "Cristóbal",
+                "Duvergé",
+                "La Descubierta",
+                "Mella"
+            ]
+        },
+        {
+            "La Altagracia": [
+                "Higüey",
+                "La Romana",
+                "San Rafael del Yuma"
+            ]
+        },
+        {
+            "La Romana": [
+                "Guaymate",
+                "La Romana",
+                "Villa Hermosa"
+            ]
+        },
+        {
+            "La Vega": [
+                "Concepción de La Vega",
+                "Constanza",
+                "Jarabacoa",
+                "Jima Abajo",
+                "La Vega",
+                "Moca"
+            ]
+        },
+        {
+            "María Trinidad Sánchez": [
+                "Cabrera",
+                "El Factor",
+                "Nagua",
+                "Río San Juan"
+            ]
+        },
+        {
+            "Monseñor Nouel": [
+                "Bonao",
+                "Maimón",
+                "Piedra Blanca"
+            ]
+        },
+        {
+            "Monte Cristi": [
+                "Castañuela",
+                "Guayubín",
+                "Las Matas de Santa Cruz",
+                "Monte Cristi",
+                "Pepillo Salcedo",
+                "Villa Vásquez"
+            ]
+        },
+        {
+            "Monte Plata": [
+                "Bayaguana",
+                "Don Juan",
+                "Monte Plata",
+                "Peralvillo",
+                "Sabana Grande de Boyá",
+                "Yamasá"
+            ]
+        },
+        {
+            "Pedernales": [
+                "Oviedo",
+                "Pedernales"
+            ]
+        },
+        {
+            "Peravia": [
+                "Baní",
+                "Nizao",
+                "Sabana Buey",
+                "Sabana Grande de Palenque"
+            ]
+        },
+        {
+            "Puerto Plata": [
+                "Altamira",
+                "Guananico",
+                "Imbert",
+                "Los Hidalgos",
+                "Luperón",
+                "Puerto Plata",
+                "Sosúa",
+                "Villa Isabela"
+            ]
+        },
+        {
+            "Samaná": [
+                "El Limón",
+                "Las Terrenas",
+                "Samaná",
+                "Sánchez"
+            ]
+        },
+        {
+            "San Cristóbal": [
+                "Bajos de Haina",
+                "Cambita Garabitos",
+                "Los Cacaos",
+                "Sabana Grande de Palenque",
+                "San Cristóbal",
+                "Villa Altagracia"
+            ]
+        },
+        {
+            "San José de Ocoa": [
+                "Rancho Arriba",
+                "San José de Ocoa"
+            ]
+        },
+        {
+            "San Juan": [
+                "Bohechío",
+                "El Cercado",
+                "Juan de Herrera",
+                "Las Matas de Farfán",
+                "San Juan de la Maguana",
+                "Vallejuelo"
+            ]
+        },
+        {
+            "San Pedro de Macorís": [
+                "Consuelo",
+                "Guayacanes",
+                "Quisqueya",
+                "Ramón Santana",
+                "San Pedro de Macorís"
+            ]
+        },
+        {
+            "Santiago": [
+                "Bisonó",
+                "Jánico",
+                "Licey al Medio",
+                "Puñal",
+                "Santiago de los Caballeros",
+                "Tamboril",
+                "Villa González"
+            ]
+        },
+        {
+            "Santiago Rodríguez": [
+                "Los Almácigos",
+                "San Ignacio de Sabaneta",
+                "Villa Los Almácigos"
+            ]
+        },
+        {
+            "Santo Domingo": [
+                "Boca Chica",
+                "Los Alcarrizos",
+                "Pedro Brand",
+                "San Antonio de Guerra",
+                "Santo Domingo Este",
+                "Santo Domingo Norte",
+                "Santo Domingo Oeste"
+            ]
+        }
     ]
 }
 

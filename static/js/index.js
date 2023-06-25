@@ -81,46 +81,6 @@ function downPassenger(label){
 }
 
 
-
-function upClientsHotel(label){
-  let lbl = document.getElementById(`${label}LabelClientsHotels`);
-  let actualValue = parseInt(lbl.textContent);
-  if( actualValue < parseInt(lbl.getAttribute("max"))){
-      lbl.textContent = actualValue + 1;
-      let input = document.getElementById(label);
-      input.value = actualValue + 1;
-      
-      let textClientsHotels = document.getElementById("textClientsHotels");
-      let count = parseInt(textClientsHotels.textContent)
-      textClientsHotels.textContent = count + 1;
-  }
-
-}
-
-function downClientsHotel(label){
-    let lbl = document.getElementById(`${label}LabelClientsHotels`);
-    let actualValue = parseInt(lbl.textContent);
-    if( actualValue > 1){
-        lbl.textContent = actualValue - 1;
-        let input = document.getElementById(label);
-        input.value = actualValue - 1;
-
-        let textClientsHotels = document.getElementById("textClientsHotels");
-        let count = parseInt(textClientsHotels.textContent)
-        textClientsHotels.textContent = count - 1;
-    }
-    else if( label !== "adults" && actualValue > 0){
-        lbl.textContent = actualValue - 1;
-        let input = document.getElementById(label);
-        input.value = actualValue - 1;
-        
-        let textClientsHotels = document.getElementById("textClientsHotels");
-        let count = parseInt(textClientsHotels.textContent)
-        textClientsHotels.textContent = count - 1;
-    }
-
-}
-
 function selectFrom(id_select){
 	const select = document.getElementById("to-hotels");
 	
@@ -165,13 +125,32 @@ function selectHotel(id_select){
 	
 	window.objHotels.forEach(obj => { 
 		if(obj.id == id_select) {
-			document.getElementById("textClientsHotels").textContent = 1;
-			document.getElementById("adultsLabelClientsHotels").setAttribute("max",obj.max_adults);
-			document.getElementById("adultsLabelClientsHotels").textContent = 1;
-			document.getElementById("childrenLabelClientsHotels").setAttribute("max",obj.max_childrens);
-			document.getElementById("childrenLabelClientsHotels").textContent = 0;
-			document.getElementById("infantsLabelClientsHotels").setAttribute("max",obj.max_infants);
-			document.getElementById("infantsLabelClientsHotels").textContent = 0;		
+			document.getElementById("textClientsHotels").innerText = "Rooms:1  Clientes: 1";
+            
+            var htmlAdults = '<option value = "1" selected="true">1</option>'
+            for (let i = 2; i <= obj.max_adults; i++) {
+                htmlAdults += `<option value = "${i}">${i}</option>`
+            }
+            for (let i = 1; i <= 9; i++) {
+                document.getElementById(`adults-room-${i}`).innerHTML = htmlAdults;
+            }
+            
+            var htmlChildrens = '<option value = "0" selected="true">0</option>'
+            for (let i = 1; i <= obj.max_childrens; i++) {
+                htmlChildrens += `<option value = "${i}">${i}</option>`
+            }
+            var htmlInfants = '<option value = "0" selected="true">0</option>'
+            for (let i = 1; i <= obj.max_infants; i++) {
+                htmlInfants += `<option value = "${i}">${i}</option>`
+            }
+
+            for (let i = 1; i <= 9; i++) {
+                document.getElementById(`childrens-room-${i}`).innerHTML = htmlChildrens;
+                document.getElementById(`infants-room-${i}`).innerHTML = htmlInfants;
+            }
+			//document.getElementById("adultsLabelClientsHotels").setAttribute("max",obj.max_adults);
+			//document.getElementById("childrenLabelClientsHotels").setAttribute("max",obj.max_childrens);
+			//document.getElementById("infantsLabelClientsHotels").setAttribute("max",obj.max_infants);
 		}
 	})
 	window.objRoomType.forEach(obj => {       
@@ -186,6 +165,52 @@ function selectHotel(id_select){
   option.text = "All";
   option.value = "All";
   select.appendChild(option);
+}
+
+function selectRooms(c){
+    let cant = parseInt(c);
+    for (let i = 2; i <= cant; i++) {
+        document.getElementById(`lbl-room-${i}`).classList.remove("hidden");
+        document.getElementById(`div-adults-room-${i}`).classList.remove("hidden");
+        document.getElementById(`div-childrens-room-${i}`).classList.remove("hidden");
+        document.getElementById(`div-infants-room-${i}`).classList.remove("hidden");
+    }
+    for (let i = cant+1; i <= 9; i++) {
+        document.getElementById(`lbl-room-${i}`).classList.add("hidden");
+        document.getElementById(`div-adults-room-${i}`).classList.add("hidden");
+        document.getElementById(`div-childrens-room-${i}`).classList.add("hidden");
+        document.getElementById(`div-infants-room-${i}`).classList.add("hidden");
+        
+        document.getElementById(`adults-room-${i}`).value = 1;
+        document.getElementById(`childrens-room-${i}`).value = 0;
+        document.getElementById(`infants-room-${i}`).value = 0;
+    }
+    calculateClientsPackage()
+}
+
+function calculateClientsPackage(){
+    let cant = parseInt(document.getElementById("cant-rooms").value);
+    var adults = 0;
+    var childrens = 0;
+    var infants = 0;
+    var room_clients = "";
+    for (let i = 1; i <= cant; i++) {
+        let adult = parseInt(document.getElementById(`adults-room-${i}`).value);
+        let children = parseInt(document.getElementById(`childrens-room-${i}`).value);
+        let infant = parseInt(document.getElementById(`infants-room-${i}`).value);
+
+        room_clients += `${adult}-${children}-${infant}%`;
+        console.log(room_clients)
+
+        adults += adult
+        childrens += children
+        infants += infant
+    }
+    
+    document.getElementById("input-room-clients").value = room_clients;
+
+    let cllients = adults + childrens + infants;
+    document.getElementById("textClientsHotels").innerText = "Rooms: " + cant + "  Clientes: " + cllients;
 }
 
 //**************************************************** */

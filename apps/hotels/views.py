@@ -6,6 +6,7 @@ from django.views.generic import View
 from apps.hotels.models import Bill, Booking, Destinatation, Hotel, RoomType, VacationPackage
 
 from apps.menus.models import Menu
+from apps.utils.utils import toMoney
 from core.languages import get_strings
 
 
@@ -36,10 +37,7 @@ class Hotels(View):
         room_type = data["room-type"]
         hotel = data["hotel"]
 
-        adults = int(data["adults"])
-        children = int(data["children"])
-        infants = int(data["infants"])
-        ability_requiered = adults + children
+        rooms_clients = str(data["room-clients"]).split("%")[:-1]
 
         month_year = data["month-travel"]
 
@@ -57,7 +55,12 @@ class Hotels(View):
         
         
         for pp in period_packages:
-            pp.priceTotalM = pp.priceTotalMoney(adults,children,infants)
+            priceTotal = 0.0
+            for room in rooms_clients:
+                clients = room.split("-")
+                priceTotal += pp.priceTotal(int(clients[0]),int(clients[1]),int(clients[2]))
+
+            pp.priceTotalM = toMoney(priceTotal)
 
         strings,language = get_strings(request.COOKIES)
         
@@ -65,9 +68,7 @@ class Hotels(View):
         menus = Menu.objects.filter(actived=True).order_by('position')
         
         context = {
-            "adults":adults,
-            "children":children,
-            "infants":infants,
+            "room_clients":data["room-clients"],
             "language":language,
             "strings" : strings,
             "destinatationsHotels":destinatationsHotels,
@@ -86,9 +87,7 @@ class BookingView(View):
     def get(self,request,*args,**kwargs):
         data = request.GET
 
-        adults = int(data['adults'])
-        children = int(data['children'])
-        infants = int(data['infants'])
+        rooms_clients = str(data["room-clients"]).split("%")[:-1]
         id = int(data['period'])
 
         period = VacationPackage.objects.get(id=id)
@@ -96,7 +95,7 @@ class BookingView(View):
         try:
             address_begin = countries[period.origen.countryCode.upper()]
             cities_begin = address_begin[0][list(address_begin[0].keys())[0]]
-            address_to = countries[period.hotel.location.countryCode.upper()]
+            address_to = countries[period.room.hotel.location.countryCode.upper()]
             cities_to = address_to[0][list(address_to[0].keys())[0]]
         except:
             address_begin = []
@@ -107,7 +106,14 @@ class BookingView(View):
         menus = Menu.objects.filter(actived=True).order_by('position')
         strings,language = get_strings(request.COOKIES)
         
-        period.priceTotalM = period.priceTotalMoney(adults,children,infants)
+        
+        priceTotal = 0.0
+        for index,room in enumerate(rooms_clients,start=0):
+            clients = room.split("-")
+            priceTotal += period.priceTotal(int(clients[0]),int(clients[1]),int(clients[2]))
+            rooms_clients[index] = [int(clients[0]),int(clients[1]),int(clients[2])]
+
+        period.priceTotalM = toMoney(priceTotal)
         context = {
             "language":language,
             "strings" : strings,
@@ -116,11 +122,8 @@ class BookingView(View):
             "cities_begin" : cities_begin,
             "address_to" : address_to,
             "cities_to" : cities_to,
-
-            "adults":adults,
-            "children":children,
-            "infants":infants,
-            "period":period
+            "period":period,
+            "rooms_clients":rooms_clients
 
             }
         
@@ -130,94 +133,100 @@ class BookingView(View):
         data = request.POST
         files = request.FILES
 
-        adults = int(data["adults"])
-        children = int(data["children"])
-        infants = int(data["infants"])
-
-        passagersTypeList = ["Adult",]
-
-        if children > 0 :passagersTypeList.append("Children")
-        if infants > 0 :passagersTypeList.append("Infant")
-        
-        periodPackage = VacationPackage.objects.get(id=int(data["period"]))
-        
-        dk = date_key()
-        n = 1
-        bill = Bill.objects.create(code = str(dk[5:]),
-                                   amount = periodPackage.pricePackage(adults,children,infants),
-                                   revenue = periodPackage.markupValue(adults,children,infants))
 
 
-        for p in passagersTypeList:
-            if p == "Adult" :
-                end = adults + 1
-            elif p == "Children" :
-                end = children + 1
-            elif p == "Infant" :
-                end = infants + 1
+        rooms_clients = str(data["room-clients"]).split("%")[:-1]
+
+        for room in rooms_clients:
+            clients = room.split("-")
+            adults = int(clients[0])
+            children = int(clients[1])
+            infants = int(clients[2])
+
+            passagersTypeList = ["Adult",]
+
+            if children > 0 :passagersTypeList.append("Children")
+            if infants > 0 :passagersTypeList.append("Infant")
+            
+            periodPackage = VacationPackage.objects.get(id=int(data["period"]))
+            
+            dk = date_key()
+            n = 1
+            bill = Bill.objects.create(code = str(dk[5:]),
+                                    amount = periodPackage.pricePackage(adults,children,infants),
+                                    revenue = periodPackage.markupValue(adults,children,infants))
 
 
-            for i in range(1, end):
-                birthList = data[f'dateBirth-{p}{i}'].split("/")
-                docExpList = data[f'expiration-document-primary-{p}{i}'].split("/")
-                secDocExpList = data[f'expiration-document-secondary-{p}{i}'].split("/")
-                
-                if n < 10:_n = f"0{n}"
-                else:_n = str(n)
+            for p in passagersTypeList:
+                if p == "Adult" :
+                    end = adults + 1
+                elif p == "Children" :
+                    end = children + 1
+                elif p == "Infant" :
+                    end = infants + 1
 
-                booking = Booking.objects.create(
-                    user = request.user,
-                    package = periodPackage,
 
-                    firstName = data[f'firstName-{p}{i}'].upper(),
-                    middleName = data[f'middleName-{p}{i}'].upper(),
-                    lastName = data[f'lastName-{p}{i}'].upper(),
-                    motherLastName = data[f'motherLastName-{p}{i}'].upper(),
-                    birth = date(int(birthList[2]),int(birthList[0]),int(birthList[1])),
-                    gender = data[f'gender-{p}{i}'].upper(),
+                for i in range(1, end):
+                    birthList = data[f'dateBirth-{p}{i}'].split("/")
+                    docExpList = data[f'expiration-document-primary-{p}{i}'].split("/")
+                    secDocExpList = data[f'expiration-document-secondary-{p}{i}'].split("/")
                     
-                    documentNumber = data[f'number-document-primary-{p}{i}'],
-                    documentExpiration = date(int(docExpList[2]),int(docExpList[0]),int(docExpList[1])),
-                    documentType = data[f'type-document-primary-{p}{i}'],
-                    documentCountry = data[f'country-document-primary-{p}{i}'],
+                    if n < 10:_n = f"0{n}"
+                    else:_n = str(n)
 
-                    email = data['emailContact'],
-                    phone = data['codePhoneNumber'] + data['phoneNumber'],
+                    booking = Booking.objects.create(
+                        user = request.user,
+                        package = periodPackage,
 
-                    streetBegin = data[f'address-street-1'],
-                    cityBegin = data[f'address-city-1'],
-                    stateBegin = data[f'address-state-1'],
+                        firstName = data[f'firstName-{p}{i}'].upper(),
+                        middleName = data[f'middleName-{p}{i}'].upper(),
+                        lastName = data[f'lastName-{p}{i}'].upper(),
+                        motherLastName = data[f'motherLastName-{p}{i}'].upper(),
+                        birth = date(int(birthList[2]),int(birthList[0]),int(birthList[1])),
+                        gender = data[f'gender-{p}{i}'].upper(),
+                        
+                        documentNumber = data[f'number-document-primary-{p}{i}'],
+                        documentExpiration = date(int(docExpList[2]),int(docExpList[0]),int(docExpList[1])),
+                        documentType = data[f'type-document-primary-{p}{i}'],
+                        documentCountry = data[f'country-document-primary-{p}{i}'],
 
-                    streetTo = data[f'address-street-2'],
-                    cityTo = data[f'address-city-2'],
-                    stateTo = data[f'address-state-2'],
+                        email = data['emailContact'],
+                        phone = data['codePhoneNumber'] + data['phoneNumber'],
 
-                    bill = bill,
+                        streetBegin = data[f'address-street-1'],
+                        cityBegin = data[f'address-city-1'],
+                        stateBegin = data[f'address-state-1'],
 
-                    reservationCode = dk + _n + "01"
-                )
-                
-                if f"license-{p}{i}" in files.keys():
-                    booking.license = data[f'license-{p}{i}']
-                    booking.save()
-                
-                if f"imagen-document-{p}{i}" in files.keys():
-                    image  = files[f"imagen-document-{p}{i}"]
-                    imageName = f"primary_document_" + str(booking.id) + ".png"
-                    booking.imageDocument.save(imageName,image)
+                        streetTo = data[f'address-street-2'],
+                        cityTo = data[f'address-city-2'],
+                        stateTo = data[f'address-state-2'],
 
-                if data[f'number-document-secondary-{p}{i}'] != "" and data[f'expiration-document-secondary-{p}{i}'] != "" and data[f'type-document-secondary-{p}{i}'] != "" and data[f'country-document-secondary-{p}{i}']:
-                    booking.secondaryDocumentNumber = data[f'number-document-secondary-{p}{i}']
-                    booking.secondaryDocumentExpiration = date(int(secDocExpList[2]),int(secDocExpList[0]),int(secDocExpList[1]))
-                    booking.secondaryDocumentType = data[f'type-document-secondary-{p}{i}']
-                    booking.secondaryDocumentCountry = data[f'country-document-secondary-{p}{i}']
-                    booking.save()
+                        bill = bill,
+
+                        reservationCode = dk + _n + "01"
+                    )
                     
-                    if f"imagen-document-secondary-{p}{i}" in files.keys():
-                        image  = files[f"imagen-document-secondary-{p}{i}"]
-                        imageName = f"secondary_document_" + str(booking.id) + ".png"
-                        booking.imageSecondaryDocument.save(imageName,image)
+                    if f"license-{p}{i}" in files.keys():
+                        booking.license = data[f'license-{p}{i}']
+                        booking.save()
+                    
+                    if f"imagen-document-{p}{i}" in files.keys():
+                        image  = files[f"imagen-document-{p}{i}"]
+                        imageName = f"primary_document_" + str(booking.id) + ".png"
+                        booking.imageDocument.save(imageName,image)
 
-                n += 1
+                    if data[f'number-document-secondary-{p}{i}'] != "" and data[f'expiration-document-secondary-{p}{i}'] != "" and data[f'type-document-secondary-{p}{i}'] != "" and data[f'country-document-secondary-{p}{i}']:
+                        booking.secondaryDocumentNumber = data[f'number-document-secondary-{p}{i}']
+                        booking.secondaryDocumentExpiration = date(int(secDocExpList[2]),int(secDocExpList[0]),int(secDocExpList[1]))
+                        booking.secondaryDocumentType = data[f'type-document-secondary-{p}{i}']
+                        booking.secondaryDocumentCountry = data[f'country-document-secondary-{p}{i}']
+                        booking.save()
+                        
+                        if f"imagen-document-secondary-{p}{i}" in files.keys():
+                            image  = files[f"imagen-document-secondary-{p}{i}"]
+                            imageName = f"secondary_document_" + str(booking.id) + ".png"
+                            booking.imageSecondaryDocument.save(imageName,image)
 
-        return  redirect("tickets")
+                    n += 1
+
+        return  redirect("index")
