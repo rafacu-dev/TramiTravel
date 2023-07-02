@@ -265,7 +265,6 @@
 
         <form method="post" onsubmit="return validator()" enctype="multipart/form-data" class="w-full h-auto max-w-7xl bg-white border-gray-200 rounded-lg shadow-md p-4 md:p-12 pt-6 ">
             
-            <input class="hidden" name="room-clients" value="{{rooms_clients}}"/>
             {% for room in rooms_clients %}
             {% with forloop.counter as room_number %}
             

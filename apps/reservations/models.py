@@ -366,7 +366,7 @@ class Booking(models.Model):
     pnr = models.CharField(blank = True, null = True, max_length=50)
     
     amount = models.FloatField(blank=False, null=False,default=0)
-    revenue = models.FloatField(blank=False, null=False,default=0)    
+    revenue = models.FloatField(blank=False, null=False,default=0)
     liquidated = models.FloatField(blank=False, null=False,default=0)
 
     license = models.CharField(blank = True, null = True, max_length=100)

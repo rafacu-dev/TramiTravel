@@ -200,7 +200,6 @@ function calculateClientsPackage(){
         let infant = parseInt(document.getElementById(`infants-room-${i}`).value);
 
         room_clients += `${adult}-${children}-${infant}%`;
-        console.log(room_clients)
 
         adults += adult
         childrens += children

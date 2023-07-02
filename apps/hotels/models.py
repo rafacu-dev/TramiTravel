@@ -163,7 +163,8 @@ class VacationPackage(models.Model):
         return ammount
     
     def priceTotal(self,adults,childrens,infants) -> float:
-        return (self.pricePackage(adults,childrens,infants) * self.numberNights()) + self.taxes + self.flight + self.transfer + self.markup
+        price = (self.pricePackage(adults,childrens,infants) * self.numberNights()) + self.taxes + self.flight + self.transfer + self.markup
+        return price
         
     def markupValue(self,adults,childrens,infants) -> float:
         return ((self.pricePackage(adults,childrens,infants) * self.numberNights()) + self.flight + self.transfer) / (1 - (self.markup / 100))
@@ -288,10 +289,6 @@ class Booking(models.Model):
     cityBegin = models.CharField(blank = False, null = False, max_length=100)
     stateBegin = models.CharField(blank = False, null = False, max_length=100)
 
-    streetTo = models.CharField(blank = False, null = False, max_length=200)
-    cityTo = models.CharField(blank = False, null = False, max_length=100)
-    stateTo = models.CharField(blank = False, null = False, max_length=100)
-
     reservationCode = models.BigIntegerField(blank = False, null = False)
     pnr = models.CharField(blank = True, null = True, max_length=50)
     pnr_return = models.CharField(blank = True, null = True, max_length=50)
@@ -299,6 +296,10 @@ class Booking(models.Model):
     license = models.CharField(blank = True, null = True, max_length=100)
     
     bill = models.ForeignKey(Bill,on_delete=models.CASCADE,null=False,blank=False,related_name="hotels_bill")
+    
+    amount = models.FloatField(blank=False, null=False,default=0)
+    markup = models.FloatField(blank=False, null=False,default=0)
+    liquidated = models.FloatField(blank=False, null=False,default=0)
   
     actived = models.BooleanField(default=True)
 

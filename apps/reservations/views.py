@@ -59,7 +59,6 @@ class Home(View):
 
         fecha_actual = timezone.now().date()
         package = VacationPackage.objects.filter(Q(startDate__gte=fecha_actual) & Q(actived=True))
-        print(package)
 
         for p in package:
             objFrom = {

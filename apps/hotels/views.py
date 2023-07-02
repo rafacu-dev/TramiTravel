@@ -80,9 +80,25 @@ class Hotels(View):
     
 
     
+class ReservationsView(View):
+    def get(self,request,*args,**kwargs):
+        data = request.GET
+        menus = Menu.objects.filter(actived=True).order_by('position')
+        strings,language = get_strings(request.COOKIES)
+
+        reservations = Booking.objects.filter(user = request.user)
+        
+        
+        context = {
+            "language":language,
+            "strings" : strings,
+            "menus" :menus,
+            "reservations":reservations
+            }
+        
+        return render(request,'reservations_package.html',context)
+    
 class BookingView(View):
-    def test_user(self):
-        return self.request.user.is_authenticated and self.request.user.agencie
     
     def get(self,request,*args,**kwargs):
         data = request.GET
@@ -135,9 +151,14 @@ class BookingView(View):
 
 
 
-        rooms_clients = str(data["room-clients"]).split("%")[:-1]
+        rooms_clients = str(request.GET["room-clients"]).split("%")[:-1]
+        
+        dk = date_key()
+        bill = Bill.objects.create(code = str(dk[5:]),)
+        amount = 0
+        revenue = 0
 
-        for room in rooms_clients:
+        for r,room in enumerate(rooms_clients,start=1):
             clients = room.split("-")
             adults = int(clients[0])
             children = int(clients[1])
@@ -150,11 +171,12 @@ class BookingView(View):
             
             periodPackage = VacationPackage.objects.get(id=int(data["period"]))
             
-            dk = date_key()
             n = 1
-            bill = Bill.objects.create(code = str(dk[5:]),
-                                    amount = periodPackage.pricePackage(adults,children,infants),
-                                    revenue = periodPackage.markupValue(adults,children,infants))
+
+            _amount = periodPackage.pricePackage(adults,children,infants)
+            _revenue = periodPackage.markupValue(adults,children,infants)
+            amount += _amount
+            revenue += _revenue
 
 
             for p in passagersTypeList:
@@ -167,9 +189,9 @@ class BookingView(View):
 
 
                 for i in range(1, end):
-                    birthList = data[f'dateBirth-{p}{i}'].split("/")
-                    docExpList = data[f'expiration-document-primary-{p}{i}'].split("/")
-                    secDocExpList = data[f'expiration-document-secondary-{p}{i}'].split("/")
+                    birthList = data[f'dateBirth-Room{r}-{p}{i}'].split("/")
+                    docExpList = data[f'expiration-document-primary-Room{r}-{p}{i}'].split("/")
+                    secDocExpList = data[f'expiration-document-secondary-Room{r}-{p}{i}'].split("/")
                     
                     if n < 10:_n = f"0{n}"
                     else:_n = str(n)
@@ -178,17 +200,17 @@ class BookingView(View):
                         user = request.user,
                         package = periodPackage,
 
-                        firstName = data[f'firstName-{p}{i}'].upper(),
-                        middleName = data[f'middleName-{p}{i}'].upper(),
-                        lastName = data[f'lastName-{p}{i}'].upper(),
-                        motherLastName = data[f'motherLastName-{p}{i}'].upper(),
+                        firstName = data[f'firstName-Room{r}-{p}{i}'].upper(),
+                        middleName = data[f'middleName-Room{r}-{p}{i}'].upper(),
+                        lastName = data[f'lastName-Room{r}-{p}{i}'].upper(),
+                        motherLastName = data[f'motherLastName-Room{r}-{p}{i}'].upper(),
                         birth = date(int(birthList[2]),int(birthList[0]),int(birthList[1])),
-                        gender = data[f'gender-{p}{i}'].upper(),
+                        gender = data[f'gender-Room{r}-{p}{i}'].upper(),
                         
-                        documentNumber = data[f'number-document-primary-{p}{i}'],
+                        documentNumber = data[f'number-document-primary-Room{r}-{p}{i}'],
                         documentExpiration = date(int(docExpList[2]),int(docExpList[0]),int(docExpList[1])),
-                        documentType = data[f'type-document-primary-{p}{i}'],
-                        documentCountry = data[f'country-document-primary-{p}{i}'],
+                        documentType = data[f'type-document-primary-Room{r}-{p}{i}'],
+                        documentCountry = data[f'country-document-primary-Room{r}-{p}{i}'],
 
                         email = data['emailContact'],
                         phone = data['codePhoneNumber'] + data['phoneNumber'],
@@ -197,9 +219,8 @@ class BookingView(View):
                         cityBegin = data[f'address-city-1'],
                         stateBegin = data[f'address-state-1'],
 
-                        streetTo = data[f'address-street-2'],
-                        cityTo = data[f'address-city-2'],
-                        stateTo = data[f'address-state-2'],
+                        amount = _amount,
+                        markup = _revenue,
 
                         bill = bill,
 
@@ -207,26 +228,30 @@ class BookingView(View):
                     )
                     
                     if f"license-{p}{i}" in files.keys():
-                        booking.license = data[f'license-{p}{i}']
+                        booking.license = data[f'license-Room{r}-{p}{i}']
                         booking.save()
                     
                     if f"imagen-document-{p}{i}" in files.keys():
-                        image  = files[f"imagen-document-{p}{i}"]
+                        image  = files[f"imagen-document-Room{r}-{p}{i}"]
                         imageName = f"primary_document_" + str(booking.id) + ".png"
                         booking.imageDocument.save(imageName,image)
 
-                    if data[f'number-document-secondary-{p}{i}'] != "" and data[f'expiration-document-secondary-{p}{i}'] != "" and data[f'type-document-secondary-{p}{i}'] != "" and data[f'country-document-secondary-{p}{i}']:
-                        booking.secondaryDocumentNumber = data[f'number-document-secondary-{p}{i}']
+                    if data[f'number-document-secondary-Room{r}-{p}{i}'] != "" and data[f'expiration-document-secondary-Room{r}-{p}{i}'] != "" and data[f'type-document-secondary-Room{r}-{p}{i}'] != "" and data[f'country-document-secondary-Room{r}-{p}{i}']:
+                        booking.secondaryDocumentNumber = data[f'number-document-secondary-Room{r}-{p}{i}']
                         booking.secondaryDocumentExpiration = date(int(secDocExpList[2]),int(secDocExpList[0]),int(secDocExpList[1]))
-                        booking.secondaryDocumentType = data[f'type-document-secondary-{p}{i}']
-                        booking.secondaryDocumentCountry = data[f'country-document-secondary-{p}{i}']
+                        booking.secondaryDocumentType = data[f'type-document-secondary-Room{r}-{p}{i}']
+                        booking.secondaryDocumentCountry = data[f'country-document-secondary-Room{r}-{p}{i}']
                         booking.save()
                         
-                        if f"imagen-document-secondary-{p}{i}" in files.keys():
-                            image  = files[f"imagen-document-secondary-{p}{i}"]
+                        if f"imagen-document-secondary-Room{r}-{p}{i}" in files.keys():
+                            image  = files[f"imagen-document-secondary-Room{r}-{p}{i}"]
                             imageName = f"secondary_document_" + str(booking.id) + ".png"
                             booking.imageSecondaryDocument.save(imageName,image)
 
                     n += 1
 
-        return  redirect("index")
+        bill.amount = amount
+        bill.revenue = revenue
+        bill.save()
+
+        return  redirect("reservations")
