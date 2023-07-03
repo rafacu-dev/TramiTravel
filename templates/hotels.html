@@ -11,7 +11,7 @@
     <div class=" lg:flex  w-full max-w-6xl p-3  mt-3 md:mt-6" >
         <div class="lg:w-1/3 bg-white border rounded-lg shadow-md lg:mr-6 h-full mb-2" >
             <div class=" flex justify-between items-center lg:hidden w-full max-w-6xl p-3 w-full" >
-                <p>{{filter}}</p>
+                <p>Filtrar</p>
                 
                 <button onclick="openClose('formFilter')" type="button" 
                 class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100
@@ -168,16 +168,16 @@
             </form>
         </div>
 
-        <div class=" lg:w-2/3 p-1 md:p-4 h-full">
+        <div class=" lg:w-2/3 p-1 md:px-4 md:pb-4 h-full">
             <div data-accordion="collapse" >
                 {% for pp in period_packages %}
                 <form method="get" action="{% url 'booking-package'%}" class="w-full bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:shadow-lg">
                     <input class="hidden"  type="number" name="period" value="{{pp.id}}">
                     <input class="hidden" name="room-clients" value="{{room_clients}}"/>
 
-                    <div class="w-full flex items-center p-0.5">
+                    <div class="w-full md:flex items-center p-0.5">
                         <img class="object-cover rounded-lg h-full md:w-48" src="{{pp.room.hotel.image.url}}" alt="">
-                        <div class="flex flex-col justify-between p-4 leading-normal w-full p-3">
+                        <div class="flex flex-col justify-between p-4 leading-normal p-3 w-full">
                             <div class="flex w-full justify-between">
                                 <h5 class="mb-1 text-xl font-serif font-bold text-gray-900">{{pp.name}}</h5>
                                 <h5 class="mb-1 text-xl font-bold text-itravel-900">${{pp.priceTotalM}}</h5>
@@ -212,7 +212,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="accordion-flush-body-{{pp.id}}" class="hidden py-1" aria-labelledby="accordion-flush-heading-{{pp.id}}">
+                    <div id="accordion-flush-body-{{pp.id}}" class="hidden py-1 overflow-auto" aria-labelledby="accordion-flush-heading-{{pp.id}}">
                         <div class="flex flex-col border-b p-6">
                             <div class="flex">
                                 <div class="w-1/2">
