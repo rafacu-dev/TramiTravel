@@ -122,6 +122,79 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                         </svg>
                                     </button>
+                                    <!-- Dropdown menu -->
+                                    <div id="dropdownPassengerEdit" class="hidden z-10 bg-white rounded divide-y divide-gray-100 shadow  p-5 absolute">
+                                        <div class="flex justify-between items-center py-1 ">
+                                            <div class="ml-2 text-sm  mr-6 w-full">
+                                                <label for="helper-radio-4 " class="font-medium text-gray-900">
+                                                    <h5 class="text-md text-gray-900 font-bold ">{{strings.adults}} :</h5>
+                                                    <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.adults_ages}}</p>
+                                                </label>
+                                            </div>
+                                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                                            onclick="downPassenger('adults')">
+                                                <svg class="w-6 h-6 p-1 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </button>
+                                            <input type="number" value="1" min="1" name="adults" id="adults"  onkeyup="" class="hidden" placeholder="0">
+                                            <h1 class="flex justify-center text-center  text-md w-12 mx-3" id="adultsLabel">1</h1>
+                                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                                            onclick="upPassenger('adults')">
+                                                <svg class="w-6 h-6 p-1 rotate-180 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1 ">
+                                            <div class="ml-2 text-sm  mr-6 w-full">
+                                                <label for="helper-radio-4 " class="font-medium text-gray-900">
+                                                    <h5 class="text-md text-gray-900 font-bold ">{{strings.children}} :</h5>
+                                                    <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.children_ages}}</p>
+                                                </label>
+                                            </div>
+                                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                                            onclick="downPassenger('children')">
+                                                <svg class="w-6 h-6 p-1 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </button>
+                                            <input type="number" value="0" min="0" name="children" id="children"  onkeyup="" class="hidden" placeholder="0">
+                                            <h1 class="flex justify-center text-center  text-md w-12 mx-3" id="childrenLabel">0</h1>
+                                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                                            onclick="upPassenger('children')">
+                                                <svg class="w-6 h-6 p-1 rotate-180 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="flex justify-between items-center py-1 ">
+                                            <div class="ml-2 text-sm  mr-6 w-full">
+                                                <label for="helper-radio-4 " class="font-medium text-gray-900">
+                                                    <h5 class="text-md text-gray-900 font-bold ">{{strings.infants}} :</h5>
+                                                    <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.infants_ages}}</p>
+                                                </label>
+                                            </div>
+                                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                                            onclick="downPassenger('infants')">
+                                                <svg class="w-6 h-6 p-1 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </button>
+                                            <input type="number" value="0" min="0" name="infants" id="infants"  onkeyup="" class="hidden" placeholder="0">
+                                            <h1 class="flex justify-center text-center  text-md w-12 mx-3" id="infantsLabel">0</h1>
+                                            <button type="button" class="border flex justify-center text-center w-6 h-6 bg-gray-200 rounded-full text-md text-gray-500 font-bold hover:text-gray-800 hover:bg-gray-300 "
+                                            onclick="upPassenger('infants')">
+                                                <svg class="w-6 h-6 p-1 rotate-180 " aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                        <div class="py-1">
+                                            <button type="button" onclick="document.getElementById('dropdownPassenger').click()" class="block py-2 px-4 text-sm font-bold font-serif text-black bg-itravel-900/50 hover:bg-itravel-900/70 w-full rounded-md">{{strings.ready}}</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 
 
