@@ -86,8 +86,29 @@ class ReservationsView(View):
         menus = Menu.objects.filter(actived=True).order_by('position')
         strings,language = get_strings(request.COOKIES)
 
-        reservations = Booking.objects.filter(user = request.user)
-        
+        codes = []
+        reservations = []
+
+        bookings = Booking.objects.filter(user = request.user)
+
+        for booking in bookings:
+            reservationCode = str(booking.reservationCode)[:-2]
+            if reservationCode not in codes:
+                codes.append(reservationCode)
+                booking.clients = []
+                reservations.append(booking)
+            else:
+                index = codes.index(reservationCode)
+                reservations[index].clients.append({
+                    "firstName":booking.firstName,
+                    "middleName":booking.middleName,
+                    "lastName":booking.lastName,
+                    "motherLastName":booking.motherLastName,
+                    "birth":booking.birth,
+                    "gender":booking.gender
+                })
+
+
         
         context = {
             "language":language,
@@ -178,6 +199,10 @@ class BookingView(View):
             amount += _amount
             revenue += _revenue
 
+            
+            if r < 10:_r = f"0{r}"
+            else:_r = str(r)
+
 
             for p in passagersTypeList:
                 if p == "Adult" :
@@ -224,7 +249,7 @@ class BookingView(View):
 
                         bill = bill,
 
-                        reservationCode = dk + _n + "01"
+                        reservationCode = dk + _r + _n
                     )
                     
                     if f"license-{p}{i}" in files.keys():
@@ -248,7 +273,7 @@ class BookingView(View):
                             imageName = f"secondary_document_" + str(booking.id) + ".png"
                             booking.imageSecondaryDocument.save(imageName,image)
 
-                    n += 1
+            n += 1
 
         bill.amount = amount
         bill.revenue = revenue

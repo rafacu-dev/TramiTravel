@@ -209,7 +209,7 @@
                         
                         <div class="flex justify-start items-center">
                             <button id="accordion-flush-heading-{{reservation.id}}" type="button" class="flex w-min px-2 bg-itravel-900/30 rounded-lg shadow-sm" data-accordion-target="#accordion-flush-body-{{reservation.id}}" aria-expanded="false" aria-controls="accordion-flush-body-{{reservation.id}}">
-                                <span class="text-gray-900">Ver itinerario</span>
+                                <span class="text-gray-900">Ver detalles</span>
                                 <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                             </button>
                         </div>
@@ -217,7 +217,26 @@
                 </div>
                 <div id="accordion-flush-body-{{reservation.id}}" class="hidden py-1" aria-labelledby="accordion-flush-heading-{{reservation.id}}">
                     <div class="flex flex-col border-b p-6">
-                        <div class="flex">
+                        
+                        <div class="flex items-center mb-3 text-lg font-bold ">
+                            <p class="ml-1 text-gray-900 material-icons text-md">chair</p>
+                            {% with reservation.clients|length as clients %}
+                                {% with clients_plus_one=clients|add:1 %}
+                                {% if clients_plus_one > 1 %}
+                                <p class="ml-1 text-gray-900">Room para {{clients_plus_one}} clientes</p>
+                                {% else %}
+                                <p class="ml-1 text-gray-900">Room para {{clients_plus_one}} cliente</p>
+                                {% endif %}
+                                {% endwith %}
+                            {% endwith %}
+                        </div>
+                        <p class="mb-1 text-md font-semibold ml-3">- {{reservation.firstName}} {{reservation.middleName}} {{reservation.lastName}} {{reservation.motherLastName}}&nbsp;&nbsp;&nbsp;&nbsp;({{reservation.gender}}&nbsp;&nbsp;-&nbsp;&nbsp;{{reservation.birth}})</p>
+                        {% for client in reservation.clients %}
+                        <p class="mb-1 text-md font-semibold ml-3">- {{client.firstName}} {{client.middleName}} {{client.lastName}} {{client.motherLastName}}&nbsp;&nbsp;&nbsp;&nbsp;({{client.gender}}&nbsp;&nbsp;-&nbsp;&nbsp;{{client.birth}})</p>
+                        {% endfor %}
+                        
+
+                        <div class="flex mt-12">
                             <div class="w-1/2">
                                 <div class="flex items-center">
                                     <span class="material-icons md:text-sm font-bold md:mx-2 rotate-90"> flight </span>

@@ -163,11 +163,14 @@ class VacationPackage(models.Model):
         return ammount
     
     def priceTotal(self,adults,childrens,infants) -> float:
-        price = (self.pricePackage(adults,childrens,infants) * self.numberNights()) + self.taxes + (self.flight * (adults + childrens)) + (self.transfer * (adults + childrens)) + self.markup
-        return price
+        price = (self.pricePackage(adults,childrens,infants) * self.numberNights()) + (self.flight * (adults + childrens)) + (self.transfer * (adults + childrens))
+        markup = price * self.markup / 100 
+        return price + (self.taxes *(adults+childrens+infants))+ markup
         
     def markupValue(self,adults,childrens,infants) -> float:
-        return ((self.pricePackage(adults,childrens,infants) * self.numberNights()) + (self.flight * (adults + childrens)) + (self.transfer * (adults + childrens))) / (1 - (self.markup / 100))
+        price = (self.pricePackage(adults,childrens,infants) * self.numberNights()) + (self.flight * (adults + childrens)) + (self.transfer * (adults + childrens))
+        markup = price * self.markup / 100 
+        return markup
 
 class Bill(models.Model):
     id = models.AutoField(primary_key=True)
