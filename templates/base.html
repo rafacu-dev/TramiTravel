@@ -115,10 +115,13 @@
                                         </div>
                                         <ul class="py-1 text-sm text-gray-700">
                                             <li id="panel-admin" class="{% if request.user.is_authenticated and not request.user.is_superuser %}hidden{% endif %}">
-                                                <a href="{% url 'add_flight'%}" class="block py-2 px-4 hover:bg-gray-100 ">{{ strings.add_flights }}</a>
+                                                <a href="{% url 'add_flight'%}" class="block py-2 px-4 hover:bg-gray-100">{{ strings.add_flights }}</a>
                                             </li>
                                             <li>
                                                 <a href="{% url 'tickets'%}" class="block py-2 px-4 hover:bg-gray-100 ">{{ strings.trips }}</a>
+                                            </li>
+                                            <li>
+                                                <a href="{% url 'reservations'%}" class="block py-2 px-4 hover:bg-gray-100">Reservations</a>
                                             </li>
                                         </ul>
                                         <div class="py-1">
