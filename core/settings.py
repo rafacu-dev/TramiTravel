@@ -5,14 +5,10 @@ import dj_database_url
 
 env = environ.Env()
 environ.Env.read_env()
-
 ENVIRONMENT = env
 
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 SECRET_KEY = os.environ.get('SECRET_KEY')
-
 DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = ['10.0.2.2','127.0.0.1','localhost']

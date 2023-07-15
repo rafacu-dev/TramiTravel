@@ -198,7 +198,7 @@
                     <div class="flex flex-col justify-between p-4 leading-normal w-full p-3">
                         <div class="flex w-full justify-between">
                             <h5 class="mb-1 text-xl font-serif font-bold text-gray-900">{{pp.name}}</h5>
-                            <h5 class="mb-1 text-xl font-bold text-itravel-900">${{reservation.amount|toMoney}}</h5>
+                            <h5 class="mb-1 text-xl font-bold text-itravel-900">${{reservation.total_amount|toMoney}}</h5>
                         </div>
                         <p class="mb-1 font-bold text-gray-900">{{ pp.numberNights }} noches <span class="text-xs font-light text-gray-500">({{pp.startDate}} - {{pp.lastDate}})</span></p>
 
@@ -207,36 +207,21 @@
                             <p class="ml-1 text-gray-600">{{ pp.room.hotel.location.city }}, {{ pp.room.hotel.location.country }}</p>
                         </div>
                         
-                        <div class="flex justify-start items-center">
-                            <button id="accordion-flush-heading-{{reservation.id}}" type="button" class="flex w-min px-2 bg-itravel-900/30 rounded-lg shadow-sm" data-accordion-target="#accordion-flush-body-{{reservation.id}}" aria-expanded="false" aria-controls="accordion-flush-body-{{reservation.id}}">
-                                <span class="text-gray-900">Ver detalles</span>
+                        <div class="flex justify-start items-center space-x-3">
+                            <button id="accordion-rooms-heading-{{reservation.id}}" type="button" class="flex w-min px-2 bg-itravel-900/20 rounded-lg shadow-sm" data-accordion-target="#accordion-rooms-body-{{reservation.id}}" aria-expanded="false" aria-controls="accordion-rooms-body-{{reservation.id}}">
+                                <span class="text-gray-900">Rooms</span>
+                                <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            </button>
+                            <button id="accordion-itinerario-heading-{{reservation.id}}" type="button" class="flex w-min px-2 bg-itravel-900/20 rounded-lg shadow-sm" data-accordion-target="#accordion-itinerario-body-{{reservation.id}}" aria-expanded="false" aria-controls="accordion-itinerario-body-{{reservation.id}}">
+                                <span class="text-gray-900">Itinerario</span>
                                 <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                             </button>
                         </div>
                     </div>
                 </div>
-                <div id="accordion-flush-body-{{reservation.id}}" class="hidden py-1" aria-labelledby="accordion-flush-heading-{{reservation.id}}">
+                <div id="accordion-itinerario-body-{{reservation.id}}" class="hidden py-1" aria-labelledby="accordion-itinerario-heading-{{reservation.id}}">
                     <div class="flex flex-col border-b p-6">
-                        
-                        <div class="flex items-center mb-3 text-lg font-bold ">
-                            <p class="ml-1 text-gray-900 material-icons text-md">chair</p>
-                            {% with reservation.clients|length as clients %}
-                                {% with clients_plus_one=clients|add:1 %}
-                                {% if clients_plus_one > 1 %}
-                                <p class="ml-1 text-gray-900">Room para {{clients_plus_one}} clientes</p>
-                                {% else %}
-                                <p class="ml-1 text-gray-900">Room para {{clients_plus_one}} cliente</p>
-                                {% endif %}
-                                {% endwith %}
-                            {% endwith %}
-                        </div>
-                        <p class="mb-1 text-md font-semibold ml-3">- {{reservation.firstName}} {{reservation.middleName}} {{reservation.lastName}} {{reservation.motherLastName}}&nbsp;&nbsp;&nbsp;&nbsp;({{reservation.gender}}&nbsp;&nbsp;-&nbsp;&nbsp;{{reservation.birth}})</p>
-                        {% for client in reservation.clients %}
-                        <p class="mb-1 text-md font-semibold ml-3">- {{client.firstName}} {{client.middleName}} {{client.lastName}} {{client.motherLastName}}&nbsp;&nbsp;&nbsp;&nbsp;({{client.gender}}&nbsp;&nbsp;-&nbsp;&nbsp;{{client.birth}})</p>
-                        {% endfor %}
-                        
-
-                        <div class="flex mt-12">
+                        <div class="flex">
                             <div class="w-1/2">
                                 <div class="flex items-center">
                                     <span class="material-icons md:text-sm font-bold md:mx-2 rotate-90"> flight </span>
@@ -446,6 +431,46 @@
                         <p class="text-sm font-semibold ml-6">&nbsp;&nbsp;Hora de llegada: {{pp.arrival_traslate_return|time:"h:i"}}  {{pp.arrival_traslate_return|time:"A"}}</p>
                     </div>
                 </div>
+
+                <div id="accordion-rooms-body-{{reservation.id}}" class="hidden py-1" aria-labelledby="accordion-rooms-heading-{{reservation.id}}">
+                    <div class="flex flex-col p-6">
+                        
+                        <div class="flex items-center mb-3 text-lg font-bold ">
+                            <p class="ml-1 text-gray-900 material-icons text-md">chair</p>
+                            <p class="ml-1 text-gray-900">Habitaciones reservadas ({{reservation.rooms|length}})</p>
+                        </div>
+
+                        
+                        {% for room in reservation.rooms %}
+                        <div class="flex justify-between">     
+                            <p class="text-md text-gray-900 px-6 py-3 font-semibold">Room {{forloop.counter}}</p>
+                            <p class="text-md text-gray-900 px-6 py-3 font-semibold">Monto: ${{room.1|toMoney}}</p>
+                        </div>
+                        <div class="relative overflow-x-auto shadow-sm sm:rounded-lg mb-3 border">                            
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">Cliente</th>
+                                        <th scope="col" class="px-6 py-3">Fecha de nacimiento</th>
+                                        <th scope="col" class="px-6 py-3">Genero</th>
+                                        <th scope="col" class="px-6 py-3">Numero de documento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cliente in room.0 %}
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{cliente.lastName}} {{cliente.motherLastName}}, {{cliente.firstName}} {{cliente.middleName}}</th>
+                                        <td class="px-6 py-4">{{cliente.birth}}</td>
+                                        <td class="px-6 py-4">{{cliente.gender}}</td>
+                                        <td class="px-6 py-4">{{cliente.documentNumber}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
             {% endwith %}
             {% endfor %}
@@ -455,6 +480,7 @@
         <h1 class="mt-20 w-full text-center">{{strings.ticket_t15}}</h1>
         {% endif %}
     </div>
+    
 </div>
 
 
@@ -519,7 +545,7 @@
                             <time class="mb-1 text-sm font-normal leading-none text-gray-400">{{ strings.step }} 2</time>
                             <h3 class="text-lg font-semibold text-gray-900">{{ strings.ticket_t7 }}</h3>
                             <p class="text-base font-normal text-gray-500 ">{{ strings.ticket_t8 }}</p>
-                            <h1 class="text-xl font-bold text-black text-left mt-2">{{bill.amountMoney}} USD</h1>
+                            <h1 class="text-xl font-bold text-black text-left mt-2">{{bill.amount}} USD</h1>
                         </li>
                         <li class="mb-5 ml-4">
                             <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
@@ -570,6 +596,7 @@
         </form>
     </div>
 </div> 
+
 {% endblock content %}
 
 

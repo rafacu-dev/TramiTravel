@@ -460,225 +460,230 @@
 <div id="popup-clients-package" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-auto max-h-full">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="popup-clients-package">
+            <button id="close-clients-package" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="popup-clients-package">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 <span class="sr-only">Close modal</span>
             </button>
             
-            <div class="p-12 text-center flex">
-                <div class="flex flex-col items-center w-max">
-                    <div class="flex w-max items-center h-12 border-b px-3">
-                        <h5 class="text-md text-gray-900 font-bold mr-2">{{strings.rooms}}:</h5>
+            <div class="flex flex-col">
+                <div class="p-12 pb-2 px-6 text-center flex">
+                    <div class="flex flex-col items-center w-max">
+                        <div class="flex w-max items-center h-12 border-b px-3">
+                            <h5 class="text-md text-gray-900 font-bold mr-2">{{strings.rooms}}:</h5>
+                            
+                            <select id="cant-rooms" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" name="to" id="to" required onchange="selectRooms(this.value)">
+                                <option value = "1" selected="true">1</option>
+                                <option value = "2">2</option>
+                                <option value = "3">3</option>
+                                <option value = "4">4</option>
+                                <option value = "5">5</option>
+                                <option value = "6">6</option>
+                                <option value = "7">7</option>
+                                <option value = "8">8</option>
+                                <option value = "9">9</option>
+                            </select>
+                        </div>
                         
-                        <select id="cant-rooms" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" name="to" id="to" required onchange="selectRooms(this.value)">
-                            <option value = "1" selected="true">1</option>
-                            <option value = "2">2</option>
-                            <option value = "3">3</option>
-                            <option value = "4">4</option>
-                            <option value = "5">5</option>
-                            <option value = "6">6</option>
-                            <option value = "7">7</option>
-                            <option value = "8">8</option>
-                            <option value = "9">9</option>
-                        </select>
-                    </div>
-                    
-                    <h5 class="text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 1 :</h5>
-                    <h5 id="lbl-room-2" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 2 :</h5>
-                    <h5 id="lbl-room-3" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 3 :</h5>
-                    <h5 id="lbl-room-4" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 4 :</h5>
-                    <h5 id="lbl-room-5" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 5 :</h5>
-                    <h5 id="lbl-room-6" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 6 :</h5>
-                    <h5 id="lbl-room-7" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 7 :</h5>
-                    <h5 id="lbl-room-8" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 8 :</h5>
-                    <h5 id="lbl-room-9" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 9 :</h5>
+                        <h5 class="text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 1 :</h5>
+                        <h5 id="lbl-room-2" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 2 :</h5>
+                        <h5 id="lbl-room-3" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 3 :</h5>
+                        <h5 id="lbl-room-4" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 4 :</h5>
+                        <h5 id="lbl-room-5" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 5 :</h5>
+                        <h5 id="lbl-room-6" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 6 :</h5>
+                        <h5 id="lbl-room-7" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 7 :</h5>
+                        <h5 id="lbl-room-8" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 8 :</h5>
+                        <h5 id="lbl-room-9" class="hidden text-md text-gray-900 font-semibold w-full px-3 h-12 flex items-center justify-center border-b">Room 9 :</h5>
 
-                </div>
+                    </div>
 
-                <div class="flex flex-col items-center w-max">
-                    <div class="flex w-max flex-col items-center border-b px-3 h-12">
-                        <h5 class="text-md text-gray-900 font-bold ">{{strings.adults}} :</h5>
-                        <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.adults_ages}}</p>
+                    <div class="flex flex-col items-center w-max">
+                        <div class="flex w-max flex-col items-center border-b px-3 h-12">
+                            <h5 class="text-md text-gray-900 font-bold ">{{strings.adults}} :</h5>
+                            <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.adults_ages}}</p>
+                        </div>
+                        <div class="flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="adults-room-1" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" id="div-adults-room-1" onchange="calculateClientsPackage()">
+                                <option value = "1" selected="true">1</option>
+                            </select>
+                        </div>
+                        <div id="div-adults-room-2" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="adults-room-2" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "1" selected="true">1</option>
+                            </select>
+                        </div>
+                        <div id="div-adults-room-3" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="adults-room-3" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "1" selected="true">1</option>
+                            </select>
+                        </div>
+                        <div id="div-adults-room-4" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="adults-room-4" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "1" selected="true">1</option>
+                            </select>
+                        </div>
+                        <div id="div-adults-room-5" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="adults-room-5" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "1" selected="true">1</option>
+                            </select>
+                        </div>
+                        <div id="div-adults-room-6" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="adults-room-6" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "1" selected="true">1</option>
+                            </select>
+                        </div>
+                        <div id="div-adults-room-7" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="adults-room-7" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "1" selected="true">1</option>
+                            </select>
+                        </div>
+                        <div id="div-adults-room-8" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="adults-room-8" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "1" selected="true">1</option>
+                            </select>
+                        </div>
+                        <div id="div-adults-room-9" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="adults-room-9" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "1" selected="true">1</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="adults-room-1" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" id="div-adults-room-1" onchange="calculateClientsPackage()">
-                            <option value = "1" selected="true">1</option>
-                        </select>
-                    </div>
-                    <div id="div-adults-room-2" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="adults-room-2" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "1" selected="true">1</option>
-                        </select>
-                    </div>
-                    <div id="div-adults-room-3" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="adults-room-3" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "1" selected="true">1</option>
-                        </select>
-                    </div>
-                    <div id="div-adults-room-4" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="adults-room-4" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "1" selected="true">1</option>
-                        </select>
-                    </div>
-                    <div id="div-adults-room-5" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="adults-room-5" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "1" selected="true">1</option>
-                        </select>
-                    </div>
-                    <div id="div-adults-room-6" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="adults-room-6" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "1" selected="true">1</option>
-                        </select>
-                    </div>
-                    <div id="div-adults-room-7" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="adults-room-7" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "1" selected="true">1</option>
-                        </select>
-                    </div>
-                    <div id="div-adults-room-8" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="adults-room-8" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "1" selected="true">1</option>
-                        </select>
-                    </div>
-                    <div id="div-adults-room-9" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="adults-room-9" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "1" selected="true">1</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="flex flex-col items-center w-max">
-                    <div class="flex w-max flex-col items-center border-b px-3 h-12">
-                        <h5 class="text-md text-gray-900 font-bold ">{{strings.children}} :</h5>
-                        <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.children_ages}}</p>
+                    <div class="flex flex-col items-center w-max">
+                        <div class="flex w-max flex-col items-center border-b px-3 h-12">
+                            <h5 class="text-md text-gray-900 font-bold ">{{strings.children}} :</h5>
+                            <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.children_ages}}</p>
+                        </div>
+                        <div class="flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="childrens-room-1" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-childrens-room-2" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="childrens-room-2" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-childrens-room-3" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="childrens-room-3" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-childrens-room-4" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="childrens-room-4" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-childrens-room-5" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="childrens-room-5" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-childrens-room-6" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="childrens-room-6" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-childrens-room-7" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="childrens-room-7" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-childrens-room-8" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="childrens-room-8" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-childrens-room-9" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="childrens-room-9" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="childrens-room-1" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-childrens-room-2" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="childrens-room-2" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-childrens-room-3" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="childrens-room-3" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-childrens-room-4" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="childrens-room-4" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-childrens-room-5" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="childrens-room-5" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-childrens-room-6" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="childrens-room-6" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-childrens-room-7" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="childrens-room-7" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-childrens-room-8" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="childrens-room-8" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-childrens-room-9" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="childrens-room-9" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="flex flex-col items-center w-max">
-                    <div class="flex w-max flex-col items-center border-b px-3 h-12">
-                        <h5 class="text-md text-gray-900 font-bold ">{{strings.infants}} :</h5>
-                        <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.infants_ages}}</p>
-                    </div>
-                    <div class="flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="infants-room-1" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-infants-room-2" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="infants-room-2" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-infants-room-3" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="infants-room-3" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-infants-room-4" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="infants-room-4" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-infants-room-5" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="infants-room-5" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-infants-room-6" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="infants-room-6" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-infants-room-7" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="infants-room-7" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-infants-room-8" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="infants-room-8" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
-                    </div>
-                    <div id="div-infants-room-9" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
-                        <select id="infants-room-9" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
-                        focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
-                            <option value = "0" selected="true">0</option>
-                        </select>
+                    <div class="flex flex-col items-center w-max">
+                        <div class="flex w-max flex-col items-center border-b px-3 h-12">
+                            <h5 class="text-md text-gray-900 font-bold ">{{strings.infants}} :</h5>
+                            <p id="helper-radio-text-4" class="text-xs font-normal text-gray-500 italic ">{{strings.infants_ages}}</p>
+                        </div>
+                        <div class="flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="infants-room-1" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-infants-room-2" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="infants-room-2" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-infants-room-3" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="infants-room-3" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-infants-room-4" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="infants-room-4" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-infants-room-5" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="infants-room-5" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-infants-room-6" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="infants-room-6" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-infants-room-7" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="infants-room-7" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-infants-room-8" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="infants-room-8" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
+                        <div id="div-infants-room-9" class="hidden flex w-full flex-col justify-center border-b px-3 h-12">
+                            <select id="infants-room-9" class="block appearance-none w-full bg-white/70 border border-white/70 text-gray-500 px-2 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-0 p-0.5" onchange="calculateClientsPackage()">
+                                <option value = "0" selected="true">0</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-
+                
+                <div class="px-6 mb-6">
+                    <button type="button" onclick="document.getElementById('close-clients-package').click()" class="block py-2 px-4 text-sm font-bold font-serif text-black bg-itravel-900/50 hover:bg-itravel-900/70 w-full rounded-md">{{strings.ready}}</button>
+                </div>
             </div>
         </div>
     </div>
