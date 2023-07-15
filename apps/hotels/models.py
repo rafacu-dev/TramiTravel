@@ -140,27 +140,27 @@ class VacationPackage(models.Model):
         return (self.lastDate - self.startDate).days
     
     def pricePackage(self,adults,childrens,infants) -> float:
-        ammount = 0.0
+        amount = 0.0
 
-        if adults >= 5: ammount += ((self.price_adults_2 * 2) + self.price_adults_3 + self.price_adults_4 + (self.price_adults_5 * adults - 4))
-        elif adults == 4: ammount += ((self.price_adults_2 * 2) + self.price_adults_3 + self.price_adults_4)
-        elif adults == 3 :  ammount += ((self.price_adults_2 * 2) + self.price_adults_3)
-        elif adults == 2:  ammount += (self.price_adults_2 * 2)
-        else:  ammount += self.price_adults_1
+        if adults >= 5: amount += ((self.price_adults_2 * 2) + self.price_adults_3 + self.price_adults_4 + (self.price_adults_5 * adults - 4))
+        elif adults == 4: amount += ((self.price_adults_2 * 2) + self.price_adults_3 + self.price_adults_4)
+        elif adults == 3 :  amount += ((self.price_adults_2 * 2) + self.price_adults_3)
+        elif adults == 2:  amount += (self.price_adults_2 * 2)
+        else:  amount += self.price_adults_1
         
-        if childrens >= 5: ammount += ((self.price_childrens_2 * 2) + self.price_childrens_3 + self.price_childrens_4 + (self.price_childrens_5 * childrens - 4))
-        elif childrens == 4: ammount += ((self.price_childrens_2 * 2) + self.price_childrens_3 + self.price_childrens_4)
-        elif childrens == 3 :  ammount += ((self.price_childrens_2 * 2) + self.price_childrens_3)
-        elif childrens == 2:  ammount += (self.price_childrens_2 * 2)
-        elif childrens == 1:  ammount += self.price_childrens_1
+        if childrens >= 5: amount += ((self.price_childrens_2 * 2) + self.price_childrens_3 + self.price_childrens_4 + (self.price_childrens_5 * childrens - 4))
+        elif childrens == 4: amount += ((self.price_childrens_2 * 2) + self.price_childrens_3 + self.price_childrens_4)
+        elif childrens == 3 :  amount += ((self.price_childrens_2 * 2) + self.price_childrens_3)
+        elif childrens == 2:  amount += (self.price_childrens_2 * 2)
+        elif childrens == 1:  amount += self.price_childrens_1
 
-        if infants >= 5: ammount += ((self.price_infants_2 * 2) + self.price_infants_3 + self.price_infants_4 + (self.price_infants_5 * infants - 4))
-        elif infants == 4: ammount += ((self.price_infants_2 * 2) + self.price_infants_3 + self.price_infants_4)
-        elif infants == 3 :  ammount += ((self.price_infants_2 * 2) + self.price_infants_3)
-        elif infants == 2:  ammount += (self.price_infants_2 * 2)
-        elif infants == 1:  ammount += self.price_infants_1
+        if infants >= 5: amount += ((self.price_infants_2 * 2) + self.price_infants_3 + self.price_infants_4 + (self.price_infants_5 * infants - 4))
+        elif infants == 4: amount += ((self.price_infants_2 * 2) + self.price_infants_3 + self.price_infants_4)
+        elif infants == 3 :  amount += ((self.price_infants_2 * 2) + self.price_infants_3)
+        elif infants == 2:  amount += (self.price_infants_2 * 2)
+        elif infants == 1:  amount += self.price_infants_1
 
-        return ammount
+        return amount
     
     def priceTotal(self,adults,childrens,infants) -> float:
         price = (self.pricePackage(adults,childrens,infants) * self.numberNights()) + (self.flight * (adults + childrens)) + (self.transfer * (adults + childrens))
@@ -259,6 +259,12 @@ class Bill(models.Model):
             _sec = str(sec)
             listReturn += [_sec[0],_sec[1]]
         return listReturn
+
+    def amountMoney(self) -> str:
+        amount = self.amount() + self.revenue()
+        if len(str(amount).split(".")[1]) == 1: return "$ " + str(amount) + "0"
+        return "$ " + str(amount)
+    
 
 class Booking(models.Model):
     id = models.AutoField(primary_key=True)

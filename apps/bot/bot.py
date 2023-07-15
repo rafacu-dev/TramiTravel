@@ -3,6 +3,7 @@ import telebot, threading, os, time as ti
 from telebot.types import InlineKeyboardMarkup,InlineKeyboardButton
 
 from apps.reservations.models import Bill, Booking
+from apps.hotels.models import Bill as BillPackage
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -332,6 +333,15 @@ def send_message_confirm_paid(message=str,bill=int):
     markup.add(btn_success,btn_deny)
     bot.send_message(ADMIN1_ID,message,parse_mode="html",disable_web_page_preview=True,reply_markup=markup)
     
+def send_message_confirm_paid_package(message=str,bill=int):
+    bot.send_chat_action(ADMIN1_ID, "typing")
+
+    markup = InlineKeyboardMarkup(row_width=2)
+    btn_success = InlineKeyboardButton("✅ CONFIRMAR",callback_data=f"confirm-package-{bill}")
+    btn_deny = InlineKeyboardButton("❌ DENEGAR",callback_data=f"deny-package-{bill}")
+    markup.add(btn_success,btn_deny)
+    bot.send_message(ADMIN1_ID,message,parse_mode="html",disable_web_page_preview=True,reply_markup=markup)
+    
 
 def send_message_to_searchl_link(message=str):
     sl_id = -1001783822172
@@ -347,7 +357,22 @@ def response_buttons(call):
         message_text = call.message.text
         bill_id = int(call.data.split("-")[1])
 
-        if "confirm" in call.data and chat_id == ADMIN1_ID:
+        if "confirm-package" in call.data and chat_id == ADMIN1_ID:
+            bill = BillPackage.objects.get(id = bill_id)
+            bill = Bill.objects.get(id = bill_id)
+            bill.paid = True
+            bill.liquidated = bill.amount() + bill.revenue()
+            bill.save()
+
+            bot.edit_message_text(message_text + "\n\n✅ CONFIRMADO",chat_id,message_id,parse_mode="html")
+            
+        elif "deny-package" in call.data and chat_id == ADMIN1_ID:
+            bill = Bill.objects.get(id = bill_id)
+            bill.paid = False
+            bill.save()
+            bot.edit_message_text(call.message.text + "\n\n❌ DENEGADO",chat_id,message_id,parse_mode="html")
+
+        elif "confirm" in call.data and chat_id == ADMIN1_ID:
             bill = Bill.objects.get(id = bill_id)
             bill.paid = True
             bill.liquidated = bill.amount() + bill.revenue()

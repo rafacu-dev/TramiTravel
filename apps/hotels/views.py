@@ -1,5 +1,6 @@
 import calendar
 from datetime import date, datetime
+import threading
 from apps.utils.countries import countries
 from django.shortcuts import redirect, render
 from django.views.generic import View
@@ -8,6 +9,8 @@ from apps.hotels.models import Bill, Booking, Destinatation, Hotel, RoomType, Va
 from apps.menus.models import Menu
 from apps.utils.utils import toMoney
 from core.languages import get_strings
+
+from apps.bot.bot import send_message_confirm_paid_package
 
 
 def date_key():
@@ -86,39 +89,106 @@ class ReservationsView(View):
         menus = Menu.objects.filter(actived=True).order_by('position')
         strings,language = get_strings(request.COOKIES)
 
-        codes = []
+        package_ids = []
         reservations = []
 
         bookings = Booking.objects.filter(user = request.user)
 
+        bill = None
+
         for booking in bookings:
-            reservationCode = str(booking.reservationCode)[:-2]
-            if reservationCode not in codes:
-                codes.append(reservationCode)
-                booking.clients = []
+            if  bill == None: bill = booking.bill
+
+            package_id = booking.package.id
+            total_amount = 0.0
+
+            if package_id not in package_ids:
+                package_ids.append(package_id)
+
+                rooms_dict = {}
+                amounts_dict = {}
+                for room in bookings.filter(package = booking.package):
+                        if room.reservationCode in rooms_dict.keys():
+                            rooms_dict[room.reservationCode].append({
+                            "firstName":room.firstName,
+                            "middleName":room.middleName,
+                            "lastName":room.lastName,
+                            "motherLastName":room.motherLastName,
+                            "birth":room.birth,
+                            "gender":room.gender,
+                            "documentNumber":room.documentNumber
+                            })
+                            #amounts_dict[room.reservationCode] += room.amount
+                        else:
+                            rooms_dict[room.reservationCode] = [{
+                            "firstName":room.firstName,
+                            "middleName":room.middleName,
+                            "lastName":room.lastName,
+                            "motherLastName":room.motherLastName,
+                            "birth":room.birth,
+                            "gender":room.gender,
+                            "documentNumber":room.documentNumber
+                            }]
+                            amounts_dict[room.reservationCode] = room.amount
+                            total_amount +=room.amount
+                rooms = []
+                for key in rooms_dict.keys():
+                    rooms.append([rooms_dict[key],amounts_dict[key]])
+                
+                booking.rooms = rooms
+                booking.total_amount = total_amount
                 reservations.append(booking)
-            else:
-                index = codes.index(reservationCode)
-                reservations[index].clients.append({
-                    "firstName":booking.firstName,
-                    "middleName":booking.middleName,
-                    "lastName":booking.lastName,
-                    "motherLastName":booking.motherLastName,
-                    "birth":booking.birth,
-                    "gender":booking.gender
-                })
 
-
-        
         context = {
             "language":language,
             "strings" : strings,
             "menus" :menus,
-            "reservations":reservations
+            "reservations":reservations,
+            "bill":bill
             }
         
         return render(request,'reservations_package.html',context)
     
+    def post(self,request,*args,**kwargs):
+        if not request.user.is_authenticated: return  redirect("index")
+        data = request.POST
+        try:
+        
+            codes = data["bill-code"].split("-")
+            id = int(data["bill-id"])
+            
+            for code in codes:
+                bill = Bill.objects.get(code = code, id = id)
+
+                phone = data["phonePayment"]
+                email = data["emailPayment"]
+                if phone != "":
+                    bill.zelle = phone
+                elif email != "":
+                    bill.zelle = email
+                bill.zelle_owner = data["zelle-owner"]
+                bill.paid = None
+                bill.save()
+
+                message = f"<b>COMPROBACION DE PAGO DE PAQUETE CON BILL-{bill.id}:</b>\n\n"
+                message += f"<b>Usuario:</b> <code>{request.user}</code>\n"
+                message += f"<b>Zelle:</b> <code>{bill.zelle}</code>\n"
+                message += f"<b>Codigo:</b> <code>{bill.code}</code>\n\n"
+                message += f"<b>Monto requerido:</b> <code>{bill.amountMoney()}</code>\n"
+                message += f"<b>Liquidado:</b> <code> ${bill.liquidated}</code>"
+                
+                
+                
+                t = threading.Thread(target=lambda:send_message_confirm_paid_package(message,id))
+                t.start()
+            
+            return  redirect("reservations")
+
+        except: 
+            print("Error al registrar pago")
+            return  redirect("reservations")
+        
+        
 class BookingView(View):
     
     def get(self,request,*args,**kwargs):
@@ -194,7 +264,7 @@ class BookingView(View):
             
             n = 1
 
-            _amount = periodPackage.pricePackage(adults,children,infants)
+            _amount = periodPackage.priceTotal(adults,children,infants)
             _revenue = periodPackage.markupValue(adults,children,infants)
             amount += _amount
             revenue += _revenue
