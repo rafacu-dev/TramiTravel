@@ -149,12 +149,12 @@ function renderDaySelection(dm) {
         if(textColor == ""){
             btn.addEventListener('click', function(e) {
                 document.querySelectorAll('.day-selection').forEach((element) => {
-                    element.classList.remove('bg-itravel-900/20');
+                    element.classList.remove('bg-itravel-100');
                     element.classList.remove('border');
                     element.classList.remove('border-solid');
                     element.classList.remove('day-selected');
                 });
-                btn.classList.add('bg-itravel-900/20');
+                btn.classList.add('bg-itravel-100');
                     btn.classList.add('border');
                     btn.classList.add('border-solid');
                     btn.classList.add('day-selected');
@@ -203,7 +203,7 @@ function renderDaySelection(dm) {
         selectedDate.getFullYear() == currentMonth.getFullYear()) {
             btn.classList.add('border')
             btn.classList.add('border-solid')
-            btn.classList.add('bg-itravel-900/20');
+            btn.classList.add('bg-itravel-100');
             btn.classList.add('day-selected');
         }
 
@@ -371,12 +371,12 @@ function renderDaySelection2(dm) {
         if(textColor == ""){
             btn.addEventListener('click', function(e) {
                 document.querySelectorAll('.day-selection2').forEach((element) => {
-                    element.classList.remove('bg-itravel-900/20');
+                    element.classList.remove('bg-itravel-100');
                     element.classList.remove('border');
                     element.classList.remove('border-solid');
                     element.classList.remove('day-selected');
                 });
-                btn.classList.add('bg-itravel-900/20');
+                btn.classList.add('bg-itravel-100');
                     btn.classList.add('border');
                     btn.classList.add('border-solid');
                     btn.classList.add('day-selected');
@@ -405,7 +405,7 @@ function renderDaySelection2(dm) {
 
         if (selectedDate2.getDate() == i && selectedDate2.getMonth() == currentMonth2.getMonth() &&
         selectedDate2.getFullYear() == currentMonth2.getFullYear()) {
-            btn.classList.add('bg-itravel-900/20');
+            btn.classList.add('bg-itravel-100');
             btn.classList.add('border');
             btn.classList.add('border-solid');
             btn.classList.add('day-selected');

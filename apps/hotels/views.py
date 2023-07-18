@@ -1,10 +1,11 @@
 import calendar
 from datetime import date, datetime
 import threading
+from apps.user.models import CreditRecharge
 from apps.utils.countries import countries
 from django.shortcuts import redirect, render
 from django.views.generic import View
-from apps.hotels.models import Bill, Booking, Destinatation, Hotel, RoomType, VacationPackage
+from apps.hotels.models import Bill, Booking, Client, Destinatation, Hotel, RoomType, VacationPackage
 
 from apps.menus.models import Menu
 from apps.utils.utils import toMoney
@@ -85,6 +86,9 @@ class Hotels(View):
     
 class ReservationsView(View):
     def get(self,request,*args,**kwargs):
+        if not request.user.is_authenticated: return  redirect("index") 
+        if self.request.user.agencie:return redirect("reservationsAgencie")
+
         data = request.GET
         menus = Menu.objects.filter(actived=True).order_by('position')
         strings,language = get_strings(request.COOKIES)
@@ -133,7 +137,7 @@ class ReservationsView(View):
                             total_amount +=room.amount
                 rooms = []
                 for key in rooms_dict.keys():
-                    rooms.append([rooms_dict[key],amounts_dict[key]])
+                    rooms.append([rooms_dict[key],amounts_dict[key],key])
                 
                 booking.rooms = rooms
                 booking.total_amount = total_amount
@@ -187,6 +191,73 @@ class ReservationsView(View):
         except: 
             print("Error al registrar pago")
             return  redirect("reservations")
+        
+    
+class ReservationsAgencieView(View):
+    def get(self,request,*args,**kwargs):
+        data = request.GET
+        menus = Menu.objects.filter(actived=True).order_by('position')
+        strings,language = get_strings(request.COOKIES)
+
+        bookings = Booking.objects.filter(user = request.user)
+
+        context = {
+            "language":language,
+            "strings" : strings,
+            "menus" :menus,
+            "bookings":bookings
+            }
+        
+        return render(request,'reservations_package_agencie.html',context)
+        
+    def post(self,request,*args,**kwargs):
+        data = request.POST
+        if "cancel-booking-id" in data.keys():
+            booking = Booking.objects.get(user = request.user,id=data["cancel-booking-id"])
+            booking.actived = False
+            booking.save()
+
+        if "liquidated-booking-id" in data.keys():
+            amount = float(data["liquidated-booking-amount"])
+            booking = Booking.objects.get(user = request.user,id=data["liquidated-booking-id"])
+            booking.liquidated += amount
+            booking.save()
+
+            request.user.agencie.credit -= amount
+            request.user.agencie.save()
+        
+        if "amount_transferred" in data.keys():
+            phone = data["phonePayment"]
+            email = data["emailPayment"]
+            if phone != "":
+                zelle = phone
+            elif email != "":
+                zelle = email
+
+            CreditRecharge.objects.create(
+                zelle = zelle,
+                zelle_owner = data["zelle-owner"],
+                amount = data["amount_transferred"],
+                agencie = request.user.agencie,
+                user = request.user
+            )
+
+
+        menus = Menu.objects.filter(actived=True).order_by('position')
+        strings,language = get_strings(request.COOKIES)
+
+        bookings = Booking.objects.filter(user = request.user)
+
+        context = {
+            "language":language,
+            "strings" : strings,
+            "menus" :menus,
+            "bookings":bookings,
+            "total_credit":request.user.agencie.creditMoney()
+            }
+        
+        return render(request,'reservations_package_agencie.html',context)
+
         
         
 class BookingView(View):
@@ -272,7 +343,17 @@ class BookingView(View):
             
             if r < 10:_r = f"0{r}"
             else:_r = str(r)
+            if n < 10:_n = f"0{n}"
+            else:_n = str(n)
 
+            booking = Booking.objects.create(
+                user = request.user,
+                package = periodPackage,
+                amount = _amount,
+                markup = _revenue,
+                bill = bill,
+                reservationCode = dk + _r + _n
+            )
 
             for p in passagersTypeList:
                 if p == "Adult" :
@@ -288,13 +369,9 @@ class BookingView(View):
                     docExpList = data[f'expiration-document-primary-Room{r}-{p}{i}'].split("/")
                     secDocExpList = data[f'expiration-document-secondary-Room{r}-{p}{i}'].split("/")
                     
-                    if n < 10:_n = f"0{n}"
-                    else:_n = str(n)
 
-                    booking = Booking.objects.create(
-                        user = request.user,
-                        package = periodPackage,
-
+                    client = Client.objects.create(
+                        booking = booking,
                         firstName = data[f'firstName-Room{r}-{p}{i}'].upper(),
                         middleName = data[f'middleName-Room{r}-{p}{i}'].upper(),
                         lastName = data[f'lastName-Room{r}-{p}{i}'].upper(),
@@ -313,35 +390,24 @@ class BookingView(View):
                         streetBegin = data[f'address-street-1'],
                         cityBegin = data[f'address-city-1'],
                         stateBegin = data[f'address-state-1'],
-
-                        amount = _amount,
-                        markup = _revenue,
-
-                        bill = bill,
-
-                        reservationCode = dk + _r + _n
                     )
-                    
-                    if f"license-{p}{i}" in files.keys():
-                        booking.license = data[f'license-Room{r}-{p}{i}']
-                        booking.save()
                     
                     if f"imagen-document-{p}{i}" in files.keys():
                         image  = files[f"imagen-document-Room{r}-{p}{i}"]
-                        imageName = f"primary_document_" + str(booking.id) + ".png"
-                        booking.imageDocument.save(imageName,image)
+                        imageName = f"primary_document_" + str(client.id) + ".png"
+                        client.imageDocument.save(imageName,image)
 
                     if data[f'number-document-secondary-Room{r}-{p}{i}'] != "" and data[f'expiration-document-secondary-Room{r}-{p}{i}'] != "" and data[f'type-document-secondary-Room{r}-{p}{i}'] != "" and data[f'country-document-secondary-Room{r}-{p}{i}']:
-                        booking.secondaryDocumentNumber = data[f'number-document-secondary-Room{r}-{p}{i}']
-                        booking.secondaryDocumentExpiration = date(int(secDocExpList[2]),int(secDocExpList[0]),int(secDocExpList[1]))
-                        booking.secondaryDocumentType = data[f'type-document-secondary-Room{r}-{p}{i}']
-                        booking.secondaryDocumentCountry = data[f'country-document-secondary-Room{r}-{p}{i}']
-                        booking.save()
+                        client.secondaryDocumentNumber = data[f'number-document-secondary-Room{r}-{p}{i}']
+                        client.secondaryDocumentExpiration = date(int(secDocExpList[2]),int(secDocExpList[0]),int(secDocExpList[1]))
+                        client.secondaryDocumentType = data[f'type-document-secondary-Room{r}-{p}{i}']
+                        client.secondaryDocumentCountry = data[f'country-document-secondary-Room{r}-{p}{i}']
+                        client.save()
                         
                         if f"imagen-document-secondary-Room{r}-{p}{i}" in files.keys():
                             image  = files[f"imagen-document-secondary-Room{r}-{p}{i}"]
-                            imageName = f"secondary_document_" + str(booking.id) + ".png"
-                            booking.imageSecondaryDocument.save(imageName,image)
+                            imageName = f"secondary_document_" + str(client.id) + ".png"
+                            client.imageSecondaryDocument.save(imageName,image)
 
             n += 1
 

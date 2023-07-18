@@ -1,0 +1,328 @@
+
+/** border-color */
+.border-itravel-50 {
+  border-color:rgba(128, 75, 100,0.1)!important;
+}
+.border-itravel-100 {
+  border-color:rgba(128, 75, 100,0.2)!important;
+}
+.border-itravel-200 {
+  border-color:rgba(128, 75, 100,0.3)!important;
+}
+.border-itravel-300 {
+  border-color:rgba(128, 75, 100,0.4)!important;
+}
+.border-itravel-400 {
+  border-color:rgb(228, 165, 200)!important;
+}
+.border-itravel-500 {
+  border-color:rgb(208, 145, 180)!important;
+}
+.border-itravel-600 {
+  border-color:rgb(188, 125, 160)!important;
+}
+.border-itravel-700 {
+  border-color:rgb(168, 105, 140)!important;
+}
+.border-itravel-800 {
+  border-color:rgb(148, 95, 120)!important;
+}
+.border-itravel-900 {
+  border-color:rgb(128, 75, 100)!important;
+}
+
+
+
+.hover\:border-itravel-50:hover {
+  border-color:rgba(128, 75, 100,0.1)!important;
+}
+.hover\:border-itravel-100:hover {
+  border-color:rgba(128, 75, 100,0.2)!important;
+}
+.hover\:border-itravel-200:hover {
+  border-color:rgba(128, 75, 100,0.3)!important;
+}
+.hover\:border-itravel-300:hover {
+  border-color:rgba(128, 75, 100,0.4)!important;
+}
+.hover\:border-itravel-400:hover {
+  border-color:rgb(228, 165, 200)!important;
+}
+.hover\:border-itravel-500:hover {
+  border-color:rgb(208, 145, 180)!important;
+}
+.hover\:border-itravel-600:hover {
+  border-color:rgb(188, 125, 160)!important;
+}
+.hover\:border-itravel-700:hover {
+  border-color:rgb(168, 105, 140)!important;
+}
+.hover\:border-itravel-800:hover {
+  border-color:rgb(148, 95, 120)!important;
+}
+.hover\:border-itravel-900:hover {
+  border-color:rgb(128, 75, 100)!important;
+}
+
+
+
+.focus\:border-itravel-50:focus {
+  border-color:rgba(128, 75, 100,0.1)!important;
+}
+.focus\:border-itravel-100:focus {
+  border-color:rgba(128, 75, 100,0.2)!important;
+}
+.focus\:border-itravel-200:focus {
+  border-color:rgba(128, 75, 100,0.3)!important;
+}
+.focus\:border-itravel-300:focus {
+  border-color:rgba(128, 75, 100,0.4)!important;
+}
+.focus\:border-itravel-400:focus {
+  border-color:rgb(228, 165, 200)!important;
+}
+.focus\:border-itravel-500:focus {
+  border-color:rgb(208, 145, 180)!important;
+}
+.focus\:border-itravel-600:focus {
+  border-color:rgb(188, 125, 160)!important;
+}
+.focus\:border-itravel-700:focus {
+  border-color:rgb(168, 105, 140)!important;
+}
+.focus\:border-itravel-800:focus {
+  border-color:rgb(148, 95, 120)!important;
+}
+.focus\:border-itravel-900:focus {
+  border-color:rgb(128, 75, 100)!important;
+}
+
+
+/** background-color */
+.bg-itravel-50 {
+  background-color:rgba(128, 75, 100,0.1)!important;
+}
+.bg-itravel-100 {
+  background-color:rgba(128, 75, 100,0.2)!important;
+}
+.bg-itravel-200 {
+  background-color:rgba(128, 75, 100,0.3)!important;
+}
+.bg-itravel-300 {
+  background-color:rgba(128, 75, 100,0.4)!important;
+}
+.bg-itravel-400 {
+  background-color:rgb(228, 165, 200)!important;
+}
+.bg-itravel-500 {
+  background-color:rgb(208, 145, 180)!important;
+}
+.bg-itravel-600 {
+  background-color:rgb(188, 125, 160)!important;
+}
+.bg-itravel-700 {
+  background-color:rgb(168, 105, 140)!important;
+}
+.bg-itravel-800 {
+  background-color:rgb(148, 95, 120)!important;
+}
+.bg-itravel-900 {
+  background-color:rgb(128, 75, 100)!important;
+}
+
+.hover\:bg-itravel-50:hover {
+  background-color:rgba(128, 75, 100,0.1)!important;
+}
+.hover\:bg-itravel-100:hover {
+  background-color:rgba(128, 75, 100,0.2)!important;
+}
+.hover\:bg-itravel-200:hover {
+  background-color:rgba(128, 75, 100,0.3)!important;
+}
+.hover\:bg-itravel-300:hover {
+  background-color:rgba(128, 75, 100,0.4)!important;
+}
+.hover\:bg-itravel-400:hover {
+  background-color:rgb(228, 165, 200)!important;
+}
+.hover\:bg-itravel-500:hover {
+  background-color:rgb(208, 145, 180)!important;
+}
+.hover\:bg-itravel-600:hover {
+  background-color:rgb(188, 125, 160)!important;
+}
+.hover\:bg-itravel-700:hover {
+  background-color:rgb(168, 105, 140)!important;
+}
+.hover\:bg-itravel-800:hover {
+  background-color:rgb(148, 95, 120)!important;
+}
+.hover\:bg-itravel-900:hover {
+  background-color:rgb(128, 75, 100)!important;
+}
+
+.focus\:bg-itravel-50:focus {
+  background-color:rgba(128, 75, 100,0.1)!important;
+}
+.focus\:bg-itravel-100:focus {
+  background-color:rgba(128, 75, 100,0.2)!important;
+}
+.focus\:bg-itravel-200:focus {
+  background-color:rgba(128, 75, 100,0.3)!important;
+}
+.focus\:bg-itravel-300:focus {
+  background-color:rgba(128, 75, 100,0.4)!important;
+}
+.focus\:bg-itravel-400:focus {
+  background-color:rgb(228, 165, 200)!important;
+}
+.focus\:bg-itravel-500:focus {
+  background-color:rgb(208, 145, 180)!important;
+}
+.focus\:bg-itravel-600:focus {
+  background-color:rgb(188, 125, 160)!important;
+}
+.focus\:bg-itravel-700:focus {
+  background-color:rgb(168, 105, 140)!important;
+}
+.focus\:bg-itravel-800:focus {
+  background-color:rgb(148, 95, 120)!important;
+}
+.focus\:bg-itravel-900:focus {
+  background-color:rgb(128, 75, 100)!important;
+}
+
+
+/** color */
+.text-itravel-50 {
+  color:rgba(128, 75, 100,0.1);
+}
+.text-itravel-100 {
+  color:rgba(128, 75, 100,0.2);
+}
+.text-itravel-200 {
+  color:rgba(128, 75, 100,0.3);
+}
+.text-itravel-300 {
+  color:rgba(128, 75, 100,0.4);
+}
+.text-itravel-400 {
+  color:rgb(228, 165, 200);
+}
+.text-itravel-500 {
+  color:rgb(208, 145, 180);
+}
+.text-itravel-600 {
+  color:rgb(188, 125, 160);
+}
+.text-itravel-700 {
+  color:rgb(168, 105, 140);
+}
+.text-itravel-800 {
+  color:rgb(148, 95, 120);
+}
+.text-itravel-900 {
+  color:rgb(128, 75, 100);
+}
+
+.hover\:text-itravel-50:hover {
+  color:rgba(128, 75, 100,0.1);
+}
+.hover\:text-itravel-100:hover {
+  color:rgba(128, 75, 100,0.2);
+}
+.hover\:text-itravel-200:hover {
+  color:rgba(128, 75, 100,0.3);
+}
+.hover\:text-itravel-300:hover {
+  color:rgba(128, 75, 100,0.4);
+}
+.hover\:text-itravel-400:hover {
+  color:rgb(228, 165, 200);
+}
+.hover\:text-itravel-500:hover {
+  color:rgb(208, 145, 180);
+}
+.hover\:text-itravel-600:hover {
+  color:rgb(188, 125, 160);
+}
+.hover\:text-itravel-700:hover {
+  color:rgb(168, 105, 140);
+}
+.hover\:text-itravel-800:hover {
+  color:rgb(148, 95, 120);
+}
+.hover\:text-itravel-900:hover {
+  color:rgb(128, 75, 100);
+}
+
+.focus\:text-itravel-50:focus {
+  color:rgba(128, 75, 100,0.1);
+}
+.focus\:text-itravel-100:focus {
+  color:rgba(128, 75, 100,0.2);
+}
+.focus\:text-itravel-200:focus {
+  color:rgba(128, 75, 100,0.3);
+}
+.focus\:text-itravel-300:focus {
+  color:rgba(128, 75, 100,0.4);
+}
+.focus\:text-itravel-400:focus {
+  color:rgb(228, 165, 200);
+}
+.focus\:text-itravel-500:focus {
+  color:rgb(208, 145, 180);
+}
+.focus\:text-itravel-600:focus {
+  color:rgb(188, 125, 160);
+}
+.focus\:text-itravel-700:focus {
+  color:rgb(168, 105, 140);
+}
+.focus\:text-itravel-800:focus {
+  color:rgb(148, 95, 120);
+}
+.focus\:text-itravel-900:focus {
+  color:rgb(128, 75, 100);
+}
+
+
+
+
+.from-itravel-900 {
+  --tw-gradient-from: rgb(128, 75, 100);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(128, 75, 100, 0));
+}
+
+.to-itravel-600 {
+  --tw-gradient-to: rgb(188, 125, 160);
+}
+
+
+
+
+.focus\:ring-itravel-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgba(208, 145, 180, var(--tw-ring-opacity));
+}
+
+.peer:focus ~ .peer-focus\:text-itravel-600 {
+  --tw-text-opacity: 1;
+  color: rgba(188, 125, 160, var(--tw-text-opacity));
+}
+
+
+@media (min-width: 768px) {
+    .md\:hover\:text-itravel-900:hover {
+      --tw-text-opacity: 1;
+      color: rgba(128, 75, 100, var(--tw-text-opacity));
+    }
+}
+
+@media (min-width: 1024px) {
+  .lg\:hover\:text-itravel-900:hover {
+    --tw-text-opacity: 1;
+    color: rgba(128, 75, 100, var(--tw-text-opacity));
+  }
+}

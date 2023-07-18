@@ -1,10 +1,10 @@
 function controlSeeBooking(value){
 
     document.querySelectorAll('.booking-btn').forEach((element) => {
-        element.className = "p-2 my-1 hover:bg-itravel-900/30 hover:text-black text-gray-700 text-sm w-56 text-left font-serif rounded-md booking-btn flex";
+        element.className = "p-2 my-1 hover:bg-itravel-200 hover:text-black text-gray-700 text-sm w-56 text-left font-serif rounded-md booking-btn flex";
     });
     
-    document.getElementById(value).className = "p-2 my-1 hover:bg-itravel-900/30 hover:text-black bg-itravel-900/30 text-sm text-black w-56 text-left font-serif rounded-md booking-btn flex";
+    document.getElementById(value).className = "p-2 my-1 hover:bg-itravel-200 hover:text-black bg-itravel-200 text-sm text-black w-56 text-left font-serif rounded-md booking-btn flex";
     
     let x = document.getElementsByClassName('booking');
 

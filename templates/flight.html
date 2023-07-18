@@ -167,7 +167,7 @@
     
                         <div class="py-1">
                             <button type="button" onclick="document.getElementById('dropdownPassenger').click()"
-                            class="block py-2 px-4 text-sm font-bold font-serif text-black bg-itravel-900/50 hover:bg-itravel-900/70 w-full rounded-md">{{strings.ready}}</button>
+                            class="block py-2 px-4 text-sm font-bold font-serif text-black bg-itravel-400 hover:bg-itravel-700 w-full rounded-md">{{strings.ready}}</button>
                         </div>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
                         <p id="month-selection" class="p-1 text-center font-bold text-sm mx-6"></p>
                     </div>
 
-                    <div class="flex flex-row justify-between bg-itravel-900/20 rounded-lg">  
+                    <div class="flex flex-row justify-between bg-itravel-100 rounded-lg">  
                         <button id="prevMonth" type="button" onclick="prevMonth()" class="w-6 h-content cursor-pointer text-center font-bold text-itravel-200 hover:text-itravel-400 text-sm pr-8 rotate-180">➜</button>                      
                         <div id="day-selection" class="flex flex-row justify-between w-full  py-1 pl-2"></div>
                         <button type="button" onclick="nextMonth()" class="w-6 h-content cursor-pointer text-center font-bold text-itravel-200 hover:text-itravel-400 text-sm pr-8">➜</button>
@@ -307,7 +307,7 @@
                         <div class="flex w-full justify-center">
                             <p id="month-selection2" class="p-1 text-center font-bold text-sm mx-6"></p>
                         </div>            
-                        <div class="flex flex-row justify-between bg-itravel-900/20 rounded-lg">  
+                        <div class="flex flex-row justify-between bg-itravel-100 rounded-lg">  
                             <button id="prevMonth-2" type="button" onclick="prevMonth2()" class="w-6 h-content cursor-pointer text-center font-bold text-itravel-200 hover:text-itravel-400 text-sm pr-8 rotate-180">➜</button>                      
                             <div id="day-selection2" class="flex flex-row justify-between w-full  py-1 pl-2"></div>
                             <button type="button" onclick="nextMonth2()" class="w-6 h-content cursor-pointer text-center font-bold text-itravel-200 hover:text-itravel-400 text-sm pr-8">➜</button>
@@ -408,15 +408,15 @@
                 
                 <div class="flex justify-between items-center py-2 border-t border-solid border-gray-200 mt-6  pt-6 hidden">
                     <div class="lg:flex justify-center items-center py-2 w-1/3 ">
-                        <h5 class="bg-itravel-900/20 appearance-none md:rounded-l-lg border border-itravel-900  focus:border-itravel-500 focus:ring-itravel-500 p-2 text-md text-gray-900 font-bold italic">{{strings.adults}} :</h5>
+                        <h5 class="bg-itravel-100 appearance-none md:rounded-l-lg border border-itravel-900  focus:border-itravel-500 focus:ring-itravel-500 p-2 text-md text-gray-900 font-bold italic">{{strings.adults}} :</h5>
                         <input type="number" value="{{adults}}" min="1" name="adults" class="appearance-none w-full md:w-20 md:rounded-r-lg border border-itravel-900  focus:border-itravel-500 focus:ring-itravel-500 text-md text-gray-900 placeholder-gray-900 font-bold" placeholder="0.00">
                     </div>
                     <div class="lg:flex justify-center items-center py-2 w-1/3">
-                        <h5 class="bg-itravel-900/20 appearance-none md:rounded-l-lg border border-itravel-900 p-2 text-md text-gray-900 font-bold italic">{{strings.children}} :</h5>
+                        <h5 class="bg-itravel-100 appearance-none md:rounded-l-lg border border-itravel-900 p-2 text-md text-gray-900 font-bold italic">{{strings.children}} :</h5>
                         <input type="number" value="{{children}}" min="0" name="children" class="appearance-none w-full md:w-20 md:rounded-r-lg border-itravel-900 text-md text-gray-900 placeholder-gray-900 font-bold" placeholder="0.00">
                     </div>
                     <div class="lg:flex justify-center items-center py-2 w-1/3">
-                        <h5 class="bg-itravel-900/20 appearance-none md:rounded-l-lg border border-itravel-900 p-2 text-md text-gray-900 font-bold italic">{{strings.infants}} :</h5>
+                        <h5 class="bg-itravel-100 appearance-none md:rounded-l-lg border border-itravel-900 p-2 text-md text-gray-900 font-bold italic">{{strings.infants}} :</h5>
                         <input type="number" value="{{infants}}" min="0" name="infants" class="appearance-none w-full md:w-20 md:rounded-r-lg border-itravel-900 text-md text-gray-900 placeholder-gray-900 font-bold" placeholder="0.00">
                     </div>
                 </div>

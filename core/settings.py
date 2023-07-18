@@ -29,8 +29,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
 
-    'tailwind',
-    'theme',
+    #'tailwind',
+    #'theme',
 
     'apps.user',
     'apps.reservations',
@@ -41,13 +41,10 @@ INSTALLED_APPS = [
     'apps.hotels',
 ]
 
-TAILWIND_APP_NAME = 'theme'
+#TAILWIND_APP_NAME = 'theme'
 #NPM_BIN_PATH = "/usr/bin/npm"
-NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
-
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+#NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+#INTERNAL_IPS = [ "127.0.0.1", ]
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -55,7 +52,6 @@ CKEDITOR_CONFIGS = {
         'autoParagraph': False
     }
 }
-
 CKEDITOR_UPLOAD_PATH = "/media/"
 
 

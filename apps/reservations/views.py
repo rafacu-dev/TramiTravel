@@ -126,7 +126,7 @@ class Home(View):
 
 class HomeTraslate(View):
     def get(self,request,traslate,*args,**kwargs):
-
+        
         try:
             ip_address = request.META.get('HTTP_CF_CONNECTING_IP')
             get_request, _ = GetRequests.objects.get_or_create(ip_address=ip_address)
@@ -141,8 +141,7 @@ class HomeTraslate(View):
         relationsRoomType = []
 
         fecha_actual = timezone.now().date()
-        package = VacationPackage.objects.filter(Q(startDate__lte=fecha_actual) & Q(lastDate__gte=fecha_actual))
-
+        package = VacationPackage.objects.filter(Q(startDate__gte=fecha_actual) & Q(actived=True))
 
         for p in package:
             objFrom = {
@@ -154,16 +153,16 @@ class HomeTraslate(View):
                 
             objTo = {
                 "id_from":p.origen.id,
-                "id":p.hotel.location.id,
-                "name":p.hotel.location.name(),
+                "id":p.room.hotel.location.id,
+                "name":p.room.hotel.location.name(),
             }
             if objTo not in relationsTo:
                 relationsTo.append(objTo)
                 
             objHotels = {
-                "id_to":p.hotel.location.id,
-                "id":p.hotel.id,
-                "name":p.hotel.name,
+                "id_to":p.room.hotel.location.id,
+                "id":p.room.hotel.id,
+                "name":p.room.hotel.name,
                 "max_adults":p.maxAdults(),
                 "max_childrens":p.maxChildrens(),
                 "max_infants":p.maxInfants(),
@@ -173,9 +172,9 @@ class HomeTraslate(View):
                 relationsHotels.append(objHotels)
                 
             objRoomType = {
-                "id_hotel":p.hotel.id,
-                "id":p.room_type.id,
-                "name":p.room_type.name,
+                "id_hotel":p.room.hotel.id,
+                "id":p.room.room_type.id,
+                "name":p.room.room_type.name,
             }
             if objRoomType not in relationsRoomType:
                 relationsRoomType.append(objRoomType)
