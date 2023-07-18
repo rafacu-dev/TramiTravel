@@ -19,7 +19,7 @@
                     {% if bill.paid == False or not bill.paid %}
 
                         {% if not bill.zelle or bill.paid == False %}
-                        <button class="animate-bounce flex items-center justify-between px-8 h-12 shadow-lg shadow-itravel-500/50 rounded-lg bg-gradient-to-br from-itravel-900 to-pink-700 hover:bg-gradient-to-bl font-bold w-64"
+                        <button class="animate-bounce flex items-center justify-between px-8 h-12 shadow-lg  rounded-lg bg-gradient-to-br from-itravel-900 to-pink-700 hover:bg-gradient-to-bl font-bold w-64"
                             data-modal-toggle="payment-modal">
                             <p class="text-lg text-white mr-2">{{ strings.ticket_t1 }}</p>
                             <img src="{% static 'images/zelle.png' %}" class="w-auto h-8" alt="" />
@@ -162,7 +162,7 @@
                         <p class="text-xs mt-3">{{strings.ticket_t15}}</p>
                         {% endif %}
                         {% for booking in bookings %}
-                        <button class="p-2 my-1 hover:bg-itravel-900/30 hover:text-black text-gray-700 text-sm w-56 text-left font-serif rounded-md booking-btn truncate {% if forloop.counter == 1 %} bg-itravel-900/30 {% endif %}" id="{{booking.reservationCode}}" onclick="controlSeeBooking({{booking.reservationCode}})">
+                        <button class="p-2 my-1 hover:bg-itravel-200 hover:text-black text-gray-700 text-sm w-56 text-left font-serif rounded-md booking-btn truncate {% if forloop.counter == 1 %} bg-itravel-200 {% endif %}" id="{{booking.reservationCode}}" onclick="controlSeeBooking({{booking.reservationCode}})">
                             <span class="overflow-hidden truncate">{{booking.name}}</span>
                         </button>
                         {% endfor %}
@@ -171,7 +171,7 @@
                             <div id="pending-bookings-line" class="h-px w-full bg-gray-200 mt-3"></div>
                             <p id="pending-bookings-header" class="py-2 my-1 text-sm text-itravel-900 font-bold w-56 text-left font-serif">{{ strings.pending_bookings }}</p>                        
                             {% for booking in pending_bookings %}
-                            <div class="p-2 my-1 hover:bg-itravel-900/30 hover:text-black text-gray-700 text-sm w-56 text-left font-serif rounded-md booking-btn flex items-center pending-bookings" id="{{booking.reservationCode}}">
+                            <div class="p-2 my-1 hover:bg-itravel-200 hover:text-black text-gray-700 text-sm w-56 text-left font-serif rounded-md booking-btn flex items-center pending-bookings" id="{{booking.reservationCode}}">
                                 <button class="w-44 overflow-hidden truncate"  onclick="controlSeeBooking({{booking.reservationCode}})">{{booking.name}}</button>
                                 <button id="btnDelete-{{booking.reservationCode}}" class="z-50 material-icons hover:text-red-900 ml-2 " data-modal-toggle="toast-delete-booking" onclick="deleteBooking({{booking.reservationCode}})">delete_outline</button>
                                 <svg id="loadingDelete-{{booking.reservationCode}}" aria-hidden="true" role="status" class="ml-2 h-6 w-6 animate-spin text-itravel-900 hidden" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -208,12 +208,12 @@
                         </div>
                         
                         <div class="flex justify-start items-center space-x-3">
-                            <button id="accordion-rooms-heading-{{reservation.id}}" type="button" class="flex w-min px-2 bg-itravel-900/20 rounded-lg shadow-sm" data-accordion-target="#accordion-rooms-body-{{reservation.id}}" aria-expanded="false" aria-controls="accordion-rooms-body-{{reservation.id}}">
-                                <span class="text-gray-900">Rooms</span>
+                            <button id="accordion-rooms-heading-{{reservation.id}}" type="button" class="flex w-min px-2 bg-itravel-100 rounded-lg shadow-sm" data-accordion-target="#accordion-rooms-body-{{reservation.id}}" aria-expanded="false" aria-controls="accordion-rooms-body-{{reservation.id}}">
+                                <span class="text-gray-900 truncate">Rooms</span>
                                 <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                             </button>
-                            <button id="accordion-itinerario-heading-{{reservation.id}}" type="button" class="flex w-min px-2 bg-itravel-900/20 rounded-lg shadow-sm" data-accordion-target="#accordion-itinerario-body-{{reservation.id}}" aria-expanded="false" aria-controls="accordion-itinerario-body-{{reservation.id}}">
-                                <span class="text-gray-900">Itinerario</span>
+                            <button id="accordion-itinerario-heading-{{reservation.id}}" type="button" class="flex w-min px-2 bg-itravel-100 rounded-lg shadow-sm" data-accordion-target="#accordion-itinerario-body-{{reservation.id}}" aria-expanded="false" aria-controls="accordion-itinerario-body-{{reservation.id}}">
+                                <span class="text-gray-900 truncate">Itinerario</span>
                                 <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                             </button>
                         </div>
@@ -443,7 +443,7 @@
                         
                         {% for room in reservation.rooms %}
                         <div class="flex justify-between">     
-                            <p class="text-md text-gray-900 px-6 py-3 font-semibold">Room {{forloop.counter}}</p>
+                            <p class="text-md text-gray-900 px-6 py-3 font-semibold">Room {{forloop.counter}} (Reservation Code: {{room.2}})</p>
                             <p class="text-md text-gray-900 px-6 py-3 font-semibold">Monto: ${{room.1|toMoney}}</p>
                         </div>
                         <div class="relative overflow-x-auto shadow-sm sm:rounded-lg mb-3 border">                            

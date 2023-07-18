@@ -7,6 +7,10 @@ register = template.Library()
 def toInt(obj):
     return int(obj)
 
+@register.filter
+def parseFloat(obj):
+    return str(obj).replace(",",".")
+
 
 @register.filter
 def toMoney(objet) -> str:

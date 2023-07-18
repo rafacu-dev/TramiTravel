@@ -270,8 +270,26 @@ class Booking(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(UserAccount,on_delete=models.CASCADE,null=False,blank=False,related_name="user_account")
     package = models.ForeignKey(VacationPackage,on_delete=models.SET_NULL,null=True,blank=True,related_name="VacationPackage")
-    date = models.DateField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    reservationCode = models.BigIntegerField(blank = False, null = False)
+    pnr = models.CharField(blank = True, null = True, max_length=50)
+    pnr_return = models.CharField(blank = True, null = True, max_length=50)
     
+    bill = models.ForeignKey(Bill,on_delete=models.CASCADE,null=False,blank=False,related_name="hotels_bill")
+    
+    amount = models.FloatField(blank=False, null=False,default=0)
+    markup = models.FloatField(blank=False, null=False,default=0)
+    liquidated = models.FloatField(blank=False, null=False,default=0)
+  
+    actived = models.BooleanField(default=True)
+
+    def holder(self):
+        return Client.objects.filter(booking=self)[0]
+
+class Client(models.Model):
+    id = models.AutoField(primary_key=True)
+    booking = models.ForeignKey(Booking,on_delete=models.CASCADE,null=False,blank=False,related_name="booking")
     firstName = models.CharField(blank = False, null = False, max_length=100)
     middleName = models.CharField(blank = True, null = True,max_length=100)
     lastName = models.CharField(blank = False, null = False, max_length=100)
@@ -298,20 +316,8 @@ class Booking(models.Model):
     cityBegin = models.CharField(blank = False, null = False, max_length=100)
     stateBegin = models.CharField(blank = False, null = False, max_length=100)
 
-    reservationCode = models.BigIntegerField(blank = False, null = False)
-    pnr = models.CharField(blank = True, null = True, max_length=50)
-    pnr_return = models.CharField(blank = True, null = True, max_length=50)
-
-    license = models.CharField(blank = True, null = True, max_length=100)
-    
-    bill = models.ForeignKey(Bill,on_delete=models.CASCADE,null=False,blank=False,related_name="hotels_bill")
-    
-    amount = models.FloatField(blank=False, null=False,default=0)
-    markup = models.FloatField(blank=False, null=False,default=0)
-    liquidated = models.FloatField(blank=False, null=False,default=0)
-  
-    actived = models.BooleanField(default=True)
-
+    def __str__(self) -> str:
+        return self.lastName + " " + self.motherLastName + ", " + self.firstName + " " + self.middleName
     
 """
 Total = (Hotel * Nights) + Taxes + Flight + Transfer + Markup +- Additional Fee/Discount

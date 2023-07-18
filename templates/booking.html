@@ -36,7 +36,7 @@
             <div class="hidden" id="date-compare-flight">{% if flightReturnSelect %}{{ flightReturnSelect.date|date:"Y-m-d" }}{% else %} {{ flightBeginSelect.date|date:"Y-m-d" }} {%endif%}</div>
 
             <div class="w-full h-auto max-w-6xl border border-itravel-200 rounded-lg shadow-smmb-3  mt-3 lg:flex">
-                <div class="lg:h-full lg:w-1/3 bg-itravel-900/20  p-6 ">
+                <div class="lg:h-full lg:w-1/3 bg-itravel-100  p-6 ">
                     <p class="text-black font-bold text-3xl w-full mb-3 font-serif">{{ strings.booking_t1 }}</p>
                     <p class="text-itravel-900 font-bold text-4xl w-full mb-6">{{price}}</p>
 
@@ -125,20 +125,20 @@
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Adult{{forloop.counter}}">{{ strings.first_name }} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                <input required class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input required class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 focus:ring-itravel-500" id="firstName-Adult{{forloop.counter}}" name="firstName-Adult{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Adult{{forloop.counter}}">{{ strings.middle_name}}</label>
-                                <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Adult{{forloop.counter}}" name="middleName-Adult{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Adult{{forloop.counter}}">{{ strings.last_name}} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                <input required class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input required class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Adult{{forloop.counter}}" name="lastName-Adult{{forloop.counter}}" type="text">
                             </div>
 
@@ -148,7 +148,7 @@
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Adult{{forloop.counter}}">{{ strings.mother_name}}</label>
-                                <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Adult{{forloop.counter}}" name="motherLastName-Adult{{forloop.counter}}" type="text">
                             </div>
 
@@ -164,7 +164,7 @@
                                         </svg>
                                     </div>
                                     <input required datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="dateBirth-Adult{{forloop.counter}}" name="dateBirth-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy"
-                                    type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                    type="text" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                     focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 range-today">
                                 </div>
                             </div>
@@ -196,7 +196,7 @@
                             <div class="flex flex-wrap w-full md:w-1/3">
                                 <div class="w-full md:w-1/2 md:px-2 py-3">
                                     <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-primary-Adult{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                    <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required id="number-document-primary-Adult{{forloop.counter}}" name="number-document-primary-Adult{{forloop.counter}}" type="text">
+                                    <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required id="number-document-primary-Adult{{forloop.counter}}" name="number-document-primary-Adult{{forloop.counter}}" type="text">
                                 </div>
         
                                 <div class="w-full md:w-1/2 md:px-2 py-3">
@@ -207,13 +207,13 @@
                                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                         </div>
                                         <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-primary-Adult{{forloop.counter}}" name="expiration-document-primary-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
-                                        type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
+                                        type="text" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
                                     </div>
                                 </div>
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-primary-Adult{{forloop.counter}}">{{ strings.document_type }}</label>
-                                <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                                <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
                                 name="type-document-primary-Adult{{forloop.counter}}" id="type-document-primary-Adult{{forloop.counter}}" required>
                                     <option value="Passport">{{ strings.passport }}</option>
                                     <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
@@ -223,7 +223,7 @@
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-primary-Adult{{forloop.counter}}">{{ strings.country_document }}</label>
-                                <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
+                                <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2
                                 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-primary-Adult{{forloop.counter}}" id="country-document-primary-Adult{{forloop.counter}}" required>
                                     
                                     <!--<option value="US" selected>US (United States)</option>
@@ -728,7 +728,7 @@
                                 <div class="flex flex-wrap w-full md:w-1/3">
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
                                         <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-secondary-Adult{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                        <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Adult{{forloop.counter}}" name="number-document-secondary-Adult{{forloop.counter}}" type="text" required>
+                                        <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Adult{{forloop.counter}}" name="number-document-secondary-Adult{{forloop.counter}}" type="text" required>
                                     </div>
             
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
@@ -738,13 +738,13 @@
                                                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                             </div>
                                             <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}"  id="expiration-document-secondary-Adult{{forloop.counter}}"  name="expiration-document-secondary-Adult{{forloop.counter}}" placeholder="mm/dd/yyyy"   id="expiration-document-secondary-Adult{{forloop.counter}}" required onchange="validDatepicker(this)" autocomplete="off"
-                                            type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
+                                            type="text" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
                                     <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-secondary-Adult{{forloop.counter}}">{{ strings.document_type }}</label>
-                                    <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                                    <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
                                     id="type-document-secondary-Adult{{forloop.counter}}" name="type-document-secondary-Adult{{forloop.counter}}" required>
                                         <option value="Passport">{{ strings.passport }}</option>
                                         <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
@@ -754,7 +754,7 @@
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
                                     <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-secondary-Adult{{forloop.counter}}">{{ strings.country_document }}</label>
-                                    <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
+                                    <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2
                                     leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-secondary-Adult{{forloop.counter}}" id="country-document-secondary-Adult{{forloop.counter}}" required>
                                         <option value="USA" selected>USA (United States)</option>
                                         <option value="CUB">CUB (Cuba)</option> ADD_CUBA
@@ -1051,20 +1051,20 @@
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Children{{forloop.counter}}">{{ strings.first_name }} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="firstName-Children{{forloop.counter}}" name="firstName-Children{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Children{{forloop.counter}}">{{ strings.middle_name}}</label>
-                                <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Children{{forloop.counter}}" name="middleName-Children{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Children{{forloop.counter}}">{{ strings.last_name}} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Children{{forloop.counter}}" name="lastName-Children{{forloop.counter}}" type="text">
                             </div>
 
@@ -1074,7 +1074,7 @@
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Children{{forloop.counter}}">{{ strings.mother_name}}</label>
-                                <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Children{{forloop.counter}}" name="motherLastName-Children{{forloop.counter}}" type="text">
                             </div>
 
@@ -1090,7 +1090,7 @@
                                         </svg>
                                     </div>
                                     <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="dateBirth-Children{{forloop.counter}}" name="dateBirth-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" onchange="validDatepicker(this)" autocomplete="off"
-                                    type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                    type="text" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                     focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 range-today children-dateBirth" children-date-count="{{flightBeginSelect.date|date:"Y-m-d"}}">
                                 </div>
                             </div>
@@ -1118,7 +1118,7 @@
                             <div class="flex flex-wrap w-full md:w-1/3">
                                 <div class="w-full md:w-1/2 md:px-2 py-3">
                                     <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-primary-Children{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                    <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required
+                                    <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required
                                     id="number-document-primary-Children{{forloop.counter}}" name="number-document-primary-Children{{forloop.counter}}" type="text">
                                 </div>
         
@@ -1130,13 +1130,13 @@
                                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                         </div>
                                         <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-primary-Children{{forloop.counter}}" name="expiration-document-primary-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
-                                        type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
+                                        type="text" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
                                     </div>
                                 </div>
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-primary-Children{{forloop.counter}}">{{ strings.document_type }}</label>
-                                <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                                <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
                                 name="type-document-primary-Children{{forloop.counter}}" id="type-document-primary-Children{{forloop.counter}}" required>
                                     <option value="Passport">{{ strings.passport }}</option>
                                     <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
@@ -1146,7 +1146,7 @@
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-primary-Children{{forloop.counter}}">{{ strings.country_document }}</label>
-                                <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
+                                <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2
                                     leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-primary-Children{{forloop.counter}}" id="country-document-primary-Children{{forloop.counter}}" required>
                                     <option value="USA" selected>USA (United States)</option>
                                     <option value="CUB">CUB (Cuba)</option> ADD_CUBA
@@ -1409,7 +1409,7 @@
                                 <div class="flex flex-wrap w-full md:w-1/3">
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
                                         <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-secondary-Children{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                        <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Children{{forloop.counter}}" name="number-document-secondary-Children{{forloop.counter}}" type="text" required>
+                                        <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Children{{forloop.counter}}" name="number-document-secondary-Children{{forloop.counter}}" type="text" required>
                                     </div>
             
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
@@ -1419,13 +1419,13 @@
                                                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                             </div>
                                             <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-secondary-Children{{forloop.counter}}" name="expiration-document-secondary-Children{{forloop.counter}}" placeholder="mm/dd/yyyy" id="expiration-document-secondary-Children{{forloop.counter}}" required onchange="validDatepicker(this)" autocomplete="off"
-                                            type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 ">
+                                            type="text" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 ">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
                                     <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-secondary-Children{{forloop.counter}}">{{ strings.document_type }}</label>
-                                    <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                                    <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
                                     id="type-document-secondary-Children{{forloop.counter}}" name="type-document-secondary-Children{{forloop.counter}}" required>
                                         <option value="Passport">{{ strings.passport }}</option>
                                         <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
@@ -1435,7 +1435,7 @@
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
                                     <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-secondary-Children{{forloop.counter}}">{{ strings.country_document }}</label>
-                                    <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
+                                    <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2
                                     leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-secondary-Children{{forloop.counter}}" id="country-document-secondary-Children{{forloop.counter}}" required>
                                         <option value="USA" selected>USA (United States)</option>
                                         <option value="CUB">CUB (Cuba)</option> ADD_CUBA
@@ -1733,20 +1733,20 @@
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="firstName-Infant{{forloop.counter}}">{{ strings.first_name }} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="firstName-Infant{{forloop.counter}}"  name="firstName-Infant{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="middleName-Infant{{forloop.counter}}">{{ strings.middle_name}}</label>
-                                <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="middleName-Infant{{forloop.counter}}" name="middleName-Infant{{forloop.counter}}" type="text">
                             </div>
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="lastName-Infant{{forloop.counter}}">{{ strings.last_name}} 
                                     <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="lastName-Infant{{forloop.counter}}" name="lastName-Infant{{forloop.counter}}" type="text">
                             </div>
 
@@ -1756,7 +1756,7 @@
 
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="motherLastName-Infant{{forloop.counter}}">{{ strings.mother_name}}</label>
-                                <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="motherLastName-Infant{{forloop.counter}}" name="motherLastName-Infant{{forloop.counter}}" type="text">
                             </div>
 
@@ -1772,7 +1772,7 @@
                                         </svg>
                                     </div>
                                     <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="dateBirth-Infant{{forloop.counter}}" name="dateBirth-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy" onchange="validDatepicker(this)" autocomplete="off"
-                                    type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
+                                    type="text" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight 
                                     focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5 range-today infant-dateBirth">
                                 </div>
                             </div>
@@ -1800,7 +1800,7 @@
                             <div class="flex flex-wrap w-full md:w-1/3">
                                 <div class="w-full md:w-1/2 md:px-2 py-3">
                                     <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-primary-Infant{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                    <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required
+                                    <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" required
                                     id="number-document-primary-Infant{{forloop.counter}}" name="number-document-primary-Infant{{forloop.counter}}" type="text">
                                 </div>
 
@@ -1812,13 +1812,13 @@
                                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                         </div>
                                         <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-primary-Infant{{forloop.counter}}" name="expiration-document-primary-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy" required onchange="validDatepicker(this)" autocomplete="off"
-                                        type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
+                                        type="text" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
                                     </div>
                                 </div>
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-primary-Infant{{forloop.counter}}">{{ strings.document_type }}</label>
-                                <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                                <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
                                 id="type-document-primary-Infant{{forloop.counter}}" name="type-document-primary-Infant{{forloop.counter}}" required>
                                     <option value="Passport">{{ strings.passport }}</option>
                                     <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
@@ -1828,7 +1828,7 @@
                             </div>
                             <div class="w-full md:w-1/3 md:px-2 py-3">
                                 <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-primary-Infant{{forloop.counter}}">{{ strings.country_document }}</label>
-                                <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
+                                <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2
                                 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="country-document-primary-Infant{{forloop.counter}}" name="country-document-primary-Infant{{forloop.counter}}" required>
                                     <option value="USA" selected>USA (United States)</option>
                                     <option value="CUB">CUB (Cuba)</option> ADD_CUBA
@@ -2090,7 +2090,7 @@
                                 <div class="flex flex-wrap w-full md:w-1/3">
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
                                         <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="number-document-secondary-Infant{{forloop.counter}}">{{ strings.document_number }} <span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                                        <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Infant{{forloop.counter}}" name="number-document-secondary-Infant{{forloop.counter}}" type="text" required>
+                                        <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="number-document-secondary-Infant{{forloop.counter}}" name="number-document-secondary-Infant{{forloop.counter}}" type="text" required>
                                     </div>
 
                                     <div class="w-full md:w-1/2 md:px-2 py-3">
@@ -2100,13 +2100,13 @@
                                                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                             </div>
                                             <input datepicker datepicker-autohide datepicker-title="{{ strings.select_date_birth }}" id="expiration-document-secondary-Infant{{forloop.counter}}" name="expiration-document-secondary-Infant{{forloop.counter}}" placeholder="mm/dd/yyyy"  id="expiration-document-secondary-Infant{{forloop.counter}}" required onchange="validDatepicker(this)" autocomplete="off"
-                                            type="text" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
+                                            type="text" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500 pl-10 p-2.5">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
                                     <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="type-document-secondary-Infant{{forloop.counter}}">{{ strings.document_type }}</label>
-                                    <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
+                                    <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" 
                                     id="type-document-secondary-Infant{{forloop.counter}}" name="type-document-secondary-Infant{{forloop.counter}}" required>
                                         <option value="Passport">{{ strings.passport }}</option>
                                         <option value="U.S. Permanent Resident Card">{{ strings.country_document_s2 }}</option>
@@ -2116,7 +2116,7 @@
                                 </div>
                                 <div class="w-full md:w-1/3 md:px-2 py-3">
                                     <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="country-document-secondary-Infant{{forloop.counter}}">{{ strings.country_document }}</label>
-                                    <select class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
+                                    <select class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2
                                     leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="country-document-secondary-Infant{{forloop.counter}}" id="country-document-secondary-Infant{{forloop.counter}}" required>
                                         <option value="USA" selected>USA (United States)</option>
                                         <option value="CUB">CUB (Cuba)</option> ADD_CUBA
@@ -2372,12 +2372,12 @@
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full md:w-1/3 md:px-2 py-3">
                         <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-street-1">{{ strings.street}}<span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                        <input autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-street-1" name="address-street-1" type="text" required>
+                        <input autocomplete="off" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-street-1" name="address-street-1" type="text" required>
                     </div>
                     <div class="w-full md:w-2/3 md:flex">
                         <div class="w-full md:w-1/3 md:px-2 py-3">
                             <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-state-1">{% if flightBeginSelect.from.countryCode|upper == "CUB" or flightBeginSelect.from.countryCode|upper == "CU" %}{{ strings.province }}{% else %}{{ strings.state }}{% endif%}</label>
-                            <select autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 
+                            <select autocomplete="off" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2 
                             leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" onchange="setCities(this.selectedOptions[0].getAttribute('cities'),'address-city-1')" name="address-state-1"  id="address-state-1"  required>
                             {% for address in address_begin %}
                                 {% for state in address %}
@@ -2388,7 +2388,7 @@
                         </div>
                         <div class="w-full md:w-1/3 md:px-2 py-3">
                             <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-city-1">{% if flightBeginSelect.from.countryCode|upper == "CUB" or flightBeginSelect.from.countryCode|upper == "CU" %}{{ strings.municipality }}{% else %}{{ strings.city }}{% endif%}</label>
-                            <select autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
+                            <select autocomplete="off" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2
                             leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="address-city-1" id="address-city-1" required>
                             {% for city in cities_begin %}
                                 <option value="{{ city }}">{{ city }}</option>
@@ -2397,7 +2397,7 @@
                         </div>
                         <div class="w-full md:w-1/3 md:px-2 py-3">
                             <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-postalcode-1">{{ strings.zip_code }}</label>
-                            <input autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-postalcode-1" name="address-postalcode-1" type="text">
+                            <input autocomplete="off" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-postalcode-1" name="address-postalcode-1" type="text">
                         </div>
                     </div>
                 </div>
@@ -2406,12 +2406,12 @@
                 <div class="flex flex-wrap mb-6">
                     <div class="w-full md:w-1/3 md:px-2 py-3">
                         <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-street-2">{{ strings.street}}<span class="text-red-500 text-md p-0 font-bold">*</span></label>
-                        <input autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-street-2" name="address-street-2" type="text" required>
+                        <input autocomplete="off" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-street-2" name="address-street-2" type="text" required>
                     </div>
                     <div class="w-full md:w-2/3 md:flex">
                         <div class="w-full md:w-1/3 md:px-2 py-3">
                             <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-state-2">{% if flightBeginSelect.to.countryCode|upper == "CUB" or flightBeginSelect.to.countryCode|upper == "CU" %}{{ strings.province }}{% else %}{{ strings.state }}{% endif%}</label>
-                            <select autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 
+                            <select autocomplete="off" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2 
                             leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" onchange="setCities(this.selectedOptions[0].getAttribute('cities'),'address-city')" name="address-state-2"  id="address-state-2"  required>
                             {% for address in address_to %}
                                 {% for state in address %}
@@ -2422,7 +2422,7 @@
                         </div>
                         <div class="w-full md:w-1/3 md:px-2 py-3">
                             <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-city-2">{% if flightBeginSelect.to.countryCode|upper == "CUB" or flightBeginSelect.to.countryCode|upper == "CU" %}{{ strings.municipality }}{% else %}{{ strings.city }}{% endif%}</label>
-                            <select autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2
+                            <select autocomplete="off" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2
                             leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" name="address-city-2" id="address-city-2" required>
                             {% for sity in cities_to %}
                                 <option value="US">{{ sity }}</option>
@@ -2431,7 +2431,7 @@
                         </div>
                         <div class="w-full md:w-1/3 md:px-2 py-3">
                             <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="address-postalcode">{{ strings.zip_code }}</label>
-                            <input autocomplete="off" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-postalcode" name="address-postalcode" type="text">
+                            <input autocomplete="off" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500" id="address-postalcode" name="address-postalcode" type="text">
                         </div>
                     </div>
                 </div>
@@ -2447,7 +2447,7 @@
                 <p class="text-gray-700 mb-3 text-sm ml-4">{{ strings.license_t7 }}</p>
                 <div class="mt-2 flex flex-col mb-6 ml-2">
                     <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="license">{{ strings.license_t8 }}</label>
-                    <select id="license" id="license-Infant{{forloop.counter}}" class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-2 md:w-1/3
+                    <select id="license" id="license-Infant{{forloop.counter}}" class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-2 md:w-1/3
                     leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500">
                         <option value="515.561:Visita familiar" class="ng-star-inserted">515.561 : Visita familiar </option>
                         <option value="515.562:Asuntos oficiales del gobierno de EE.&nbsp;UU., gobiernos extranjeros u organizaciones intergubernamentales" class="ng-star-inserted">515.562 : Asuntos oficiales del gobierno de EE.&nbsp;UU., gobiernos extranjeros u organizaciones intergubernamentales </option>
@@ -2486,13 +2486,13 @@
 
                     <div class="w-full md:w-1/3 md:px-2 py-3">
                         <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="emailContact">{{ strings.email }}</label>
-                        <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500"
+                        <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500"
                         name="emailContact" id="emailContact" type="email" {% if request.user.is_authenticated %} value="{{request.user}} {% endif %}">
                     </div>
 
                     <div class="w-full md:w-1/3 md:px-2 py-3">
                         <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2" for="confirmEmail">{{ strings.confirm_email }}</label>
-                        <input class="appearance-none block w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500  mb-1"
+                        <input class="appearance-none block w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500  mb-1"
                         name="confirmEmail" id="confirmEmail" type="email" {% if request.user.is_authenticated %} value="{{request.user}} {% endif %}">
                         <span id="errorMsgConfirmEmail" class="text-red-500 text-xs font-serif"> </span>
                     </div>
@@ -2501,7 +2501,7 @@
                         <label id="" class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2">{{ strings.phone_number }}</label>
                         <input class="hidden" name="codePhoneNumber" id="codePhoneNumberInput" type="text">
                         <input id="phone" type="tel" autocomplete="off" data-intl-tel-input-id="0" placeholder="" name="phoneNumber" required
-                            class="w-full bg-itravel-900/10 text-gray-700 border border-itravel-700 rounded py-2.5 px-4 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500  mb-1">
+                            class="w-full bg-itravel-50 text-gray-700 border border-itravel-700 rounded py-2.5 px-4 focus:outline-none focus:bg-white focus:border-itravel-500 focus:ring-itravel-500  mb-1">
                         <span id="errorMsgValidatePhone" class="hidden text-red-500 text-xs font-serif"></span>
                     </div>
                 </div>

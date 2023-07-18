@@ -318,7 +318,7 @@ function changedText(text1,text2){
     var html = ` <h1 class="font-semibold capitalize text-md text-5xl  xl:text-6xl mt-20 text-white w-auto">
                       <span class="animate-letra  h-20"><span class="w-full font-serif text-shadow" >${text1}</span></span>
                   </h1>
-                  <h1 class="font-bold capitalize text-xs text-3xl mb-12">
+                  <h1 class="font-bold capitalize text-xs md:text-3xl mb-12">
                       <span class="animate-letra"><span class="w-full font-serif text-shadow-sm">${text2}</span></span>
                   </h1>`
 
