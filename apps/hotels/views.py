@@ -96,7 +96,7 @@ class ReservationsView(View):
         package_ids = []
         reservations = []
 
-        bookings = Booking.objects.filter(user = request.user)
+        bookings = Booking.objects.filter(user = request.user, actived = True)
 
         bill = None
 
@@ -112,29 +112,30 @@ class ReservationsView(View):
                 rooms_dict = {}
                 amounts_dict = {}
                 for room in bookings.filter(package = booking.package):
-                        if room.reservationCode in rooms_dict.keys():
-                            rooms_dict[room.reservationCode].append({
-                            "firstName":room.firstName,
-                            "middleName":room.middleName,
-                            "lastName":room.lastName,
-                            "motherLastName":room.motherLastName,
-                            "birth":room.birth,
-                            "gender":room.gender,
-                            "documentNumber":room.documentNumber
-                            })
-                            #amounts_dict[room.reservationCode] += room.amount
-                        else:
-                            rooms_dict[room.reservationCode] = [{
-                            "firstName":room.firstName,
-                            "middleName":room.middleName,
-                            "lastName":room.lastName,
-                            "motherLastName":room.motherLastName,
-                            "birth":room.birth,
-                            "gender":room.gender,
-                            "documentNumber":room.documentNumber
-                            }]
-                            amounts_dict[room.reservationCode] = room.amount
-                            total_amount +=room.amount
+                        clients = Client.objects.filter(booking=room)
+                        for client in clients:
+                            if room.reservationCode in rooms_dict.keys():
+                                rooms_dict[room.reservationCode].append({
+                                "firstName":client.firstName,
+                                "middleName":client.middleName,
+                                "lastName":client.lastName,
+                                "motherLastName":client.motherLastName,
+                                "birth":client.birth,
+                                "gender":client.gender,
+                                "documentNumber":client.documentNumber
+                                })
+                            else:
+                                rooms_dict[room.reservationCode] = [{
+                                "firstName":client.firstName,
+                                "middleName":client.middleName,
+                                "lastName":client.lastName,
+                                "motherLastName":client.motherLastName,
+                                "birth":client.birth,
+                                "gender":client.gender,
+                                "documentNumber":client.documentNumber
+                                }]
+                                amounts_dict[room.reservationCode] = room.amount
+                                total_amount +=room.amount
                 rooms = []
                 for key in rooms_dict.keys():
                     rooms.append([rooms_dict[key],amounts_dict[key],key])
