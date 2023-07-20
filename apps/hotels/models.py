@@ -261,7 +261,7 @@ class Bill(models.Model):
         return listReturn
 
     def amountMoney(self) -> str:
-        amount = self.amount() + self.revenue()
+        amount = self.amount + self.revenue
         if len(str(amount).split(".")[1]) == 1: return "$ " + str(amount) + "0"
         return "$ " + str(amount)
     
