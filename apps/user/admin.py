@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.user.models import Agencie
+from apps.user.models import Agencie, CreditRecharge
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -16,3 +16,4 @@ class AgencieAdmin(admin.ModelAdmin):
     model = Agencie
 
 admin.site.register(Agencie,AgencieAdmin)
+admin.site.register(CreditRecharge)
