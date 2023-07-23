@@ -47,6 +47,8 @@ class PasmsView(View):
                             success.append({"phone":p.phone,"case":p.case,"date":p.date})
                         else:
                             pending.append({"phone":p.phone,"case":p.case})
+                    else:
+                        p.delete()
 
             return JsonResponse({"success":success,"pending":pending})
         
