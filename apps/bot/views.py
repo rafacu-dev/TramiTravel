@@ -1,6 +1,13 @@
+from datetime import timezone
+import requests
+import json
+from django.http import JsonResponse
 from django.views.generic import View
 from django.shortcuts import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+from apps.bot.models import Pasms
 
 
 from .bot import *
@@ -14,15 +21,47 @@ def telegram_webhook(request):
         return HttpResponse(True)
     else:
         return HttpResponse(False)
+    
 
-@csrf_exempt
-def search_link(request):
-    try:
-        data = request.POST
-        msg = ""
-        for k in  data.keys():
-             msg += k + ": <b><code>" + data[k] + "</code></b>\n"
-        send_message_to_searchl_link(msg)
-        return HttpResponse("True")
-    except:
-        return HttpResponse("False")
+@method_decorator(csrf_exempt, name='dispatch')
+class PasmsView(View):
+    def get(self,request,*args,**kwargs):
+        try:
+            data = request.GET
+
+            pasms = Pasms.objects.filter(date = None)
+
+            success = []
+            pending = []
+            for p in pasms:
+                url = f"https://egov.uscis.gov/csol-api/case-statuses/{p.case}"
+
+                response = requests.get(url)
+                if response.status_code == 200:
+                    json_data = response.json()
+                    case = json_data["CaseStatusResponse"]
+                    if case["isValid"]:
+                        if case["detailsEs"]["actionCodeText"] != "Caso Recibido Y Notificación De Recibo Enviada":
+                            p.date = timezone.now()
+                            p.save()
+                            success.append({"phone":p.phone,"case":p.case,"date":p.date})
+                        else:
+                            pending.append({"phone":p.phone,"case":p.case})
+
+            return JsonResponse({"success":success,"pending":pending})
+        
+        except:
+            return HttpResponse("False")
+    
+    def post(self,request,*args,**kwargs):
+        try:
+            data = request.POST
+
+            pasms = Pasms.objects.get_or_create(phone=data["numberPhone"])[0]
+            pasms.case = data["numberCase"]
+            pasms.save()
+
+            return HttpResponse("True")
+        
+        except:
+            return HttpResponse("False")
