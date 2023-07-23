@@ -29,7 +29,7 @@ class PasmsView(View):
         try:
             data = request.GET
 
-            pasms = Pasms.objects.filter(date = None)
+            pasms = Pasms.objects.filter(date__isnull=True)
 
             success = []
             pending = []
