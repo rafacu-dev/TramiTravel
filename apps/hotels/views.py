@@ -1,10 +1,11 @@
 import calendar
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import threading
 from apps.user.models import CreditRecharge
 from apps.utils.countries import countries
 from django.shortcuts import redirect, render
 from django.views.generic import View
+from django.db.models import Q
 from apps.hotels.models import Bill, Booking, Client, Destinatation, Hotel, RoomType, VacationPackage
 
 from apps.menus.models import Menu
@@ -97,6 +98,7 @@ class ReservationsView(View):
         reservations = []
 
         bookings = Booking.objects.filter(user = request.user, actived = True)
+        
 
         bill = None
 
@@ -202,12 +204,33 @@ class ReservationsAgencieView(View):
 
         bookings = Booking.objects.filter(user = request.user)
 
+        print(data.keys())
+        if "start_date" in data.keys() and data["start_date"] != "":
+            start_date = datetime.strptime(data["start_date"], '%m/%d/%Y')
+            bookings = bookings.filter(date__gt=start_date)
+
+        if "end_date" in data.keys() and data["end_date"] != "":
+            end_date = datetime.strptime(data["end_date"], '%m/%d/%Y')
+            bookings = bookings.filter(date__lt=end_date)
+        
+        if "booking_code" in data.keys() and data["booking_code"] != "":
+            bookings = bookings.filter(reservationCode=data["booking_code"])
+        
+        if "booking_holder" in data.keys() and data["booking_holder"] != "":
+            bookings = bookings.filter(booking__holder=data["booking_holder"])
+
+        bookings = bookings.distinct()
+
         context = {
             "language":language,
             "strings" : strings,
             "menus" :menus,
-            "bookings":bookings
+            "bookings":bookings,
             }
+        if "start_date" in data.keys():context["start_date"] = data["start_date"]
+        if "end_date" in data.keys():context["end_date"] = data["end_date"]
+        if "booking_code" in data.keys():context["booking_code"] = data["booking_code"]
+        if "booking_holder" in data.keys():context["booking_holder"] = data["booking_holder"]
         
         return render(request,'reservations_package_agencie.html',context)
         
