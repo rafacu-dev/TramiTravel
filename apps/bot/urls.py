@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import telegram_webhook,search_link
+from .views import telegram_webhook,PasmsView
 
 urlpatterns = [
     path('', telegram_webhook, name='telegram_webhook'),
-    path('search-link/add/', search_link, name='search_link'),
+    path('settings-pasms/', PasmsView.as_view(), name='Pasms'),
 ]
