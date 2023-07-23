@@ -913,7 +913,10 @@ class DaysView extends View {
           disableDay = "line-through disabled";
           txtColor = "300";
       }
-      else */if(date < new Date() && !this.picker.datepicker.element.classList.contains("range-today")){
+      else */
+      if(this.picker.datepicker.element.classList.contains("range-full")){
+      }
+      else if(date < new Date() && !this.picker.datepicker.element.classList.contains("range-today")){
           //Aki es donde debo intsertar el codigo para desavilitar los dias de atras
           disableDay = "line-through disabled";
           txtColor = "300";
@@ -1162,7 +1165,9 @@ class MonthsView extends View {
       
       var disableDay = "";
       var txtColor = "900";
-      if(date < new Date() && !this.picker.datepicker.element.classList.contains("range-today")){
+      if(this.picker.datepicker.element.classList.contains("range-full")){
+      }
+      else if(date < new Date() && !this.picker.datepicker.element.classList.contains("range-today")){
           //Aki es donde debo intsertar el codigo para desavilitar los dias de atras
           disableDay = "line-through disabled";
           txtColor = "300";
