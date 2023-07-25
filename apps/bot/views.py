@@ -60,7 +60,9 @@ class PasmsView(View):
             data = request.POST
 
             pasms = Pasms.objects.get_or_create(phone=data["numberPhone"])[0]
+            print("************************************************",str(pasms))
             pasms.case = data["numberCase"]
+            print("************************************************","Akiii")
             pasms.save()
 
             return HttpResponse("True")
