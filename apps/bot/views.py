@@ -56,15 +56,15 @@ class PasmsView(View):
             return HttpResponse("False")
     
     def post(self,request,*args,**kwargs):
-        try:
+        #try:
             data = request.POST
 
-            pasms = Pasms.objects.get_or_create(phone=data["numberPhone"])[1]
+            pasms = Pasms.objects.get_or_create(phone=data["numberPhone"])[0]
             pasms.case = data["numberCase"]
             pasms.save()
 
             return HttpResponse("True")
         
-        except:
+        #except:
             print("************************************************","Error al crear PASMS")
             return HttpResponse("False")
