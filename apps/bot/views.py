@@ -56,7 +56,7 @@ class PasmsView(View):
             return HttpResponse("False")
     
     def post(self,request,*args,**kwargs):
-        #try:
+        try:
             data = request.POST
 
             print("************************************************ DATA:",str(data))
@@ -65,9 +65,10 @@ class PasmsView(View):
             pasms.case = data["numberCase"]
             print("************************************************","Akiii")
             pasms.save()
+            print("************************************************","Akaaaa")
 
             return HttpResponse("True")
         
-        #except:
-            print("************************************************","Error al crear PASMS")
+        except Exception as error:
+            print("************************************************ ERROR:",str(error))
             return HttpResponse("False")
