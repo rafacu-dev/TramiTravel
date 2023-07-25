@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from apps.bot.models import Pasms
+
+admin.site.register(Pasms)
