@@ -1,11 +1,10 @@
-from datetime import timezone
 import requests
-import json
 from django.http import JsonResponse
 from django.views.generic import View
 from django.shortcuts import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.utils import timezone
 
 from apps.bot.models import Pasms
 
@@ -52,23 +51,19 @@ class PasmsView(View):
 
             return JsonResponse({"success":success,"pending":pending})
         
-        except:
+        except Exception as error:
+            print("************************************************ ERROR en GET:",str(error))
             return HttpResponse("False")
     
     def post(self,request,*args,**kwargs):
         try:
             data = request.POST
-
-            print("************************************************ DATA:",str(data))
             pasms = Pasms.objects.get_or_create(phone=data["numberPhone"])[0]
-            print("************************************************",str(pasms))
             pasms.case = data["numberCase"]
-            print("************************************************","Akiii")
             pasms.save()
-            print("************************************************","Akaaaa")
 
             return HttpResponse("True")
         
         except Exception as error:
-            print("************************************************ ERROR:",str(error))
+            print("************************************************ ERROR en POST:",str(error))
             return HttpResponse("False")
