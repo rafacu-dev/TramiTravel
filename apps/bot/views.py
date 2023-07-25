@@ -39,7 +39,6 @@ class PasmsView(View):
                 if response.status_code == 200:
                     json_data = response.json()
                     case = json_data["CaseStatusResponse"]
-                    print("************************************************ CASO:",case)
                     if case["isValid"]:
                         if case["detailsEs"]["actionCodeText"] != "Caso Recibido Y Notificación De Recibo Enviada":
                             p.date = timezone.now()
@@ -48,7 +47,6 @@ class PasmsView(View):
                         else:
                             pending.append({"phone":p.phone,"case":p.case})
                     else:
-                        print("************************************************ BORRANDO NUMERO DE CASO XQ NO ES VALIDO")
                         p.delete()
 
             return JsonResponse({"success":success,"pending":pending})
