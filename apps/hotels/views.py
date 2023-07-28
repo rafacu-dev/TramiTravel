@@ -204,7 +204,6 @@ class ReservationsAgencieView(View):
 
         bookings = Booking.objects.filter(user = request.user)
 
-        print(data.keys())
         if "start_date" in data.keys() and data["start_date"] != "":
             start_date = datetime.strptime(data["start_date"], '%m/%d/%Y')
             bookings = bookings.filter(date__gt=start_date)
@@ -221,11 +220,61 @@ class ReservationsAgencieView(View):
 
         bookings = bookings.distinct()
 
+
+        
+        package_ids = []
+        reservations = []
+
+        bill = None
+
+        for booking in bookings:
+            if  bill == None: bill = booking.bill
+
+            package_id = booking.package.id
+            total_amount = 0.0
+
+            rooms_dict = {}
+            amounts_dict = {}
+            for room in bookings.filter(package = booking.package):
+                    clients = Client.objects.filter(booking=room)
+                    for client in clients:
+                        if room.reservationCode in rooms_dict.keys():
+                            rooms_dict[room.reservationCode].append({
+                            "firstName":client.firstName,
+                            "middleName":client.middleName,
+                            "lastName":client.lastName,
+                            "motherLastName":client.motherLastName,
+                            "birth":client.birth,
+                            "gender":client.gender,
+                            "documentNumber":client.documentNumber
+                            })
+                        else:
+                            rooms_dict[room.reservationCode] = [{
+                            "firstName":client.firstName,
+                            "middleName":client.middleName,
+                            "lastName":client.lastName,
+                            "motherLastName":client.motherLastName,
+                            "birth":client.birth,
+                            "gender":client.gender,
+                            "documentNumber":client.documentNumber
+                            }]
+                            amounts_dict[room.reservationCode] = room.amount
+                            total_amount +=room.amount
+            rooms = []
+            for key in rooms_dict.keys():
+                rooms.append([rooms_dict[key],amounts_dict[key],key])
+            
+            booking.rooms = rooms
+            booking.total_amount = total_amount
+            reservations.append(booking)
+
+
         context = {
             "language":language,
             "strings" : strings,
             "menus" :menus,
-            "bookings":bookings,
+            "bookings":reservations,
+            "bill":bill
             }
         if "start_date" in data.keys():context["start_date"] = data["start_date"]
         if "end_date" in data.keys():context["end_date"] = data["end_date"]
