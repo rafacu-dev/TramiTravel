@@ -322,3 +322,4 @@ function openClose(id){
         element.classList.add("hidden")
     }
 }
+
