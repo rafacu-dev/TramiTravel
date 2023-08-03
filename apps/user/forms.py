@@ -15,7 +15,7 @@ class AgencyForm(ModelForm):
         
         widgets = {
             'name': forms.TextInput(attrs={'class':styles}),
-            'logo': forms.FileInput(attrs={'class':'hidden'}),
+            'logo': forms.FileInput(attrs={'class':'hidden','onchange': 'displayFilePath()'}),
             'address': forms.TextInput(attrs={'class':styles}),
             'email': forms.EmailInput(attrs={'class':styles}),
             'phone': forms.TextInput(attrs={'class':styles}),
