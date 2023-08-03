@@ -6,7 +6,7 @@ function liquidateBooking(id){
     document.getElementById(`loading-liquidated-${id}`).classList.remove("hidden");
 
     $.ajax({
-        url:"/bookings-agencie/",
+        url:"/bookings-agency/",
         type:"post",
         data:{
             'booking_id': id,

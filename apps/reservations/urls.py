@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (AddFlight, Home,BookingView,Flights,GetFligths,
-                    Tickets, Message, HomeTraslate,BookingsAgencie,EditFlights,
+                    Tickets, Message, HomeTraslate,Bookingsagency,EditFlights,
                     baggagePolicy, download_pdf_ticket, deleteBooking,terminosCondiciones,politicaPrivacidad)
 
 urlpatterns = [
@@ -10,7 +10,7 @@ urlpatterns = [
     path('fligths/get/<str:date_departure>/<str:date_return>/<int:begin>/<int:to>/<int:adults>/<int:children>/<int:infants>/<int:class_type>', GetFligths.as_view(),name='getFligths'),
     path('booking/', BookingView.as_view(),name='booking'),
     path('tickets/', Tickets.as_view(),name='tickets'),
-    path('bookings-agencie/', BookingsAgencie.as_view(),name='bookingsAgencie'),
+    path('bookings-agency/', Bookingsagency.as_view(),name='bookingsagency'),
     path('tickets/booking-delete/', deleteBooking,name='deleteBooking'),
     path('contact/<str:tag>', Message.as_view(),name='sendMessage'),
     

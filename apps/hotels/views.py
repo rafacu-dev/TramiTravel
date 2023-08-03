@@ -5,11 +5,11 @@ from apps.user.models import CreditRecharge
 from apps.utils.countries import countries
 from django.shortcuts import redirect, render
 from django.views.generic import View
-from django.db.models import Q
+from django.utils.decorators import method_decorator
 from apps.hotels.models import Bill, Booking, Client, Destinatation, Hotel, RoomType, VacationPackage
 
 from apps.menus.models import Menu
-from apps.utils.utils import toMoney
+from apps.utils.utils import toMoney,permission_checked
 from core.languages import get_strings
 
 from apps.bot.bot import send_message_confirm_paid_package
@@ -31,10 +31,8 @@ def date_key():
     return year + day + sec
 
 
+@method_decorator(permission_checked, name='dispatch')
 class Hotels(View):
-    def test_user(self):
-        return self.request.user.is_authenticated and self.request.user.agencie
-    
     def get(self,request,*args,**kwargs):
         data = request.GET
         nearest_airport = int(data["begin"])
@@ -83,12 +81,12 @@ class Hotels(View):
             
         return render(request,'hotels.html',context)
     
-
     
+@method_decorator(permission_checked, name='dispatch')
 class ReservationsView(View):
     def get(self,request,*args,**kwargs):
         if not request.user.is_authenticated: return  redirect("index") 
-        if self.request.user.agencie:return redirect("reservationsAgencie")
+        if self.request.user.agency:return redirect("reservationsagency")
 
         data = request.GET
         menus = Menu.objects.filter(actived=True).order_by('position')
@@ -196,7 +194,8 @@ class ReservationsView(View):
             return  redirect("reservations")
         
     
-class ReservationsAgencieView(View):
+@method_decorator(permission_checked, name='dispatch')
+class ReservationsagencyView(View):
     def get(self,request,*args,**kwargs):
         data = request.GET
         menus = Menu.objects.filter(actived=True).order_by('position')
@@ -216,7 +215,8 @@ class ReservationsAgencieView(View):
             bookings = bookings.filter(reservationCode=data["booking_code"])
         
         if "booking_holder" in data.keys() and data["booking_holder"] != "":
-            bookings = bookings.filter(booking__holder=data["booking_holder"])
+            bookings = bookings.filter(id__in=[b.id for b in bookings if data["booking_holder"].lower() in b.holder().lower()])
+            
 
         bookings = bookings.distinct()
 
@@ -281,7 +281,7 @@ class ReservationsAgencieView(View):
         if "booking_code" in data.keys():context["booking_code"] = data["booking_code"]
         if "booking_holder" in data.keys():context["booking_holder"] = data["booking_holder"]
         
-        return render(request,'reservations_package_agencie.html',context)
+        return render(request,'reservations_package_agency.html',context)
         
     def post(self,request,*args,**kwargs):
         data = request.POST
@@ -296,8 +296,8 @@ class ReservationsAgencieView(View):
             booking.liquidated += amount
             booking.save()
 
-            request.user.agencie.credit -= amount
-            request.user.agencie.save()
+            request.user.agency.credit -= amount
+            request.user.agency.save()
         
         if "amount_transferred" in data.keys():
             phone = data["phonePayment"]
@@ -311,7 +311,7 @@ class ReservationsAgencieView(View):
                 zelle = zelle,
                 zelle_owner = data["zelle-owner"],
                 amount = data["amount_transferred"],
-                agencie = request.user.agencie,
+                agency = request.user.agency,
                 user = request.user
             )
 
@@ -326,13 +326,13 @@ class ReservationsAgencieView(View):
             "strings" : strings,
             "menus" :menus,
             "bookings":bookings,
-            "total_credit":request.user.agencie.creditMoney()
+            "total_credit":request.user.agency.creditMoney()
             }
         
-        return render(request,'reservations_package_agencie.html',context)
+        return render(request,'reservations_package_agency.html',context)
 
-        
-        
+
+@method_decorator(permission_checked, name='dispatch')        
 class BookingView(View):
     
     def get(self,request,*args,**kwargs):

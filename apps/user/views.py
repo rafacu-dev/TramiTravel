@@ -10,8 +10,13 @@ from django.utils.html import strip_tags
 from django.views.generic import View
 from django.contrib.auth import logout,authenticate,login
 from django.core.mail import send_mail
+from apps.user.forms import AgencyForm
+from apps.menus.models import Menu, Ofert, OfertGroup
 
-from apps.user.models import ConfirmCode, UserAccount, RecreatePassword as RecreatePsw
+from apps.user.models import Agency, ConfirmCode, UserAccount, RecreatePassword as RecreatePsw
+from core.languages import get_strings
+from django.utils.decorators import method_decorator
+from apps.utils.utils import permission_checked
 
 class Login(View):
     def post(self,request,*args,**kwargs):
@@ -44,6 +49,7 @@ class Register(View):
         email = request.POST['email']
         password = request.POST['password']
         newsLetter = request.POST['newsLetter']
+        rool = request.POST['rool']
 
         userexist = UserAccount.objects.filter(email=email)
         if len(userexist) > 0:
@@ -51,9 +57,15 @@ class Register(View):
             return HttpResponse(data,"application/json")
 
 
-        userRegister = UserAccount.objects.create_user(email=email, password=password)
+        agency = Agency.objects.create()
+        userRegister = UserAccount.objects.create_user(email=email, password=password,agency = agency)
         userRegister.is_active = False
+        if rool == "agency":
+            userRegister.is_admin_agency = True
         userRegister.save()
+
+
+
 
         user = authenticate(request, email=email, password=password)
 
@@ -73,7 +85,7 @@ class Register(View):
                 print("Suscrito a newsLetter")
 
             data = json.dumps({
-                "register":"success",
+                "register":"success"
                 })
             return HttpResponse(data,"application/json")
         else:
@@ -145,17 +157,21 @@ class RegisterConfirm(View):
             user.save()
             login(request, user)
 
+
             request.user = user
             csrf = str(render(request,"csrf.html").content).replace('''b'<input type="hidden" name="csrfmiddlewaretoken" value="''',"").replace("""">'""","")
 
             if user.is_superuser:success = "admin" 
             else:success = "success"
 
-            data = json.dumps({
-                "register":success,
-                "csrf":csrf,
-                "user":user.__str__()
-                })
+            if(user.is_admin_agency):
+                data = json.dumps({"redirect":"/info-agency/"})
+            else:
+                data = json.dumps({
+                    "register":success,
+                    "csrf":csrf,
+                    "user":user.__str__()
+                    })
             return HttpResponse(data,"application/json")
         else:
             data =json.dumps({"register":"error"})
@@ -215,7 +231,61 @@ class Logout(View):
         logout(request)
         return  redirect("index")
     
+@method_decorator(permission_checked, name='dispatch')
+class ChangeInfoAgency(View):
+    def get(self,request,*args,**kwargs):
+        form = AgencyForm()
+            
+        menus = Menu.objects.filter(actived=True).order_by('position')
+        oferts = OfertGroup.objects.filter(actived=True).order_by('position')
+        strings,language = get_strings(request.COOKIES)
 
+        context = {
+            "form":form,
+            "oferts":oferts,
+            "language":language,
+            "strings" : strings,
+            "menus" :menus
+            }
+        return render(request,'change_info_agency.html',context)
+
+    def post(self,request,*args,**kwargs):
+        form = AgencyForm(request.POST, request.FILES)
+
+        menus = Menu.objects.filter(actived=True).order_by('position')
+        oferts = OfertGroup.objects.filter(actived=True).order_by('position')
+        strings,language = get_strings(request.COOKIES)
+
+        context = {
+            "oferts":oferts,
+            "language":language,
+            "strings" : strings,
+            "menus" :menus
+            }
+
+        if form.is_valid():
+            agency = request.user.agency
+
+            agency.name = form.cleaned_data['name']
+            agency.logo = request.FILES['logo']
+            agency.address = form.cleaned_data['address']
+            agency.email = form.cleaned_data['email']
+            agency.phone = form.cleaned_data['phone']
+            agency.fax = form.cleaned_data['fax']
+            agency.fei_ein_number = form.cleaned_data['fei_ein_number']
+            agency.seller_travel_number = form.cleaned_data['seller_travel_number']
+            agency.contact_name = form.cleaned_data['contact_name']
+            agency.contact_email = form.cleaned_data['contact_email']
+            agency.contact_phone = form.cleaned_data['contact_phone']
+            agency.save()
+            return redirect("index")
+
+
+        print("formulario invalido")
+        new_form = AgencyForm()
+        context["form"] = new_form
+
+        return render(request,'change_info_agency.html',context)
 
 def send_email_code(code,email):
 

@@ -101,11 +101,20 @@ function register(){
         document.getElementById("close-register-modal").classList.add("hidden");
         document.getElementById("textRegister").classList.add("hidden");
         document.getElementById("loadingRegister").classList.remove("hidden");
+        var radios = document.getElementsByName('rool-logup');
+        var rool;
+        for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            rool = radios[i].value;
+            break;
+        }
+        }
 
         $.ajax({
             url:"/register/",
             type:"post",
             data:{
+                'rool': rool,
                 'email': email,
                 'password' : password,
                 'newsLetter':newsLetter,
@@ -132,7 +141,6 @@ function register(){
                     }
                     document.getElementById("errorDataRegister").classList.remove("hidden");
                 }else{
-                    
                     document.getElementById("close-register-modal").click();
                     document.getElementById("close-confirm-code-modal").setAttribute("url","/register-confirm/");
                     document.getElementById("close-confirm-code-modal").click();
@@ -154,7 +162,6 @@ function confirmCode(){
     let csrf_token = document.getElementById("csrf_token_confirm_code");
     let csrf = csrf_token.children[0];
 
-
     let code = document.getElementById("confirm-code").value;
     
     document.getElementById("close-confirm-code-modal").classList.add("hidden");
@@ -168,7 +175,6 @@ function confirmCode(){
     else{
         email = document.getElementById("emailRecreatePassword").value;
     }
-
 
     $.ajax({
         url:url,
@@ -184,7 +190,9 @@ function confirmCode(){
             document.getElementById("textConfirmCode").classList.remove("hidden");
             document.getElementById("loadingConfirmCode").classList.add("hidden");
 
-            if(response.register == "error"){
+            if(response.redirect){
+                window.location.href = window.location.origin + response.redirect;
+            }else if(response.register == "error"){
                 if(language === "es"){
                     document.getElementById("textErrorDataConfirmCode").textContent = "Error al realizar registro";
                 }else{
@@ -210,7 +218,7 @@ function confirmCode(){
                 document.querySelector('[name=csrfmiddlewaretoken]').value = response.csrf
                 document.getElementById("accountEmail").textContent = response.user
                 
-                if (response.register == "admin"){
+                if (response.success == "admin"){
                     document.getElementById("panel-admin").classList.remove("hidden");
                 }
                 document.getElementById("btnLogout").classList.remove("hidden");

@@ -23,23 +23,26 @@ class UserAccountManager(BaseUserManager):
         user.save()
         return user
 
-#User = settings.AUTH_USER_MODEL
-
-class Agencie(models.Model):
+class Agency(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(blank = False, null = False,max_length=300)
-    email = models.EmailField(max_length=255, blank = False, null = False)
-    email2 = models.EmailField(max_length=255, blank = True, null = True)
-    phone = models.CharField(blank = False, null = False, max_length=20)
-    phone2 = models.CharField(blank = True, null = True, max_length=20)
-    phone3 = models.CharField(blank = True, null = True, max_length=20)
+    logo = models.ImageField(blank = True, null = True,upload_to = 'agency')
     address = models.CharField(blank = False, null = False, max_length=200)
-    logo = models.ImageField(blank = True, null = True,upload_to = 'agencie')
+    email = models.EmailField(max_length=255, blank = False, null = False)
+    phone = models.CharField(blank = False, null = False, max_length=20)
+    fax = models.CharField(blank = False, null = False, max_length=20)
+    fei_ein_number = models.CharField(blank = False, null = False, max_length=20)
+    seller_travel_number = models.CharField(blank = False, null = False, max_length=20)
+
+
+    contact_name = models.CharField(blank = False, null = False,max_length=300)
+    contact_email = models.EmailField(max_length=255, blank = False, null = False)
+    contact_phone = models.CharField(blank = False, null = False, max_length=20)
+
     revenue = models.FloatField(blank=False, null=False,default=10.0)
-    license = models.FileField(null=True, blank=True, upload_to = 'agencie-license')
+    license = models.FileField(null=True, blank=True, upload_to = 'agency-license')
 
     credit = models.FloatField(blank=False, null=False,default=0)
-
 
     actived = models.BooleanField(default=True)
 
@@ -61,8 +64,8 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     
-    agencie = models.ForeignKey(Agencie,on_delete=models.CASCADE,null=True,blank=True,related_name="agencie")
-    is_admin_agencie = models.BooleanField(default=False)
+    agency = models.ForeignKey(Agency,on_delete=models.CASCADE,null=True,blank=True,related_name="agency")
+    is_admin_agency = models.BooleanField(default=False)
 
     objects = UserAccountManager()
 
@@ -105,7 +108,7 @@ class CreditRecharge(models.Model):
     zelle = models.CharField(blank = True, null = True, max_length=100)  
     zelle_owner = models.CharField(blank = True, null = True, max_length=100)  
     date = models.DateTimeField(auto_now_add=True)
-    agencie = models.ForeignKey(Agencie,on_delete=models.CASCADE,null=True,blank=True,related_name="agencie_credit_recharge")
+    agency = models.ForeignKey(Agency,on_delete=models.CASCADE,null=True,blank=True,related_name="agency_credit_recharge")
     user = models.ForeignKey(UserAccount,on_delete=models.SET_NULL,null=True,blank=True,related_name="user_account_credit_recharge")
     amount = models.FloatField(blank=False, null=False,default=0)
     amount_confirmed = models.FloatField(blank=False, null=False,default=0)

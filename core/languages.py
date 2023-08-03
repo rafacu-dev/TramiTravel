@@ -152,7 +152,7 @@ en = {
     "phone_number":"Phone Number",
 
     
-    # -- Bookings Agencie
+    # -- Bookings agency
     "liquidate":"Liquidate",
     "liquidated":"Liquidated",
     "recharge_account_with":"Recharge Account With ",
@@ -450,7 +450,7 @@ sp = {
     "t2_delete_bookings":"¿Se encuentra seguro de eliminar la reserva?",
     "or":"o",
     
-    # -- Bookings Agencie
+    # -- Bookings agency
     "liquidate":"Liquidar",
     "liquidated":"Liquidado",
     "recharge_account_with":"Recargar cuenta con ",

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+                
+{% block content %}
+<div class="pt-16 flex justify-center">
+    <form method="POST" onsubmit="" id="" enctype="multipart/form-data">
+        <div class="m-5 max-w-7xl rounded-lg bg-white shadow-lg p-4 ">
+            {% csrf_token %}
+            <div class="flex flex-wrap">
+
+                <h1 class="block uppercase tracking-wide text-gray-900 text-lg font-bold w-full px-3 mb-6">General information</h1>
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.name.id_for_label }}">
+                        Agency Name
+                    </label>
+                    {{ form.name }}
+                </div>
+
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.address.id_for_label }}">
+                        Address
+                    </label>
+                    {{ form.address }}
+                </div>
+
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.logo.id_for_label }}">
+                        Image Agency
+                    </label>
+                    <label for="{{ form.logo.id_for_label }}" class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <div class="flex items-center justify-center py-2">
+                            <svg class="w-6 h-6 mr-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                            </svg>
+                            <p class="text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                        </div>
+                        {{ form.logo }}
+                    </label>
+                </div>
+                
+
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.email.id_for_label }}">
+                        Email
+                    </label>
+                    {{ form.email }}
+                </div>
+                
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.phone.id_for_label }}">
+                        Phone
+                    </label>
+                    {{ form.phone }}
+                </div>
+                
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.fax.id_for_label }}">
+                        Fax
+                    </label>
+                    {{ form.fax }}
+                </div>
+
+                <h1 class="block uppercase tracking-wide text-gray-900 text-lg font-bold w-full px-3 mb-6">Contact information</h1>
+                
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.contact_name.id_for_label }}">
+                        Contact person
+                    </label>
+                    {{ form.contact_name }}
+                </div>
+                
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.contact_email.id_for_label }}">
+                        Email
+                    </label>
+                    {{ form.contact_email }}
+                </div>
+                
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.contact_phone.id_for_label }}">
+                        Phone
+                    </label>
+                    {{ form.contact_phone }}
+                </div>
+
+                <h1 class="block uppercase tracking-wide text-gray-900 text-lg font-bold w-full px-3 mb-6">Billing information</h1>
+                
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.fei_ein_number.id_for_label }}">
+                        FEI/EINNumber
+                    </label>
+                    {{ form.fei_ein_number }}
+                </div>
+                
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.seller_travel_number.id_for_label }}">
+                        IATA/CLIA/SELLER OF TRAVEL NUMBER
+                    </label>
+                    {{ form.seller_travel_number }}
+                </div>
+            </div>
+
+            <div class="flex space-x-3">
+                <button class="text-black shadow-md hover:shadow-lg w-1/2 px-3  p-2.5 text-sm font-medium tracking-wide capitalize transition-colors duration-300 transform border border-gray-300
+                    bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50  font-serif"
+                    type="submit" onclick="">
+                    Eliminar Registro
+                </button>
+                <button class=" shadow-md hover:shadow-lg w-1/2 px-3  p-2.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border border-itravel-900
+                    bg-itravel-900 rounded-md hover:bg-itravel-600 focus:outline-none focus:ring focus:ring-itravel-500 focus:ring-opacity-50  font-serif"
+                    type="submit">
+                    Terminar Registro
+                </button>
+            </div>
+        </div>
+    
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

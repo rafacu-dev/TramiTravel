@@ -386,7 +386,7 @@ class Booking(models.Model):
     def name(self) -> str:
         return self.lastName + " " + self.motherLastName + ", " + self.firstName + " " + self.middleName
 
-    def amountAgencieMoney(self,revenue_agency) -> str:
+    def amountagencyMoney(self,revenue_agency) -> str:
         amount = self.amount + self.flight.agencyCommission + revenue_agency
         if len(str(amount).split(".")[1]) == 1: return "$ " + str(amount) + "0"
         return "$ " + str(amount)
