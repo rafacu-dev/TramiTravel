@@ -50,7 +50,10 @@ function login(){
                 document.querySelector('[name=csrfmiddlewaretoken]').value = response.csrf
                 document.getElementById("accountEmail").textContent = response.user
 
-                if (response.register == "admin"){
+                
+                if(response.redirect){
+                    window.location.href = window.location.origin + response.redirect;
+                }else if (response.register == "admin"){
                     document.getElementById("panel-admin").classList.remove("hidden");
                 }
                 document.getElementById("btnLogout").classList.remove("hidden");
