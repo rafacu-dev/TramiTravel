@@ -275,13 +275,13 @@ class ChangeInfoAgency(View):
             agency.name = form.cleaned_data['name']
             agency.logo = request.FILES['logo']
             agency.address = form.cleaned_data['address']
-            agency.email = form.cleaned_data['email']
+            agency.email = str(form.cleaned_data['email']).lower()
             agency.phone = form.cleaned_data['phone']
             agency.fax = form.cleaned_data['fax']
             agency.fei_ein_number = form.cleaned_data['fei_ein_number']
             agency.seller_travel_number = form.cleaned_data['seller_travel_number']
             agency.contact_name = form.cleaned_data['contact_name']
-            agency.contact_email = form.cleaned_data['contact_email']
+            agency.contact_email = str(form.cleaned_data['contact_email']).lower()
             agency.contact_phone = form.cleaned_data['contact_phone']
             agency.save()
             return redirect("index")
