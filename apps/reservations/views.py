@@ -23,6 +23,8 @@ from core import settings
 from core.settings import BASE_DIR
 from core.languages import get_strings
 
+from django.utils.decorators import method_decorator
+from apps.utils.utils import permission_checked
 
 def date_key():
     dt_tuple = datetime.now().timetuple()
@@ -41,6 +43,7 @@ def date_key():
      
 
 
+@method_decorator(permission_checked, name='dispatch')
 class Home(View):
     def get(self,request,*args,**kwargs):
         
@@ -124,6 +127,7 @@ class Home(View):
 
         return render(request,'index.html',context)
 
+@method_decorator(permission_checked, name='dispatch')
 class HomeTraslate(View):
     def get(self,request,traslate,*args,**kwargs):
         
@@ -207,9 +211,10 @@ class HomeTraslate(View):
 
         return render(request,'index.html',context)
 
+@method_decorator(permission_checked, name='dispatch')
 class Flights(View):
     def test_user(self):
-        return self.request.user.is_authenticated and self.request.user.agencie
+        return self.request.user.is_authenticated and self.request.user.agency
     
     def get(self,request,*args,**kwargs):
         data = request.GET
@@ -238,7 +243,7 @@ class Flights(View):
             if flight.capacity() < ability_requiered:
                 flights.pop(index)
             
-            if self.test_user():flight.price_money = flight.priceAgencyMoney(revenue_agency=request.user.agencie.revenue)
+            if self.test_user():flight.price_money = flight.priceAgencyMoney(revenue_agency=request.user.agency.revenue)
             else:flight.price_money = flight.priceMoney()
 
         available_dates = []
@@ -298,7 +303,7 @@ class Flights(View):
                 if flight.capacity() < ability_requiered:
                     flightsReturn.pop(index)
             
-                if self.test_user():flight.price_money = flight.priceAgencyMoney(revenue_agency=request.user.agencie.revenue)
+                if self.test_user():flight.price_money = flight.priceAgencyMoney(revenue_agency=request.user.agency.revenue)
                 else:flight.price_money = flight.priceMoney()
 
             available_dates_return = []
@@ -329,9 +334,10 @@ class Flights(View):
 
         return render(request,'flight.html',context)
 
+@method_decorator(permission_checked, name='dispatch')
 class GetFligths(View):
     def test_user(self):
-        if self.request.user.is_authenticated and self.request.user.agencie:return True
+        if self.request.user.is_authenticated and self.request.user.agency:return True
         return False
     
     def get(self,request,date_departure,date_return,begin,to,adults,children,infants,class_type,*args,**kwargs):
@@ -353,7 +359,7 @@ class GetFligths(View):
                 flight["price"] = f.priceAdult
                 flight["actived"] = f.actived
 
-                if self.test_user():flight["priceMoney"] = f.priceAgencyMoney(revenue_agency=request.user.agencie.revenue)
+                if self.test_user():flight["priceMoney"] = f.priceAgencyMoney(revenue_agency=request.user.agency.revenue)
                 else:flight["priceMoney"] = f.priceMoney()
 
                 flight["begin"] = f.begin.__str__()
@@ -411,11 +417,11 @@ class GetFligths(View):
         flightsReturn = json.dumps(returned)
         return HttpResponse(flightsReturn,"application/json")
 
-
-class BookingsAgencie(View):
+@method_decorator(permission_checked, name='dispatch')
+class Bookingsagency(View):
     def get(self,request,*args,**kwargs):
         if not request.user.is_authenticated: return  redirect("index")
-        if not request.user.agencie: return  redirect("tickets")
+        if not request.user.agency: return  redirect("tickets")
 
         menus = Menu.objects.filter(actived=True).order_by('position')
         strings,language = get_strings(request.COOKIES)
@@ -425,7 +431,7 @@ class BookingsAgencie(View):
         tickets_return = []
         for ticket in tickets:
             if not ticket.isReturn():
-                ticket.amount_agencie_money = ticket.amountAgencieMoney(self.request.user.agencie.revenue)
+                ticket.amount_agency_money = ticket.amountagencyMoney(self.request.user.agency.revenue)
                 ticket_return = Booking.objects.filter(reservationCode=ticket.reservationCode+1)
                 if ticket_return:
                     ticket.flight_return = ticket_return.flight
@@ -438,7 +444,7 @@ class BookingsAgencie(View):
             "menus" : menus,
             }
 
-        return render(request,'bookings_agencie.html',context)
+        return render(request,'bookings_agency.html',context)
     
     def post(self,request,*args,**kwargs):
         try:
@@ -456,7 +462,7 @@ class BookingsAgencie(View):
                     zelle = zelle,
                     zelle_owner = request.POST["zelle-owner"],
                     amount = request.POST["amount_transferred"],
-                    agencie = request.user.agencie,
+                    agency = request.user.agency,
                     user = request.user
                 )
 
@@ -468,7 +474,7 @@ class BookingsAgencie(View):
                 tickets_return = []
                 for ticket in tickets:
                     if not ticket.isReturn():
-                        ticket.amount_agencie_money = ticket.amountAgencieMoney(self.request.user.agencie.revenue)
+                        ticket.amount_agency_money = ticket.amountagencyMoney(self.request.user.agency.revenue)
                         ticket_return = Booking.objects.filter(reservationCode=ticket.reservationCode+1)
                         if ticket_return:
                             ticket.flight_return = ticket_return.flight
@@ -481,12 +487,12 @@ class BookingsAgencie(View):
                     "menus" : menus,
                     }
 
-                return render(request,'bookings_agencie.html',context)
+                return render(request,'bookings_agency.html',context)
 
 
             booking = Booking.objects.get(user=request.user,id=int(request.POST["booking_id"]))
 
-            if booking.amount + booking.flight.agencyCommission > request.user.agencie.credit:
+            if booking.amount + booking.flight.agencyCommission > request.user.agency.credit:
                 returned = {
                     "success":"NO_CREDIT",
                 }
@@ -497,14 +503,14 @@ class BookingsAgencie(View):
             booking.save()
             
 
-            request.user.agencie.credit -= booking.amount + booking.flight.agencyCommission
-            request.user.agencie.save()
+            request.user.agency.credit -= booking.amount + booking.flight.agencyCommission
+            request.user.agency.save()
 
             
             returned = {
                 "success":"YES",
                 "amount_liquidated":booking.liquidatedMoney(),
-                "total_credit":request.user.agencie.creditMoney()
+                "total_credit":request.user.agency.creditMoney()
             }
             return HttpResponse(json.dumps(returned),"application/json")
         except:
@@ -513,11 +519,12 @@ class BookingsAgencie(View):
             }
             return HttpResponse(json.dumps(returned),"application/json")
         
+@method_decorator(permission_checked, name='dispatch')
 class Tickets(View):
     
     def get(self,request,*args,**kwargs):
         if not request.user.is_authenticated: return  redirect("index") 
-        if self.request.user.agencie:return redirect("bookingsAgencie")
+        if self.request.user.agency:return redirect("bookingsagency")
 
         menus = Menu.objects.filter(actived=True).order_by('position')
         strings,language = get_strings(request.COOKIES)
@@ -621,9 +628,10 @@ class Tickets(View):
             print("Error al registrar pago")
             return  redirect("tickets")
 
+@method_decorator(permission_checked, name='dispatch')
 class BookingView(View):
     def test_user(self):
-        return self.request.user.is_authenticated and self.request.user.agencie
+        return self.request.user.is_authenticated and self.request.user.agency
     
     def get(self,request,*args,**kwargs):
         data = request.GET
@@ -870,6 +878,7 @@ class BookingView(View):
 
         return  redirect("tickets")
 
+@method_decorator(permission_checked, name='dispatch')
 class Message(View):
     def get(self,request,tag,*args,**kwargs):
 
@@ -891,6 +900,7 @@ class Message(View):
 
         return render(request,'contact.html',context)
 
+@method_decorator(permission_checked, name='dispatch')
 class AddFlight(View):
     def test_user(self):
         return self.request.user.is_authenticated and self.request.user.is_superuser
@@ -979,6 +989,7 @@ class AddFlight(View):
 
         return render(request,'add_flight.html',context)
 
+@method_decorator(permission_checked, name='dispatch')
 class EditFlights(View):
     def test_user(self):
         return self.request.user.is_authenticated and self.request.user.is_superuser

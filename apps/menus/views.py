@@ -5,6 +5,8 @@ from django.http import FileResponse
 from django.shortcuts import render
 from django.views.generic import View
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from apps.utils.utils import permission_checked
 from core import settings
 
 from core.languages import get_strings
@@ -14,6 +16,7 @@ from .models import Menu, Seccion
 
 # Create your views here.
 
+@method_decorator(permission_checked, name='dispatch')
 class Service(View):
     def get(self,request,tag,*args,**kwargs):
 
@@ -59,6 +62,7 @@ class Service(View):
 
         return render(request,'service.html',context)
 
+@method_decorator(permission_checked, name='dispatch')
 class Services(View):
     def get(self,request,tag,*args,**kwargs):
 
@@ -74,7 +78,8 @@ class Services(View):
             }
 
         return render(request,'services.html',context)
-        
+     
+@method_decorator(permission_checked, name='dispatch')   
 class Contact(View):
     def get(self,request,*args,**kwargs):
         menus = Menu.objects.filter(actived=True).order_by('position')        

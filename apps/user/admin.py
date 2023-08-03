@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.user.models import Agencie, CreditRecharge
+from apps.user.models import Agency, CreditRecharge
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -11,9 +11,9 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.register(User, UserAdmin)
 
-class AgencieAdmin(admin.ModelAdmin):
-    list_display=[field.name for field in Agencie._meta.fields]
-    model = Agencie
+class AgencyAdmin(admin.ModelAdmin):
+    list_display=[field.name for field in Agency._meta.fields]
+    model = Agency
 
-admin.site.register(Agencie,AgencieAdmin)
+admin.site.register(Agency,AgencyAdmin)
 admin.site.register(CreditRecharge)

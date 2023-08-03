@@ -285,7 +285,7 @@ class Booking(models.Model):
     actived = models.BooleanField(default=True)
 
     def holder(self):
-        return Client.objects.filter(booking=self)[0]
+        return Client.objects.filter(booking=self)[0].__str__()
 
 class Client(models.Model):
     id = models.AutoField(primary_key=True)

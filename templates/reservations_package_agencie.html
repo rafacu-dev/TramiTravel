@@ -55,7 +55,7 @@
 
         <div class="pt-6 flex flex-col items-center justify-center lg:w-3/4 p-1 md:px-4 md:pb-4 h-full">
             <div class="flex flex-wrap justify-between w-full max-w-7xl">
-                <p class="w-auto text-black font-bold font-serif text-lg" id="total-credit">{{ strings.total_credit_remaining }}: {{request.user.agencie.creditMoney }}</p>
+                <p class="w-auto text-black font-bold font-serif text-lg" id="total-credit">{{ strings.total_credit_remaining }}: {{request.user.agency.creditMoney }}</p>
                 <button class="flex items-center justify-between px-4 h-auto py-2 shadow-lg  rounded-lg bg-gradient-to-br from-itravel-900 to-pink-700 hover:bg-gradient-to-bl font-bold"
                     data-modal-toggle="payment-modal">
                     <p class="text-sm text-white mr-2">{{ strings.recharge_account_with }}</p>
@@ -504,7 +504,7 @@
 <script src="{% static 'js/TweenMax.min.js' %}"></script>
 <script src="{% static 'js/tickets.js' %}"></script>
 <script type = "text/JavaScript">
-    let creditAgencie = {{request.user.agencie.credit|parseFloat }};
+    let creditagency = {{request.user.agency.credit|parseFloat }};
     function cancelBooking(id,code){
         document.getElementById("cancel-booking-id").value = id;
         document.getElementById("text-cancel-booking").innerText = `Se encuentra seguro de cancelar la reserva ${code}?`;
@@ -513,12 +513,12 @@
         document.getElementById("liquidated-booking-id").value = id;
         document.getElementById("text-liquidated-booking").innerText = `Booking code: ${code}`;
         let forLiquidated = amount - liquidated;
-        if(creditAgencie > forLiquidated){
+        if(creditagency > forLiquidated){
             document.getElementById("liquidated-booking-value").value = forLiquidated;
             document.getElementById("liquidated-booking-value").setAtribute("max",forLiquidated);
         }else{
-            document.getElementById("liquidated-booking-value").value = creditAgencie;
-            document.getElementById("liquidated-booking-value").setAtribute("max",creditAgencie);
+            document.getElementById("liquidated-booking-value").value = creditagency;
+            document.getElementById("liquidated-booking-value").setAtribute("max",creditagency);
         }
     }
 </script>

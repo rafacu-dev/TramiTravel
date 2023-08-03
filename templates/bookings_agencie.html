@@ -5,7 +5,7 @@
 
 <div class="pt-16 flex flex-col items-center justify-center h-2/3">
     <div class="flex flex-wrap justify-between w-full max-w-7xl">
-        <p class="w-auto text-black font-bold font-serif text-lg" id="total-credit">{{ strings.total_credit_remaining }}: {{request.user.agencie.creditMoney }}</p>
+        <p class="w-auto text-black font-bold font-serif text-lg" id="total-credit">{{ strings.total_credit_remaining }}: {{request.user.agency.creditMoney }}</p>
         <button class="flex items-center justify-between px-4 h-auto py-2 shadow-lg  rounded-lg bg-gradient-to-br from-itravel-900 to-pink-700 hover:bg-gradient-to-bl font-bold"
             data-modal-toggle="payment-modal">
             <p class="text-sm text-white mr-2">{{ strings.recharge_account_with }}</p>
@@ -49,10 +49,10 @@
                     <td scope="row" class="whitespace-nowrap px-6 py-3">{% if tiket.flight_return %}{{ tiket.flight_return.date|date:"m/d/Y" }} {{ tiket.flight_return.departure|time:"h:iA" }}{% else %}-{% endif %}</td>
                     <td scope="row" class="whitespace-nowrap px-6 py-3">{{ tiket.reservationCode }}</td>
                     <td scope="row" class="whitespace-nowrap px-6 py-3">{% if tiket.pnr %}{{ tiket.pnr }}{% endif %}</td>
-                    <td scope="row" class="px-6 py-3">{{ tiket.amount_agencie_money }}</td>
+                    <td scope="row" class="px-6 py-3">{{ tiket.amount_agency_money }}</td>
                     <td scope="row" id="amount-liquidated-{{ tiket.id }}" class="whitespace-nowrap px-6 py-3">{{ tiket.liquidatedMoney }}</td>
                     <td scope="row" class="whitespace-nowrap px-6 py-3">{{ tiket.amountMoney }}</td>
-                    <td scope="row" class="px-6 py-3">{{ request.user.agencie.amountMoney }}</td>
+                    <td scope="row" class="px-6 py-3">{{ request.user.agency.amountMoney }}</td>
                     <td scope="row" class="px-6 py-3">
                         <button id="btn-liquidated-{{ tiket.id }}" type="button" class="flex items-center justify-center h-auto text-white bg-itravel-700 hover:bg-itravel-800 z-50 
                         rounded-lg text-sm px-3 py-1.5 text-center px-4 cursor-pointer group focus:outline-none 
@@ -159,5 +159,5 @@
 {% endblock content %}
 
 {% block scripts %}
-<script src="{% static 'js/bookings_agencie.js' %}"></script>
+<script src="{% static 'js/bookings_agency.js' %}"></script>
 {% endblock scripts %}
