@@ -4,6 +4,7 @@ from django.views.generic import View
 from apps.menus.models import Menu
 
 from apps.refills.models import Config, Refill
+from core.languages import get_strings
 from ..bot.bot import *
 from random import randint as ri
 
@@ -20,7 +21,12 @@ class Refills(View):
 
         menus = Menu.objects.all().order_by('position')
         
+        menus = Menu.objects.filter(actived=True).order_by('position')
+        strings,language = get_strings(request.COOKIES)
         context = {
+            "language":language,
+            "strings" : strings,
+            "menus" :menus,
             "porcent" : porcent,
             "code" : code,
             "refills" : refills,

@@ -85,9 +85,10 @@ en = {
     "reset_passwor_3":"New Password",
 
     # -- MENU --
-    "menu_t1":"Flights",
+    "menu_t1":"Home",
     "menu_t2":"Contact",
     "menu_t3":"Pro User",
+    "menu_t4":"Refills",
     "trips":"Trips",
     "signout":"Sign out",
     "account":"Account",
@@ -327,9 +328,10 @@ sp = {
     "reset_passwor_3":"Nueva contraseña",
 
     # -- MENU --
-    "menu_t1":"Vuelos",
+    "menu_t1":"Inicio",
     "menu_t2":"Contáctanos",
     "menu_t3":"Usuario",
+    "menu_t4":"Recargas",
     "trips":"Voletos",
     "signout":"Cerrar sesión",
     "account":"Cuenta",
