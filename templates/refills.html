@@ -127,16 +127,23 @@
                                 <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
                                 <time class="mb-1 text-sm font-normal leading-none text-gray-400">Step 5</time>
                                 <h3 class="text-lg font-semibold text-gray-900">Enter the details of the account from which you made the transfer</h3>
-                                
-                                <div class="relative mt-3">
+                                                                
+                                <h3 class="text-sm font-semibold text-gray-900 mt-3">{{ strings.ticket_t17 }}</h3>
+                                <div class="relative mt-1">
                                     <input type="email" name="emailPayment" id="emailPayment" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-itravel-600 focus:bg-gray-100 peer" placeholder=" " />
-                                    <label for="emailPayment" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Email of Zelle</label>
+                                    <label for="emailPayment" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ strings.ticket_t12 }}</label>
                                 </div>
-                                <p class="ml-6 text-sm font-normal leading-none text-gray-600 mt-4">or</p>
-                                <div class="relative mt-4">
+                                <p class="ml-6 text-sm font-normal leading-none text-gray-600 mt-2">{{ strings.or }}</p>
+                                <div class="relative mt-2">
                                     <input type="number" name="phonePayment" id="phonePayment" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-itravel-600 focus:bg-gray-100 peer" placeholder=" " />
-                                    <label for="phonePayment" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Phone of Zelle</label>
-                                </div>
+                                    <label for="phonePayment" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ strings.ticket_t13 }}</label>
+                                </div> 
+                                <p class="text-sm font-normal text-red-600 mt-2 ml-2 hidden" id="alertZelleRequired">{{ strings.ticket_t16 }}</p>
+                                <h3 class="text-sm font-semibold text-gray-900 mt-4">{{ strings.ticket_t18 }}</h3>
+                                <div class="relative mt-1">
+                                    <input type="text" name="zelle-owner" id="zelle-owner" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-itravel-600 focus:bg-gray-100 peer" placeholder=" " />
+                                    <label for="zelle-owner" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-itravel-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ strings.ticket_t19 }}</label>
+                                </div> 
                             </li>
                         </ol>
             

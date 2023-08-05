@@ -172,6 +172,11 @@
                                 <a href="{% url 'index_traslate' traslate='traslate' %}" class="block py-2 pr-4 pl-3  rounded-md border-b border-gray-100 hover:bg-itravel-100 lg:border-0 lg:hover:text-itravel-900 font-serif text-lg
                                 {% if request.path == '/' or 'traslate' in request.path %} bg-itravel-50 lg:border-0 text-itravel-900 {% else %}text-gray-700{% endif %}">{{ strings.menu_t1 }}</a>
                             </li>
+                            
+                            <li>
+                                <a href="{% url 'refills' %}" class="block py-2 pr-4 pl-3  rounded-md border-b border-gray-100 hover:bg-itravel-100 lg:border-0 lg:hover:text-itravel-900 font-serif text-lg
+                                {% if 'refills/' in request.path %} bg-itravel-50 lg:border-0 text-itravel-900 {% else %}text-gray-700{% endif %}">{{ strings.menu_t4 }}</a>
+                            </li>
 
                             {% for menu in menus %}
                             {% if menu.necessary %}
