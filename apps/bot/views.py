@@ -22,7 +22,6 @@ def telegram_webhook(request):
         return HttpResponse(False)
     
 
-@method_decorator(csrf_exempt, name='dispatch')
 class PasmsView(View):
     def get(self,request,*args,**kwargs):
         try:
@@ -66,4 +65,28 @@ class PasmsView(View):
         
         except Exception as error:
             print("************************************************ ERROR en POST:",str(error))
+            return HttpResponse("False")
+        
+
+
+        
+class PasmsViewAll(View):
+    def get(self,request,*args,**kwargs):
+        try:
+            data = request.GET
+
+            pasms = Pasms.objects.all()
+
+            success = []
+            pending = []
+            for p in pasms:
+                if p.date == None:
+                    pending.append({"phone":p.phone,"case":p.case})
+                else:
+                    success.append({"phone":p.phone,"case":p.case,"date":p.date})
+
+            return JsonResponse({"success":success,"pending":pending})
+        
+        except Exception as error:
+            print("************************************************ ERROR en GET:",str(error))
             return HttpResponse("False")
