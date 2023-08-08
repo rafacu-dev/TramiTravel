@@ -24,7 +24,7 @@ def telegram_webhook(request):
     
 
 class PasmsView(View):
-    def get(self,request,*args,**kwargs):
+    def get(self,request,index,*args,**kwargs):
         try:
             data = request.GET
 
@@ -32,29 +32,25 @@ class PasmsView(View):
 
             success = []
             pending = []
-            for p in pasms:
-                url = f"https://egov.uscis.gov/csol-api/case-statuses/{p.case}"
 
-                try:
-                    response = requests.get(url, verify=False)
-                    if response.status_code == 200:
-                        json_data = response.json()
-                        print("************************************************ json_data:",str(p.case),json_data)
-                        case = json_data["CaseStatusResponse"]
-                        if case["isValid"]:
-                            if case["detailsEs"]["actionCodeText"] != "Caso Recibido Y Notificación De Recibo Enviada":
-                                p.date = timezone.now()
-                                p.save()
-                                success.append({"phone":p.phone,"case":p.case,"date":p.date})
-                            else:
-                                pending.append({"phone":p.phone,"case":p.case})
-                        else:
-                            p.delete()
-                except Exception as error:
-                    print("************************************************ ERROR en FOR:",str(error))
-                    return HttpResponse("ERROR:" + str(error))
+            p = pasms[index]
+            url = f"https://egov.uscis.gov/csol-api/case-statuses/{p.case}"
+            response = requests.get(url, verify=False)
+            if response.status_code == 200:
+                json_data = response.json()
+                print("************************************************ json_data:",str(p.case),json_data)
+                case = json_data["CaseStatusResponse"]
+                if case["isValid"]:
+                    if case["detailsEs"]["actionCodeText"] != "Caso Recibido Y Notificación De Recibo Enviada":
+                        p.date = timezone.now()
+                        p.save()
+                        success.append({"phone":p.phone,"case":p.case,"date":p.date})
+                    else:
+                        pending.append({"phone":p.phone,"case":p.case})
+                else:
+                    p.delete()
 
-                return JsonResponse({"success":success,"pending":pending})
+                return JsonResponse({"success":success,"pending":pending,"next":f'<a href="/remote-control/settings-pasms/{index+1}">{index+1}</a>'})
         
         except Exception as error:
             print("************************************************ ERROR en GET:",str(error))
