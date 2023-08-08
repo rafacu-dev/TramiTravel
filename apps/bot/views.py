@@ -1,3 +1,4 @@
+import time
 import requests
 from django.http import JsonResponse
 from django.views.generic import View
@@ -34,6 +35,7 @@ class PasmsView(View):
             for p in pasms:
                 url = f"https://egov.uscis.gov/csol-api/case-statuses/{p.case}"
 
+                time.sleep(0.01)
                 response = requests.get(url, verify=False)
                 if response.status_code == 200:
                     json_data = response.json()
