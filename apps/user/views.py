@@ -285,8 +285,12 @@ class ChangeInfoAgency(View):
             agency.contact_phone = form.cleaned_data['contact_phone']
             agency.save()
             return redirect("index")
+        else:
+            campos_no_validos = form.errors.keys()
+            print(campos_no_validos)
 
 
+        context["errors_form"] = campos_no_validos
         print("formulario invalido")
         new_form = AgencyForm()
         context["form"] = new_form
