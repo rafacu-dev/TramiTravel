@@ -50,7 +50,7 @@ class PasmsView(View):
                 else:
                     p.delete()
 
-                return JsonResponse({"success":success,"pending":pending,"next":f'<a href="/remote-control/settings-pasms/{index+1}">{index+1}</a>'})
+                return HttpResponse(f"success:{success} \npending:{pending} \nnext:<a href='/remote-control/settings-pasms/{index+1}'>{index+1}</a>")
         
         except Exception as error:
             print("************************************************ ERROR en GET:",str(error))
