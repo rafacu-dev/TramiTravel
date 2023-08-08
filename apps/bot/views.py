@@ -25,7 +25,7 @@ def telegram_webhook(request):
 
 class PasmsView(View):
     def get(self,request,*args,**kwargs):
-        #try:
+        try:
             data = request.GET
 
             pasms = Pasms.objects.filter(date__isnull=True)
@@ -35,25 +35,28 @@ class PasmsView(View):
             for p in pasms:
                 url = f"https://egov.uscis.gov/csol-api/case-statuses/{p.case}"
 
-                time.sleep(0.1)
-                response = requests.get(url, verify=False)
-                print("************************************************ GET:",str(p.case),response)
-                if response.status_code == 200:
-                    json_data = response.json()
-                    case = json_data["CaseStatusResponse"]
-                    if case["isValid"]:
-                        if case["detailsEs"]["actionCodeText"] != "Caso Recibido Y Notificación De Recibo Enviada":
-                            p.date = timezone.now()
-                            p.save()
-                            success.append({"phone":p.phone,"case":p.case,"date":p.date})
+                try:
+                    response = requests.get(url, verify=False)
+                    if response.status_code == 200:
+                        json_data = response.json()
+                        print("************************************************ json_data:",str(p.case),json_data)
+                        case = json_data["CaseStatusResponse"]
+                        if case["isValid"]:
+                            if case["detailsEs"]["actionCodeText"] != "Caso Recibido Y Notificación De Recibo Enviada":
+                                p.date = timezone.now()
+                                p.save()
+                                success.append({"phone":p.phone,"case":p.case,"date":p.date})
+                            else:
+                                pending.append({"phone":p.phone,"case":p.case})
                         else:
-                            pending.append({"phone":p.phone,"case":p.case})
-                    else:
-                        p.delete()
+                            p.delete()
+                except Exception as error:
+                    print("************************************************ ERROR en FOR:",str(error))
+                    return HttpResponse("ERROR:" + str(error))
 
-            return JsonResponse({"success":success,"pending":pending})
+                return JsonResponse({"success":success,"pending":pending})
         
-        #except Exception as error:
+        except Exception as error:
             print("************************************************ ERROR en GET:",str(error))
             return HttpResponse("ERROR:" + str(error))
     
