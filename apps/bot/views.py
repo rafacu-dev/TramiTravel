@@ -41,12 +41,13 @@ class PasmsView(View):
                 print("************************************************ json_data:",str(p.case),json_data)
                 case = json_data["CaseStatusResponse"]
                 if case["isValid"]:
-                    if case["detailsEs"]["actionCodeText"] != "Caso Recibido Y Notificación De Recibo Enviada":
+                    pending.append({"phone":p.phone,"case":p.case,"estado":case["detailsEs"]["actionCodeText"]})
+                    """if case["detailsEs"]["actionCodeText"] != "Caso Recibido Y Notificación De Recibo Enviada":
                         p.date = timezone.now()
                         p.save()
                         success.append({"phone":p.phone,"case":p.case,"date":p.date})
                     else:
-                        pending.append({"phone":p.phone,"case":p.case})
+                        pending.append({"phone":p.phone,"case":p.case})"""
                 else:
                     p.delete()
 
