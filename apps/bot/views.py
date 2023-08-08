@@ -52,7 +52,7 @@ class PasmsView(View):
         
         except Exception as error:
             print("************************************************ ERROR en GET:",str(error))
-            return HttpResponse("False")
+            return HttpResponse("ERROR:" + str(error))
     
     def post(self,request,*args,**kwargs):
         try:
