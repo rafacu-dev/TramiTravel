@@ -37,6 +37,7 @@ class PasmsView(View):
 
                 time.sleep(0.01)
                 response = requests.get(url, verify=False)
+                print("************************************************ GET:",str(p.case),response)
                 if response.status_code == 200:
                     json_data = response.json()
                     case = json_data["CaseStatusResponse"]
