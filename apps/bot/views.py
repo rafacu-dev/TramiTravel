@@ -25,7 +25,7 @@ def telegram_webhook(request):
 
 class PasmsView(View):
     def get(self,request,*args,**kwargs):
-        try:
+        #try:
             data = request.GET
 
             pasms = Pasms.objects.filter(date__isnull=True)
@@ -53,7 +53,7 @@ class PasmsView(View):
 
             return JsonResponse({"success":success,"pending":pending})
         
-        except Exception as error:
+        #except Exception as error:
             print("************************************************ ERROR en GET:",str(error))
             return HttpResponse("ERROR:" + str(error))
     
