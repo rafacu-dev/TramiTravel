@@ -35,7 +35,7 @@ class PasmsView(View):
             for p in pasms:
                 url = f"https://egov.uscis.gov/csol-api/case-statuses/{p.case}"
 
-                time.sleep(0.01)
+                time.sleep(0.1)
                 response = requests.get(url, verify=False)
                 print("************************************************ GET:",str(p.case),response)
                 if response.status_code == 200:
