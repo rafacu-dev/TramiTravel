@@ -76,6 +76,13 @@
                         </tr>
                     </thead>
                     <tbody data-accordion="collapse">
+                        {% if bookings|length == 0 %}
+                        <tr>
+                            <td scope="row" class="table-cell" colspan="6">
+                                <h1 class="tracking-wide text-black text-md w-full px-3 mb-6 mt-4">No existen reservaciones</h1>
+                            </td>
+                        </tr>
+                        {% else %}
                         {% for booking in bookings%}
                         <tr class="bg-white border-b hover:bg-gray-50">
                             <td scope="col" class="pl-3">
@@ -334,6 +341,7 @@
                         </tr>
                         {% endwith %}
                         {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
             </div>

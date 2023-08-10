@@ -33,6 +33,14 @@
                 </tr>
             </thead>
             <tbody>
+                
+                {% if bookings|length == 0 %}
+                <tr>
+                    <td scope="row" class="table-cell" colspan="14">
+                        <h1 class="tracking-wide text-black text-md w-full px-3 mb-6 mt-4 text-center">No existen reservaciones</h1>
+                    </td>
+                </tr>
+                {% else %}
                 {% for tiket in tickets%}
                 <tr class="bg-white border-b hover:bg-gray-50">
                     <td scope="row" class="px-6 py-3">
@@ -67,6 +75,7 @@
                     </td>
                 </tr>
                 {% endfor %}
+                {% endif %}
             </tbody>
         </table>
     </div>
