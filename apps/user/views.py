@@ -251,7 +251,8 @@ class ChangeInfoAgency(View):
             "oferts":oferts,
             "language":language,
             "strings" : strings,
-            "menus" :menus
+            "menus" :menus,
+            "message_alert":"Para continuar debe completar los datos de la agencia"
             }
         return render(request,'change_info_agency.html',context)
 
@@ -289,9 +290,8 @@ class ChangeInfoAgency(View):
             campos_no_validos = form.errors.keys()
             print(campos_no_validos)
 
-
+        context["message_alert"] = "Error en los datos proporcionados. Para continuar debe completar adecuadamente los datos de la agencia"
         context["errors_form"] = campos_no_validos
-        print("formulario invalido")
         new_form = AgencyForm()
         context["form"] = new_form
 

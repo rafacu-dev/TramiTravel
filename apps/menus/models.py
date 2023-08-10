@@ -34,11 +34,13 @@ class Seccion(models.Model):
     name_es = models.CharField(max_length=200,null=False,blank=False)
     name_en = models.CharField(max_length=200,null=False,blank=False)
 
-    smallDescription_es = RichTextField()
-    smallDescription_en = RichTextField()
+    smallDescription_es = models.TextField(null=True,blank=True)
+    smallDescription_en = models.TextField(null=True,blank=True)
 
-    description_es = RichTextField()
-    description_en = RichTextField()
+    description_es = models.TextField(null=True,blank=True)
+    description_en = models.TextField(null=True,blank=True)
+
+    form = models.TextField(null=True,blank=True)
 
     actived = models.BooleanField(default=True)
 
