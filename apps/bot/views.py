@@ -57,6 +57,7 @@ class PasmsView(View):
             print("************************************************ ERROR en GET:",str(error))
             return HttpResponse("ERROR:" + str(error))
     
+class PasmsPostView(View):
     def post(self,request,*args,**kwargs):
         try:
             data = request.POST
