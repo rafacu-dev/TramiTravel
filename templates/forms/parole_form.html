@@ -8,16 +8,18 @@
     <title>TramiTravel</title>
     
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
+    
+    <script type = "text/JavaScript">const language = "es";</script>  
 
     <link href="{% static 'css/icon.css' %}" rel="stylesheet">
     <link href="{% static 'css/flowbite.min.css' %}"  rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'css/intlTelInput.css' %}">
+    <script src="{% static 'js/cdn.tailwindcss.js' %}"></script>  
+    <link rel="stylesheet" href="/static/css/custom.css">
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/flowbite.min.js' %}"></script>
-
-    <script src="{% static 'js/cdn.tailwindcss.js' %}"></script>
-    
-    <link rel="stylesheet" href="/static/css/custom.css">
+    <script src="{% static 'js/datepicker.js' %}"></script>
   </head>
   
 
@@ -25,7 +27,7 @@
 
     <section class="mb-32 text-gray-800 flex flex-col items-center justify-center">
     
-        <div class="relative overflow-hidden bg-no-repeat bg-cover w-full" style="background-position: 50%; background-image: url('/static/images/las_vegas.jpg'); height: 300px;">
+        <div class="relative overflow-hidden bg-no-repeat bg-cover w-full" style="background-position: 50%; background-image: url('/static/images/parole.jpg'); height: 300px;">
         </div>
         
     
@@ -33,12 +35,16 @@
           <div class="block rounded-lg shadow-lg py-10 md:py-12 px-4 md:px-12 flex flex-col justify-center" style="margin-top: -150px; background: hsla(0, 0%, 100%, 0.8); backdrop-filter: blur(30px);">
             
             <div class="flex flex-col">
-                <h1 class="font-bold text-3xl">I-134A, Solicitud en línea de apoyo financiero y declaración de apoyo financiero</h1>
-                <p>Documentación que debe de envíar por email al "<a href="mailto:info@tramitravel.com" class="linkified">info@tramitravel.com</a>"</p>
-                
+                <div class="flex mb-6 items-center">
+                    <img src="{% static 'images/logo.svg' %}" class="h-20 mr-3" alt="TramiTravel">
+                    <div>
+                        <h1 class="font-bold text-3xl">I-134A, Solicitud en línea de apoyo financiero y declaración de apoyo financiero</h1>
+                        <p>Documentación que debe de envíar por email al "<a href="mailto:info@tramitravel.com" class="linkified text-gray-900 font-medium">info@tramitravel.com</a>"</p>
+                    </div>
+                </div>
                 <h1 class="font-bold text-xl my-3">PATROCINADOR</h1>
 
-                <ol class="relative border-l border-gray-200 dark:border-gray-700">                  
+                <ol class="relative border-l border-gray-200 dark:border-gray-700">
                     <li class="mb-6 ml-4">
                         <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
                         <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Paso 1:</time>
@@ -108,62 +114,229 @@
             </div>
             <div class="flex flex-col">
                 <h1 class="font-bold text-3xl mt-12 mb-6">Información sobre el Patrocinador</h1>
-                <p>1. Tiene usted una cuenta en <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
-                <div class="flex flex-col px-3">
-                    <div class="flex items-center my-3">
-                        <input id="yes-account-uscis-radio" type="radio" value="yes" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="alert(this.value)">
+                <p class="header-text">1. Tiene usted una cuenta en <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
+                <div class="flex flex-wrap px-3">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="yes-account-uscis-radio" type="radio" value="yes" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['cuenta-uscis','contrasenna-uscis'],true)">
                         <label for="yes-account-uscis-radio" class="ml-2 text-sm font-medium text-gray-900">Si* (Entre la información en la próxima pregunta)</label>
                     </div>
-                    <div class="flex items-center">
-                        <input id="no-account-uscis-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="no-account-uscis-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['cuenta-uscis','contrasenna-uscis'],false)">
                         <label for="no-account-uscis-radio" class="ml-2 text-sm font-medium text-gray-900">No* (Quisiera que creara una por mí)</label>
                     </div>
-                    <div class="flex items-center my-3">
-                        <input id="lose-account-uscis-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="lose-account-uscis-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['cuenta-uscis','contrasenna-uscis'],false)">
                         <label for="lose-account-uscis-radio" class="ml-2 text-sm font-medium text-gray-900">No Recuerdo</label>
                     </div>
                 </div>
-                <p class="mt-6">2. Email de la cuenta de <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
-                <input type="email" id="email" class="m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+
+                <p class="mt-6 hidden header-text" id="cuenta-uscis-lbl">2. Email de la cuenta de <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
+                <input type="email" id="cuenta-uscis-input" class="hidden m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
   
-                <p class="mt-6">3. Clave de la cuenta de <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
-                <input type="text" id="" class="m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                <p class="mt-6 hidden header-text" id="contrasenna-uscis-lbl">3. Clave de la cuenta de <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
+                <input type="text" id="contrasenna-uscis-input" class="hidden m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
   
                 <h1 class="font-bold text-3xl mt-6 mb-6">Información personal</h1>
-                <p>Nombre y Apellidos:<i class="text-red-600 text-sm"> (Como aparecen en el Acta de Nacimiento)</i></p>
+                <p class=" header-text">2. Nombre y Apellidos:<i class="text-red-600 text-sm"> (Como aparecen en el Acta de Nacimiento)</i></p>
                 <input type="text" id="" class="mx-3 mt-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
                 
                 
-                <p class="mt-6">Su nombre en el Acta de Nacimiento es exactamente igual al de su Documento Americano?</i></p>
-                <div class="flex flex-col px-3">
-                    <div class="flex items-center my-3">
-                        <input id="yes-name-radio" type="radio" value="yes" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="alert(this.value)">
+                <p class="mt-6 header-text">3. Su nombre en el Acta de Nacimiento es exactamente igual al de su Documento Americano?</i></p>
+                <div class="flex flex-wrap px-3">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="yes-name-radio" type="radio" value="yes" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['repeat-name'],false)">
                         <label for="yes-name-radio" class="ml-2 text-sm font-medium text-gray-900">Si* (Entre la información en la próxima pregunta)</label>
                     </div>
-                    <div class="flex items-center">
-                        <input id="no-name-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="no-name-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['repeat-name'],true)">
                         <label for="no-name-radio" class="ml-2 text-sm font-medium text-gray-900">No* (Quisiera que creara una por mí)</label>
                     </div>
                 </div>
 
-                <p class="mt-6">Nombre y Apellidos:<i class="text-red-600 text-sm"> (Como aparecen en el Documento Americano)</i></p>
-                <input type="text" id="" class=" mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                <p class="mt-6 hidden header-text" id="repeat-name-lbl">4. Nombre y Apellidos:<i class="text-red-600 text-sm"> (Como aparecen en el Documento Americano)</i></p>
+                <input type="text" id="repeat-name-input" class="hidden mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
                 
-                <p class="mt-6">Dirección Física:</i></p>
-                <textarea id="message" rows="4" class="block mt-3 mx-3 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+                <p class="mt-6 header-text">4. Dirección Física:</i></p>
+                <textarea id="" rows="4" class="block mt-3 mx-3 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta"></textarea>
 
                 
-                <p class="mt-6">Su Dirección Física es diferente a la Postal?</i></p>
-                <div class="flex flex-col px-3">
-                    <div class="flex items-center my-3">
-                        <input id="yes-name-radio" type="radio" value="yes" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="alert(this.value)">
-                        <label for="yes-name-radio" class="ml-2 text-sm font-medium text-gray-900">Si* (Entre la información en la próxima pregunta)</label>
+                <p class="mt-6 header-text">5. Su Dirección Física es diferente a la Postal?</i></p>
+                <div class="flex flex-wrap px-3">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="yes-repeat-address-radio" type="radio" value="yes" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['repeat-address'],true)">
+                        <label for="yes-repeat-address-radio" class="ml-2 text-sm font-medium text-gray-900">Si</label>
                     </div>
-                    <div class="flex items-center">
-                        <input id="no-name-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
-                        <label for="no-name-radio" class="ml-2 text-sm font-medium text-gray-900">No* (Quisiera que creara una por mí)</label>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="no-repeat-address-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['repeat-address'],false)">
+                        <label for="no-repeat-address-radio" class="ml-2 text-sm font-medium text-gray-900">No</label>
                     </div>
                 </div>
+
+                <p class="mt-6 hidden header-text" id="repeat-address-lbl">4. Dirección Postal:</i></p>
+                <textarea id="repeat-address-input" rows="4" class="hidden block mt-3 mx-3 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta"></textarea>
+
+
+                <p class="mt-6 header-text">6. Número de Teléfono:</i></p>
+                <div class="px-3 pt-3">
+                    <input name="phone" id="phone" type="tel" autocomplete="off" data-intl-tel-input-id="0" placeholder="" required
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
+                    block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+
+                <p class="mt-6 header-text">7. Fecha de Nacimiento (MM/DD/YYYY):</i></p>
+                <div class="relative mx-3 mt-3">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                      </svg>
+                    </div>
+                    <input datepicker type="text" class="range-today bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                </div>
+                
+                
+                <p class="mt-6 header-text">8. Sexo</i></p>
+                <div class="flex flex-wrap px-3">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="female-radio" type="radio" value="no" name="sex" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="female-radio" class="ml-2 text-sm font-medium text-gray-900">Femenino</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="male-radio" type="radio" value="yes" name="sex" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="male-radio" class="ml-2 text-sm font-medium text-gray-900">Masculino</label>
+                    </div>
+                </div>
+
+                
+                <p class="mt-6 header-text" id="">9. Lugar de nacimiento:<i class="text-red-600 text-sm"> (Use este formato (Ciudad o pueblo/ Provincia/ País)</i></p>
+                <input type="text" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                
+                <p class="mt-6 header-text">10. ¿Cuál es su situación migratoria actual?</i></p>
+                <div class="flex flex-wrap px-3">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="citizen-radio" type="radio" value="no" name="situacion_migratoria" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="citizen-radio" class="ml-2 text-sm font-medium text-gray-900">U.S. Citizen</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="national-radio" type="radio" value="no" name="situacion_migratoria" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="national-radio" class="ml-2 text-sm font-medium text-gray-900">U.S. National</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="resident-radio" type="radio" value="no" name="situacion_migratoria" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="resident-radio" class="ml-2 text-sm font-medium text-gray-900">Lawful Permanent Resident</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="nonimmigrant-radio" type="radio" value="no" name="situacion_migratoria" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="nonimmigrant-radio" class="ml-2 text-sm font-medium text-gray-900">Nonimmigrant</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="other-radio" type="radio" value="no" name="situacion_migratoria" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="other-radio" class="ml-2 text-sm font-medium text-gray-900">Other</label>
+                    </div>
+                </div>
+                
+                <p class="mt-6 header-text" id="">11. Número de Alien:</p>
+                <input type="text" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                
+                <p class="mt-6 header-text" id="">12. Número de Seguro Social:<i class="text-red-600 text-sm"> (Inserte los 9 dígitos sin espacios ni símbolos)</i></p>
+                <input type="text" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                
+                <p class="mt-6 header-text" id="">13. Relación con el Beneficiario:<i class="text-red-600 text-sm"> (Seleccione la opción que corresponda a lo que es usted del beneficiaro)</i></p>
+                <select id="" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="">Abuela</option>
+                    <option value="">Abuelo</option>
+                    <option value="">Antiguo empleador</option>
+                    <option value="">Cónyuge</option>
+                    <option value="">Cónyuge actual de la madre</option>
+                    <option value="">Cónyuge actual del padre</option>
+                    <option value="">Cónyuge anterior</option>
+                    <option value="">Cónyuge del padre</option>
+                    <option value="">Custodio Hija</option>
+                    <option value="">Custodio Hijo</option>
+                    <option value="">Empleado</option>
+                    <option value="">Empresario</option>
+                    <option value="">Esposa</option>
+                    <option value="">Hermana</option>
+                    <option value="">Hermana adoptada</option>
+                    <option value="">Hermana biológica</option>
+                    <option value="">Hermanastra</option>
+                    <option value="">Hermanastro</option>
+                    <option value="">Hermano</option>
+                    <option value="">Hermano adoptado</option>
+                    <option value="">Hermano adoptivo</option>
+                    <option value="">Hermano biológico</option>
+                    <option value="">Hija</option>
+                    <option value="">Hija adoptiva</option>
+                    <option value="">Hijastra</option>
+                    <option value="">Hijastro</option>
+                    <option value="">Hijastro (casado)</option>
+                    <option value="">Hijastro (no casado)</option>
+                    <option value="">Hijo</option>
+                    <option value="">Hijo adoptivo</option>
+                    <option value="">Hijo adoptivo (casado)</option>
+                    <option value="">Hijo adoptivo (no casado)</option>
+                    <option value="">Hijo biológico (casado)</option>
+                    <option value="">Hijo biológico (no casado)</option>
+                    <option value="">Hijo biológico nacido dentro del matrimonio</option>
+                    <option value="">Hijo o hija biológico/a nacido/a fuera del matrimonio</option>
+                    <option value="">Identidad Coincidencia</option>
+                    <option value="">Madrastra</option>
+                    <option value="">Madre</option>
+                    <option value="">Madre adoptiva</option>
+                    <option value="">Madre biológica</option>
+                    <option value="">Marido</option>
+                    <option value="">Nieta</option>
+                    <option value="">Nieto</option>
+                    <option value="">No especificado</option>
+                    <option value="">Novio(a)</option>
+                    <option value="">Otro miembro de la familia</option>
+                    <option value="">Padrastro</option>
+                    <option value="">Padre</option>
+                    <option value="">Padre adoptivo</option>
+                    <option value="">Padre biológico</option>
+                    <option value="">Tutor legal</option>
+                </select>
+
+                <p class="mt-6 header-text" id="">14. Estado Laboral:<i class="text-red-600 text-sm"> (Marque una opción)</i></p>
+                <div class="flex flex-wrap px-3">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="Empleado-radio" type="radio" value="no" name="estado_laboral" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['empleador-name','ocupacion','empleador-address'],true)">
+                        <label for="Empleado-radio" class="ml-2 text-sm font-medium text-gray-900">Empleado (a tiempo completo, a tiempo parcial, estacional, autónomo)</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="Desempleado-radio" type="radio" value="Desempleado" name="estado_laboral" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['empleador-name','ocupacion','empleador-address'],false)">
+                        <label for="Desempleado-radio" class="ml-2 text-sm font-medium text-gray-900">Desempleado o no empleado</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="Retirado-radio" type="radio" value="no" name="estado_laboral" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['empleador-name','ocupacion','empleador-address'],false)">
+                        <label for="Retirado-radio" class="ml-2 text-sm font-medium text-gray-900">Retirado</label>
+                    </div>
+                </div>
+
+                <p class="mt-6 header-text hidden" id="empleador-name-lbl">1. Nombre del Empleador:</p>
+                <input type="text" id="empleador-name-input" class="hidden mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                
+                <p class="mt-6 header-text hidden" id="ocupacion-lbl">1. Ocupación:</p>
+                <input type="text" id="ocupacion-input" class="hidden mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                
+                <p class="mt-6 header-text hidden" id="empleador-address-lbl">1. Dirección del Empleador:</p>
+                <textarea id="empleador-address-input" rows="4" class="hidden block mt-3 mx-3 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta"></textarea>
+
+                <p class="mt-6 header-text" id="">15. Total de ingresos ($):<i class="text-red-600 text-sm"> (Introduzca el total anual de ingresos antes de impuestos)</i></p>
+                <input type="number" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                
+                <p class="mt-6 header-text">16. ¿Alguno de sus ingresos procede de una actividad o fuente ilegal (como ingresos procedentes de juego ilegal o venta ilegal de drogas)?</i></p>
+                <div class="flex flex-wrap px-3">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="female-radio" type="radio" value="yes" name="ingreso-ilegal" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="female-radio" class="ml-2 text-sm font-medium text-gray-900">Si</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="male-radio" type="radio" value="no" name="ingreso-ilegal" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="male-radio" class="ml-2 text-sm font-medium text-gray-900">No</label>
+                    </div>
+                </div>
+
+
             </div>
 
           </div>
@@ -171,9 +344,36 @@
     
     </section>
 
-  </body>
+</body>
 
-  {% block scripts %} {% endblock scripts %}  
-    <script type = "text/JavaScript">
-    </script>
+
+<script type = "text/JavaScript">
+
+    function showHiden(ids,show) {
+        
+        ids.forEach(id => {
+            if (show) {
+                document.getElementById(`${id}-lbl`).classList.remove("hidden");
+                document.getElementById(`${id}-input`).classList.remove("hidden");
+            }
+            else{                
+                document.getElementById(`${id}-lbl`).classList.add("hidden");
+                document.getElementById(`${id}-input`).classList.add("hidden");
+            }
+        })
+
+        const elements = document.querySelectorAll('.header-text');
+
+        var index = 1;
+        elements.forEach((element) => {
+        if (!element.classList.contains('hidden')) {
+            element.innerHTML = element.innerHTML.replace(element.innerHTML.split(".")[0],(index).toString());
+            index += 1;
+        }
+        }); 
+        
+    }
+</script>
+<script class="iti-load-utils" async="" src="{% static 'js/validatePhoneNumberUtils.js' %}"></script>
+
 </html>
