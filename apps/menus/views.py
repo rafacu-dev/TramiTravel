@@ -131,5 +131,11 @@ class Contact(View):
 
 def download_apk(request):
     apk_file_path = os.path.join(settings.BASE_DIR, 'static/app/TramiTravel.apk')
-    print(apk_file_path)
     return FileResponse(open(apk_file_path, 'rb'), as_attachment=True)
+
+
+
+class Form(View):
+    def get(self,request,form_name,*args,**kwargs):
+        context = {}
+        return render(request,f'forms/{form_name}.html',context)

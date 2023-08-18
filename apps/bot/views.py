@@ -38,16 +38,9 @@ class PasmsView(View):
             response = requests.get(url, verify=False)
             if response.status_code == 200:
                 json_data = response.json()
-                print("************************************************ json_data:",str(p.case),json_data)
                 case = json_data["CaseStatusResponse"]
                 if case["isValid"]:
                     pending.append({"phone":p.phone,"case":p.case,"estado":case["detailsEs"]["actionCodeText"]})
-                    """if case["detailsEs"]["actionCodeText"] != "Caso Recibido Y Notificación De Recibo Enviada":
-                        p.date = timezone.now()
-                        p.save()
-                        success.append({"phone":p.phone,"case":p.case,"date":p.date})
-                    else:
-                        pending.append({"phone":p.phone,"case":p.case})"""
                 else:
                     p.delete()
 
@@ -57,6 +50,7 @@ class PasmsView(View):
             print("************************************************ ERROR en GET:",str(error))
             return HttpResponse("ERROR:" + str(error))
     
+@method_decorator(csrf_exempt, name='dispatch')
 class PasmsPostView(View):
     def post(self,request,*args,**kwargs):
         try:
