@@ -17,59 +17,159 @@
 
     <script src="{% static 'js/cdn.tailwindcss.js' %}"></script>
     
-    {% block styles %} {% endblock styles %}
+    <link rel="stylesheet" href="/static/css/custom.css">
   </head>
   
 
-  <body class="bg-gray-100 flex justify-center">
+  <body class="">
 
-    <div class="flex flex-col max-w-5xl">
-        <h1 class="font-bold text-3xl">I-134A, Solicitud en línea de apoyo financiero y declaración de apoyo financiero</h1>
-        <p>Documentación que debe de envíar por email al "<a href="mailto:info@tramitravel.com" class="linkified">info@tramitravel.com</a>"</p>
+    <section class="mb-32 text-gray-800 flex flex-col items-center justify-center">
+    
+        <div class="relative overflow-hidden bg-no-repeat bg-cover w-full" style="background-position: 50%; background-image: url('/static/images/las_vegas.jpg'); height: 300px;">
+        </div>
         
-        <h1 class="font-bold text-xl">PATROCINADOR</h1>
+    
+        <div class="container text-gray-800 px-4 lg:max-w-5xl">
+          <div class="block rounded-lg shadow-lg py-10 md:py-12 px-4 md:px-12 flex flex-col justify-center" style="margin-top: -150px; background: hsla(0, 0%, 100%, 0.8); backdrop-filter: blur(30px);">
+            
+            <div class="flex flex-col">
+                <h1 class="font-bold text-3xl">I-134A, Solicitud en línea de apoyo financiero y declaración de apoyo financiero</h1>
+                <p>Documentación que debe de envíar por email al "<a href="mailto:info@tramitravel.com" class="linkified">info@tramitravel.com</a>"</p>
+                
+                <h1 class="font-bold text-xl my-3">PATROCINADOR</h1>
 
-        <ol class="relative text-gray-500 border-l border-gray-200 dark:border-gray-700 dark:text-gray-400">                  
-            <li class="mb-10 ml-6">            
-                <span class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-green-900">
-                    <svg class="w-3.5 h-3.5 text-green-500 dark:text-green-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                    </svg>
-                </span>
-                <h3 class="font-medium leading-tight">Personal Info</h3>
-                <p class="text-sm">Step details here</p>
-            </li>
-            <li class="mb-10 ml-6">
-                <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-                    <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
-                        <path d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z"/>
-                    </svg>
-                </span>
-                <h3 class="font-medium leading-tight">Account Info</h3>
-                <p class="text-sm">Step details here</p>
-            </li>
-            <li class="mb-10 ml-6">
-                <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-                    <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
-                    </svg>
-                </span>
-                <h3 class="font-medium leading-tight">Review</h3>
-                <p class="text-sm">Step details here</p>
-            </li>
-            <li class="ml-6">
-                <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 dark:bg-gray-700">
-                    <svg class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z"/>
-                    </svg>
-                </span>
-                <h3 class="font-medium leading-tight">Confirmation</h3>
-                <p class="text-sm">Step details here</p>
-            </li>
-        </ol>
+                <ol class="relative border-l border-gray-200 dark:border-gray-700">                  
+                    <li class="mb-6 ml-4">
+                        <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                        <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Paso 1:</time>
+                        <h3 class="text-md font-semibold text-gray-900 dark:text-white">Copia de la residencia o ciudadanía.</h3>
+                    </li>
+                    <li class="mb-6 ml-4">
+                        <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                        <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Paso 2:</time>
+                        <h3 class="text-md font-semibold text-gray-900 dark:text-white">Declaración de un funcionario del banco o de otras instituciones financieras con depósitos, en la que se indiquen los siguientes datos relativos a la cuenta:</h3>
+                        <ul class="list-disc px-6">
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">Fecha de apertura de la cuenta</li>
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">Importe total depositado durante el último año</li>
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">Balance actual</li>
+                        </ul>
+                    </li>
+                    <li class="mb-6 ml-4">
+                        <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                        <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Paso 3:</time>
+                        <h3 class="text-md font-semibold text-gray-900 dark:text-white">Carta de su empleador con firma, logo y cuño que muestre:</h3>
+                        <ul class="list-disc px-6">
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">Fecha y tipo de empleo</li>
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">Salario pagado</li>
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">Si el puesto es temporal o permanente</li>
+                        </ul>
+                    </li>
+                    <li class="mb-6 ml-4">
+                        <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                        <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Paso 4:</time>
+                        <h3 class="text-md font-semibold text-gray-900 dark:text-white">Copia de la última declaración federal de impuestos de EE.UU. presentada (transcripción fiscal)</h3>
+                        
+                    </li>
+                    <li class="mb-6 ml-4">
+                        <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                        <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">Paso 5:</time>
+                        <h3 class="text-md font-semibold text-gray-900 dark:text-white">Pruebas adicionales:</h3>
+                        <ul class="list-disc px-6">
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">Colillas de cheques de los últimos 2 meses</li>
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">Valor actual de la propiedad</li>
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">Bonds</li>
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">CD’s</li>
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">Valor de los carros en caso de varios</li>
+                            <li class="text-base font-normal text-gray-500 dark:text-gray-400">Cualquier otro activo que pueda convertirse en efectivo</li>
+                        </ul>
+                    </li>
+                </ol>
 
-        
-    </div>
+                <h1 class="font-bold text-xl my-3">BENEFICIARIO</h1>
+                <ol class="relative border-l border-gray-200 dark:border-gray-700"> 
+                    <li class="mb-3 ml-4">
+                        <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                        <h3 class="text-md font-semibold text-gray-900 dark:text-white">Pasaporte</h3>
+                    </li>
+                    <li class="mb-3 ml-4">
+                        <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                        <h3 class="text-md font-semibold text-gray-900 dark:text-white">Cuentas de Banco (si aplica)</h3>
+                    </li>
+                    <li class="mb-3 ml-4">
+                        <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                        <h3 class="text-md font-semibold text-gray-900 dark:text-white">Valor de la propiedad (si aplica)</h3>
+                    </li>
+                    <li class="mb-3 ml-4">
+                        <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                        <h3 class="text-md font-semibold text-gray-900 dark:text-white">Valor de otros activos en efectivo (si aplica)</h3>
+                    </li>
+                </ol>
+                
+            </div>
+            <div class="flex flex-col">
+                <h1 class="font-bold text-3xl mt-12 mb-6">Información sobre el Patrocinador</h1>
+                <p>1. Tiene usted una cuenta en <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
+                <div class="flex flex-col px-3">
+                    <div class="flex items-center my-3">
+                        <input id="yes-account-uscis-radio" type="radio" value="yes" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="alert(this.value)">
+                        <label for="yes-account-uscis-radio" class="ml-2 text-sm font-medium text-gray-900">Si* (Entre la información en la próxima pregunta)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="no-account-uscis-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="no-account-uscis-radio" class="ml-2 text-sm font-medium text-gray-900">No* (Quisiera que creara una por mí)</label>
+                    </div>
+                    <div class="flex items-center my-3">
+                        <input id="lose-account-uscis-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="lose-account-uscis-radio" class="ml-2 text-sm font-medium text-gray-900">No Recuerdo</label>
+                    </div>
+                </div>
+                <p class="mt-6">2. Email de la cuenta de <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
+                <input type="email" id="email" class="m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+  
+                <p class="mt-6">3. Clave de la cuenta de <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
+                <input type="text" id="" class="m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+  
+                <h1 class="font-bold text-3xl mt-6 mb-6">Información personal</h1>
+                <p>Nombre y Apellidos:<i class="text-red-600 text-sm"> (Como aparecen en el Acta de Nacimiento)</i></p>
+                <input type="text" id="" class="mx-3 mt-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                
+                
+                <p class="mt-6">Su nombre en el Acta de Nacimiento es exactamente igual al de su Documento Americano?</i></p>
+                <div class="flex flex-col px-3">
+                    <div class="flex items-center my-3">
+                        <input id="yes-name-radio" type="radio" value="yes" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="alert(this.value)">
+                        <label for="yes-name-radio" class="ml-2 text-sm font-medium text-gray-900">Si* (Entre la información en la próxima pregunta)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="no-name-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="no-name-radio" class="ml-2 text-sm font-medium text-gray-900">No* (Quisiera que creara una por mí)</label>
+                    </div>
+                </div>
+
+                <p class="mt-6">Nombre y Apellidos:<i class="text-red-600 text-sm"> (Como aparecen en el Documento Americano)</i></p>
+                <input type="text" id="" class=" mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                
+                <p class="mt-6">Dirección Física:</i></p>
+                <textarea id="message" rows="4" class="block mt-3 mx-3 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+
+                
+                <p class="mt-6">Su Dirección Física es diferente a la Postal?</i></p>
+                <div class="flex flex-col px-3">
+                    <div class="flex items-center my-3">
+                        <input id="yes-name-radio" type="radio" value="yes" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="alert(this.value)">
+                        <label for="yes-name-radio" class="ml-2 text-sm font-medium text-gray-900">Si* (Entre la información en la próxima pregunta)</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="no-name-radio" type="radio" value="no" name="rt_ow" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="no-name-radio" class="ml-2 text-sm font-medium text-gray-900">No* (Quisiera que creara una por mí)</label>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+    
+    </section>
 
   </body>
 
