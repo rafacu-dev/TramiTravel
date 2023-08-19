@@ -132,10 +132,10 @@
                 </div>
 
                 <p class="mt-6 hidden header-text" id="cuenta-uscis-lbl">2. Email de la cuenta de <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
-                <input type="email" id="cuenta-uscis-input" class="hidden m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                <input type="email" id="cuenta-uscis-input" class="hidden m-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
   
                 <p class="mt-6 hidden header-text" id="contrasenna-uscis-lbl">3. Clave de la cuenta de <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
-                <input type="text" id="contrasenna-uscis-input" class="hidden m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                <input type="text" id="contrasenna-uscis-input" class="hidden m-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
   
                 <h1 class="font-bold text-3xl mt-6 mb-6">Información personal</h1>
                 <p class=" header-text">2. Nombre y Apellidos:<i class="text-red-600 text-sm"> (Como aparecen en el Acta de Nacimiento)</i></p>
@@ -191,10 +191,10 @@
                     </div>
                 </div>
 
-                <p class="mt-6 header-text">4. Dirección Física:</i></p>
+                <p class="mt-6 header-text">4. Dirección Física:</p>
                 <div class="flex flex-wrap px-3">
                     <div class="lg:pr-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="countrySelect-addressFisic" onchange="getStates(this.value,'-addressFisic')" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="countrySelect-addressFisic" onchange="getStates(this.value,'-addressFisic')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el país</option>
                             
                             <option value="Cuba">Cuba</option>
@@ -448,21 +448,21 @@
                         </select>
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="statesSelect-addressFisic" onchange="getCities(this.value,'-addressFisic')" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="statesSelect-addressFisic" onchange="getCities(this.value,'-addressFisic')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el estado</option>
                         </select>
                     </div>
                     <div class="lg:pl-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="citiesSelect-addressFisic" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="citiesSelect-addressFisic" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione la ciudad</option>
                         </select>
                     </div>
                 </div>
                 <div class="flex px-3">
-                    <input type="text" id="" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required>
+                    <input type="text" id="" class="mt-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required>
                 </div>
                 
-                <p class="mt-6 header-text">5. Su Dirección Física es diferente a la Postal?</i></p>
+                <p class="mt-6 header-text">5. Su Dirección Física es diferente a la Postal?</p>
                 <div class="flex flex-wrap px-3">
                     <div class="flex items-center mt-6 mr-6">
                         <input id="yes-repeat-address-radio" type="radio" value="yes" name="repeat_address" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['repeat-address-lbl','repeat-address-content','repeat-address-content2'],true)">
@@ -474,11 +474,11 @@
                     </div>
                 </div>
 
-                <p class="mt-6 hidden header-text" id="repeat-address-lbl">4. Dirección Postal:</i></p>
+                <p class="mt-6 hidden header-text" id="repeat-address-lbl">4. Dirección Postal:</p>
                 <div class="flex px-3 lg:space-x-3 hidden" id="repeat-address-content">
                     
                     <div class="lg:pr-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="countrySelect-addressPostal" onchange="getStates(this.value,'-addressPostal')" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="countrySelect-addressPostal" onchange="getStates(this.value,'-addressPostal')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el país</option>
                             
                             <option value="Cuba">Cuba</option>
@@ -732,29 +732,29 @@
                         </select>
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="statesSelect-addressPostal" onchange="getCities(this.value,'-addressPostal')" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="statesSelect-addressPostal" onchange="getCities(this.value,'-addressPostal')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el estado</option>
                         </select>
                     </div>
                     <div class="lg:pl-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="citiesSelect-addressPostal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="citiesSelect-addressPostal" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione la ciudad</option>
                         </select>
                     </div>
                         
                 </div>
                 <div class="flex px-3 hidden" id="repeat-address-content2">
-                    <input type="text" id="" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required>
+                    <input type="text" id="" class="mt-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required>
                 </div>
 
-                <p class="mt-6 header-text">6. Número de Teléfono:</i></p>
+                <p class="mt-6 header-text">6. Número de Teléfono:</p>
                 <div class="px-3 pt-3">
                     <input name="phone" id="phone" type="tel" autocomplete="off" data-intl-tel-input-id="0" placeholder="" required
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
                     block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
 
-                <p class="mt-6 header-text">7. Fecha de Nacimiento (MM/DD/YYYY):</i></p>
+                <p class="mt-6 header-text">7. Fecha de Nacimiento (MM/DD/YYYY):</p>
                 <div class="relative mx-3 mt-3">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                       <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -765,7 +765,7 @@
                 </div>
                 
                 
-                <p class="mt-6 header-text">8. Sexo</i></p>
+                <p class="mt-6 header-text">8. Sexo:</p>
                 <div class="flex flex-wrap px-3">
                     <div class="flex items-center mt-6 mr-6">
                         <input id="female-radio" type="radio" value="no" name="sex" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
@@ -780,7 +780,7 @@
                 <p class="mt-6 header-text" id="">9. Lugar de nacimiento:</p>
                 <div class="flex flex-wrap px-3" id="repeat-addressBorn-content">
                     <div class="lg:pr-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="countrySelect-addressBorn" onchange="getStates(this.value,'-addressBorn')" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="countrySelect-addressBorn" onchange="getStates(this.value,'-addressBorn')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el país</option>
                             
                             <option value="Cuba">Cuba</option>
@@ -1034,21 +1034,18 @@
                         </select>
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="statesSelect-addressBorn" onchange="getCities(this.value,'-addressBorn')" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="statesSelect-addressBorn" onchange="getCities(this.value,'-addressBorn')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el estado</option>
                         </select>
                     </div>
                     <div class="lg:pl-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="citiesSelect-addressBorn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="citiesSelect-addressBorn" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione la ciudad</option>
                         </select>
                     </div>
                 </div>
-                <div class="flex px-3" id="repeat-addressBorn-content2">
-                    <input type="text" id="" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required>
-                </div>
                 
-                <p class="mt-6 header-text">10. ¿Cuál es su situación migratoria actual?</i></p>
+                <p class="mt-6 header-text">10. ¿Cuál es su situación migratoria actual?</p>
                 <div class="flex flex-wrap px-3">
                     <div class="flex items-center mt-6 mr-6">
                         <input id="citizen-radio" type="radio" value="no" name="situacion_migratoria" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
@@ -1075,17 +1072,17 @@
                 <p class="mt-6 header-text" id="">11. Número de Alien:</p>
                 <div class="relative mt-3 mx-3 ">
                     <p class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none font-bold">A#</p>
-                    <input type="number" id="input-n-alien" oninput="checkInputLength('input-n-alien',9)" class="pl-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                    <input type="number" id="input-n-alien" oninput="checkInputLength('input-n-alien',9)" class="pl-10 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
                 </div>
 
                 <p class="mt-6 header-text" id="">12. Número de Seguro Social:<i class="text-red-600 text-sm"> (Inserte los 9 dígitos sin espacios ni símbolos)</i></p>
                 <div class="relative mt-3 mx-3 ">
                     <p class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none font-bold">SS#</p>
-                    <input type="text" id="input-n-security" oninput="checkInputLengthSS()" class="pl-12 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                    <input type="text" id="input-n-security" oninput="checkInputLengthSS()" class="pl-12 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
                 </div>
 
                 <p class="mt-6 header-text" id="">13. Relación con el Beneficiario:<i class="text-red-600 text-sm"> (Seleccione la opción que corresponda a lo que es usted del beneficiaro)</i></p>
-                <select id="" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="">Abuela</option>
                     <option value="">Abuelo</option>
                     <option value="">Antiguo empleador</option>
@@ -1143,46 +1140,30 @@
                 <p class="mt-6 header-text" id="">14. Estado Laboral:<i class="text-red-600 text-sm"> (Marque una opción)</i></p>
                 <div class="flex flex-wrap px-3">
                     <div class="flex items-center mt-6 mr-6">
-                        <input id="Empleado-radio" type="radio" value="no" name="estado_laboral" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['empleador-name-lbl','ocupacion-lbl','empleador-address-lbl','empleador-name-content','ocupacion-input','addressEmployer-content','addressEmployer-content2'],true)">
+                        <input id="Empleado-radio" type="radio" value="no" name="estado_laboral" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['empleador-name-lbl','ocupacion-lbl','empleador-address-lbl','empleador-name-input','ocupacion-input','addressEmployer-content','addressEmployer-content2'],true)">
                         <label for="Empleado-radio" class="ml-2 text-sm font-medium text-gray-900">Empleado (a tiempo completo, a tiempo parcial, estacional, autónomo)</label>
                     </div>
                     <div class="flex items-center mt-6 mr-6">
-                        <input id="Desempleado-radio" type="radio" value="Desempleado" name="estado_laboral" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['empleador-name-lbl','ocupacion-lbl','empleador-address-lbl','empleador-name-content','ocupacion-input','addressEmployer-content','addressEmployer-content2'],false)">
+                        <input id="Desempleado-radio" type="radio" value="Desempleado" name="estado_laboral" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['empleador-name-lbl','ocupacion-lbl','empleador-address-lbl','empleador-name-input','ocupacion-input','addressEmployer-content','addressEmployer-content2'],false)">
                         <label for="Desempleado-radio" class="ml-2 text-sm font-medium text-gray-900">Desempleado o no empleado</label>
                     </div>
                     <div class="flex items-center mt-6 mr-6">
-                        <input id="Retirado-radio" type="radio" value="no" name="estado_laboral" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['empleador-name-lbl','ocupacion-lbl','empleador-address-lbl','empleador-name-content','ocupacion-input','addressEmployer-content','addressEmployer-content2'],false)">
+                        <input id="Retirado-radio" type="radio" value="no" name="estado_laboral" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['empleador-name-lbl','ocupacion-lbl','empleador-address-lbl','empleador-name-input','ocupacion-input','addressEmployer-content','addressEmployer-content2'],false)">
                         <label for="Retirado-radio" class="ml-2 text-sm font-medium text-gray-900">Retirado</label>
                     </div>
                 </div>
 
                 <p class="mt-6 header-text hidden" id="empleador-name-lbl">1. Nombre del Empleador:</p>
-                <div class="hidden flex flex-wrap px-3" id="empleador-name-content">                    
-                    <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
-                    </div>
-                    <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
-                    </div>
-                    <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
-                    </div>
-                    <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
-                    </div>
-                </div>
+                <input type="text" id="empleador-name-input" class="hidden mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                
 
                 <p class="mt-6 header-text hidden" id="ocupacion-lbl">1. Ocupación:</p>
-                <input type="text" id="ocupacion-input" class="hidden mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                <input type="text" id="ocupacion-input" class="hidden mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
                 
                 <p class="mt-6 header-text hidden" id="empleador-address-lbl">1. Dirección del Empleador:</p>
                 <div class="flex px-3 lg:space-x-3 hidden" id="addressEmployer-content">                    
                     <div class="lg:pr-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="countrySelect-addressEmployer" onchange="getStates(this.value,'-addressEmployer')" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="countrySelect-addressEmployer" onchange="getStates(this.value,'-addressEmployer')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el país</option>
                             
                             <option value="Cuba">Cuba</option>
@@ -1436,24 +1417,27 @@
                         </select>
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="statesSelect-addressEmployer" onchange="getCities(this.value,'-addressEmployer')" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="statesSelect-addressEmployer" onchange="getCities(this.value,'-addressEmployer')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el estado</option>
                         </select>
                     </div>
                     <div class="lg:pl-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="citiesSelect-addressEmployer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="citiesSelect-addressEmployer" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione la ciudad</option>
                         </select>
                     </div>
                 </div>
                 <div class="flex px-3 hidden" id="addressEmployer-content2">
-                    <input type="text" id="" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required>
+                    <input type="text" id="" class="mt-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required>
                 </div>
                 
 
-                <p class="mt-6 header-text" id="">15. Total de ingresos ($):<i class="text-red-600 text-sm"> (Introduzca el total anual de ingresos antes de impuestos)</i></p>
-                <input type="number" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
-                
+                <p class="mt-6 header-text" id="">15. Total de ingresos:<i class="text-red-600 text-sm"> (Introduzca el total anual de ingresos antes de impuestos)</i></p>
+                <div class="relative mt-3 mx-3 ">
+                    <p class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">$</p>
+                    <input type="number" id="input-n-alien" class="pl-8 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                </div>
+
                 <p class="mt-6 header-text">16. ¿Alguno de sus ingresos procede de una actividad o fuente ilegal (como ingresos procedentes de juego ilegal o venta ilegal de drogas)?</i></p>
                 <div class="flex flex-wrap px-3">
                     <div class="flex items-center mt-6 mr-6">
@@ -1470,7 +1454,7 @@
                 <div class="flex flex-wrap px-3">
                     <div class="flex items-center mt-6 mr-6">
                         <input id="yes-8CFR-radio" type="radio" value="yes" name="ingreso-publics" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
-                        <label for="8CFR-radio" class="ml-2 text-sm font-medium text-gray-900">Si</label>
+                        <label for="yes-8CFR-radio" class="ml-2 text-sm font-medium text-gray-900">Si</label>
                     </div>
                     <div class="flex items-center mt-6 mr-6">
                         <input id="no-8CFR-radio" type="radio" value="no" name="ingreso-publics" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
@@ -1479,7 +1463,7 @@
                 </div>
 
                 <p class="mt-6 header-text" id="">18. Número de Dependientes:</p>
-                <select id="" onchange="showHidenDependientes(this.value)" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="" onchange="showHidenDependientes(this.value)" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -1489,7 +1473,7 @@
                 </select>
                 
 
-                <p class="mt-6 header-text hidden" id="dependientes-lbl">19. Nombre, Apellidos y Fecha de Nacimiento:</p>
+                <p class="mt-6 header-text hidden" id="dependientes-lbl">1. Nombre, Apellidos y Fecha de Nacimiento:</p>
                 <div class="flex flex-wrap px-3 hidden" id="dependiente1-content">
                     <p class="w-full mb-1 mt-3 text-sm font-normal leading-none text-gray-400 dark:text-gray-500" id="">Dependiente 1:</p>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
@@ -1625,6 +1609,512 @@
                         <input datepicker type="text" class="range-today bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
                     </div>
                 </div>
+                
+                <p class="mt-6 header-text" id="">19. ¿Usted o algún miembro de su familia dispone de activos que quisiera agregar como otra forma de soporte al beneficiario?
+                    <br><i class="text-red-600 text-sm">Ejemplos de activos pueden ser: (Inmuebles, cuentas de CD's, Bonds, autos u otros recursos que puedan convertirse en efectivo)</i>
+                </p>
+                <div class="flex flex-wrap px-3">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="yes-activos-radio" type="radio" value="yes" name="activos" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['activos-lbl','activos-input'],true)">
+                        <label for="yes-activos-radio" class="ml-2 text-sm font-medium text-gray-900">Si</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="no-activos-radio" type="radio" value="no" name="activos" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['activos-lbl','activos-input'],false)">
+                        <label for="no-activos-radio" class="ml-2 text-sm font-medium text-gray-900">No</label>
+                    </div>
+                </div>
+
+                <p class="mt-6 header-text hidden" id="activos-lbl">1. Información sobre los activos disponible:</p>
+                <textarea id="activos-input" rows="4" class="hidden mt-3 p-3 block mx-3 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Introduzca los datos en este formato: (Nombre y Apellidos del titular/Tipo de Activo/Valor en efectivo)"></textarea>
+
+                
+                <p class="mt-6 header-text" id="">20. ¿Ha presentado anteriormente un Formulario I-134A en nombre de una persona distinta al beneficiario para el cual está llenando este formulario?</p>
+                <div class="flex flex-wrap px-3">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="yes-previus-I134A" type="radio" value="yes" name="previus-I134A" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['n-alien-formulario-lbl','n-alien-formulario-content'],true)">
+                        <label for="yes-previus-I134A" class="ml-2 text-sm font-medium text-gray-900">Si</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="no-previus-I134A" type="radio" value="no" name="previus-I134A" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['n-alien-formulario-lbl','n-alien-formulario-content'],false)">
+                        <label for="no-previus-I134A" class="ml-2 text-sm font-medium text-gray-900">No</label>
+                    </div>
+                </div>
+
+                
+                <p class="mt-6 header-text hidden" id="n-alien-formulario-lbl">1. Nombre y Apellidos/ Número de Alien/ Fecha en la que fue sometido el formulario:</p>
+                <div class="flex flex-wrap px-3 hidden" id="n-alien-formulario-content">
+                    <div class="lg:pr-1 mt-3 lg:mt-1 w-full lg:w-1/3">
+                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
+                    </div>
+                    <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/3">
+                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
+                    </div>
+                    <div class="lg:pl-1 mt-3 lg:mt-1 w-full lg:w-1/3">
+                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
+                    </div>
+                    <div class="lg:pr-1 mt-3 w-full lg:w-1/3">
+                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
+                    </div>
+                    <div class="relative lg:px-1 mt-3 w-full lg:w-1/3">
+                        <p class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none font-bold">A#</p>
+                        <input type="number" id="input-n-alien-formulario" oninput="checkInputLength('input-n-alien-formulario',9)" class="pl-10 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                    </div>             
+                    <div class="relative lg:pl-1 mt-3 w-full lg:w-1/3">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                        </svg>
+                        </div>
+                        <input datepicker type="text" class="range-today bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                    </div>
+                </div>
+
+                <p class="mt-6 header-text" id="">21. Usted es responsable de acoger, mantener y sustentar al beneficiario durante su estancia temporal en los Estados Unidos. Describa los recursos que piensa utilizar o proporcionar para garantizar que el beneficiario disponga de un apoyo financiero adecuado para cubrir sus necesidades básicas:</p>
+                <textarea id="" rows="4" class="mt-3 p-3 block mx-3 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta"></textarea>
+
+                <p class="mt-6 header-text" id="">22. Usted es responsable de que el beneficiario disponga de un alojamiento seguro y adecuado mientras dure su libertad condicional en los Estados Unidos. Describa cómo se asegurará de que se satisfagan las necesidades de alojamiento del beneficiario, incluido el lugar donde residirá durante su estancia temporal en los Estados Unidos, si se conoce:</p>
+                <textarea id="" rows="4" class="mt-3 p-3 block mx-3 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta"></textarea>
+
+                <p class="mt-6 header-text" id="">23. Usted es responsable de ayudar al beneficiario a acceder a los servicios y prestaciones disponibles, como aprender inglés, conseguir oportunidades de empleo una vez autorizado a trabajar, matricular a los niños en la escuela y ayudarle a inscribirse en las prestaciones a las que tiene derecho. Describa las medidas que piensa adoptar en el marco de estas responsabilidades:</p>
+                <textarea id="" rows="4" class="mt-3 p-3 block mx-3 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta"></textarea>
+
+                <p class="mt-6 header-text" id="">24. La concesión de la libertad condicional es una determinación discrecional que se concede caso por caso por razones humanitarias urgentes o por un beneficio público significativo. Por favor, explique por qué se merece un ejercicio favorable de la discreción para este individuo:</p>
+                <textarea id="" rows="4" class="mt-3 p-3 block mx-3 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta"></textarea>
+
+
+                <h1 class="font-bold text-3xl mt-12 mb-6">Información sobre el Beneficiario</h1>
+
+                <p class="header-text" id="">25. Correo electrónico:</p>
+                <input type="email" id="" class="m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+  
+                <p class="mt-6 header-text" id="">26. Nombre y Apellidos:</p>                
+                <div class="flex flex-wrap px-3" id="beneficiario-name-content">
+                    <div class="lg:pr-1 mt-3 w-full lg:w-1/4 ">
+                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
+                    </div>
+                    <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
+                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
+                    </div>
+                    <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
+                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
+                    </div>
+                    <div class="lg:pl-1 mt-3 w-full lg:w-1/4 ">
+                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
+                    </div>
+                </div>
+
+                <p class="mt-6 header-text">27. Fecha de Nacimiento (MM/DD/YYYY):</i></p>
+                <div class="relative mx-3 mt-3">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                      </svg>
+                    </div>
+                    <input datepicker type="text" class="range-today bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                </div>
+                
+                
+                <p class="mt-6 header-text">28. Sexo</i></p>
+                <div class="flex flex-wrap px-3">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="female-beneficiario-radio" type="radio" value="no" name="sex-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="female-beneficiario-radio" class="ml-2 text-sm font-medium text-gray-900">Femenino</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="male-beneficiario-radio" type="radio" value="yes" name="sex-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <label for="male-beneficiario-radio" class="ml-2 text-sm font-medium text-gray-900">Masculino</label>
+                    </div>
+                </div>
+
+                <p class="mt-6 header-text" id="">29. Lugar de nacimiento:</p>
+                <div class="flex flex-wrap px-3 mt-3" id="repeat-addressBorn-beneficiario-content">
+                    <div class="lg:pr-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
+                        <select id="countrySelect-addressBorn-beneficiario" onchange="getStates(this.value,'-addressBorn-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Seleccione el país</option>
+                            
+                            <option value="Colombia">Colombia</option>
+                            <option value="Cuba">Cuba</option>
+                            <option value="El Salvador">El Salvador</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Haiti">Haiti</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="Nicaragua">Nicaragua</option>
+                            <option value="Ukraine">Ukraine</option>
+                            <option value="Venezuela">Venezuela</option>
+                        </select>
+                    </div>
+                    <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
+                        <select id="statesSelect-addressBorn-beneficiario" onchange="getCities(this.value,'-addressBorn-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Seleccione el estado</option>
+                        </select>
+                    </div>
+                    <div class="lg:pl-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
+                        <select id="citiesSelect-addressBorn-beneficiario" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Seleccione la ciudad</option>
+                        </select>
+                    </div>
+                </div>
+
+                <p class="mt-6 header-text" id="">30. Número de Pasaporte:</p>
+                <input type="text" id="" class="m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+  
+
+                <p class="mt-6 header-text">31. Fecha de Expiración (MM/DD/YYYY):</i></p>
+                <div class="relative mx-3 mt-3">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                      </svg>
+                    </div>
+                    <input datepicker type="text" class="range-today bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                </div>
+
+
+                <p class="mt-6 header-text" id="">32. Estado Civil:<i class="text-red-600 text-sm"> (Seleccione la opción que corresponda a lo que es usted del beneficiaro)</i></p>
+                <select id="" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="">Soltero, nunca casado</option>
+                    <option value="">Casado</option>
+                    <option value="">Divorciado</option>
+                    <option value="">Viudo</option>
+                    <option value="">Legalmente separados</option>
+                    <option value="">Anulación del matrimonio</option>
+                    <option value="otro">Otro</option>
+                </select>
+                
+
+                <p class="mt-6 header-text">33. Dirección Física:</i></p>
+                <div class="flex flex-wrap px-3 mt-3">
+                    <div class="lg:pr-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
+                        <select id="countrySelect-addressFisic-beneficiario" onchange="getStates(this.value,'-addressFisic-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Seleccione el país</option>
+                            
+                            <option value="Colombia">Colombia</option>
+                            <option value="Cuba">Cuba</option>
+                            <option value="El Salvador">El Salvador</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Haiti">Haiti</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="Nicaragua">Nicaragua</option>
+                            <option value="Ukraine">Ukraine</option>
+                            <option value="Venezuela">Venezuela</option>
+                        </select>
+                    </div>
+                    <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
+                        <select id="statesSelect-addressFisic-beneficiario" onchange="getCities(this.value,'-addressFisic-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Seleccione el estado</option>
+                        </select>
+                    </div>
+                    <div class="lg:pl-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
+                        <select id="citiesSelect-addressFisic-beneficiario" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Seleccione la ciudad</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex px-3">
+                    <input type="text" id="" class="mt-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required>
+                </div>
+                
+                <p class="mt-6 header-text">34. Su Dirección Física es diferente a la Postal?</i></p>
+                <div class="flex flex-wrap px-3">
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="yes-repeat-address-beneficiario-radio" type="radio" value="yes" name="repeat_address-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['repeat-address-beneficiario-lbl','repeat-address-beneficiario-content','repeat-address-beneficiario-content2'],true)">
+                        <label for="yes-repeat-address-beneficiario-radio" class="ml-2 text-sm font-medium text-gray-900">Si</label>
+                    </div>
+                    <div class="flex items-center mt-6 mr-6">
+                        <input id="no-repeat-address-beneficiario-radio" type="radio" value="no" name="repeat_address-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['repeat-address-beneficiario-lbl','repeat-address-beneficiario-content','repeat-address-beneficiario-content2'],false)">
+                        <label for="no-repeat-address-beneficiario-radio" class="ml-2 text-sm font-medium text-gray-900">No</label>
+                    </div>
+                </div>
+
+                <p class="mt-6 hidden header-text" id="repeat-address-beneficiario-lbl">35. Dirección Postal:</i></p>
+                <div class="flex px-3 lg:space-x-3 hidden" id="repeat-address-beneficiario-content">
+                    
+                    <div class="lg:pr-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
+                        <select id="countrySelect-addressPostal-beneficiario" onchange="getStates(this.value,'-addressPostal-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Seleccione el país</option>
+                            
+                            <option value="Cuba">Cuba</option>
+                            <option value="United States">United States</option>
+
+                            <option disabled></option>
+
+                            <option value="Afghanistan">Afghanistan</option>
+                            <option value="Albania">Albania</option>
+                            <option value="Algeria">Algeria</option>
+                            <option value="American Samoa">American Samoa</option>
+                            <option value="Andorra">Andorra</option>
+                            <option value="Angola">Angola</option>
+                            <option value="Anguilla">Anguilla</option>
+                            <option value="Antarctica">Antarctica</option>
+                            <option value="Antigua And Barbuda">Antigua And Barbuda</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Armenia">Armenia</option>
+                            <option value="Aruba">Aruba</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Austria">Austria</option>
+                            <option value="Azerbaijan">Azerbaijan</option>
+                            <option value="Bahamas The">Bahamas The</option>
+                            <option value="Bahrain">Bahrain</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="Barbados">Barbados</option>
+                            <option value="Belarus">Belarus</option>
+                            <option value="Belgium">Belgium</option>
+                            <option value="Belize">Belize</option>
+                            <option value="Benin">Benin</option>
+                            <option value="Bermuda">Bermuda</option>
+                            <option value="Bhutan">Bhutan</option>
+                            <option value="Bolivia">Bolivia</option>
+                            <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                            <option value="Botswana">Botswana</option>
+                            <option value="Bouvet Island">Bouvet Island</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                            <option value="Brunei">Brunei</option>
+                            <option value="Bulgaria">Bulgaria</option>
+                            <option value="Burkina Faso">Burkina Faso</option>
+                            <option value="Burundi">Burundi</option>
+                            <option value="Cambodia">Cambodia</option>
+                            <option value="Cameroon">Cameroon</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Cape Verde">Cape Verde</option>
+                            <option value="Cayman Islands">Cayman Islands</option>
+                            <option value="Central African Republic">Central African Republic</option>
+                            <option value="Chad">Chad</option>
+                            <option value="Chile">Chile</option>
+                            <option value="China">China</option>
+                            <option value="Christmas Island">Christmas Island</option>
+                            <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Comoros">Comoros</option>
+                            <option value="Cook Islands">Cook Islands</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Cote D'Ivoire (Ivory Coast)">Cote D'Ivoire (Ivory Coast)</option>
+                            <option value="Croatia (Hrvatska)">Croatia (Hrvatska)</option>
+                            <option value="Cyprus">Cyprus</option>
+                            <option value="Czech Republic">Czech Republic</option>
+                            <option value="Democratic Republic Of The Congo">Democratic Republic Of The Congo</option>
+                            <option value="Denmark">Denmark</option>
+                            <option value="Djibouti">Djibouti</option>
+                            <option value="Dominica">Dominica</option>
+                            <option value="Dominican Republic">Dominican Republic</option>
+                            <option value="East Timor">East Timor</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="Egypt">Egypt</option>
+                            <option value="El Salvador">El Salvador</option>
+                            <option value="Equatorial Guinea">Equatorial Guinea</option>
+                            <option value="Eritrea">Eritrea</option>
+                            <option value="Estonia">Estonia</option>
+                            <option value="Ethiopia">Ethiopia</option>
+                            <option value="Falkland Islands">Falkland Islands</option>
+                            <option value="Faroe Islands">Faroe Islands</option>
+                            <option value="Fiji Islands">Fiji Islands</option>
+                            <option value="Finland">Finland</option>
+                            <option value="France">France</option>
+                            <option value="French Guiana">French Guiana</option>
+                            <option value="French Polynesia">French Polynesia</option>
+                            <option value="French Southern Territories">French Southern Territories</option>
+                            <option value="Gabon">Gabon</option>
+                            <option value="Gambia The">Gambia The</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Ghana">Ghana</option>
+                            <option value="Gibraltar">Gibraltar</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Greenland">Greenland</option>
+                            <option value="Grenada">Grenada</option>
+                            <option value="Guadeloupe">Guadeloupe</option>
+                            <option value="Guam">Guam</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Guernsey and Alderney">Guernsey and Alderney</option>
+                            <option value="Guinea">Guinea</option>
+                            <option value="Guinea-Bissau">Guinea-Bissau</option>
+                            <option value="Guyana">Guyana</option>
+                            <option value="Haiti">Haiti</option>
+                            <option value="Heard and McDonald Islands">Heard and McDonald Islands</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="Hong Kong S.A.R.">Hong Kong S.A.R.</option>
+                            <option value="Hungary">Hungary</option>
+                            <option value="Iceland">Iceland</option>
+                            <option value="India">India</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Iran">Iran</option>
+                            <option value="Iraq">Iraq</option>
+                            <option value="Ireland">Ireland</option>
+                            <option value="Israel">Israel</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Jamaica">Jamaica</option>
+                            <option value="Japan">Japan</option>
+                            <option value="Jersey">Jersey</option>
+                            <option value="Jordan">Jordan</option>
+                            <option value="Kazakhstan">Kazakhstan</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Kiribati">Kiribati</option>
+                            <option value="Korea North">Korea North</option>
+                            <option value="Korea South">Korea South</option>
+                            <option value="Kuwait">Kuwait</option>
+                            <option value="Kyrgyzstan">Kyrgyzstan</option>
+                            <option value="Laos">Laos</option>
+                            <option value="Latvia">Latvia</option>
+                            <option value="Lebanon">Lebanon</option>
+                            <option value="Lesotho">Lesotho</option>
+                            <option value="Liberia">Liberia</option>
+                            <option value="Libya">Libya</option>
+                            <option value="Liechtenstein">Liechtenstein</option>
+                            <option value="Lithuania">Lithuania</option>
+                            <option value="Luxembourg">Luxembourg</option>
+                            <option value="Macau S.A.R.">Macau S.A.R.</option>
+                            <option value="Macedonia">Macedonia</option>
+                            <option value="Madagascar">Madagascar</option>
+                            <option value="Malawi">Malawi</option>
+                            <option value="Malaysia">Malaysia</option>
+                            <option value="Maldives">Maldives</option>
+                            <option value="Mali">Mali</option>
+                            <option value="Malta">Malta</option>
+                            <option value="Man (Isle of)">Man (Isle of)</option>
+                            <option value="Marshall Islands">Marshall Islands</option>
+                            <option value="Martinique">Martinique</option>
+                            <option value="Mauritania">Mauritania</option>
+                            <option value="Mauritius">Mauritius</option>
+                            <option value="Mayotte">Mayotte</option>
+                            <option value="Mexico">Mexico</option>
+                            <option value="Micronesia">Micronesia</option>
+                            <option value="Moldova">Moldova</option>
+                            <option value="Monaco">Monaco</option>
+                            <option value="Mongolia">Mongolia</option>
+                            <option value="Montserrat">Montserrat</option>
+                            <option value="Morocco">Morocco</option>
+                            <option value="Mozambique">Mozambique</option>
+                            <option value="Myanmar">Myanmar</option>
+                            <option value="Namibia">Namibia</option>
+                            <option value="Nauru">Nauru</option>
+                            <option value="Nepal">Nepal</option>
+                            <option value="Netherlands Antilles">Netherlands Antilles</option>
+                            <option value="Netherlands The">Netherlands The</option>
+                            <option value="New Caledonia">New Caledonia</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="Nicaragua">Nicaragua</option>
+                            <option value="Niger">Niger</option>
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="Niue">Niue</option>
+                            <option value="Norfolk Island">Norfolk Island</option>
+                            <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                            <option value="Norway">Norway</option>
+                            <option value="Oman">Oman</option>
+                            <option value="Pakistan">Pakistan</option>
+                            <option value="Palau">Palau</option>
+                            <option value="Palestinian Territory Occupied">Palestinian Territory Occupied</option>
+                            <option value="Panama">Panama</option>
+                            <option value="Papua new Guinea">Papua new Guinea</option>
+                            <option value="Paraguay">Paraguay</option>
+                            <option value="Peru">Peru</option>
+                            <option value="Philippines">Philippines</option>
+                            <option value="Pitcairn Island">Pitcairn Island</option>
+                            <option value="Poland">Poland</option>
+                            <option value="Portugal">Portugal</option>
+                            <option value="Puerto Rico">Puerto Rico</option>
+                            <option value="Qatar">Qatar</option>
+                            <option value="Republic Of The Congo">Republic Of The Congo</option>
+                            <option value="Reunion">Reunion</option>
+                            <option value="Romania">Romania</option>
+                            <option value="Russia">Russia</option>
+                            <option value="Rwanda">Rwanda</option>
+                            <option value="Saint Helena">Saint Helena</option>
+                            <option value="Saint Kitts And Nevis">Saint Kitts And Nevis</option>
+                            <option value="Saint Lucia">Saint Lucia</option>
+                            <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                            <option value="Saint Vincent And The Grenadines">Saint Vincent And The Grenadines</option>
+                            <option value="Samoa">Samoa</option>
+                            <option value="San Marino">San Marino</option>
+                            <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="Senegal">Senegal</option>
+                            <option value="Serbia">Serbia</option>
+                            <option value="Seychelles">Seychelles</option>
+                            <option value="Sierra Leone">Sierra Leone</option>
+                            <option value="Singapore">Singapore</option>
+                            <option value="Slovakia">Slovakia</option>
+                            <option value="Slovenia">Slovenia</option>
+                            <option value="Smaller Territories of the UK">Smaller Territories of the UK</option>
+                            <option value="Solomon Islands">Solomon Islands</option>
+                            <option value="Somalia">Somalia</option>
+                            <option value="South Africa">South Africa</option>
+                            <option value="South Georgia">South Georgia</option>
+                            <option value="South Sudan">South Sudan</option>
+                            <option value="Spain">Spain</option>
+                            <option value="Sri Lanka">Sri Lanka</option>
+                            <option value="Sudan">Sudan</option>
+                            <option value="Suriname">Suriname</option>
+                            <option value="Svalbard And Jan Mayen Islands">Svalbard And Jan Mayen Islands</option>
+                            <option value="Swaziland">Swaziland</option>
+                            <option value="Sweden">Sweden</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="Syria">Syria</option>
+                            <option value="Taiwan">Taiwan</option>
+                            <option value="Tajikistan">Tajikistan</option>
+                            <option value="Tanzania">Tanzania</option>
+                            <option value="Thailand">Thailand</option>
+                            <option value="Togo">Togo</option>
+                            <option value="Tokelau">Tokelau</option>
+                            <option value="Tonga">Tonga</option>
+                            <option value="Trinidad And Tobago">Trinidad And Tobago</option>
+                            <option value="Tunisia">Tunisia</option>
+                            <option value="Turkey">Turkey</option>
+                            <option value="Turkmenistan">Turkmenistan</option>
+                            <option value="Turks And Caicos Islands">Turks And Caicos Islands</option>
+                            <option value="Tuvalu">Tuvalu</option>
+                            <option value="Uganda">Uganda</option>
+                            <option value="Ukraine">Ukraine</option>
+                            <option value="United Arab Emirates">United Arab Emirates</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                            <option value="Uruguay">Uruguay</option>
+                            <option value="Uzbekistan">Uzbekistan</option>
+                            <option value="Vanuatu">Vanuatu</option>
+                            <option value="Vatican City State (Holy See)">Vatican City State (Holy See)</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Vietnam">Vietnam</option>
+                            <option value="Virgin Islands (British)">Virgin Islands (British)</option>
+                            <option value="Virgin Islands (US)">Virgin Islands (US)</option>
+                            <option value="Wallis And Futuna Islands">Wallis And Futuna Islands</option>
+                            <option value="Western Sahara">Western Sahara</option>
+                            <option value="Yemen">Yemen</option>
+                            <option value="Yugoslavia">Yugoslavia</option>
+                            <option value="Zambia">Zambia</option>
+                            <option value="Zimbabwe">Zimbabwe</option>
+                        </select>
+                    </div>
+                    <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
+                        <select id="statesSelect-addressPostal-beneficiario" onchange="getCities(this.value,'-addressPostal-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Seleccione el estado</option>
+                        </select>
+                    </div>
+                    <div class="lg:pl-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
+                        <select id="citiesSelect-addressPostal-beneficiario" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Seleccione la ciudad</option>
+                        </select>
+                    </div>
+                        
+                </div>
+                <div class="flex px-3 hidden" id="repeat-address-beneficiario-content2">
+                    <input type="text" id="" class="mt-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required>
+                </div>
+                
+
+                <p class="mt-6 header-text">36. Número de Teléfono:</i></p>
+                <div class="px-3 pt-3">
+                    <input name="phone" id="phone2" type="tel" autocomplete="off" data-intl-tel-input-id="0" placeholder="" required
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
+                    block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+
             </div>
 
           </div>
