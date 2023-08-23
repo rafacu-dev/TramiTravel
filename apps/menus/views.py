@@ -1,11 +1,13 @@
+import json
 import os
 import threading, re
-from django.http import FileResponse
+from django.http import FileResponse, JsonResponse
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.contrib import messages
 from django.utils.decorators import method_decorator
+from apps.utils.countries import getCountries
 from apps.utils.utils import permission_checked
 from core import settings
 
@@ -134,8 +136,62 @@ def download_apk(request):
     return FileResponse(open(apk_file_path, 'rb'), as_attachment=True)
 
 
+#https://github.com/dr5hn/countries-states-cities-database
+def getCountriesView(request):    
+    with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
+        data = json.load(json_file)
+
+    names = []
+    
+    for item in data:
+        if 'name' in item:
+            name = item['name']
+            names.append(name)
+    return JsonResponse(names, safe=False)
+
+def getStatesView(request):
+    name = request.GET["name"]
+    with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
+        data = json.load(json_file)
+
+    names = []
+    
+    for item in data:
+        if 'name' in item and item['name'] == name:
+            for state in item["states"]:
+                if 'name' in state:names.append(state['name'])
+            break
+    return JsonResponse(names, safe=False)
+
+def getCitiesView(request):  
+    cuntry = request.GET["cuntry"]
+    state_name = request.GET["state"]  
+    with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
+        data = json.load(json_file)
+
+    names = []
+    for item in data:
+        if 'name' in item and item['name'] == cuntry:
+            for state in item["states"]:
+                if state_name == state["name"] and 'cities' in state:
+                    for citie in state["cities"]:
+                        if 'name' in citie:names.append(citie['name'])
+                    break
+            break
+    return JsonResponse(names, safe=False)
+
 
 class Form(View):
     def get(self,request,form_name,*args,**kwargs):
         context = {}
         return render(request,f'forms/{form_name}.html',context)
+    
+    def post(self,request,*args,**kwargs):
+        data = request.POST 
+        print(data)
+        
+        
+        t = threading.Thread(target=lambda:send_message_to_channel(str(data)))
+        t.start()
+
+        return redirect("index")

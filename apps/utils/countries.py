@@ -417,8 +417,6 @@ countries = {
         'Santa Clara']
     }],
     
-    
-    
     "US": [
         {
             "Armed Forces Americas": [
@@ -21538,6 +21536,7 @@ countries = {
             ]
         }
     ],
+    
     "DO": [
         {
             "Distrito Nacional": [
@@ -22059,6 +22058,9 @@ countries = {
 }
 
 
+
+def getCountries():
+    return countries.keys()
 
 
 """

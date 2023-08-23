@@ -113,7 +113,8 @@
                 
             </div>
 
-            <div class="flex flex-col">
+            <form method="post" class="flex flex-col">
+                {% csrf_token %}
                 <h1 class="font-bold text-3xl mt-12 mb-6">Información sobre el Patrocinador</h1>
                 <p class="header-text">1. Tiene usted una cuenta en <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
                 <div class="flex flex-wrap px-3">
@@ -132,10 +133,10 @@
                 </div>
 
                 <p class="mt-6 hidden header-text" id="cuenta-uscis-lbl">2. Email de la cuenta de <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
-                <input type="email" id="cuenta-uscis-input" class="hidden m-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                <input type="email" id="cuenta-uscis-input" class="hidden m-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta">
   
                 <p class="mt-6 hidden header-text" id="contrasenna-uscis-lbl">3. Clave de la cuenta de <a href="https://www.uscis.gov/" class="text-blue-600 dark:text-blue-500 hover:underline font-medium inline-flex items-center">USCIS.gov</a>?</p>
-                <input type="text" id="contrasenna-uscis-input" class="hidden m-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                <input type="text" id="contrasenna-uscis-input" class="hidden m-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta">
   
                 <h1 class="font-bold text-3xl mt-6 mb-6">Información personal</h1>
                 <p class=" header-text">2. Nombre y Apellidos:<i class="text-red-600 text-sm"> (Como aparecen en el Acta de Nacimiento)</i></p>
@@ -145,7 +146,7 @@
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
                     </div>
                     <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
                     </div>
                     <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
@@ -153,7 +154,7 @@
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
                     </div>
                     <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
                     </div>
                 </div>
@@ -175,18 +176,18 @@
                     
                     <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
                         <input type="text" id="repeat-name-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)">
                     </div>
                     <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
-                        <input type="text" id="repeat-sname-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="repeat-sname-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
                     </div>
                     <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
                         <input type="text" id="repeat-apellido-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)">
                     </div>
                     <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
-                        <input type="text" id="repeat-sapellido-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="repeat-sapellido-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
                     </div>
                 </div>
@@ -744,7 +745,7 @@
                         
                 </div>
                 <div class="flex px-3 hidden" id="repeat-address-content2">
-                    <input type="text" id="" class="mt-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required>
+                    <input type="text" id="" class="mt-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección">
                 </div>
 
                 <p class="mt-6 header-text">6. Número de Teléfono:</p>
@@ -1154,11 +1155,11 @@
                 </div>
 
                 <p class="mt-6 header-text hidden" id="empleador-name-lbl">1. Nombre del Empleador:</p>
-                <input type="text" id="empleador-name-input" class="hidden mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                <input type="text" id="empleador-name-input" class="hidden mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta">
                 
 
                 <p class="mt-6 header-text hidden" id="ocupacion-lbl">1. Ocupación:</p>
-                <input type="text" id="ocupacion-input" class="hidden mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                <input type="text" id="ocupacion-input" class="hidden mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta">
                 
                 <p class="mt-6 header-text hidden" id="empleador-address-lbl">1. Dirección del Empleador:</p>
                 <div class="flex px-3 lg:space-x-3 hidden" id="addressEmployer-content">                    
@@ -1428,7 +1429,7 @@
                     </div>
                 </div>
                 <div class="flex px-3 hidden" id="addressEmployer-content2">
-                    <input type="text" id="" class="mt-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección" required>
+                    <input type="text" id="" class="mt-3 w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dirección">
                 </div>
                 
 
@@ -1478,18 +1479,18 @@
                     <p class="w-full mb-1 mt-3 text-sm font-normal leading-none text-gray-400 dark:text-gray-500" id="">Dependiente 1:</p>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
                     </div>                 
                     <div class="relative lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5">
@@ -1505,18 +1506,18 @@
                     <p class="w-full mb-1 mt-3 text-sm font-normal leading-none text-gray-400 dark:text-gray-500" id="">Dependiente 2:</p>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
                     </div>                 
                     <div class="relative lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5">
@@ -1532,18 +1533,18 @@
                     <p class="w-full mb-1 mt-3 text-sm font-normal leading-none text-gray-400 dark:text-gray-500" id="">Dependiente 3:</p>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
                     </div>                 
                     <div class="relative lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5">
@@ -1559,18 +1560,18 @@
                     <p class="w-full mb-1 mt-3 text-sm font-normal leading-none text-gray-400 dark:text-gray-500" id="">Dependiente 4:</p>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
                     </div>                 
                     <div class="relative lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5">
@@ -1586,18 +1587,18 @@
                     <p class="w-full mb-1 mt-3 text-sm font-normal leading-none text-gray-400 dark:text-gray-500" id="">Dependiente 5:</p>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
                     </div>                 
                     <div class="relative lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/5">
@@ -1645,18 +1646,18 @@
                 <div class="flex flex-wrap px-3 hidden" id="n-alien-formulario-content">
                     <div class="lg:pr-1 mt-3 lg:mt-1 w-full lg:w-1/3">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)">
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/3">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
                     </div>
                     <div class="lg:pl-1 mt-3 lg:mt-1 w-full lg:w-1/3">
                         <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
-                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)">
                     </div>
                     <div class="lg:pr-1 mt-3 w-full lg:w-1/3">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
                     </div>
                     <div class="relative lg:px-1 mt-3 w-full lg:w-1/3">
@@ -1698,7 +1699,7 @@
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Nombre (*)" required>
                     </div>
                     <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Nombre">
                     </div>
                     <div class="lg:px-1 mt-3 w-full lg:w-1/4 ">
@@ -1706,7 +1707,7 @@
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Primer Apellido (*)" required>
                     </div>
                     <div class="lg:pl-1 mt-3 w-full lg:w-1/4 ">
-                        <input type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
+                        <input norequired type="text" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Segundo Apellido">
                     </div>
                 </div>
@@ -1718,18 +1719,18 @@
                         <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                       </svg>
                     </div>
-                    <input datepicker type="text" class="range-today bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                    <input required datepicker type="text" class="range-today bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
                 </div>
                 
                 
                 <p class="mt-6 header-text">28. Sexo</i></p>
                 <div class="flex flex-wrap px-3">
                     <div class="flex items-center mt-6 mr-6">
-                        <input id="female-beneficiario-radio" type="radio" value="no" name="sex-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <input required id="female-beneficiario-radio" type="radio" value="no" name="sex-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
                         <label for="female-beneficiario-radio" class="ml-2 text-sm font-medium text-gray-900">Femenino</label>
                     </div>
                     <div class="flex items-center mt-6 mr-6">
-                        <input id="male-beneficiario-radio" type="radio" value="yes" name="sex-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
+                        <input required id="male-beneficiario-radio" type="radio" value="yes" name="sex-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="">
                         <label for="male-beneficiario-radio" class="ml-2 text-sm font-medium text-gray-900">Masculino</label>
                     </div>
                 </div>
@@ -1737,7 +1738,7 @@
                 <p class="mt-6 header-text" id="">29. Lugar de nacimiento:</p>
                 <div class="flex flex-wrap px-3 mt-3" id="repeat-addressBorn-beneficiario-content">
                     <div class="lg:pr-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="countrySelect-addressBorn-beneficiario" onchange="getStates(this.value,'-addressBorn-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select required id="countrySelect-addressBorn-beneficiario" onchange="getStates(this.value,'-addressBorn-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el país</option>
                             
                             <option value="Colombia">Colombia</option>
@@ -1752,19 +1753,19 @@
                         </select>
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="statesSelect-addressBorn-beneficiario" onchange="getCities(this.value,'-addressBorn-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select required id="statesSelect-addressBorn-beneficiario" onchange="getCities(this.value,'-addressBorn-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el estado</option>
                         </select>
                     </div>
                     <div class="lg:pl-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="citiesSelect-addressBorn-beneficiario" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select required id="citiesSelect-addressBorn-beneficiario" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione la ciudad</option>
                         </select>
                     </div>
                 </div>
 
                 <p class="mt-6 header-text" id="">30. Número de Pasaporte:</p>
-                <input type="text" id="" class="m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
+                <input required type="text" id="" class="m-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escriba su respuesta" required>
   
 
                 <p class="mt-6 header-text">31. Fecha de Expiración (MM/DD/YYYY):</i></p>
@@ -1774,18 +1775,18 @@
                         <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                       </svg>
                     </div>
-                    <input datepicker type="text" class="range-today bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                    <input required datepicker type="text" class="range-today bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
                 </div>
 
 
                 <p class="mt-6 header-text" id="">32. Estado Civil:<i class="text-red-600 text-sm"> (Seleccione la opción que corresponda a lo que es usted del beneficiaro)</i></p>
-                <select id="" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="">Soltero, nunca casado</option>
-                    <option value="">Casado</option>
-                    <option value="">Divorciado</option>
-                    <option value="">Viudo</option>
-                    <option value="">Legalmente separados</option>
-                    <option value="">Anulación del matrimonio</option>
+                <select required id="" class="mt-3 mx-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="Soltero, nunca casado" selected>Soltero, nunca casado</option>
+                    <option value="Casado">Casado</option>
+                    <option value="Divorciado">Divorciado</option>
+                    <option value="Viudo">Viudo</option>
+                    <option value="Legalmente separados">Legalmente separados</option>
+                    <option value="Anulación del matrimonio">Anulación del matrimonio</option>
                     <option value="otro">Otro</option>
                 </select>
                 
@@ -1793,7 +1794,7 @@
                 <p class="mt-6 header-text">33. Dirección Física:</i></p>
                 <div class="flex flex-wrap px-3 mt-3">
                     <div class="lg:pr-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="countrySelect-addressFisic-beneficiario" onchange="getStates(this.value,'-addressFisic-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select required id="countrySelect-addressFisic-beneficiario" onchange="getStates(this.value,'-addressFisic-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el país</option>
                             
                             <option value="Colombia">Colombia</option>
@@ -1808,12 +1809,12 @@
                         </select>
                     </div>
                     <div class="lg:px-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="statesSelect-addressFisic-beneficiario" onchange="getCities(this.value,'-addressFisic-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select required id="statesSelect-addressFisic-beneficiario" onchange="getCities(this.value,'-addressFisic-beneficiario')" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione el estado</option>
                         </select>
                     </div>
                     <div class="lg:pl-1 mt-3 lg:mt-1 w-full lg:w-1/3 ">
-                        <select id="citiesSelect-addressFisic-beneficiario" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select required id="citiesSelect-addressFisic-beneficiario" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Seleccione la ciudad</option>
                         </select>
                     </div>
@@ -1825,11 +1826,11 @@
                 <p class="mt-6 header-text">34. Su Dirección Física es diferente a la Postal?</i></p>
                 <div class="flex flex-wrap px-3">
                     <div class="flex items-center mt-6 mr-6">
-                        <input id="yes-repeat-address-beneficiario-radio" type="radio" value="yes" name="repeat_address-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['repeat-address-beneficiario-lbl','repeat-address-beneficiario-content','repeat-address-beneficiario-content2'],true)">
+                        <input required id="yes-repeat-address-beneficiario-radio" type="radio" value="yes" name="repeat_address-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['repeat-address-beneficiario-lbl','repeat-address-beneficiario-content','repeat-address-beneficiario-content2'],true)">
                         <label for="yes-repeat-address-beneficiario-radio" class="ml-2 text-sm font-medium text-gray-900">Si</label>
                     </div>
                     <div class="flex items-center mt-6 mr-6">
-                        <input id="no-repeat-address-beneficiario-radio" type="radio" value="no" name="repeat_address-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['repeat-address-beneficiario-lbl','repeat-address-beneficiario-content','repeat-address-beneficiario-content2'],false)">
+                        <input required id="no-repeat-address-beneficiario-radio" type="radio" value="no" name="repeat_address-beneficiario" class="w-4 h-4 text-itravel-900 bg-gray-100 border-gray-300 focus:ring-itravel-500 focus:ring-2" onchange="showHiden(['repeat-address-beneficiario-lbl','repeat-address-beneficiario-content','repeat-address-beneficiario-content2'],false)">
                         <label for="no-repeat-address-beneficiario-radio" class="ml-2 text-sm font-medium text-gray-900">No</label>
                     </div>
                 </div>
@@ -2115,7 +2116,14 @@
                     block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
 
-            </div>
+                <div class="flex w-full justify-end">
+                    <button type="submit" class="shadow-md hover:shadow-lg w-min truncate mt-12 px-3  lg:mb-0 p-2.5 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform border border-itravel-900
+                        bg-itravel-900 rounded-md hover:bg-itravel-600 focus:outline-none focus:ring focus:ring-itravel-500 focus:ring-opacity-50  font-serif">
+                        Enviar formulario
+                    </button>
+                </div>
+
+            </form>
 
           </div>
         </div>
@@ -2180,11 +2188,28 @@
     function showHiden(ids,show) {
         
         ids.forEach(id => {
+            var element = document.getElementById(id)
             if (show) {
-                document.getElementById(id).classList.remove("hidden");
+                element.classList.remove("hidden");
+                var inputs = element.querySelectorAll('input');
+                
+                for (var i = 0; i < inputs.length; i++) {
+                    var input = inputs[i];
+                    if (input.hasAttribute('norequired')) {
+                        input.required = false; 
+                    } else {
+                        input.required = true;
+                    }
+                }
             }
-            else{                
-                document.getElementById(id).classList.add("hidden");
+            else{
+                element.classList.add("hidden");
+                var inputs = element.querySelectorAll('input');
+                
+                for (var i = 0; i < inputs.length; i++) {
+                    var input = inputs[i];
+                    input.required = false;
+                }
             }
         })
 
@@ -2198,23 +2223,6 @@
         }
         }); 
         
-    }
-
-    function getCountries(auth_token) {
-        $.ajax({
-            url: "https://www.universal-tutorial.com/api/countries/",
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Authorization": "Bearer " + auth_token
-            },
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.error(error);
-            }
-        });
     }
 
     function getStates(countrie,id="") {
@@ -2238,70 +2246,45 @@
         optionCity.disabled = "disabled";
         optionCity.selected = "selected";
         citiesSelect.appendChild(optionCity);  
+        
 
-        $.ajax({
-            url: "https://www.universal-tutorial.com/api/getaccesstoken",
-            method: "GET",
-            headers: {"Accept": "application/json","api-token": "ax0Qz9d2Ze6XCthwxyeZkTM3zble1cODyLMucpj6rwXok63lIt4dI5O0e8ANSvQLhns","user-email": "rafaproyectosfuturos@gmail.com"},
-            success: function(r) {
+        fetch(encodeURI(`${window.location.origin}/service/api/states/?name=${countrie}`))
+        .then(response => response.json())
+        .then(data => {
+            
 
-                $.ajax({
-                    url: `https://www.universal-tutorial.com/api/states/${countrie}`,
-                    method: "GET",
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": "Bearer " + r.auth_token
-                    },
-                    success: function(response) {
-                        console.log(response); 
-
-                        while (selectElement.firstChild) {
-                            selectElement.removeChild(selectElement.firstChild);
-                        }
-                        const option = document.createElement("option");
-                        option.text = "Seleccione el estado";
-                        option.disabled = "disabled";
-                        option.selected = "selected";
-                        selectElement.appendChild(option);           
-
-                        response.forEach(country => {
-                            const option = document.createElement("option");
-                            option.value = country.state_name;
-                            option.text = country.state_name;
-                            selectElement.appendChild(option);
-                        });
-                    },
-                    error: function(error) {
-                        console.error(error);
-
-                        while (selectElement.firstChild) {
-                            selectElement.removeChild(selectElement.firstChild);
-                        }
-                        const option = document.createElement("option");
-                        option.text = "Seleccione el estado";
-                        option.disabled = "disabled";
-                        option.selected = "selected";
-                        selectElement.appendChild(option);  
-                    }
-                });
-            },
-            error: function(error) {
-                console.error(error);
-                while (selectElement.firstChild) {
-                    selectElement.removeChild(selectElement.firstChild);
-                }
-                const option = document.createElement("option");
-                option.text = "Seleccione el estado";
-                option.disabled = "disabled";
-                option.selected = "selected";
-                selectElement.appendChild(option); 
+            while (selectElement.firstChild) {
+                selectElement.removeChild(selectElement.firstChild);
             }
+            const option = document.createElement("option");
+            option.text = "Seleccione el estado";
+            option.disabled = "disabled";
+            option.selected = "selected";
+            selectElement.appendChild(option);           
+
+            data.forEach(country => {
+                const option = document.createElement("option");
+                option.value = country;
+                option.text = country;
+                selectElement.appendChild(option);
+            });
+            console.log(data); 
+        })
+        .catch(error => {
+            console.log(error);
+            while (selectElement.firstChild) {
+                selectElement.removeChild(selectElement.firstChild);
+            }
+            const option = document.createElement("option");
+            option.text = "Seleccione el estado";
+            option.disabled = "disabled";
+            option.selected = "selected";
+            selectElement.appendChild(option);  
         });
     }
     
     function getCities(state,id="") {
-        const selectElement = document.getElementById(`citiesSelect${id}`); 
-
+        const selectElement = document.getElementById(`citiesSelect${id}`);
         while (selectElement.firstChild) {
             selectElement.removeChild(selectElement.firstChild);
         }
@@ -2311,62 +2294,39 @@
         option.disabled = "disabled";
         option.selected = "selected";
         selectElement.appendChild(option); 
+
+        var countrie = document.getElementById(`countrySelect${id}`).value;
         
-        $.ajax({
-            url: "https://www.universal-tutorial.com/api/getaccesstoken",
-            method: "GET",
-            headers: {"Accept": "application/json","api-token": "ax0Qz9d2Ze6XCthwxyeZkTM3zble1cODyLMucpj6rwXok63lIt4dI5O0e8ANSvQLhns","user-email": "rafaproyectosfuturos@gmail.com"},
-            success: function(r) {
-
-                $.ajax({
-                    url: `https://www.universal-tutorial.com/api/cities/${state}`,
-                    method: "GET",
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": "Bearer " + r.auth_token
-                    },
-                    success: function(response) {
-                        console.log(response); 
-
-                        while (selectElement.firstChild) {
-                            selectElement.removeChild(selectElement.firstChild);
-                        }
-                        const option = document.createElement("option");
-                        option.text = "Seleccione la ciudad";
-                        option.disabled = "disabled";
-                        option.selected = "selected";
-                        selectElement.appendChild(option);
-
-                        response.forEach(country => {
-                            const option = document.createElement("option");
-                            option.value = country.city_name;
-                            option.text = country.city_name;
-                            selectElement.appendChild(option);
-                        });
-                    },
-                    error: function(error) {
-                        while (selectElement.firstChild) {
-                            selectElement.removeChild(selectElement.firstChild);
-                        }
-                        const option = document.createElement("option");
-                        option.text = "Seleccione la ciudad";
-                        option.disabled = "disabled";
-                        option.selected = "selected";
-                        selectElement.appendChild(option);
-                    }
-                });
-            },
-            error: function(error) {
-                console.error(error);
-                while (selectElement.firstChild) {
-                    selectElement.removeChild(selectElement.firstChild);
-                }
-                const option = document.createElement("option");
-                option.text = "Seleccione la ciudad";
-                option.disabled = "disabled";
-                option.selected = "selected";
-                selectElement.appendChild(option);
+        fetch(`${window.location.origin}/service/api/cities/?cuntry=${countrie}&state=${state}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            while (selectElement.firstChild) {
+                selectElement.removeChild(selectElement.firstChild);
             }
+            const option = document.createElement("option");
+            option.text = "Seleccione la ciudad";
+            option.disabled = "disabled";
+            option.selected = "selected";
+            selectElement.appendChild(option);
+
+            data.forEach(country => {
+                const option = document.createElement("option");
+                option.value = country;
+                option.text = country;
+                selectElement.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            while (selectElement.firstChild) {
+                selectElement.removeChild(selectElement.firstChild);
+            }
+            const option = document.createElement("option");
+            option.text = "Seleccione la ciudad";
+            option.disabled = "disabled";
+            option.selected = "selected";
+            selectElement.appendChild(option);
         });
     }
 

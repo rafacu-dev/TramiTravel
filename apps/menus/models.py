@@ -81,11 +81,11 @@ class Ofert(models.Model):
     image2 = models.ImageField(blank = True, null = True,upload_to = 'ofert')
     image3 = models.ImageField(blank = True, null = True,upload_to = 'ofert')
 
-    name_es =models.CharField(max_length=200,null=False,blank=False)
-    name_en =models.CharField(max_length=200,null=False,blank=False)
+    name_es =models.CharField(max_length=200,null=True,blank=True)
+    name_en =models.CharField(max_length=200,null=True,blank=True)
     
-    description_es = models.TextField(null=False,blank=False)
-    description_en = models.TextField(null=False,blank=False)
+    description_es = models.TextField(null=True,blank=True)
+    description_en = models.TextField(null=True,blank=True)
     message_es = models.TextField(null=False,blank=False)
     message_en = models.TextField(null=False,blank=False)
 

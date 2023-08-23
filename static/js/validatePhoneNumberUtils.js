@@ -1348,7 +1348,6 @@ return function() {
 });
 
 var input = document.querySelector("#phone"),
-input2 = document.querySelector("#phone2"),
 errorMsgValidatePhone = document.querySelector("#errorMsgValidatePhone");
 
 // here, the index maps to the error code returned from getValidationError - see readme
@@ -1368,6 +1367,7 @@ errorMsgValidatePhone.innerHTML = "";
 errorMsgValidatePhone.classList.add("hidden");
 };
 
+
 // on blur: validate
 input.addEventListener('input', function() {
 reset();
@@ -1386,34 +1386,36 @@ if (input.value.trim()) {
 input.setAttribute("placeholder", "(201) 555-0123");
 
 
-// initialise plugin
-var iti2 = window.intlTelInput(input2, {
-    utilsScript: "utils.js?1638200991544"
-    });
-    
-    var reset = function() {
-    input2.classList.remove("error");
-    errorMsgValidatePhone.innerHTML = "";
-    errorMsgValidatePhone.classList.add("hidden");
-    };
-    
-    // on blur: validate
-    input2.addEventListener('input', function() {
-    reset();
-    if (input2.value.trim()) {
-        if (iti2.isValidNumber()) {
-        errorMsgValidatePhone.innerHTML = "valid-phone";
-        } else {
-        input2.classList.add("error");
-        var errorCode = iti2.getValidationError();
-        errorMsgValidatePhone.innerHTML = errorMap[errorCode];
-        //errorMsgValidatePhone.classList.remove("hidden");
+var input2 = document.querySelector("#phone2");
+if (input2 !== null) {
+    // initialise plugin
+    var iti2 = window.intlTelInput(input2, {
+        utilsScript: "utils.js?1638200991544"
+        });
+        
+        var reset = function() {
+        input2.classList.remove("error");
+        errorMsgValidatePhone.innerHTML = "";
+        errorMsgValidatePhone.classList.add("hidden");
+        };
+        
+        // on blur: validate
+        input2.addEventListener('input', function() {
+        reset();
+        if (input2.value.trim()) {
+            if (iti2.isValidNumber()) {
+            errorMsgValidatePhone.innerHTML = "valid-phone";
+            } else {
+            input2.classList.add("error");
+            var errorCode = iti2.getValidationError();
+            errorMsgValidatePhone.innerHTML = errorMap[errorCode];
+            //errorMsgValidatePhone.classList.remove("hidden");
+            }
         }
-    }
-    });
-    
-    input2.setAttribute("placeholder", "(201) 555-0123");
-
+        });
+        
+        input2.setAttribute("placeholder", "(201) 555-0123");
+}
 
 (function(){/*
 

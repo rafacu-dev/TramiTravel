@@ -292,6 +292,33 @@
         </div>
     </div>
     
+    <h1 class="xl:text-4xl text-3xl text-center text-gray-800 font-extrabold mx-auto intro-show font-serif mt-52 animate-intro">Combos De Alimentos</h1>
+    
+    <h1 class="text-xl text-center text-gray-500 mx-auto intro-show font-serif mt-6 animate-intro mb-24">Envíe alimentos a sus seres queridos en Cuba</h1>
+    <div class="mb-16 md:px-24 flex flex-wrap">
+        <div class=" w-1/3 p-6">
+            <img class="animate-intro rounded-2xl transition-all duration-300 cursor-pointer shadow-md transition xl:hover:scale-110 duration-300 hover:shadow-xl shadow-black" src="{% static 'images/combos/c1.png' %}" alt="image description">
+        </div>
+        <div class=" w-1/3 p-6">
+            <img class="animate-intro rounded-2xl transition-all duration-300 cursor-pointer shadow-md transition xl:hover:scale-110 duration-300 hover:shadow-xl shadow-black" src="{% static 'images/combos/c2.png' %}" alt="image description">
+        </div>
+        <div class=" w-1/3 p-6">
+            <img class="animate-intro rounded-2xl transition-all duration-300 cursor-pointer shadow-md transition xl:hover:scale-110 duration-300 hover:shadow-xl shadow-black" src="{% static 'images/combos/c3.png' %}" alt="image description">
+        </div>
+    </div>
+    
+    <div class="mb-16 md:px-24 flex flex-wrap">
+        <div class=" w-1/3 p-6">
+            <img class="animate-intro rounded-2xl transition-all duration-300 cursor-pointer shadow-md transition xl:hover:scale-110 duration-300 hover:shadow-xl shadow-black" src="{% static 'images/combos/c4.png' %}" alt="image description">
+        </div>
+        <div class=" w-1/3 p-6">
+            <img class="animate-intro rounded-2xl transition-all duration-300 cursor-pointer shadow-md transition xl:hover:scale-110 duration-300 hover:shadow-xl shadow-black" src="{% static 'images/combos/c5.png' %}" alt="image description">
+        </div>
+        <div class=" w-1/3 p-6">
+            <img class="animate-intro rounded-2xl transition-all duration-300 cursor-pointer shadow-md transition xl:hover:scale-110 duration-300 hover:shadow-xl shadow-black" src="{% static 'images/combos/c6.png' %}" alt="image description">
+        </div>
+    </div>
+
     
     {% for ofertGroup in oferts %}
     {% if ofertGroup.necessary %}
@@ -308,7 +335,7 @@
         <div class="flex flex-wrap items-center justify-center">
             {% for ofert in ofertGroup.getOferts%}
                 <div class="w-full md:w-1/2 xl:w-1/4 relative mt-3 xl:mt-12 mb-3 xl:mb-12 xl:max-w-sm p-5 transition xl:hover:scale-110 duration-300">
-                    <div class="rounded-xl shadow-md bg-white animate-intro">
+                    <div class="rounded-xl shadow-md bg-white animate-intro overflow-hidden">
                         <div class="relative" data-carousel="static">
                             <!-- Carousel wrapper -->
                             <div class="relative h-56 overflow-hidden rounded-t-xl">
@@ -346,16 +373,20 @@
                                 </span>
                             </button>
                         </div>
-                        <div class="py-2 px-4">
+                        <div class="{% if ofert.name_en or ofert.name_en %}py-2 px-4{% endif %}">
                             <a href="{% url 'sendMessage' ofert.tag %}">
+                                {% if ofert.name_en %}
                                 <h1 class=" mt-2 text-gray-900 font-bold text-xl tracking-tight">
                                     {% if language == "en" %}{{ ofert.name_en}}
                                     {% else %} {{ ofert.name_es}} {% endif %}
                                 </h1>
+                                {% endif %}
+                                {% if ofert.name_en %}
                                 <p class=" py-3 text-gray-600 leading-6">
-                                    {% if language == "en" %}{{ ofert.description_en}}
+                                    {% if language == "en" %}{{ ofert.description_es}}
                                     {% else %} {{ ofert.description_es}} {% endif %}
                                 </p>
+                                {% endif %}
                             </a>
                         </div>
                     </div>
