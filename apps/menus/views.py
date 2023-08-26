@@ -165,7 +165,8 @@ def getStatesView(request):
             for state in item["states"]:
                 if 'name' in state:names.append(state['name'])
             break
-    return JsonResponse({"names":names})
+    data =json.dumps({"names":names})
+    return HttpResponse(data,"application/json")
 
 @method_decorator(csrf_exempt, name='dispatch')
 def getCitiesView(request):
@@ -183,7 +184,8 @@ def getCitiesView(request):
                         if 'name' in citie:names.append(citie['name'])
                     break
             break
-    return JsonResponse({"names":names})
+    data =json.dumps({"names":names})
+    return HttpResponse(data,"application/json")
 
 
 class Form(View):
