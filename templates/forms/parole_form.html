@@ -2247,7 +2247,7 @@
         optionCity.selected = "selected";
         citiesSelect.appendChild(optionCity);  
         $.ajax({
-            url: `${window.location.origin}/service/api/states/`,
+            url: `/service/api/states/`,
             method: 'post',
             data:{
                 'countrie': countrie
@@ -2299,7 +2299,7 @@
 
         var countrie = document.getElementById(`countrySelect${id}`).value;
         $.ajax({
-            url: `${window.location.origin}/service/api/cities/`,
+            url: `/service/api/cities/`,
             method: 'post',
             data:{
                 'countrie': countrie,
