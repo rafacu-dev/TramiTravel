@@ -2246,40 +2246,39 @@
         optionCity.disabled = "disabled";
         optionCity.selected = "selected";
         citiesSelect.appendChild(optionCity);  
-        
-
-        fetch(encodeURI(`${window.location.origin}/service/api/states/?name=${countrie}`))
-        .then(response => response.json())
-        .then(data => {
-            
-
-            while (selectElement.firstChild) {
-                selectElement.removeChild(selectElement.firstChild);
-            }
-            const option = document.createElement("option");
-            option.text = "Seleccione el estado";
-            option.disabled = "disabled";
-            option.selected = "selected";
-            selectElement.appendChild(option);           
-
-            data.forEach(country => {
+        $.ajax({
+            url: `${window.location.origin}/service/api/states/?name=${countrie}`,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                while (selectElement.firstChild) {
+                    selectElement.removeChild(selectElement.firstChild);
+                }
                 const option = document.createElement("option");
-                option.value = country;
-                option.text = country;
+                option.text = "Seleccione el estado";
+                option.disabled = true;
+                option.selected = true;
                 selectElement.appendChild(option);
-            });
-            console.log(data); 
-        })
-        .catch(error => {
-            console.log(error);
-            while (selectElement.firstChild) {
-                selectElement.removeChild(selectElement.firstChild);
+
+                data.forEach(country => {
+                    const option = document.createElement("option");
+                    option.value = country;
+                    option.text = country;
+                    selectElement.appendChild(option);
+                });
+                console.log(data);
+            },
+            error: function(error) {
+                console.log(error);
+                while (selectElement.firstChild) {
+                    selectElement.removeChild(selectElement.firstChild);
+                }
+                const option = document.createElement("option");
+                option.text = "Seleccione el estado";
+                option.disabled = true;
+                option.selected = true;
+                selectElement.appendChild(option);
             }
-            const option = document.createElement("option");
-            option.text = "Seleccione el estado";
-            option.disabled = "disabled";
-            option.selected = "selected";
-            selectElement.appendChild(option);  
         });
     }
     
@@ -2296,37 +2295,39 @@
         selectElement.appendChild(option); 
 
         var countrie = document.getElementById(`countrySelect${id}`).value;
-        
-        fetch(`${window.location.origin}/service/api/cities/?cuntry=${countrie}&state=${state}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            while (selectElement.firstChild) {
-                selectElement.removeChild(selectElement.firstChild);
-            }
-            const option = document.createElement("option");
-            option.text = "Seleccione la ciudad";
-            option.disabled = "disabled";
-            option.selected = "selected";
-            selectElement.appendChild(option);
-
-            data.forEach(country => {
+        $.ajax({
+            url: `${window.location.origin}/service/api/cities/?cuntry=${countrie}&state=${state}`,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                while (selectElement.firstChild) {
+                    selectElement.removeChild(selectElement.firstChild);
+                }
                 const option = document.createElement("option");
-                option.value = country;
-                option.text = country;
+                option.text = "Seleccione la ciudad";
+                option.disabled = true;
+                option.selected = true;
                 selectElement.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.log(error);
-            while (selectElement.firstChild) {
-                selectElement.removeChild(selectElement.firstChild);
+
+                data.forEach(country => {
+                    const option = document.createElement("option");
+                    option.value = country;
+                    option.text = country;
+                    selectElement.appendChild(option);
+                });
+            },
+            error: function(error) {
+                console.log(error);
+                while (selectElement.firstChild) {
+                    selectElement.removeChild(selectElement.firstChild);
+                }
+                const option = document.createElement("option");
+                option.text = "Seleccione la ciudad";
+                option.disabled = true;
+                option.selected = true;
+                selectElement.appendChild(option);
             }
-            const option = document.createElement("option");
-            option.text = "Seleccione la ciudad";
-            option.disabled = "disabled";
-            option.selected = "selected";
-            selectElement.appendChild(option);
         });
     }
 
