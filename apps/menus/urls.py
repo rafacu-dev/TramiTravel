@@ -9,6 +9,6 @@ urlpatterns = [
     path('descargar-apk', download_apk, name='descargar_apk'),
     
     path('countries/all/', getCountriesView,name="countries"),
-    path('api/states/<slug:name>/', getStatesView,name="states"),
-    path('api/cities/<slug:cuntry>/<slug:state_name>/', getCitiesView,name="cities"),
+    path('api/states/<str:name>/', getStatesView,name="states"),
+    path('api/cities/<str:cuntry>/<str:state_name>/', getCitiesView,name="cities"),
 ]
