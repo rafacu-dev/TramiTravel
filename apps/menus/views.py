@@ -151,8 +151,7 @@ def getCountriesView(request):
     return JsonResponse(names, safe=False)
 
 @never_cache
-def getStatesView(request):
-    name = request.GET["name"]
+def getStatesView(request,name):
     with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
         data = json.load(json_file)
 
@@ -166,9 +165,7 @@ def getStatesView(request):
     return JsonResponse(names, safe=False)
 
 @never_cache
-def getCitiesView(request):
-    cuntry = request.GET["cuntry"]
-    state_name = request.GET["state"]  
+def getCitiesView(request,cuntry,state_name):
     with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
         data = json.load(json_file)
 
