@@ -2254,6 +2254,7 @@
             },
             dataType: 'json',
             success: function(data) {
+                console.log(data);
                 while (selectElement.firstChild) {
                     selectElement.removeChild(selectElement.firstChild);
                 }
@@ -2263,13 +2264,12 @@
                 option.selected = true;
                 selectElement.appendChild(option);
 
-                data.forEach(country => {
+                data.names.forEach(country => {
                     const option = document.createElement("option");
                     option.value = country;
                     option.text = country;
                     selectElement.appendChild(option);
                 });
-                console.log(data);
             },
             error: function(error) {
                 console.log(error);

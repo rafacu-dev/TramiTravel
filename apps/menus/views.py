@@ -1,7 +1,7 @@
 import json
 import os
 import threading, re
-from django.http import FileResponse, JsonResponse
+from django.http import FileResponse, HttpResponse, JsonResponse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect, render
@@ -165,7 +165,7 @@ def getStatesView(request):
             for state in item["states"]:
                 if 'name' in state:names.append(state['name'])
             break
-    return JsonResponse(names)
+    return JsonResponse({"names":names})
 
 @method_decorator(csrf_exempt, name='dispatch')
 def getCitiesView(request):
@@ -183,7 +183,7 @@ def getCitiesView(request):
                         if 'name' in citie:names.append(citie['name'])
                     break
             break
-    return JsonResponse(names)
+    return JsonResponse({"names":names})
 
 
 class Form(View):
