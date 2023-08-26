@@ -2,7 +2,7 @@ import json
 import os
 import threading, re
 from django.http import FileResponse, JsonResponse
-
+from django.views.decorators.cache import never_cache
 from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.contrib import messages
@@ -137,7 +137,8 @@ def download_apk(request):
 
 
 #https://github.com/dr5hn/countries-states-cities-database
-def getCountriesView(request):    
+@never_cache
+def getCountriesView(request):
     with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
         data = json.load(json_file)
 
@@ -149,6 +150,7 @@ def getCountriesView(request):
             names.append(name)
     return JsonResponse(names, safe=False)
 
+@never_cache
 def getStatesView(request):
     name = request.GET["name"]
     with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
@@ -163,7 +165,8 @@ def getStatesView(request):
             break
     return JsonResponse(names, safe=False)
 
-def getCitiesView(request):  
+@never_cache
+def getCitiesView(request):
     cuntry = request.GET["cuntry"]
     state_name = request.GET["state"]  
     with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
