@@ -3,6 +3,7 @@ import os
 import threading, re
 from django.http import FileResponse, JsonResponse
 from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.contrib import messages
@@ -150,8 +151,10 @@ def getCountriesView(request):
             names.append(name)
     return JsonResponse(names, safe=False)
 
-@never_cache
-def getStatesView(request,name):
+
+@method_decorator(csrf_exempt, name='dispatch')
+def getStatesView(request):
+    name = request.POST.get("countrie")
     with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
         data = json.load(json_file)
 
@@ -164,8 +167,10 @@ def getStatesView(request,name):
             break
     return JsonResponse(names, safe=False)
 
-@never_cache
-def getCitiesView(request,cuntry,state_name):
+@method_decorator(csrf_exempt, name='dispatch')
+def getCitiesView(request):
+    cuntry = request.POST.get("countrie")
+    state_name = request.POST.get("state")  
     with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
         data = json.load(json_file)
 

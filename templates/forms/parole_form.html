@@ -2247,8 +2247,11 @@
         optionCity.selected = "selected";
         citiesSelect.appendChild(optionCity);  
         $.ajax({
-            url: `${window.location.origin}/service/api/states/${countrie}/`,
+            url: `${window.location.origin}/service/api/states/`,
             method: 'post',
+            data:{
+                'countrie': countrie
+            },
             dataType: 'json',
             success: function(data) {
                 while (selectElement.firstChild) {
@@ -2296,8 +2299,12 @@
 
         var countrie = document.getElementById(`countrySelect${id}`).value;
         $.ajax({
-            url: `${window.location.origin}/service/api/cities/${countrie}/${state}/`,
+            url: `${window.location.origin}/service/api/cities/`,
             method: 'post',
+            data:{
+                'countrie': countrie,
+                'state': state
+            },
             dataType: 'json',
             success: function(data) {
                 console.log(data);
