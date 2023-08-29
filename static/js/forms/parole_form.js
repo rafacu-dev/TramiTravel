@@ -112,7 +112,7 @@ function getStates(countrie,id="") {
     optionCity.selected = "selected";
     citiesSelect.appendChild(optionCity);  
     $.ajax({
-        url: `https://tramitravel-4n2v.onrender.com/service/api/states/${countrie}/`,
+        url: `/service/api/states/${countrie}/`,
         type:"get",
         dataType:"json",
         success: function(data) {
