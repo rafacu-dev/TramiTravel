@@ -153,8 +153,8 @@ def getCountriesView(request):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-def getStatesView(request):
-    name = request.POST.get("countrie")
+def getStatesView(request,name):
+    #name = request.POST.get("countrie")
     with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
         data = json.load(json_file)
 
