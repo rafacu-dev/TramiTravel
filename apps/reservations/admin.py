@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import reverse
 
-from apps.reservations.models import Airline, Bill, Destinatation, Flight, Charter, Aircraft, Booking, BaggagePolicy, ClassType
+from apps.reservations.models import Airline, Bill, Destinatation, Flight, Charter, Aircraft, Booking, BaggagePolicy, ClassType, TvImages
 
 # Register your models here.
 
@@ -91,3 +91,4 @@ admin.site.register(Aircraft,AircraftAdmin)
 admin.site.register(Booking,BookingAdmin)
 admin.site.register(BaggagePolicy,BaggagePolicyAdmin)
 admin.site.register(ClassType,ClassTypeAdmin)
+admin.site.register(TvImages)

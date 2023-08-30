@@ -1,10 +1,11 @@
 from django.urls import path
 from .views import (AddFlight, Home,BookingView,Flights,GetFligths,
-                    Tickets, Message, HomeTraslate,Bookingsagency,EditFlights,
+                    Tickets, Message, HomeTraslate,Bookingsagency,EditFlights,Tv,
                     baggagePolicy, download_pdf_ticket, deleteBooking,terminosCondiciones,politicaPrivacidad)
 
 urlpatterns = [
     path('<str:traslate>', HomeTraslate.as_view(),name='index_traslate'),
+    path('tv/', Tv.as_view(),name='tv'),
     path('', Home.as_view(),name='index'),
     path('fligth/', Flights.as_view(),name='fligth'),
     path('fligths/get/<str:date_departure>/<str:date_return>/<int:begin>/<int:to>/<int:adults>/<int:children>/<int:infants>/<int:class_type>', GetFligths.as_view(),name='getFligths'),

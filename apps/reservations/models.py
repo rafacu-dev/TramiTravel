@@ -401,3 +401,7 @@ class Booking(models.Model):
         if len(str(amount).split(".")[1]) == 1: return "$ " + str(amount) + "0"
         return "$ " + str(amount)
 
+
+class TvImages(models.Model):
+    id = models.AutoField(primary_key=True)
+    image = models.ImageField(upload_to = 'tv_images')

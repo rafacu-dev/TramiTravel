@@ -12,7 +12,7 @@ from apps.location.models import GetRequests
 from apps.menus.models import Menu, Ofert, OfertGroup
 from apps.reservations.forms import EditFlightForm, FlightForm
 
-from apps.reservations.models import Aircraft, BaggagePolicy, Bill, Booking, Charter, ClassType, Destinatation, Flight
+from apps.reservations.models import Aircraft, BaggagePolicy, Bill, Booking, Charter, ClassType, Destinatation, Flight, TvImages
 from apps.hotels.models import Destinatation as DestinatationHotels, Hotel, RoomType, VacationPackage
 
 from apps.bot.bot import send_message_confirm_paid
@@ -1191,3 +1191,9 @@ def politicaPrivacidad(request):
     
     except FileNotFoundError:
         raise Http404()
+    
+    
+class Tv(View):
+    def get(self,request,*args,**kwargs):
+        images = TvImages.objects.all()
+        return render(request,'tv.html',{"images":images,"image":list(images)[-1]})
