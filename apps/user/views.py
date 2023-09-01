@@ -34,7 +34,7 @@ class Login(View):
             if user.is_superuser:success = "admin" 
             else:success = "success"
             
-            if(user.is_admin_agency and not user.agency.name):
+            if(user.is_admin_agency and (not user.agency or not user.agency.name)):
                 data = json.dumps({"redirect":"/info-agency/"})
             else:
                 data = json.dumps({

@@ -9,6 +9,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from apps.user.models import UserAccount
+from apps.utils.models import Payment
 
 from apps.utils.pdf_generated import generate_tickets_pdf
 
@@ -333,6 +334,7 @@ def send_message_confirm_paid(message=str,bill=int):
     markup.add(btn_success,btn_deny)
     bot.send_message(ADMIN1_ID,message,parse_mode="html",disable_web_page_preview=True,reply_markup=markup)
     
+# Este es para los pagos de paquetes bacacionales
 def send_message_confirm_paid_package(message=str,bill=int):
     bot.send_chat_action(ADMIN1_ID, "typing")
 
@@ -341,13 +343,18 @@ def send_message_confirm_paid_package(message=str,bill=int):
     btn_deny = InlineKeyboardButton("❌ DENEGAR",callback_data=f"deny-package-{bill}")
     markup.add(btn_success,btn_deny)
     bot.send_message(ADMIN1_ID,message,parse_mode="html",disable_web_page_preview=True,reply_markup=markup)
+
+
+# Este es para los pagos generales como combos y otras cosas
+def send_message_confirm_payment(message=str,payment=int):
+    bot.send_chat_action(ADMIN1_ID, "typing")
+
+    markup = InlineKeyboardMarkup(row_width=2)
+    btn_success = InlineKeyboardButton("✅ CONFIRMAR",callback_data=f"confirm-payment-{payment}")
+    btn_deny = InlineKeyboardButton("❌ DENEGAR",callback_data=f"deny-payment-{payment}")
+    markup.add(btn_success,btn_deny)
+    bot.send_message(ADMIN1_ID,message,parse_mode="html",disable_web_page_preview=True,reply_markup=markup)
     
-
-def send_message_to_searchl_link(message=str):
-    sl_id = -1001783822172
-    bot.send_chat_action(sl_id, "typing")
-    bot.send_message(sl_id,message,parse_mode="html",disable_web_page_preview=True)
-
 
 @bot.callback_query_handler(func=lambda x:True)
 def response_buttons(call):
@@ -355,8 +362,9 @@ def response_buttons(call):
         chat_id = call.from_user.id
         message_id = call.message.id
         message_text = call.message.text
-        bill_id = int(call.data.split("-")[1])
+        bill_id = int(call.data.split("-")[-1])
 
+        # Para los pagos de paquetes
         if "confirm-package" in call.data and chat_id == ADMIN1_ID:
             bill = BillPackage.objects.get(id = bill_id)
             bill = Bill.objects.get(id = bill_id)
@@ -371,6 +379,22 @@ def response_buttons(call):
             bill.paid = False
             bill.save()
             bot.edit_message_text(call.message.text + "\n\n❌ DENEGADO",chat_id,message_id,parse_mode="html")
+            
+        # Para los pagos generales
+        elif "confirm-payment" in call.data and chat_id == ADMIN1_ID:
+            bill = Payment.objects.get(id = bill_id)
+            bill.paid = True
+            bill.save()
+
+            bot.edit_message_text(message_text + "\n\n✅ CONFIRMADO",chat_id,message_id,parse_mode="html")
+            
+        elif "deny-payment" in call.data and chat_id == ADMIN1_ID:
+            bill = Payment.objects.get(id = bill_id)
+            bill.paid = False
+            bill.save()
+            bot.edit_message_text(call.message.text + "\n\n❌ DENEGADO",chat_id,message_id,parse_mode="html")
+
+
 
         elif "confirm" in call.data and chat_id == ADMIN1_ID:
             bill = Bill.objects.get(id = bill_id)

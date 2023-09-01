@@ -1,9 +1,9 @@
 import json
 from datetime import date, datetime, timedelta, time
-from django.utils import timezone
 import threading
 from os import remove
 
+from django.utils import timezone
 from django.shortcuts import HttpResponse, redirect, render
 from django.views.generic import View
 from django.db.models import Q

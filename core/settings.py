@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'apps.bot',
     'apps.location',
     'apps.hotels',
+    'apps.utils',
 ]
 
 #TAILWIND_APP_NAME = 'theme'
