@@ -17,6 +17,7 @@ from apps.hotels.models import Destinatation as DestinatationHotels, Hotel, Room
 
 from apps.bot.bot import send_message_confirm_paid
 from apps.user.models import CreditRecharge
+from apps.utils import countries_states_cities
 from apps.utils.pdf_generated import generate_tickets_pdf
 from apps.utils.countries import countries
 from core import settings
@@ -1213,9 +1214,7 @@ class CitiesView(View):
         return render(request,'booking.html',context)
 
 def getStatesView(request,name):
-    """with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
-        data = json.load(json_file)
-
+    data = json.load(countries_states_cities)
     names = []
     
     for item in data:
@@ -1223,7 +1222,7 @@ def getStatesView(request,name):
             for state in item["states"]:
                 if 'name' in state:names.append(state['name'])
             break
-    data =json.dumps({"names":names})"""
+    data =json.dumps({"names":names})
     return HttpResponse("application/json")
 
 @method_decorator(csrf_exempt, name='dispatch')
