@@ -89,7 +89,6 @@ class Pay(View):
 
 
 
-
 #https://github.com/dr5hn/countries-states-cities-database
 def getStatesView(request,name):
     names = []    

@@ -18,7 +18,6 @@ urlpatterns = [
     path('add-fligth/', AddFlight.as_view(),name='add_flight'),
     path('edit-fligths/<str:flight_ids>/', EditFlights.as_view(),name='edit_flights'),
 
-
     path('baggage-policy/<int:bp>', baggagePolicy, name='baggagePolicy'),
     path('download_pdf_ticket/<str:tickets>/<int:option>', download_pdf_ticket,name='download_pdf_ticket'),
     path('terminos-condiciones/', terminosCondiciones, name='terminos_condiciones'),
