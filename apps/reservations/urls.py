@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (AddFlight, Home,BookingView,Flights,GetFligths,
                     Tickets, Message, HomeTraslate,Bookingsagency,EditFlights,Tv,
-                    baggagePolicy, download_pdf_ticket, deleteBooking,terminosCondiciones,politicaPrivacidad)
+                    baggagePolicy, download_pdf_ticket, deleteBooking,terminosCondiciones,politicaPrivacidad,
+                    getStatesView,getCitiesView)
 
 urlpatterns = [
     path('<str:traslate>', HomeTraslate.as_view(),name='index_traslate'),
@@ -23,4 +24,8 @@ urlpatterns = [
     path('download_pdf_ticket/<str:tickets>/<int:option>', download_pdf_ticket,name='download_pdf_ticket'),
     path('terminos-condiciones/', terminosCondiciones, name='terminos_condiciones'),
     path('politica-privacidad/', politicaPrivacidad, name='politica_privacidad'),
+
+    
+    path('api/states/<slug:name>/', getStatesView,name="states"),
+    path('countries/cities/', getCitiesView,name="cities"),
 ]

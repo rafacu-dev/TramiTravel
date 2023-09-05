@@ -112,7 +112,7 @@ function getStates(countrie,id="") {
     optionCity.selected = "selected";
     citiesSelect.appendChild(optionCity);  
     $.ajax({
-        url: `/service/api/states/${countrie}/`,
+        url: `/api/states/${countrie}/`,
         type:"get",
         dataType:"json",
         success: function(data) {
@@ -161,7 +161,7 @@ function getCities(state,id="") {
 
     var countrie = document.getElementById(`countrySelect${id}`).value;
     $.ajax({
-        url: `/service/countries/cities/`,
+        url: `/countries/cities/`,
         method: 'post',
         data:{
             'countrie': countrie,
