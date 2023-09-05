@@ -1213,7 +1213,7 @@ class CitiesView(View):
         return render(request,'booking.html',context)
 
 def getStatesView(request,name):
-    with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
+    """with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
         data = json.load(json_file)
 
     names = []
@@ -1223,7 +1223,7 @@ def getStatesView(request,name):
             for state in item["states"]:
                 if 'name' in state:names.append(state['name'])
             break
-    data =json.dumps({"names":names})
+    data =json.dumps({"names":names})"""
     return HttpResponse("application/json")
 
 @method_decorator(csrf_exempt, name='dispatch')
