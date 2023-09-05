@@ -12,7 +12,7 @@ from apps.utils.models import Payment
 from apps.utils.utils import permission_checked
 from core.languages import get_strings
 
-from apps.utils import countries_states_cities
+#from apps.utils import countries_states_cities
 
 
 @method_decorator(permission_checked, name='dispatch')
