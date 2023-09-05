@@ -1200,6 +1200,18 @@ class Tv(View):
         return render(request,'tv.html',{"images":images,"image":list(images)[-1]})
 
 
+class CitiesView(View):
+    def get(self,request,*args,**kwargs):
+        data = request.GET
+
+        adults = int(data['adults'])
+        
+        
+        menus = Menu.objects.filter(actived=True).order_by('position')
+        strings,language = get_strings(request.COOKIES)
+        context = {}
+        return render(request,'booking.html',context)
+
 def getStatesView(request,name):
     with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
         data = json.load(json_file)
@@ -1212,7 +1224,7 @@ def getStatesView(request,name):
                 if 'name' in state:names.append(state['name'])
             break
     data =json.dumps({"names":names})
-    return HttpResponse(data,"application/json")
+    return HttpResponse("application/json")
 
 @method_decorator(csrf_exempt, name='dispatch')
 def getCitiesView(request):
