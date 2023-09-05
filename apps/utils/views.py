@@ -12,7 +12,7 @@ from apps.utils.models import Payment
 from apps.utils.utils import permission_checked
 from core.languages import get_strings
 
-from apps.utils import countries_states_cities
+#from apps.utils import countries_states_cities
 
 
 @method_decorator(permission_checked, name='dispatch')
@@ -87,7 +87,7 @@ class Pay(View):
 
         return render(request,'payment.html',context)
 
-
+"""
 
 #https://github.com/dr5hn/countries-states-cities-database
 def getStatesView(request,name):
@@ -113,3 +113,5 @@ def getCitiesView(request,cuntry,state_name):
             break
     data_return =json.dumps({"names":names})
     return HttpResponse(data_return,"application/json")
+
+"""
