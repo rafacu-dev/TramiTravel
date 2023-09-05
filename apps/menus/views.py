@@ -137,57 +137,6 @@ def download_apk(request):
     return FileResponse(open(apk_file_path, 'rb'), as_attachment=True)
 
 
-#https://github.com/dr5hn/countries-states-cities-database
-@never_cache
-def getCountriesView(request):
-    with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
-        data = json.load(json_file)
-
-    names = []
-    
-    for item in data:
-        if 'name' in item:
-            name = item['name']
-            names.append(name)
-    return JsonResponse(names, safe=False)
-
-
-@method_decorator(csrf_exempt, name='dispatch')
-def getStatesView(request,name):
-    #name = request.POST.get("countrie")
-    with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
-        data = json.load(json_file)
-
-    names = []
-    
-    for item in data:
-        if 'name' in item and item['name'] == name:
-            for state in item["states"]:
-                if 'name' in state:names.append(state['name'])
-            break
-    data =json.dumps({"names":names})
-    return HttpResponse(data,"application/json")
-
-@method_decorator(csrf_exempt, name='dispatch')
-def getCitiesView(request):
-    cuntry = request.POST.get("countrie")
-    state_name = request.POST.get("state")  
-    with open('apps/menus/countries-states-cities.json', encoding='utf-8') as json_file:
-        data = json.load(json_file)
-
-    names = []
-    for item in data:
-        if 'name' in item and item['name'] == cuntry:
-            for state in item["states"]:
-                if state_name == state["name"] and 'cities' in state:
-                    for citie in state["cities"]:
-                        if 'name' in citie:names.append(citie['name'])
-                    break
-            break
-    data =json.dumps({"names":names})
-    return HttpResponse(data,"application/json")
-
-
 class Form(View):
     def get(self,request,form_name,*args,**kwargs):
         context = {}

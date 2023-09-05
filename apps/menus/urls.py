@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Service,Services,Contact,Form, download_apk, getCountriesView, getStatesView,getCitiesView
+from .views import Service,Services,Contact,Form, download_apk
 
 urlpatterns = [
     path('<slug:tag>/', Service.as_view(),name="service"),
@@ -7,8 +7,4 @@ urlpatterns = [
     path('contact', Contact.as_view(),name="contact"),
     path('forms/<slug:form_name>/', Form.as_view(),name="forms"),
     path('descargar-apk', download_apk, name='descargar_apk'),
-    
-    path('countries/all/', getCountriesView,name="countries"),
-    path('api/states/<slug:name>/', getStatesView,name="states"),
-    path('countries/cities/', getCitiesView,name="cities"),
 ]
