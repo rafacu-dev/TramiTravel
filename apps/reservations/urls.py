@@ -26,6 +26,6 @@ urlpatterns = [
     path('politica-privacidad/', politicaPrivacidad, name='politica_privacidad'),
 
     
-    path('api/states/<slug:name>/', getStatesView,name="states"),
+    path('api/states/<str:name>/', getStatesView,name="states"),
     path('countries/cities/', getCitiesView,name="cities"),
 ]
