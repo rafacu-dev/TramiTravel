@@ -128,8 +128,8 @@ function getStates(countrie,id="") {
 
             data.names.forEach(country => {
                 const option = document.createElement("option");
-                option.value = country;
-                option.text = country;
+                option.value = country.name;
+                option.text = country.name;
                 selectElement.appendChild(option);
             });
         },

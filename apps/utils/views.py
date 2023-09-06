@@ -10,9 +10,9 @@ from apps.bot.bot import send_message_confirm_payment
 from apps.menus.models import Menu
 from apps.utils.models import Payment
 from apps.utils.utils import permission_checked
+from apps.utils.states import states
 from core.languages import get_strings
 
-#from apps.utils import countries_states_cities
 
 
 @method_decorator(permission_checked, name='dispatch')
@@ -90,25 +90,15 @@ class Pay(View):
 
 #https://github.com/dr5hn/countries-states-cities-database
 def getStatesView(request,name):
-    names = []    
-    for item in countries_states_cities.countries_list:
-        if 'name' in item and item['name'] == name:
-            for state in item["states"]:
-                if 'name' in state:names.append(state['name'])
-            break
-    data_return =json.dumps({"names":names})
+    data_return =json.dumps({"names":states[name]})
     return HttpResponse(data_return,"application/json")
 
 
 def getCitiesView(request,cuntry,state_name):
-    names = []
-    for item in countries_states_cities.countries_list:
-        if 'name' in item and item['name'] == cuntry:
-            for state in item["states"]:
-                if state_name == state["name"] and 'cities' in state:
-                    for citie in state["cities"]:
-                        if 'name' in citie:names.append(citie['name'])
-                    break
+    cities = []
+    for item in states[cuntry]:
+        if item['name']  == state_name:
+            cities = item['cities']
             break
-    data_return =json.dumps({"names":names})
+    data_return =json.dumps({"names":cities})
     return HttpResponse(data_return,"application/json")
