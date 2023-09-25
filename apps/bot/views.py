@@ -33,10 +33,15 @@ class PasmsView(View):
             success = []
             pending = []
 
+            response = requests.get(url, headers={"Content-Type": "application/json"})
+            data = response.json()
+            access_token = data["JwtResponse"]["accessToken"]
+
             p = pasms[index]
             url = f"https://egov.uscis.gov/csol-api/case-statuses/{p.case}"
             headers = {
-                "Referer": "https://egov.uscis.gov/"
+                "Referer": "https://egov.uscis.gov/",
+                "Authorization": f"Bearer {access_token}"
             }
             response = requests.get(url, headers=headers, verify=False)
 
