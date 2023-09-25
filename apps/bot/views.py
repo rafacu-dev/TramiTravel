@@ -33,6 +33,7 @@ class PasmsView(View):
             success = []
             pending = []
 
+            url = "https://egov.uscis.gov/csol-api/ui-auth"
             response = requests.get(url, headers={"Content-Type": "application/json"})
             data = response.json()
             access_token = data["JwtResponse"]["accessToken"]
