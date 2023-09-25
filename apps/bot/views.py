@@ -35,7 +35,11 @@ class PasmsView(View):
 
             p = pasms[index]
             url = f"https://egov.uscis.gov/csol-api/case-statuses/{p.case}"
-            response = requests.get(url, verify=False)
+            headers = {
+                "Referer": "https://egov.uscis.gov/"
+            }
+            response = requests.get(url, headers=headers, verify=False)
+
             if response.status_code == 200:
                 json_data = response.json()
                 case = json_data["CaseStatusResponse"]
