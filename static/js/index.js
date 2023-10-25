@@ -125,7 +125,7 @@ function selectHotel(id_select){
 	
 	window.objHotels.forEach(obj => { 
 		if(obj.id == id_select) {
-			document.getElementById("textClientsHotels").innerText = "Rooms:1  Clientes: 1";
+			document.getElementById("textClientsHotels").innerText = "Habitación:1  Clientes: 1";
             
             var htmlAdults = '<option value = "1" selected="true">1</option>'
             for (let i = 2; i <= obj.max_adults; i++) {
@@ -209,7 +209,7 @@ function calculateClientsPackage(){
     document.getElementById("input-room-clients").value = room_clients;
 
     let cllients = adults + childrens + infants;
-    document.getElementById("textClientsHotels").innerText = "Rooms: " + cant + "  Clientes: " + cllients;
+    document.getElementById("textClientsHotels").innerText = "Habitaciones: " + cant + "  Clientes: " + cllients;
 }
 
 //**************************************************** */

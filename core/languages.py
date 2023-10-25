@@ -266,7 +266,7 @@ sp = {
     "ready":"Listo",
     "index_t4":"Seleccione el día de salida",
     "index_t5":"Seleccione el día de retorno",
-    "rooms":"Abitaciones",
+    "rooms":"Habitaciones",
     "max_rooms":"Más de 9 contactar con soporte",
 
     
