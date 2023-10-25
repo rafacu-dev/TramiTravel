@@ -190,7 +190,7 @@ en = {
     "ticket_t4":"Remaining time to pay",
     "ticket_t4":"Make payment",
     "ticket_t5":"Put TramiTravel data",
-    "ticket_t6":"Make the transfer to the following account:",
+    "ticket_t6":"Realiza la transferencia a la siguiente cuenta:",
     "ticket_t7":"Add the amount to transfer",
     "ticket_t8":"In the transfer box, place the following amount:",
     "ticket_t9":"Add confirmation code",
@@ -490,7 +490,7 @@ sp = {
 def get_strings(cookies):
     try :
         lang = cookies["language"]
-        print(lang)
+        lang = "es"
         if lang == "en":return en,lang
         else:return sp,lang
     except:

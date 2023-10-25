@@ -443,7 +443,7 @@
                         
                         {% for room in reservation.rooms %}
                         <div class="flex justify-between">     
-                            <p class="text-md text-gray-900 px-6 py-3 font-semibold">Room {{forloop.counter}} (Reservation Code: {{room.2}})</p>
+                            <p class="text-md text-gray-900 px-6 py-3 font-semibold">Habitación{{forloop.counter}} (Reservation Code: {{room.2}})</p>
                             <p class="text-md text-gray-900 px-6 py-3 font-semibold">Monto: ${{room.1|toMoney}}</p>
                         </div>
                         <div class="relative overflow-x-auto shadow-sm sm:rounded-lg mb-3 border">                            

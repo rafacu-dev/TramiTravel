@@ -132,7 +132,7 @@
                                             <a href="{% url 'tickets'%}" class="block py-2 px-4 hover:bg-gray-100 ">{{ strings.trips }}</a>
                                         </li>
                                         <li>
-                                            <a href="{% url 'reservations'%}" class="block py-2 px-4 hover:bg-gray-100">Reservations</a>
+                                            <a href="{% url 'reservations'%}" class="block py-2 px-4 hover:bg-gray-100">Reservaciones</a>
                                         </li>
                                     </ul>
                                     <div class="py-1">
@@ -142,7 +142,7 @@
                         </button>
 
                         
-                        <label for="toggleLanguage" class="md:p-0.5 inline-flex items-center rounded-full cursor-pointer bg-gray-100 ml-2 md:ml-5">
+                        <label for="toggleLanguage" class="md:p-0.5 inline-flex items-center rounded-full cursor-pointer bg-gray-100 ml-2 md:ml-5 hidden">
                             
                             <input id="toggleLanguage" type="checkbox" class="hidden peer" onchange="changeLanguage()" {% if language == "en" %}checked{% endif %}>
                             
@@ -176,6 +176,55 @@
                             <li>
                                 <a href="{% url 'refills' %}" class="block py-2 pr-4 pl-3  rounded-md border-b border-gray-100 hover:bg-itravel-100 lg:border-0 lg:hover:text-itravel-900 font-serif text-md
                                 {% if 'refills/' in request.path %} bg-itravel-50 lg:border-0 text-itravel-900 {% else %}text-gray-700{% endif %}">{{ strings.menu_t4 }}</a>
+                            </li>
+
+                            <li>
+                                <a href="" class="block py-2 pr-4 pl-3  rounded-md border-b border-gray-100 hover:bg-itravel-100 lg:border-0 lg:hover:text-itravel-900 font-serif text-md">Combos</a>
+                                <ul class="pt-3 hidden lg:flex lg:flex-col">
+                                    <p class="h-2.5 flex justify-center text-white text-sm w-16">▲</p>
+                                    <div class="bg-white rounded-lg shadow border border-gray-200 max-h-96 overflow-auto scrollbar">
+                                        
+                                        <li class="block rounded-md py-2 m-2 pr-4 pl-3 hover:bg-gray-100 md:border-0 md:hover:text-itravel-900 text-gray-700">
+                                            <a href="/pay/?product=Combo-1&ammount=210"  class="flex whitespace-normal">
+                                                <img class="w-12 h-10 mr-2 rounded-md" src="{% static 'images/combos/c6.png' %}" alt="Jese image">
+                                                <p class="max-w-[12em] break-words text-sm font-serif h-full flex items-center">Combo #6<p>
+                                            </a>
+                                        </li>
+                                        
+                                        <li class="block rounded-md py-2 m-2 pr-4 pl-3 hover:bg-gray-100 md:border-0 md:hover:text-itravel-900 text-gray-700">
+                                            <a href="/pay/?product=Combo-2&ammount=200"  class="flex whitespace-normal">
+                                                <img class="w-12 h-10 mr-2 rounded-md" src="{% static 'images/combos/c2.png' %}" alt="Jese image">
+                                                <p class="max-w-[12em] break-words text-sm font-serif">Combo #2<p>
+                                            </a>
+                                        </li>
+                                        
+                                        <li class="block rounded-md py-2 m-2 pr-4 pl-3 hover:bg-gray-100 md:border-0 md:hover:text-itravel-900 text-gray-700">
+                                            <a href="/pay/?product=Combo-3&ammount=170"  class="flex whitespace-normal">
+                                                <img class="w-12 h-10 mr-2 rounded-md" src="{% static 'images/combos/c3.png' %}" alt="Jese image">
+                                                <p class="max-w-[12em] break-words text-sm font-serif">Combo #3<p>
+                                            </a>
+                                        </li>
+                                        
+                                        <li class="block rounded-md py-2 m-2 pr-4 pl-3 hover:bg-gray-100 md:border-0 md:hover:text-itravel-900 text-gray-700">
+                                            <a href="/pay/?product=Combo-4&ammount=190"  class="flex whitespace-normal">
+                                                <img class="w-12 h-10 mr-2 rounded-md" src="{% static 'images/combos/c4.png' %}" alt="Jese image">
+                                                <p class="max-w-[12em] break-words text-sm font-serif">Combo #4<p>
+                                            </a>
+                                        </li>
+                                        <li class="block rounded-md py-2 m-2 pr-4 pl-3 hover:bg-gray-100 md:border-0 md:hover:text-itravel-900 text-gray-700">
+                                            <a href="/pay/?product=Combo-5&ammount=160"  class="flex whitespace-normal">
+                                                <img class="w-12 h-10 mr-2 rounded-md" src="{% static 'images/combos/c5.png' %}" alt="Jese image">
+                                                <p class="max-w-[12em] break-words text-sm font-serif">Combo #5<p>
+                                            </a>
+                                        </li>
+                                        <li class="block rounded-md py-2 m-2 pr-4 pl-3 hover:bg-gray-100 md:border-0 md:hover:text-itravel-900 text-gray-700">
+                                            <a href="/pay/?product=Cerdo Asado 100Lb&ammount=160"  class="flex whitespace-normal">
+                                                <img class="w-12 h-10 mr-2 rounded-md" src="{% static 'images/combos/c1.png' %}" alt="Jese image">
+                                                <p class="max-w-[12em] break-words text-sm font-serif">Cerdo Asado 100Lb<p>
+                                            </a>
+                                        </li>
+                                    </div>
+                                </ul>
                             </li>
 
                             {% for menu in menus %}
@@ -591,7 +640,7 @@
   
     <script type = "text/JavaScript">
         
-        
+        document.cookie = "language=es"
         if(window.location.toString().includes('tramicuba.com')){
             location.href = "https://tramitravel.com/";            
         }

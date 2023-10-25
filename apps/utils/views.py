@@ -24,7 +24,9 @@ class Pay(View):
         menus = Menu.objects.filter(actived=True).order_by('position')
         strings,language = get_strings(request.COOKIES)
 
-        payments = Payment.objects.filter(user = request.user)
+        if request.user.is_authenticated:
+            payments = Payment.objects.filter(user = request.user)
+        else: payments = None
         
 
         context = {

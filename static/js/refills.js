@@ -50,23 +50,23 @@ function calculateChange(){
     if(document.getElementById("coin-deposit-calculate").textContent == "USD"){
         let usd = document.getElementById("quantity-deposit-calculate").value;
 
-        document.getElementById("deposit-calculate").textContent = "Receibe in Cuba";
+        document.getElementById("deposit-calculate").textContent = "Receibe en Cuba";
         document.getElementById("quantity-deposit-calculate").value = document.getElementById("quantity-receibe-calculate").textContent;
         document.getElementById("coin-deposit-calculate").textContent = "MLC";
         
-        document.getElementById("receibe-calculate").textContent = "If deposit in USA";
+        document.getElementById("receibe-calculate").textContent = "Deposita en USA";
         document.getElementById("quantity-receibe-calculate").textContent = usd;
         document.getElementById("coin-receibe-calculate").textContent = "USD";
     }
     else{
         let usd = document.getElementById("quantity-deposit-calculate").value;
 
-        document.getElementById("deposit-calculate").textContent = "If deposit in USA";
+        document.getElementById("deposit-calculate").textContent = "Deposita en USA";
         document.getElementById("quantity-deposit-calculate").value = document.getElementById("quantity-receibe-calculate").textContent;
         document.getElementById("coin-deposit-calculate").textContent = "USD";
 
         
-        document.getElementById("receibe-calculate").textContent = "Receibe in Cuba";
+        document.getElementById("receibe-calculate").textContent = "Receibe en Cuba";
         document.getElementById("quantity-receibe-calculate").textContent = usd;
         document.getElementById("coin-receibe-calculate").textContent = "MLC";
     }
