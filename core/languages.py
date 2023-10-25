@@ -488,10 +488,11 @@ sp = {
 
 
 def get_strings(cookies):
+    return sp,"es"
     try :
         lang = cookies["language"]
         lang = "es"
         if lang == "en":return en,lang
         else:return sp,lang
     except:
-        return en,"en"
+        return sp,lang
