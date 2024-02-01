@@ -1,4 +1,5 @@
 import json
+import requests
 from datetime import date, datetime, timedelta, time
 import threading
 from os import remove
@@ -46,6 +47,69 @@ def date_key():
 @method_decorator(permission_checked, name='dispatch')
 class Home(View):
     def get(self,request,*args,**kwargs):
+        
+        try:
+            ip_address = request.META.get('HTTP_CF_CONNECTING_IP')
+            get_request, _ = GetRequests.objects.get_or_create(ip_address=ip_address)
+            get_request.last_use = timezone.now()
+            get_request.concurrence += 1
+            get_request.save()
+        except:pass
+
+        destinatationsRelations = {
+            "relationsFrom":[],
+            "relationsTo":[],
+            "relationsHotels":[],
+            "relationsRoomType":[]           
+        }
+
+        menus = Menu.objects.filter(actived=True).order_by('position')
+        oferts = OfertGroup.objects.filter(actived=True).order_by('position')
+        strings,language = get_strings(request.COOKIES)
+        
+        begin = [
+            {
+                "code":"MIA",
+                "name":"Miami",
+                "value":"1"
+            }
+        ]
+        destination = [
+            {
+                "code":"CMW",
+                "name":"Camaguey",
+                "value":"3",
+            },
+            {
+                "code":"HAV",
+                "name":"Havana",
+                "value":"2",
+            },
+            {
+                "code":"HOG",
+                "name":"Holguin",
+                "value":"8",
+            },
+            {
+                "code":"SNU",
+                "name":"Santa Clara",
+                "value":"4",
+            }
+        ]
+
+        context = {
+            "oferts":oferts,
+            "language":language,
+            "strings" : strings,
+            "begin":begin,
+            "destination" :destination,
+            "destinatationsRelations":destinatationsRelations,
+            "menus" :menus
+            }
+
+        return render(request,'index.html',context)
+    
+    def get2(self,request,*args,**kwargs):
         
         try:
             ip_address = request.META.get('HTTP_CF_CONNECTING_IP')
@@ -217,6 +281,105 @@ class Flights(View):
         return self.request.user.is_authenticated and self.request.user.agency
     
     def get(self,request,*args,**kwargs):
+        
+        begin = [
+            {
+                "code":"MIA",
+                "name":"Miami",
+                "value":"1"
+            }
+        ]
+        destination = [
+            {
+                "code":"CMW",
+                "name":"Camaguey",
+                "value":"3",
+            },
+            {
+                "code":"HAV",
+                "name":"Havana",
+                "value":"2",
+            },
+            {
+                "code":"HOG",
+                "name":"Holguin",
+                "value":"8",
+            },
+            {
+                "code":"SNU",
+                "name":"Santa Clara",
+                "value":"4",
+            }
+        ]
+
+
+        data = request.GET
+        begin_select = None
+        for e in begin:
+            if e["value"] == data["begin"]:
+                begin_select = e
+                break
+
+        destination_select = None 
+        for e in destination:
+            if e["value"] == data["to"]:
+                destination_select = e
+                break
+
+        adults = int(data["adults"])
+        children = int(data["children"])
+        infants = int(data["infants"])
+
+        date_departure_select = data["date_departure"]
+        date_departure_list = date_departure_select.split("/")
+        date_departure = f"{date_departure_list[2]}-{date_departure_list[0]}-{date_departure_list[1]}"
+        print(date_departure_select)
+
+        menus = Menu.objects.all().order_by('position')
+
+        strings,language = get_strings(request.COOKIES)
+        
+        filter = f"{date_departure_select}  | {strings['from']}"
+        
+        flights = []
+        try:
+            data = '{' + f'"flightType":0,"origin":{begin_select["value"]},"destination":{destination_select["value"]},"returnOrigin":2,"returnDestination":1,"departDate":"{date_departure_select}","returnDate":"03/02/2024","departDateTime":"{date_departure}T05:00:00.000Z","returnDateTime":"2024-03-02T05:00:00.000Z","adults":1,"infants":0,"passengerClass":2' + '}'
+            headers = {
+                'Content-Type': 'application/json; charset=utf-8',
+            }
+            url = "https://publicservice.cubaazulaircharter.com/api/webservice/GetAvailableDates"
+            response = requests.post(url, data=data,headers=headers)
+            departFlights = json.loads(response.content)["departFlights"]
+
+            for f in departFlights:
+                if f["Key"] == date_departure_select:
+                    flight = f["Value"][0]
+                    flight["CharterName"] = "CubazulAirCharter"
+                    flight["CharterImage"] = "https://cubazulaircharter.com/favicon.ico"
+                    flights.append(flight)
+                    break
+        except:
+            pass
+        #date_return
+        context = {
+            "date_departure":date_departure_select,
+            "flights":flights,
+            "filter":filter,
+            "begin":begin,
+            "destination" :destination,
+            "adults":adults,
+            "children":children,
+            "infants":infants,
+            "totalPassengers":adults + children + infants,
+            "language":language,
+            "strings" : strings,
+            "menus" :menus,
+            }
+        return render(request,'test_api/flight.html',context)
+
+
+    
+    def get2(self,request,*args,**kwargs):
         data = request.GET
         begin = int(data["begin"])
         to = int(data["to"])
@@ -333,6 +496,9 @@ class Flights(View):
             context["flightsReturn"] = flightsReturn
 
         return render(request,'flight.html',context)
+
+
+
 
 @method_decorator(permission_checked, name='dispatch')
 class GetFligths(View):

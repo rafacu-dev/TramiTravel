@@ -1,5 +1,6 @@
 
 if(!document.getElementById("preloader").classList.contains("hidden")){
+
     $('#navBar').addClass("hidden");
     $('.root-index').addClass("hidden");
 
