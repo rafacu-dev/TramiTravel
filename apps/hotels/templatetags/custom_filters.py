@@ -1,4 +1,5 @@
 from django import template
+from datetime import datetime
 
 register = template.Library()
 
@@ -20,3 +21,13 @@ def toMoney(objet) -> str:
     end =  l[1]
     if len(end) == 1: end += "0"
     return f"{start}.{end}"
+
+
+@register.filter
+def toDate(obj):
+    return datetime.strptime(obj, "%m/%d/%Y")
+
+
+@register.filter
+def parseUrl(obj):
+    return obj.replace("/","%2F")

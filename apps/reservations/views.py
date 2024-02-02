@@ -333,7 +333,6 @@ class Flights(View):
         date_departure_select = data["date_departure"]
         date_departure_list = date_departure_select.split("/")
         date_departure = f"{date_departure_list[2]}-{date_departure_list[0]}-{date_departure_list[1]}"
-        print(date_departure_select)
 
         menus = Menu.objects.all().order_by('position')
 
@@ -342,6 +341,7 @@ class Flights(View):
         filter = f"{date_departure_select}  | {strings['from']}"
         
         flights = []
+        departDates = []
         try:
             data = '{' + f'"flightType":0,"origin":{begin_select["value"]},"destination":{destination_select["value"]},"returnOrigin":2,"returnDestination":1,"departDate":"{date_departure_select}","returnDate":"03/02/2024","departDateTime":"{date_departure}T05:00:00.000Z","returnDateTime":"2024-03-02T05:00:00.000Z","adults":1,"infants":0,"passengerClass":2' + '}'
             headers = {
@@ -349,7 +349,9 @@ class Flights(View):
             }
             url = "https://publicservice.cubaazulaircharter.com/api/webservice/GetAvailableDates"
             response = requests.post(url, data=data,headers=headers)
-            departFlights = json.loads(response.content)["departFlights"]
+            dataResponse = json.loads(response.content)
+            departFlights = dataResponse["departFlights"]
+            departDates = dataResponse["departDates"]
 
             for f in departFlights:
                 if f["Key"] == date_departure_select:
@@ -362,6 +364,7 @@ class Flights(View):
             pass
         #date_return
         context = {
+            "departDates":departDates,
             "date_departure":date_departure_select,
             "flights":flights,
             "filter":filter,

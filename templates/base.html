@@ -1,5 +1,5 @@
 
-{% load static %}
+{% load static custom_filters %}
 <html lang="{{language}}"  translate="no">
   <head>
     <meta charset="UTF-8" />
@@ -38,6 +38,11 @@
         .scrollbar-sm::-webkit-scrollbar:horizontal {
             height: 0px;
         }
+        
+        .scrollbar-hidden::-webkit-scrollbar:horizontal {
+            height: 0px;
+        }
+        
         
         .scrollbar::-webkit-scrollbar-thumb {
             background-color: #e5e6e7;
